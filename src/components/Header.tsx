@@ -37,7 +37,7 @@ export default function Header(): JSX.Element {
           display: "flex",
           flexDirection: isMobile ? "column" : "row",
           alignItems: "center",
-          paddingX: 2, // Add padding to give some breathing room
+          paddingX: 2,
         }}
       >
         <Link
@@ -61,7 +61,7 @@ export default function Header(): JSX.Element {
               lineHeight: 2,
               transition: "color 0.3s",
               "&:hover": {
-                color: "#4c9173",
+                color: "#896daf",
               },
             }}
           >
@@ -85,7 +85,7 @@ export default function Header(): JSX.Element {
               lineHeight: 2,
               transition: "color 0.3s",
               "&:hover": {
-                color: "#4c9173",
+                color: "#896daf",
               },
             }}
           >
@@ -109,7 +109,7 @@ export default function Header(): JSX.Element {
               lineHeight: 2,
               transition: "color 0.3s",
               "&:hover": {
-                color: "#4c9173",
+                color: "#896daf",
               },
             }}
           >

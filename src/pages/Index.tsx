@@ -1,4 +1,3 @@
-import CheckIcon from "@mui/icons-material/Check";
 import EmailIcon from "@mui/icons-material/Email";
 import Instagram from "@mui/icons-material/Instagram";
 import PhoneIcon from "@mui/icons-material/Phone";
@@ -55,14 +54,7 @@ export default function Index() {
         >
           Let's talk
         </Typography>
-        <div
-          style={{
-            height: 1,
-            width: 85,
-            backgroundColor: "white",
-            marginBottom: 16,
-          }}
-        />
+        <div style={{ height: 2, width: 50, backgroundColor: "#896daf" }} />
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
           <EmailIcon sx={{ color: "white" }} />
           <Typography sx={{ color: "white", fontSize: 16 }}>
@@ -113,8 +105,9 @@ export default function Index() {
             >
               Web applications
             </Typography>
-            <CheckIcon sx={{ color: "#4c9173", fontSize: 45, marginLeft: 1 }} />
+            {/* <CheckIcon sx={{ color: "#896daf", fontSize: 45, marginLeft: 1 }} /> */}
           </Box>
+          <div style={{ height: 2, width: 200, backgroundColor: "#896daf" }} />
           <Box
             sx={{
               display: "flex",
@@ -161,8 +154,9 @@ export default function Index() {
             >
               Mobile applications
             </Typography>
-            <CheckIcon sx={{ color: "#4c9173", fontSize: 45, marginLeft: 1 }} />
+            {/* <CheckIcon sx={{ color: "#896daf", fontSize: 45, marginLeft: 1 }} /> */}
           </Box>
+          <div style={{ height: 2, width: 200, backgroundColor: "#896daf" }} />
           <Box
             sx={{
               display: "flex",
@@ -209,8 +203,15 @@ export default function Index() {
             >
               Backend solutions
             </Typography>
-            <CheckIcon sx={{ color: "#4c9173", fontSize: 45, marginLeft: 1 }} />
+            {/* <CheckIcon
+              sx={{
+                color: "#896daf",
+                fontSize: 45,
+                marginLeft: 1,
+              }}
+            /> */}
           </Box>
+          <div style={{ height: 2, width: 200, backgroundColor: "#896daf" }} />
           <Box
             sx={{
               display: "flex",
