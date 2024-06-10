@@ -16,7 +16,6 @@ export default function Error() {
       sx={{
         display: "flex",
         flexDirection: "column",
-        backgroundColor: "white",
         padding: 0,
         margin: 0,
         width: "100%",
@@ -32,7 +31,8 @@ export default function Error() {
           flexDirection: "column",
           width: "100%",
           overflowX: "hidden",
-          justifyContent: "center",
+          justifyContent: "flex-start",
+          alignItems: "center",
         }}
       >
         <Typography
@@ -40,35 +40,35 @@ export default function Error() {
           gutterBottom
           sx={{
             textAlign: "center",
-            color: "#d29bbf",
+            color: "white",
             position: "relative",
             marginTop: isMobile ? "40px" : "20px",
             marginBottom: "20px",
           }}
         >
-          Ojdå, här var det tomt.
+          Wrong URL?
         </Typography>
         <Button
           variant="outlined"
           sx={{
-            color: "#fff",
-            borderColor: "#e3c5da",
+            color: "white",
+            borderColor: "rgba(255,255,255,0.5)",
             margin: isMobile ? "10px" : "10px 20px",
             paddingX: 3,
             paddingY: 1,
-            backgroundColor: "#dbbed1",
+            backgroundColor: "rgba(255,255,255,0.5)",
             "&:hover": {
-              borderColor: "#c499b6",
-              backgroundColor: "#c499b6",
+              borderColor: "rgba(255,255,255,0.5)",
+              backgroundColor: "rgba(255,255,255,0.3)",
               transition: "background-color 0.3s ease, color 0.3s ease",
             },
-            minWidth: isMobile ? "100%" : "auto",
+            width: "50%",
           }}
           onClick={() => {
             navigate("/");
           }}
         >
-          Till startsidan
+          Go back
         </Button>
       </div>
     </Box>

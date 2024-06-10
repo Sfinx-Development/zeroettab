@@ -9,18 +9,17 @@ const RootLayout = () => {
         display: "flex",
         flexDirection: "column",
         flex: 1,
-        height: "100vh",
+        minHeight: "100vh",
         alignItems: "center",
         width: "100%",
         margin: 0,
         padding: 0,
         flexGrow: 1,
-        position: "relative", // Lägg till position: relative för att rikta overlay-lagret
+        position: "relative",
         backgroundImage: "url('https://i.imgur.com/eaQNAlS.jpeg')",
         backgroundSize: "cover",
       }}
     >
-      {/* Svart overlay-lager */}
       <div
         style={{
           position: "absolute",
@@ -28,7 +27,7 @@ const RootLayout = () => {
           left: 0,
           width: "100%",
           height: "100%",
-          backgroundColor: "rgba(0, 0, 0, 0.5)", // Justera färg och opacitet här
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
         }}
       ></div>
 
