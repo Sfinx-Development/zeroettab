@@ -29,21 +29,19 @@ export default function Index() {
         marginTop: 2,
         flexGrow: 1,
         minHeight: "100vh",
-        // backgroundColor: "red",
         zIndex: 1,
       }}
     >
       <Box
         sx={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: "column",
           padding: 0,
           margin: 0,
           width: "100%",
           alignItems: "start",
           marginTop: 2,
           flexGrow: 1,
-          // backgroundColor: "red",
           zIndex: 1,
         }}
       >
@@ -58,6 +56,7 @@ export default function Index() {
             paddingLeft: 4,
             borderRadius: 8,
             boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+            marginBottom: { xs: 4, md: 0 },
           }}
         >
           <Typography
@@ -118,12 +117,11 @@ export default function Index() {
                   color: "white",
                   letterSpacing: 3,
                   fontWeight: "400",
-                  fontSize: 40,
+                  fontSize: { xs: 30, md: 40 },
                 }}
               >
                 Web applications
               </Typography>
-              {/* <CheckIcon sx={{ color: "#896daf", fontSize: 45, marginLeft: 1 }} /> */}
             </Box>
             <div
               style={{ height: 2, width: 200, backgroundColor: "#896daf" }}
@@ -171,12 +169,11 @@ export default function Index() {
                   color: "white",
                   letterSpacing: 3,
                   fontWeight: "400",
-                  fontSize: 40,
+                  fontSize: { xs: 30, md: 40 },
                 }}
               >
                 Mobile applications
               </Typography>
-              {/* <CheckIcon sx={{ color: "#896daf", fontSize: 45, marginLeft: 1 }} /> */}
             </Box>
             <div
               style={{ height: 2, width: 200, backgroundColor: "#896daf" }}
@@ -200,7 +197,7 @@ export default function Index() {
                   marginTop: 1,
                 }}
               >
-                Building apps for Android and IOS
+                Building apps for all platforms
               </Typography>
             </Box>
           </Box>
@@ -222,18 +219,11 @@ export default function Index() {
                   color: "white",
                   letterSpacing: 3,
                   fontWeight: "400",
-                  fontSize: 40,
+                  fontSize: { xs: 30, md: 40 },
                 }}
               >
                 Backend solutions
               </Typography>
-              {/* <CheckIcon
-              sx={{
-                color: "#896daf",
-                fontSize: 45,
-                marginLeft: 1,
-              }}
-            /> */}
             </Box>
             <div
               style={{ height: 2, width: 200, backgroundColor: "#896daf" }}
