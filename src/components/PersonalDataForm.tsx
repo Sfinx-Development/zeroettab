@@ -22,7 +22,10 @@ export default function PersonalDataForm() {
       >
         <TextField
           label="Förnamn och efternamn"
-          sx={{ marginBottom: 2, background: "white" }}
+          sx={{
+            marginBottom: 2,
+            background: "white",
+          }}
           value={customer.name}
           onChange={(e) => setCustomer({ ...customer, name: e.target.value })}
         />
