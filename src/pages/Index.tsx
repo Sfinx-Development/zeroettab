@@ -200,7 +200,7 @@ export default function Index() {
                   marginTop: 1,
                 }}
               >
-                Building apps for all platforms
+                Building apps for Android and IOS
               </Typography>
             </Box>
           </Box>

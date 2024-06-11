@@ -22,7 +22,7 @@ export default function Header(): JSX.Element {
           display: "flex",
           justifyContent: isMobile ? "center" : "flex-start",
           width: isMobile ? "100%" : "auto",
-          paddingX: 2, // Add padding to give some breathing room
+          paddingX: 2,
         }}
       >
         <img
@@ -35,9 +35,10 @@ export default function Header(): JSX.Element {
       <Box
         sx={{
           display: "flex",
-          flexDirection: isMobile ? "column" : "row",
+          flexDirection: "row",
           alignItems: "center",
           paddingX: 2,
+          gap: 2,
         }}
       >
         <Link

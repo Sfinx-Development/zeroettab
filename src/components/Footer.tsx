@@ -8,7 +8,6 @@ export default function Footer() {
     <Box
       sx={{
         paddingY: 6,
-        paddingX: 2,
         textAlign: "center",
         backgroundColor: "rgba(0,0,0,0.8)",
         zIndex: 2,
