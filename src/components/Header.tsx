@@ -22,7 +22,6 @@ export default function Header(): JSX.Element {
           display: "flex",
           justifyContent: isMobile ? "center" : "flex-start",
           width: isMobile ? "100%" : "auto",
-          paddingX: 2,
         }}
       >
         <img

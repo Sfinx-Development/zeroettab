@@ -35,7 +35,7 @@ export default function Index() {
       <Box
         sx={{
           display: "flex",
-          flexDirection: "column",
+          flexDirection: { xs: "column", md: "row" },
           padding: 0,
           margin: 0,
           width: "100%",
@@ -99,7 +99,11 @@ export default function Index() {
           }}
         >
           <Box
-            sx={{ display: "flex", flexDirection: "column", marginBottom: 3 }}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              marginBottom: 3,
+            }}
           >
             <Box
               sx={{
@@ -117,7 +121,7 @@ export default function Index() {
                   color: "white",
                   letterSpacing: 3,
                   fontWeight: "400",
-                  fontSize: { xs: 30, md: 40 },
+                  fontSize: { xs: 35, md: 40 },
                 }}
               >
                 Web applications
@@ -169,7 +173,7 @@ export default function Index() {
                   color: "white",
                   letterSpacing: 3,
                   fontWeight: "400",
-                  fontSize: { xs: 30, md: 40 },
+                  fontSize: { xs: 35, md: 40 },
                 }}
               >
                 Mobile applications
@@ -197,7 +201,7 @@ export default function Index() {
                   marginTop: 1,
                 }}
               >
-                Building apps for all platforms
+                Building apps for Android and IOS
               </Typography>
             </Box>
           </Box>
@@ -219,7 +223,7 @@ export default function Index() {
                   color: "white",
                   letterSpacing: 3,
                   fontWeight: "400",
-                  fontSize: { xs: 30, md: 40 },
+                  fontSize: { xs: 35, md: 40 },
                 }}
               >
                 Backend solutions
