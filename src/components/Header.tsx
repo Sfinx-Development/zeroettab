@@ -22,14 +22,17 @@ export default function Header(): JSX.Element {
           display: "flex",
           justifyContent: isMobile ? "center" : "flex-start",
           width: isMobile ? "100%" : "auto",
+          marginLeft: isMobile ? 0 : 5,
         }}
       >
-        <img
-          src="https://i.imgur.com/qY6tjPU.png"
-          alt="logo saying zeroett"
-          width={isMobile ? 200 : 250}
-          style={{ marginBottom: isMobile ? 16 : 0 }}
-        />
+        <Link href="/" sx={{ textDecoration: "none" }}>
+          <img
+            src="https://i.imgur.com/qY6tjPU.png"
+            alt="logo saying zeroett"
+            width={isMobile ? 200 : 250}
+            style={{ marginBottom: isMobile ? 16 : 0 }}
+          />
+        </Link>
       </Box>
       <Box
         sx={{

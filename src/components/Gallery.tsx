@@ -16,8 +16,8 @@ export default function Gallery() {
     { id: 1, url: "https://i.imgur.com/U7CiaGM.png", alt: "webpage" },
     { id: 2, url: "https://i.imgur.com/Y0HEktb.png", alt: "webpage" },
     { id: 3, url: "https://i.imgur.com/kKyCoTP.png", alt: "webpage" },
-    // { id: 4, url: "https://i.imgur.com/kW51MSz.jpg", alt: "webpage" },
     { id: 4, url: "https://i.imgur.com/A0IOVjh.png", alt: "webpage" },
+    { id: 5, url: "https://i.imgur.com/Q6nDVVa.png", alt: "webpage" },
   ];
 
   const handlePrev = () => {
@@ -39,13 +39,26 @@ export default function Gallery() {
         minHeight: "250px",
         position: "relative",
         overflow: "hidden",
+        backgroundColor: "rgba(0, 0, 0, 0.7)",
+        borderRadius: 8,
+        paddingY: 2,
+        boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.3)",
       }}
     >
       <IconButton
         onClick={handlePrev}
-        sx={{ position: "absolute", left: 10, zIndex: 1 }}
+        sx={{
+          position: "absolute",
+          left: 10,
+          zIndex: 1,
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          "&:hover": {
+            backgroundColor: "rgba(0, 0, 0, 0.7)",
+          },
+          color: "white",
+        }}
       >
-        <ArrowBackIcon />
+        <ArrowBackIcon sx={{ fontSize: 30 }} />
       </IconButton>
 
       <Box
@@ -65,9 +78,16 @@ export default function Gallery() {
             style={{
               height: imageInFocus === i.id ? 250 : 200,
               minWidth: imageInFocus === i.id ? "auto" : 150,
-              filter: imageInFocus === i.id ? "none" : "blur(2px)",
+              filter:
+                imageInFocus === i.id ? "none" : "blur(2px) grayscale(80%)",
               transition: "all 0.5s ease",
               margin: "0 10px",
+              borderRadius: 8,
+              boxShadow:
+                imageInFocus === i.id
+                  ? "0px 4px 15px rgba(255, 255, 255, 0.5)"
+                  : "none",
+              transform: imageInFocus === i.id ? "scale(1.05)" : "scale(1)",
             }}
           />
         ))}
@@ -75,9 +95,18 @@ export default function Gallery() {
 
       <IconButton
         onClick={handleNext}
-        sx={{ position: "absolute", right: 10, zIndex: 1 }}
+        sx={{
+          position: "absolute",
+          right: 10,
+          zIndex: 1,
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          "&:hover": {
+            backgroundColor: "rgba(0, 0, 0, 0.7)",
+          },
+          color: "white",
+        }}
       >
-        <ArrowForwardIcon sx={{ fontSize: 40 }} />
+        <ArrowForwardIcon sx={{ fontSize: 30 }} />
       </IconButton>
     </Box>
   );

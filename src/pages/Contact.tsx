@@ -1,9 +1,20 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography, keyframes } from "@mui/material";
+import { motion } from "framer-motion";
 import CompanyForm from "../components/CompanyForm";
 import ClientIdeaForm from "../components/CustomerIdeaForm";
 import FormStepper from "../components/FormStepper";
 import PersonalDataForm from "../components/PersonalDataForm";
-import { motion } from "framer-motion";
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 export default function Contact() {
   return (
@@ -33,7 +44,7 @@ export default function Contact() {
           flexDirection: "row",
           marginBottom: 4,
           minWidth: { xs: "100%", md: "90%" },
-          marginleft: { xs: 0, md: 20 },
+          marginLeft: { xs: 0, md: 20 },
         }}
       >
         <Grid
@@ -46,6 +57,16 @@ export default function Contact() {
             alignItems: { xs: "center", md: "start" },
             flex: 1,
             width: "100%",
+            backgroundColor: "rgba(0, 0, 0, 0.7)",
+            borderRadius: 8,
+            padding: 4,
+            boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.3)",
+            maxWidth: "100%",
+            margin: "auto",
+            animation: `${fadeIn} 1s ease-out`,
+            animationDelay: "0.5s",
+            animationFillMode: "forwards",
+            opacity: 0,
           }}
         >
           <Typography
@@ -95,6 +116,7 @@ export default function Contact() {
             Tell us your thoughts and let's talk!
           </Typography>
         </Grid>
+
         <Grid
           item
           xs={12}

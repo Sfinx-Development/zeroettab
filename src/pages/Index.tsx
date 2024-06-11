@@ -121,7 +121,7 @@ export default function Index() {
                   color: "white",
                   letterSpacing: 3,
                   fontWeight: "400",
-                  fontSize: { xs: 35, md: 40 },
+                  fontSize: { xs: 35, md: 50 },
                 }}
               >
                 Web applications
@@ -173,7 +173,7 @@ export default function Index() {
                   color: "white",
                   letterSpacing: 3,
                   fontWeight: "400",
-                  fontSize: { xs: 35, md: 40 },
+                  fontSize: { xs: 35, md: 50 },
                 }}
               >
                 Mobile applications
@@ -223,7 +223,7 @@ export default function Index() {
                   color: "white",
                   letterSpacing: 3,
                   fontWeight: "400",
-                  fontSize: { xs: 35, md: 40 },
+                  fontSize: { xs: 35, md: 50 },
                 }}
               >
                 Backend solutions
