@@ -28,7 +28,7 @@ export default function Header(): JSX.Element {
         <img
           src="https://i.imgur.com/qY6tjPU.png"
           alt="logo saying zeroett"
-          width={isMobile ? 200 : 300}
+          width={isMobile ? 200 : 250}
           style={{ marginBottom: isMobile ? 16 : 0 }}
         />
       </Box>

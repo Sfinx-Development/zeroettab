@@ -37,7 +37,7 @@ const RootLayout = () => {
           display: "flex",
           flexDirection: "column",
           flexGrow: 1,
-          height: "100vh",
+          minHeight: "100vh",
           width: "100%",
           alignItems: "center",
         }}
