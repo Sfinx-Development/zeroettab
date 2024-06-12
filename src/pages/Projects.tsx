@@ -186,7 +186,7 @@ export default function Projects() {
                       },
                     }}
                   >
-                    Besök Hemsidan
+                    Visit Website
                   </Link>
                 )}
               </CardContent>
