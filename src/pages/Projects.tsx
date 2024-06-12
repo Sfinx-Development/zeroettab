@@ -6,6 +6,7 @@ import {
   Grid,
   Typography,
   keyframes,
+  Link,
 } from "@mui/material";
 
 const fadeIn = keyframes`
@@ -26,6 +27,7 @@ const projects = [
     description:
       "A website for a cleaning company with email services and customized design.",
     imageUrl: "https://i.imgur.com/TofNZWm.png",
+    link: "https://stadtjejerna.se",
   },
   {
     id: 2,
@@ -167,6 +169,26 @@ export default function Projects() {
                 <Typography variant="body2" color="white">
                   {project.description}
                 </Typography>
+                {project.link && (
+                  <Link
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener"
+                    sx={{
+                      display: "block",
+                      marginTop: 1,
+                      // color: "#896daf",
+                      color: "white",
+                      textDecoration: "none",
+                      "&:hover": {
+                        textDecoration: "underline",
+                        color: "#896daf",
+                      },
+                    }}
+                  >
+                    Besök Hemsidan
+                  </Link>
+                )}
               </CardContent>
             </Card>
           </Grid>
