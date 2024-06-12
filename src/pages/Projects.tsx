@@ -80,7 +80,7 @@ export default function Projects() {
             marginBottom: { xs: 2, md: 1 },
             fontWeight: "300",
             fontSize: { xs: 35, md: 50 },
-            textAlign: { xs: "center", md: "start" },
+            textAlign: { xs: "start", md: "start" },
           }}
         >
           Our Projects
