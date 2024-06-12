@@ -72,7 +72,7 @@ export default function FormStepper(props: Props) {
     };
 
     emailjs
-      .send("service_f1l2auv", "LÄGG TEMPLATE IDT HÄR!!", templateParams)
+      .send("service_f1l2auv", "template_2f6lq5o", templateParams)
       .then((response) => {
         console.log("Email sent successfully:", response.status, response.text);
         setSnackbarSeverity("success");

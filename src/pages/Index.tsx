@@ -1,7 +1,7 @@
 import EmailIcon from "@mui/icons-material/Email";
 import Instagram from "@mui/icons-material/Instagram";
 import PhoneIcon from "@mui/icons-material/Phone";
-import { Box, Typography, keyframes } from "@mui/material";
+import { Box, Link, Typography, keyframes } from "@mui/material";
 import Gallery from "../components/Gallery";
 
 // Keyframes for the animation
@@ -29,21 +29,19 @@ export default function Index() {
         marginTop: 2,
         flexGrow: 1,
         minHeight: "100vh",
-        // backgroundColor: "red",
         zIndex: 1,
       }}
     >
       <Box
         sx={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: { xs: "column", md: "row" },
           padding: 0,
           margin: 0,
           width: "100%",
           alignItems: "start",
           marginTop: 2,
           flexGrow: 1,
-          // backgroundColor: "red",
           zIndex: 1,
         }}
       >
@@ -58,6 +56,7 @@ export default function Index() {
             paddingLeft: 4,
             borderRadius: 8,
             boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+            marginBottom: { xs: 4, md: 0 },
           }}
         >
           <Typography
@@ -73,21 +72,44 @@ export default function Index() {
           <div style={{ height: 2, width: 50, backgroundColor: "#896daf" }} />
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <EmailIcon sx={{ color: "white" }} />
-            <Typography sx={{ color: "white", fontSize: 16 }}>
-              zeroettab@gmail.com
-            </Typography>
+            <a
+              href="mailto:zeroettab@gmail.com"
+              style={{ textDecoration: "none" }}
+            >
+              <Typography sx={{ color: "white", fontSize: 16 }}>
+                zeroettab@gmail.com
+              </Typography>
+            </a>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <PhoneIcon sx={{ color: "white" }} />
-            <Typography sx={{ color: "white", fontSize: 16 }}>
-              0737000820/kkdkd
-            </Typography>
+            <a
+              href="tel:0737000820"
+              style={{ color: "inherit", textDecoration: "none" }}
+            >
+              <Typography sx={{ color: "white", fontSize: 16 }}>
+                0737000820
+              </Typography>
+            </a>
+            <a
+              href="tel:0723372475"
+              style={{ color: "inherit", textDecoration: "none" }}
+            >
+              <Typography sx={{ color: "white", fontSize: 16 }}>
+                / 0723372475
+              </Typography>
+            </a>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <Instagram sx={{ color: "white" }} />
-            <Typography sx={{ color: "white", fontSize: 16 }}>
-              Zeroett's instagram
-            </Typography>
+            <Link
+              href="https://www.instagram.com/zeroettab"
+              sx={{ textDecoration: "none" }}
+            >
+              <Typography sx={{ color: "white", fontSize: 16 }}>
+                Zeroett's instagram
+              </Typography>
+            </Link>
           </Box>
         </Box>
         <Box
@@ -100,7 +122,11 @@ export default function Index() {
           }}
         >
           <Box
-            sx={{ display: "flex", flexDirection: "column", marginBottom: 3 }}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              marginBottom: 3,
+            }}
           >
             <Box
               sx={{
@@ -114,16 +140,16 @@ export default function Index() {
               }}
             >
               <Typography
+                variant="h2"
                 sx={{
                   color: "white",
                   letterSpacing: 3,
                   fontWeight: "400",
-                  fontSize: 40,
+                  fontSize: { xs: 35, md: 50 },
                 }}
               >
                 Web applications
               </Typography>
-              {/* <CheckIcon sx={{ color: "#896daf", fontSize: 45, marginLeft: 1 }} /> */}
             </Box>
             <div
               style={{ height: 2, width: 200, backgroundColor: "#896daf" }}
@@ -167,16 +193,16 @@ export default function Index() {
               }}
             >
               <Typography
+                variant="h2"
                 sx={{
                   color: "white",
                   letterSpacing: 3,
                   fontWeight: "400",
-                  fontSize: 40,
+                  fontSize: { xs: 35, md: 50 },
                 }}
               >
                 Mobile applications
               </Typography>
-              {/* <CheckIcon sx={{ color: "#896daf", fontSize: 45, marginLeft: 1 }} /> */}
             </Box>
             <div
               style={{ height: 2, width: 200, backgroundColor: "#896daf" }}
@@ -218,22 +244,16 @@ export default function Index() {
               }}
             >
               <Typography
+                variant="h2"
                 sx={{
                   color: "white",
                   letterSpacing: 3,
                   fontWeight: "400",
-                  fontSize: 40,
+                  fontSize: { xs: 35, md: 50 },
                 }}
               >
                 Backend solutions
               </Typography>
-              {/* <CheckIcon
-              sx={{
-                color: "#896daf",
-                fontSize: 45,
-                marginLeft: 1,
-              }}
-            /> */}
             </Box>
             <div
               style={{ height: 2, width: 200, backgroundColor: "#896daf" }}
@@ -263,6 +283,7 @@ export default function Index() {
           </Box>
         </Box>
       </Box>
+      {/* <Info /> */}
       <Gallery />
     </Box>
   );
