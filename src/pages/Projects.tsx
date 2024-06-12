@@ -4,9 +4,9 @@ import {
   CardContent,
   CardMedia,
   Grid,
+  Link,
   Typography,
   keyframes,
-  Link,
 } from "@mui/material";
 
 const fadeIn = keyframes`
@@ -43,9 +43,27 @@ const projects = [
   },
   {
     id: 4,
-    title: "Web service - Virtual Workplace",
+    title: "Web service - Workplace",
     description: "An online workplace and project manager for workplaces.",
     imageUrl: "https://i.imgur.com/PXofn2Z.png",
+  },
+  {
+    id: 5,
+    title: "Mobile app - Greenify",
+    description: "A gamified garbage collector app.",
+    imageUrl: "https://i.imgur.com/YZem2E2.png",
+  },
+  {
+    id: 6,
+    title: "Web service - Webshop",
+    description: "A webshop with an admin service.",
+    imageUrl: "https://i.imgur.com/KSbsIhH.png",
+  },
+  {
+    id: 7,
+    title: "Web site - Calendar",
+    description: "An online calendar.",
+    imageUrl: "https://i.imgur.com/ZKM8ghk.png",
   },
 ];
 
@@ -55,7 +73,7 @@ export default function Projects() {
       sx={{
         display: "flex",
         flexDirection: "column",
-        padding: 4,
+        paddingY: 4,
         margin: 0,
         width: "100%",
         alignItems: "center",
@@ -70,7 +88,10 @@ export default function Projects() {
         sx={{
           width: "100%",
           marginBottom: 2,
-          marginLeft: 10,
+          marginLeft: { xs: 0, md: 10 },
+          display: "flex",
+          flexDirection: "column",
+          alignItems: { xs: "center", md: "start" },
         }}
       >
         <Typography
@@ -81,15 +102,15 @@ export default function Projects() {
             marginBottom: { xs: 2, md: 1 },
             fontWeight: "300",
             fontSize: { xs: 35, md: 50 },
-            textAlign: { xs: "start", md: "start" },
+            textAlign: { xs: "center", md: "start" },
           }}
         >
-          Our Projects
+          Featured Projects
         </Typography>
         <div
           style={{
             height: 2,
-            width: 200,
+            width: 270,
             backgroundColor: "#896daf",
             marginBottom: 1,
           }}
@@ -186,7 +207,7 @@ export default function Projects() {
                       },
                     }}
                   >
-                    Visit Website
+                    <Typography>Visit Website</Typography>
                   </Link>
                 )}
               </CardContent>
