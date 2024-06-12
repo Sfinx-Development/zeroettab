@@ -23,14 +23,14 @@ export default function Header(): JSX.Element {
           display: "flex",
           justifyContent: isMobile ? "center" : "flex-start",
           width: isMobile ? "100%" : "auto",
-          marginLeft: isMobile ? 0 : 5,
+          marginLeft: isMobile ? 0 : 15,
         }}
       >
         <Link href="/" sx={{ textDecoration: "none" }}>
           <img
-            src="https://i.imgur.com/qY6tjPU.png"
+            src="https://i.imgur.com/5Fk6tu4.png"
             alt="logo with text zeroett"
-            width={isMobile ? 200 : 250}
+            width={isMobile ? 200 : 350}
             style={{ marginBottom: isMobile ? 16 : 0 }}
           />
         </Link>
