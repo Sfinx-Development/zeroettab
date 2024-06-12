@@ -29,7 +29,7 @@ export default function Header(): JSX.Element {
         <Link href="/" sx={{ textDecoration: "none" }}>
           <img
             src="https://i.imgur.com/5Fk6tu4.png"
-            alt="logo with text zeroett"
+            alt="Zeroett"
             width={isMobile ? 200 : 350}
             style={{ marginBottom: isMobile ? 16 : 0 }}
           />
