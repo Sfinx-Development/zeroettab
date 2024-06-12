@@ -144,6 +144,7 @@ export default function Index() {
                 sx={{
                   color: "white",
                   letterSpacing: 3,
+                  marginBottom: { xs: 2, md: 1 },
                   fontWeight: "400",
                   fontSize: { xs: 35, md: 50 },
                 }}
@@ -197,6 +198,7 @@ export default function Index() {
                 sx={{
                   color: "white",
                   letterSpacing: 3,
+                  marginBottom: { xs: 2, md: 1 },
                   fontWeight: "400",
                   fontSize: { xs: 35, md: 50 },
                 }}
@@ -248,6 +250,7 @@ export default function Index() {
                 sx={{
                   color: "white",
                   letterSpacing: 3,
+                  marginBottom: { xs: 2, md: 1 },
                   fontWeight: "400",
                   fontSize: { xs: 35, md: 50 },
                 }}
