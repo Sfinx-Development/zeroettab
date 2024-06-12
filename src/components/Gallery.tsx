@@ -68,16 +68,21 @@ export default function Gallery() {
           width: "100%",
           justifyContent: "center",
           alignItems: "center",
+          flexDirection: "row",
+          "@media (max-width: 600px)": {
+            flexDirection: "column",
+            alignItems: "center",
+          },
         }}
       >
         {images.map((i) => (
-          <img
+          <Box
             key={i.id}
-            src={i.url}
-            alt={i.alt}
-            style={{
+            sx={{
+              display:
+                imageInFocus === i.id ? "block" : { xs: "none", sm: "block" },
               height: imageInFocus === i.id ? 250 : 200,
-              minWidth: imageInFocus === i.id ? "auto" : 150,
+              minWidth: imageInFocus === i.id ? 400 : 150,
               filter:
                 imageInFocus === i.id ? "none" : "blur(2px) grayscale(80%)",
               transition: "all 0.5s ease",
@@ -89,7 +94,17 @@ export default function Gallery() {
                   : "none",
               transform: imageInFocus === i.id ? "scale(1.05)" : "scale(1)",
             }}
-          />
+          >
+            <img
+              src={i.url}
+              alt={i.alt}
+              style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: "inherit",
+              }}
+            />
+          </Box>
         ))}
       </Box>
 
