@@ -16,6 +16,7 @@ export default function Header(): JSX.Element {
         paddingY: 3,
         backgroundColor: "transparent",
       }}
+      component={"header"}
     >
       <Box
         sx={{
@@ -28,7 +29,7 @@ export default function Header(): JSX.Element {
         <Link href="/" sx={{ textDecoration: "none" }}>
           <img
             src="https://i.imgur.com/qY6tjPU.png"
-            alt="logo saying zeroett"
+            alt="logo with text zeroett"
             width={isMobile ? 200 : 250}
             style={{ marginBottom: isMobile ? 16 : 0 }}
           />
@@ -101,7 +102,7 @@ export default function Header(): JSX.Element {
             marginX: isMobile ? 0 : 2,
             marginY: isMobile ? 1 : 0,
           }}
-          href="/portfolio"
+          href="/projects"
         >
           <Typography
             sx={{
@@ -116,7 +117,7 @@ export default function Header(): JSX.Element {
               },
             }}
           >
-            Portfolio
+            Projects
           </Typography>
         </Link>
       </Box>

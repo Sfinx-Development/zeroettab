@@ -1,7 +1,7 @@
 import EmailIcon from "@mui/icons-material/Email";
 import Instagram from "@mui/icons-material/Instagram";
 import PhoneIcon from "@mui/icons-material/Phone";
-import { Box, Typography, keyframes } from "@mui/material";
+import { Box, Link, Typography, keyframes } from "@mui/material";
 import Gallery from "../components/Gallery";
 
 // Keyframes for the animation
@@ -72,21 +72,44 @@ export default function Index() {
           <div style={{ height: 2, width: 50, backgroundColor: "#896daf" }} />
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <EmailIcon sx={{ color: "white" }} />
-            <Typography sx={{ color: "white", fontSize: 16 }}>
-              zeroettab@gmail.com
-            </Typography>
+            <a
+              href="mailto:zeroettab@gmail.com"
+              style={{ textDecoration: "none" }}
+            >
+              <Typography sx={{ color: "white", fontSize: 16 }}>
+                zeroettab@gmail.com
+              </Typography>
+            </a>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <PhoneIcon sx={{ color: "white" }} />
-            <Typography sx={{ color: "white", fontSize: 16 }}>
-              0737000820/kkdkd
-            </Typography>
+            <a
+              href="tel:0737000820"
+              style={{ color: "inherit", textDecoration: "none" }}
+            >
+              <Typography sx={{ color: "white", fontSize: 16 }}>
+                0737000820
+              </Typography>
+            </a>
+            <a
+              href="tel:0723372475"
+              style={{ color: "inherit", textDecoration: "none" }}
+            >
+              <Typography sx={{ color: "white", fontSize: 16 }}>
+                / 0723372475
+              </Typography>
+            </a>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <Instagram sx={{ color: "white" }} />
-            <Typography sx={{ color: "white", fontSize: 16 }}>
-              Zeroett's instagram
-            </Typography>
+            <Link
+              href="https://www.instagram.com/zeroettab"
+              sx={{ textDecoration: "none" }}
+            >
+              <Typography sx={{ color: "white", fontSize: 16 }}>
+                Zeroett's instagram
+              </Typography>
+            </Link>
           </Box>
         </Box>
         <Box
@@ -117,6 +140,7 @@ export default function Index() {
               }}
             >
               <Typography
+                variant="h2"
                 sx={{
                   color: "white",
                   letterSpacing: 3,
@@ -169,6 +193,7 @@ export default function Index() {
               }}
             >
               <Typography
+                variant="h2"
                 sx={{
                   color: "white",
                   letterSpacing: 3,
@@ -219,6 +244,7 @@ export default function Index() {
               }}
             >
               <Typography
+                variant="h2"
                 sx={{
                   color: "white",
                   letterSpacing: 3,
@@ -257,6 +283,7 @@ export default function Index() {
           </Box>
         </Box>
       </Box>
+      {/* <Info /> */}
       <Gallery />
     </Box>
   );

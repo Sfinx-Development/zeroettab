@@ -9,15 +9,15 @@ import {
 } from "@mui/material";
 
 const fadeIn = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  `;
 
 const projects = [
   {
@@ -64,23 +64,48 @@ export default function Projects() {
         animation: `${fadeIn} 1s ease-out`,
       }}
     >
-      {/* <Typography
-        variant="h2"
+      <Box
         sx={{
-          color: "white",
-          letterSpacing: 2,
-          fontWeight: "400",
-          marginBottom: 4,
-          textAlign: "center",
-          animation: `${fadeIn} 1s ease-out`,
-          animationDelay: "0.3s",
-          animationFillMode: "forwards",
-          opacity: 0,
+          //   backgroundColor: "red",
+          width: "100%",
+          marginBottom: 2,
+          marginLeft: 10,
         }}
       >
-        Our Projects
-      </Typography> */}
-      <Grid container spacing={4} justifyContent="center">
+        <Typography
+          variant="h2"
+          sx={{
+            color: "white",
+            letterSpacing: 3,
+            marginBottom: { xs: 2, md: 1 },
+            fontWeight: "300",
+            fontSize: { xs: 35, md: 50 },
+            textAlign: { xs: "center", md: "start" },
+          }}
+        >
+          Our Projects
+        </Typography>
+        <div
+          style={{
+            height: 2,
+            width: 200,
+            backgroundColor: "#896daf",
+            marginBottom: 1,
+          }}
+        />
+      </Box>
+
+      <Grid
+        container
+        spacing={4}
+        justifyContent="center"
+        alignItems="center"
+        sx={{
+          display: "flex",
+          width: "100%",
+          maxWidth: "1200px",
+        }}
+      >
         {projects.map((project, index) => (
           <Grid
             item
@@ -100,7 +125,7 @@ export default function Projects() {
                 maxWidth: 345,
                 backgroundColor: "rgba(0,0,0, 0.7)",
                 boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.3)",
-                borderRadius: 8,
+                borderRadius: 4,
                 transition: "transform 0.3s ease",
                 "&:hover": {
                   transform: "scale(1.05)",
@@ -119,7 +144,7 @@ export default function Projects() {
                   gutterBottom
                   variant="h5"
                   component="div"
-                  sx={{ color: "#896daf" }}
+                  sx={{ color: "white" }}
                 >
                   {project.title}
                 </Typography>
