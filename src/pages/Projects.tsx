@@ -66,7 +66,6 @@ export default function Projects() {
     >
       <Box
         sx={{
-          //   backgroundColor: "red",
           width: "100%",
           marginBottom: 2,
           marginLeft: 10,
@@ -123,8 +122,8 @@ export default function Projects() {
             <Card
               sx={{
                 maxWidth: 345,
-                backgroundColor: "rgba(0,0,0, 0.7)",
-                boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.3)",
+                backgroundColor: "transparent",
+                boxShadow: "none",
                 borderRadius: 4,
                 transition: "transform 0.3s ease",
                 "&:hover": {
@@ -137,17 +136,34 @@ export default function Projects() {
                 alt={project.title}
                 height="200"
                 image={project.imageUrl}
-                sx={{ borderRadius: "8px 8px 0 0" }}
+                sx={{
+                  borderRadius: "4px 4px 0 0",
+                  filter: "brightness(0.85)",
+                }}
               />
-              <CardContent>
+              <CardContent
+                sx={{
+                  position: "relative",
+                  backgroundColor: "transparent",
+                  padding: 2,
+                }}
+              >
                 <Typography
                   gutterBottom
                   variant="h5"
                   component="div"
-                  sx={{ color: "white" }}
+                  sx={{ color: "white", marginBottom: 1 }}
                 >
                   {project.title}
                 </Typography>
+                <div
+                  style={{
+                    height: 2,
+                    width: 50,
+                    backgroundColor: "#896daf",
+                    marginBottom: 8,
+                  }}
+                />
                 <Typography variant="body2" color="white">
                   {project.description}
                 </Typography>
