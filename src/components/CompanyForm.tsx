@@ -1,4 +1,10 @@
-import { Box, Checkbox, FormControlLabel, TextField } from "@mui/material";
+import {
+  Box,
+  Checkbox,
+  FormControlLabel,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useCustomerContext } from "../context/customerContext";
 
 export default function CompanyForm() {
@@ -22,15 +28,20 @@ export default function CompanyForm() {
           <FormControlLabel
             control={
               <Checkbox
+                sx={{ color: "white" }}
                 checked={customer.isCompany}
                 onChange={(event) =>
                   setCustomer({ ...customer, isCompany: event.target.checked })
                 }
               />
             }
-            label="Företag"
+            label={<Typography color={"white"}>Företag</Typography>}
           />
-          <FormControlLabel control={<Checkbox />} label="Privatperson" />
+          <FormControlLabel
+            color="white"
+            control={<Checkbox sx={{ color: "white" }} />}
+            label={<Typography color={"white"}>Privatperson</Typography>}
+          />
         </Box>
         <TextField
           label="Namn på företag"
