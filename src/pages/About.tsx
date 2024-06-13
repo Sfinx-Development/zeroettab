@@ -1,4 +1,5 @@
 import { Box, Typography, keyframes } from "@mui/material";
+import { FormattedMessage } from "react-intl";
 
 const fadeIn = keyframes`
   from {
@@ -73,7 +74,7 @@ export default function AboutUs() {
               display: "inline",
             }}
           >
-            Our team consists of two full-stack
+            <FormattedMessage id="our-team" />
           </Typography>
           <Typography
             variant="h4"
@@ -85,19 +86,13 @@ export default function AboutUs() {
               display: "inline",
             }}
           >
-            developers
+            <FormattedMessage id="developers" />
           </Typography>
           <Typography
             variant="body1"
             sx={{ marginTop: 2, lineHeight: 1.8, color: "white" }}
           >
-            We focus on creating strong, smart, and secure systems for our
-            customers. Our team consists of two full-stack developers with
-            additional expertise in C#, JAVA, JavaScript, and TypeScript. We use
-            frameworks like React, Svelte, Angular, Grails, and .NET for both
-            small and large systems. As full-stack developers, we take care of
-            all your software needs - from websites and web shops to mobile
-            applications and features in already established systems.
+            <FormattedMessage id="we-focus" />
           </Typography>
           <Typography
             variant="h5"

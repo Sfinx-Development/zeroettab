@@ -7,6 +7,7 @@ import Stepper from "@mui/material/Stepper";
 import Typography from "@mui/material/Typography";
 import emailjs from "emailjs-com";
 import * as React from "react";
+import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import { Customer, useCustomerContext } from "../context/customerContext";
 
@@ -139,7 +140,7 @@ export default function FormStepper(props: Props) {
                     color: "red",
                   }}
                 >
-                  {step.title}
+                  {<FormattedMessage id={step.title} />}
                 </StepLabel>
               </Step>
             ))}
@@ -172,13 +173,17 @@ export default function FormStepper(props: Props) {
                     onClick={handleBack}
                     sx={{ mr: 1, fontSize: 15, color: "white" }}
                   >
-                    Tillbaka
+                    <FormattedMessage id="previous" />
                   </Button>
                   <Button
                     onClick={handleNext}
                     sx={{ fontSize: 15, color: "white" }}
                   >
-                    {activeStep === steps.length - 1 ? "Klar" : "Nästa"}
+                    {activeStep === steps.length - 1 ? (
+                      <FormattedMessage id="done" />
+                    ) : (
+                      <FormattedMessage id="next" />
+                    )}
                   </Button>
                 </Box>
               </div>

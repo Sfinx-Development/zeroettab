@@ -1,5 +1,6 @@
 import { Box, TextField } from "@mui/material";
 import { useCustomerContext } from "../context/customerContext";
+import { FormattedMessage } from "react-intl";
 
 export default function PersonalDataForm() {
   const { customer, setCustomer } = useCustomerContext();
@@ -21,7 +22,7 @@ export default function PersonalDataForm() {
         }}
       >
         <TextField
-          label="Förnamn och efternamn"
+          label={<FormattedMessage id="name" />}
           sx={{
             marginBottom: 2,
             background: "white",
@@ -30,19 +31,19 @@ export default function PersonalDataForm() {
           onChange={(e) => setCustomer({ ...customer, name: e.target.value })}
         />
         <TextField
-          label="Email"
+          label={<FormattedMessage id="email" />}
           sx={{ marginBottom: 2, background: "white" }}
           value={customer.email}
           onChange={(e) => setCustomer({ ...customer, email: e.target.value })}
         />
         <TextField
-          label="Telefonnummer"
+          label={<FormattedMessage id="phone" />}
           sx={{ marginBottom: 2, background: "white" }}
           value={customer.phone}
           onChange={(e) => setCustomer({ ...customer, phone: e.target.value })}
         />
         <TextField
-          label="Adress"
+          label={<FormattedMessage id="address" />}
           sx={{ marginBottom: 2, background: "white" }}
           value={customer.address}
           onChange={(e) =>

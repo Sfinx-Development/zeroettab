@@ -1,4 +1,5 @@
 import { Box, Link, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { FormattedMessage } from "react-intl";
 
 export default function Header(): JSX.Element {
   const theme = useTheme();
@@ -69,7 +70,7 @@ export default function Header(): JSX.Element {
               },
             }}
           >
-            About
+            <FormattedMessage id="about" />
           </Typography>
         </Link>
         <Link
@@ -93,7 +94,7 @@ export default function Header(): JSX.Element {
               },
             }}
           >
-            Contact Us
+            <FormattedMessage id="contact" />
           </Typography>
         </Link>
         <Link
@@ -117,7 +118,7 @@ export default function Header(): JSX.Element {
               },
             }}
           >
-            Projects
+            <FormattedMessage id="project" />
           </Typography>
         </Link>
       </Box>

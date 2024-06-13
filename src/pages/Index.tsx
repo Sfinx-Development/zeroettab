@@ -2,6 +2,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import Instagram from "@mui/icons-material/Instagram";
 import PhoneIcon from "@mui/icons-material/Phone";
 import { Box, Link, Typography, keyframes } from "@mui/material";
+import { FormattedMessage } from "react-intl";
 import Gallery from "../components/Gallery";
 
 // Keyframes for the animation
@@ -67,7 +68,7 @@ export default function Index() {
               marginBottom: 1,
             }}
           >
-            Let's talk
+            <FormattedMessage id="lets-talk" />
           </Typography>
           <div style={{ height: 2, width: 50, backgroundColor: "#896daf" }} />
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -149,7 +150,7 @@ export default function Index() {
                   fontSize: { xs: 35, md: 50 },
                 }}
               >
-                Web applications
+                <FormattedMessage id="web-applications" />
               </Typography>
             </Box>
             <div
@@ -174,7 +175,7 @@ export default function Index() {
                   marginTop: 1,
                 }}
               >
-                We design and build your webpage
+                <FormattedMessage id="we-design" />
               </Typography>
             </Box>
           </Box>
@@ -203,7 +204,7 @@ export default function Index() {
                   fontSize: { xs: 35, md: 50 },
                 }}
               >
-                Mobile applications
+                <FormattedMessage id="mobile-applications" />
               </Typography>
             </Box>
             <div
@@ -228,7 +229,7 @@ export default function Index() {
                   marginTop: 1,
                 }}
               >
-                Building apps for Android and IOS
+                <FormattedMessage id="building-apps" />
               </Typography>
             </Box>
           </Box>
@@ -255,7 +256,7 @@ export default function Index() {
                   fontSize: { xs: 35, md: 50 },
                 }}
               >
-                Backend solutions
+                <FormattedMessage id="backend-solutions" />
               </Typography>
             </Box>
             <div
@@ -280,7 +281,7 @@ export default function Index() {
                   marginTop: 1,
                 }}
               >
-                Robust and scalable backend systems
+                <FormattedMessage id="robust-and" />
               </Typography>
             </Box>
           </Box>
