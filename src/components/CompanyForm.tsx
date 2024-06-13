@@ -5,6 +5,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { FormattedMessage } from "react-intl";
 import { useCustomerContext } from "../context/customerContext";
 
 export default function CompanyForm() {
@@ -35,16 +36,24 @@ export default function CompanyForm() {
                 }
               />
             }
-            label={<Typography color={"white"}>Företag</Typography>}
+            label={
+              <Typography color={"white"}>
+                {<FormattedMessage id="company" />}
+              </Typography>
+            }
           />
           <FormControlLabel
             color="white"
             control={<Checkbox sx={{ color: "white" }} />}
-            label={<Typography color={"white"}>Privatperson</Typography>}
+            label={
+              <Typography color={"white"}>
+                {<FormattedMessage id="private-person" />}
+              </Typography>
+            }
           />
         </Box>
         <TextField
-          label="Namn på företag"
+          label={<FormattedMessage id="company-name" />}
           sx={{ marginBottom: 2, background: "white" }}
           value={customer.companyName}
           onChange={(e) =>
@@ -52,7 +61,7 @@ export default function CompanyForm() {
           }
         />
         <TextField
-          label="Vad gör ditt företag?"
+          label={<FormattedMessage id="company-does" />}
           sx={{ marginBottom: 2, background: "white" }}
           value={customer.companyDescription}
           onChange={(e) =>

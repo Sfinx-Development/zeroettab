@@ -1,5 +1,6 @@
 import { Box, Grid, Typography, keyframes } from "@mui/material";
 import { motion } from "framer-motion";
+import { FormattedMessage } from "react-intl";
 import CompanyForm from "../components/CompanyForm";
 import ClientIdeaForm from "../components/CustomerIdeaForm";
 import FormStepper from "../components/FormStepper";
@@ -80,7 +81,7 @@ export default function Contact() {
               textAlign: { xs: "center", md: "start" },
             }}
           >
-            Tell us your idea
+            <FormattedMessage id="tell-us" />
           </Typography>
           <div
             style={{
@@ -100,8 +101,7 @@ export default function Contact() {
               textAlign: { xs: "center", md: "start" },
             }}
           >
-            We assist you in designing, developing, and enhancing your
-            application.
+            <FormattedMessage id="we-assist" />
           </Typography>
           <Typography
             variant="body1"
@@ -113,7 +113,7 @@ export default function Contact() {
               textAlign: { xs: "center", md: "start" },
             }}
           >
-            Tell us your thoughts and let's talk!
+            <FormattedMessage id="tell-us-2" />
           </Typography>
         </Grid>
 
@@ -140,9 +140,9 @@ export default function Contact() {
       </Grid>
       <FormStepper
         steps={[
-          { title: "Uppgifter", form: PersonalDataForm },
-          { title: "Företag eller privatperson", form: CompanyForm },
-          { title: "Beskriv din idé", form: ClientIdeaForm },
+          { title: "info", form: PersonalDataForm },
+          { title: "company-or", form: CompanyForm },
+          { title: "describe", form: ClientIdeaForm },
         ]}
       />
     </Box>

@@ -1,4 +1,5 @@
 import { Box, TextField } from "@mui/material";
+import { FormattedMessage } from "react-intl";
 import { useCustomerContext } from "../context/customerContext";
 
 export default function ClientIdeaForm() {
@@ -20,7 +21,7 @@ export default function ClientIdeaForm() {
         }}
       >
         <TextField
-          label="Vad är syftet med applikationen?"
+          label={<FormattedMessage id="application-purpose" />}
           sx={{ marginBottom: 2, background: "white" }}
           value={customer.purposeApp}
           onChange={(e) =>
@@ -28,7 +29,7 @@ export default function ClientIdeaForm() {
           }
         />
         <TextField
-          label="Vad är det för typ av applikation (webbsida, mobilapp, systemapp)?"
+          label={<FormattedMessage id="application-type"/>}
           sx={{ marginBottom: 2, background: "white" }}
           value={customer.typeOfApp}
           onChange={(e) =>
@@ -36,7 +37,7 @@ export default function ClientIdeaForm() {
           }
         />
         <TextField
-          label="Vilken målgrupp ska den rikta sig till?"
+          label={<FormattedMessage id="target-group"/>}
           sx={{ marginBottom: 2, background: "white" }}
           value={customer.targetGroup}
           onChange={(e) =>
@@ -48,7 +49,7 @@ export default function ClientIdeaForm() {
           sx={{ marginBottom: 2, background: "white" }}
         /> */}
         <TextField
-          label="Vad är din budget och tidsram?"
+          label={<FormattedMessage id="budget-time"/>}
           sx={{ marginBottom: 2, background: "white" }}
           value={customer.budgetDescription}
           onChange={(e) =>
@@ -56,7 +57,7 @@ export default function ClientIdeaForm() {
           }
         />
         <TextField
-          label="Övrigt"
+          label={<FormattedMessage id="other"/>}
           sx={{ marginBottom: 2, background: "white" }}
           value={customer.extraDescription}
           onChange={(e) =>

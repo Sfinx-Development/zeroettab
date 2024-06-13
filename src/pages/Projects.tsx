@@ -8,6 +8,7 @@ import {
   Typography,
   keyframes,
 } from "@mui/material";
+import { FormattedMessage } from "react-intl";
 
 const fadeIn = keyframes`
     from {
@@ -23,46 +24,45 @@ const fadeIn = keyframes`
 const projects = [
   {
     id: 1,
-    title: "Web site - Städtjejerna",
-    description:
-      "A website for a cleaning company with email services and customized design.",
+    title: "stadtjejerna-title",
+    description: "stadtjejerna-desc",
     imageUrl: "https://i.imgur.com/TofNZWm.png",
     link: "https://stadtjejerna.se",
   },
   {
     id: 2,
-    title: "Web site - Example",
-    description: "An example website for products and services.",
+    title: "example-title",
+    description: "example-desc",
     imageUrl: "https://i.imgur.com/kKyCoTP.png",
   },
   {
     id: 3,
-    title: "Mobile app - Weather",
-    description: "A weather application - find the sun near you.",
+    title: "weather-title",
+    description: "weather-desc",
     imageUrl: "https://i.imgur.com/kW51MSz.jpg",
   },
   {
     id: 4,
-    title: "Web service - Workplace",
-    description: "An online workplace and project manager for workplaces.",
+    title: "cy-title",
+    description: "cy-desc",
     imageUrl: "https://i.imgur.com/PXofn2Z.png",
   },
   {
     id: 5,
-    title: "Mobile app - Greenify",
-    description: "A gamified garbage collector app.",
+    title: "greenify-title",
+    description: "greenify-desc",
     imageUrl: "https://i.imgur.com/YZem2E2.png",
   },
   {
     id: 6,
-    title: "Web service - Webshop",
-    description: "A webshop with an admin service.",
+    title: "webshop-title",
+    description: "webshop-desc",
     imageUrl: "https://i.imgur.com/KSbsIhH.png",
   },
   {
     id: 7,
-    title: "Web site - Calendar",
-    description: "An online calendar.",
+    title: "calendar-title",
+    description: "calendar-desc",
     imageUrl: "https://i.imgur.com/ZKM8ghk.png",
   },
 ];
@@ -105,12 +105,12 @@ export default function Projects() {
             textAlign: { xs: "center", md: "start" },
           }}
         >
-          Featured Projects
+          <FormattedMessage id="featured-project" />
         </Typography>
         <div
           style={{
             height: 2,
-            width: 270,
+            width: 200,
             backgroundColor: "#896daf",
             marginBottom: 1,
           }}
@@ -177,7 +177,7 @@ export default function Projects() {
                   component="div"
                   sx={{ color: "white", marginBottom: 1 }}
                 >
-                  {project.title}
+                  {<FormattedMessage id={project.title} />}
                 </Typography>
                 <div
                   style={{
@@ -188,7 +188,7 @@ export default function Projects() {
                   }}
                 />
                 <Typography variant="body2" color="white">
-                  {project.description}
+                  {<FormattedMessage id={project.description} />}
                 </Typography>
                 {project.link && (
                   <Link
@@ -207,7 +207,9 @@ export default function Projects() {
                       },
                     }}
                   >
-                    <Typography>Visit Website</Typography>
+                    <Typography>
+                      <FormattedMessage id="visit-website" />
+                    </Typography>
                   </Link>
                 )}
               </CardContent>
