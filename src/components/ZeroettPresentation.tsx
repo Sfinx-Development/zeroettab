@@ -11,16 +11,6 @@ const fadeIn = keyframes`
     transform: translateY(0);
   }
 `;
-
-const videoStyle = {
-  width: "100%",
-  maxHeight: 400,
-  objectFit: "cover",
-  borderRadius: 8,
-  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
-  transition: "transform 0.3s ease",
-};
-
 export default function ZeroettPresentation() {
   return (
     <Box
@@ -43,7 +33,7 @@ export default function ZeroettPresentation() {
           flexDirection: { xs: "column", md: "row" },
           alignItems: "center",
           backgroundColor: "rgba(0, 0, 0, 0.4)",
-          borderRadius: 8,
+          borderRadius: 2,
           padding: 4,
           boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.3)",
           margin: "auto",
@@ -60,7 +50,14 @@ export default function ZeroettPresentation() {
             autoPlay
             loop
             muted
-            style={videoStyle}
+            style={{
+              width: "100%",
+              maxHeight: 400,
+              objectFit: "cover",
+              borderRadius: 8,
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
+              transition: "transform 0.3s ease",
+            }}
             onMouseEnter={(e) =>
               (e.currentTarget.style.transform = "scale(1.05)")
             }
