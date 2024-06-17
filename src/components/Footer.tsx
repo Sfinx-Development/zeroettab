@@ -83,7 +83,15 @@ export default function Footer() {
         </Typography>
       </Box>
       <Divider sx={{ backgroundColor: "white", marginY: 4 }} />
-      <Box sx={{ marginY: 4, color: "white" }}>
+      <Box
+        sx={{
+          marginY: 4,
+          color: "white",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <Link
           href="https://www.instagram.com/zeroettab"
           sx={{
@@ -95,7 +103,7 @@ export default function Footer() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          INSTAGRAM
+          <Typography>INSTAGRAM</Typography>
         </Link>
         <Link
           href="https://www.facebook.com/zeroettab"
@@ -108,7 +116,7 @@ export default function Footer() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          FACEBOOK
+          <Typography>FACEBOOK</Typography>
         </Link>
         <Link
           href="https://www.google.com/maps/dir//Vävlagargatan+6p,+507+30+Brämhult/"
@@ -120,7 +128,7 @@ export default function Footer() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          HITTA
+          <Typography> HITTA</Typography>
         </Link>
       </Box>
     </Box>

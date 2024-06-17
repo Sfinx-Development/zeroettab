@@ -1,11 +1,25 @@
+import AppsIcon from "@mui/icons-material/Apps";
 import EmailIcon from "@mui/icons-material/Email";
 import Instagram from "@mui/icons-material/Instagram";
+import LanguageIcon from "@mui/icons-material/Language";
 import PhoneIcon from "@mui/icons-material/Phone";
-import { Box, Button, Grid, Link, Typography, keyframes } from "@mui/material";
-import { motion } from "framer-motion";
+import StorageIcon from "@mui/icons-material/Storage";
+import {
+  Box,
+  Button,
+  Grid,
+  Link,
+  Typography,
+  keyframes,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
+import { motion, useAnimation } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useNavigate } from "react-router-dom";
 import Gallery from "../components/Gallery";
+import ZeroettPresentation from "../components/ZeroettPresentation";
 
 // Keyframes for the animation
 const fadeIn = keyframes`
@@ -19,8 +33,45 @@ const fadeIn = keyframes`
   }
 `;
 
+const fadeInAnimation = {
+  hidden: { opacity: 0, x: -50 },
+  visible: { opacity: 1, x: 0 },
+};
+
 export default function Index() {
   const navigate = useNavigate();
+  const iconsRef = useRef<HTMLDivElement>(null);
+  const controls = useAnimation();
+  const [isVisible, setIsVisible] = useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (iconsRef.current) {
+        const top = iconsRef.current.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        if (top < windowHeight * 0.75) {
+          setIsVisible(true);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isVisible) {
+      controls.start((i) => ({
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.5, delay: i * 0.2 },
+      }));
+    }
+  }, [isVisible, controls]);
   return (
     <Box
       sx={{
@@ -28,6 +79,7 @@ export default function Index() {
         flexDirection: "column",
         padding: 0,
         margin: 0,
+        overflowX: "hidden",
         width: "100%",
         alignItems: "start",
         marginTop: 2,
@@ -42,147 +94,234 @@ export default function Index() {
           flexDirection: { xs: "column", md: "row" },
           padding: 0,
           margin: 0,
+          height: "auto",
           width: "100%",
           alignItems: "start",
           marginTop: 2,
-          flexGrow: 1,
           zIndex: 1,
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            flex: 1 / 2,
-            flexDirection: "column",
-            alignItems: "start",
-            justifyContent: "center",
-            gap: 2,
-            paddingLeft: 4,
-            borderRadius: 8,
-            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-            marginBottom: { xs: 4, md: 0 },
-          }}
-        >
-          <Typography
+        <Box>
+          <Box
             sx={{
-              color: "white",
-              fontSize: 18,
-              letterSpacing: 2,
-              marginBottom: 1,
+              display: "flex",
+              flex: 1 / 4,
+              flexDirection: "column",
+              alignItems: "start",
+              justifyContent: "center",
+              gap: 2,
+              paddingLeft: 4,
+              marginTop: 0,
+              borderRadius: 8,
+              minHeight: { xs: 200, md: 400 },
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+              marginBottom: { xs: 4, md: 0 },
             }}
           >
-            <FormattedMessage id="lets-talk" />
-          </Typography>
-          <div style={{ height: 2, width: 50, backgroundColor: "#896daf" }} />
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            <EmailIcon sx={{ color: "white" }} />
-            <a
-              href="mailto:zeroettab@gmail.com"
-              style={{ textDecoration: "none" }}
+            <Typography
+              sx={{
+                color: "white",
+                fontSize: 18,
+                letterSpacing: 2,
+                marginBottom: 1,
+              }}
             >
-              <Typography sx={{ color: "white", fontSize: 16 }}>
-                zeroettab@gmail.com
-              </Typography>
-            </a>
+              <FormattedMessage id="lets-talk" />
+            </Typography>
+            <div style={{ height: 2, width: 50, backgroundColor: "#896daf" }} />
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              <EmailIcon sx={{ color: "white" }} />
+              <a
+                href="mailto:zeroettab@gmail.com"
+                style={{ textDecoration: "none" }}
+              >
+                <Typography sx={{ color: "white", fontSize: 16 }}>
+                  zeroettab@gmail.com
+                </Typography>
+              </a>
+            </Box>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              <PhoneIcon sx={{ color: "white" }} />
+              <a
+                href="tel:0737000820"
+                style={{ color: "inherit", textDecoration: "none" }}
+              >
+                <Typography sx={{ color: "white", fontSize: 16 }}>
+                  0737000820
+                </Typography>
+              </a>
+              <a
+                href="tel:0723372475"
+                style={{ color: "inherit", textDecoration: "none" }}
+              >
+                <Typography sx={{ color: "white", fontSize: 16 }}>
+                  / 0723372475
+                </Typography>
+              </a>
+            </Box>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              <Instagram sx={{ color: "white" }} />
+              <Link
+                href="https://www.instagram.com/zeroettab"
+                sx={{ textDecoration: "none" }}
+              >
+                <Typography sx={{ color: "white", fontSize: 16 }}>
+                  Zeroett's instagram
+                </Typography>
+              </Link>
+            </Box>
           </Box>
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            <PhoneIcon sx={{ color: "white" }} />
-            <a
-              href="tel:0737000820"
-              style={{ color: "inherit", textDecoration: "none" }}
+
+          {!isMobile && (
+            <Box
+              ref={iconsRef}
+              sx={{
+                width: "100%",
+                display: "flex",
+                height: "auto",
+                flexDirection: "column",
+                alignItems: "end",
+                marginTop: 2,
+                justifyContent: "center",
+              }}
             >
-              <Typography sx={{ color: "white", fontSize: 16 }}>
-                0737000820
-              </Typography>
-            </a>
-            <a
-              href="tel:0723372475"
-              style={{ color: "inherit", textDecoration: "none" }}
-            >
-              <Typography sx={{ color: "white", fontSize: 16 }}>
-                / 0723372475
-              </Typography>
-            </a>
-          </Box>
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            <Instagram sx={{ color: "white" }} />
-            <Link
-              href="https://www.instagram.com/zeroettab"
-              sx={{ textDecoration: "none" }}
-            >
-              <Typography sx={{ color: "white", fontSize: 16 }}>
-                Zeroett's instagram
-              </Typography>
-            </Link>
-          </Box>
+              <motion.div
+                animate={controls}
+                initial={{ opacity: 0, y: 20 }}
+                custom={0}
+                style={{ marginBottom: 20 }}
+              >
+                <AppsIcon
+                  sx={{
+                    fontSize: 80,
+                    color: "white",
+                    marginBottom: 10,
+                  }}
+                />
+              </motion.div>
+
+              <motion.div
+                animate={controls}
+                initial={{ opacity: 0, y: 20 }}
+                custom={1}
+                style={{ marginBottom: 20 }}
+              >
+                <LanguageIcon
+                  sx={{
+                    fontSize: 80,
+                    color: "white",
+                    marginBottom: 7,
+                  }}
+                />
+              </motion.div>
+
+              <motion.div
+                animate={controls}
+                initial={{ opacity: 0, y: 20 }}
+                custom={2}
+              >
+                <StorageIcon
+                  sx={{
+                    fontSize: 80,
+                    color: "white",
+                    marginBottom: 10,
+                  }}
+                />
+              </motion.div>
+            </Box>
+          )}
         </Box>
+
         <Box
           sx={{
             flex: 1,
             display: "flex",
             flexDirection: "column",
-            alignItems: "start",
-            paddingLeft: 4,
+            alignItems: "flex-start",
+            justifyContent: "flex-start",
+            marginLeft: { xs: 0, md: 2 },
           }}
         >
+          <ZeroettPresentation />
+
           <Box
             sx={{
               display: "flex",
-              flexDirection: "column",
+              flexDirection: "row",
+              width: "100%",
+              position: "relative",
+              marginLeft: { xs: 2, md: 15 },
               marginBottom: 3,
             }}
           >
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                marginTop: 2,
-                animation: `${fadeIn} 1s ease-out`,
-                animationDelay: "0s",
-                animationFillMode: "forwards",
-                opacity: 0,
-              }}
+            <motion.div
+              variants={fadeInAnimation}
+              initial="hidden"
+              animate="visible"
             >
-              <Typography
-                component="h2"
+              <Box
                 sx={{
-                  color: "white",
-                  letterSpacing: 3,
-                  marginBottom: { xs: 2, md: 1 },
-                  fontWeight: "300",
-                  fontSize: { xs: 35, md: 50 },
-                  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+                  display: "flex",
+                  flex: 1,
+                  flexDirection: "column",
+                  width: "100%",
+                  marginBottom: 3,
                 }}
               >
-                ZEROETT AB
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                animation: `${fadeIn} 1s ease-out`,
-                animationDelay: "0.2s",
-                animationFillMode: "forwards",
-                opacity: 0,
-              }}
-            >
-              <Typography
-                component={"h3"}
-                sx={{
-                  color: "white",
-                  letterSpacing: 2,
-                  fontWeight: "300",
-                  fontSize: 20,
-                  marginTop: 1,
-                  maxWidth: { xs: "auto", md: "80%" },
-                  textShadow: "1px 1px 3px rgba(0, 0, 0, 0.3)",
-                }}
-              >
-                Zeroett AB erbjuder mjukvarulösningar, skräddarsydda hemsidor,
-                e-tjänster, mobilappar, backend-utveckling och databashantering.
-              </Typography>
-            </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginTop: 2,
+                    animation: `${fadeIn} 1s ease-out`,
+                    animationDelay: "0.5s",
+                    animationFillMode: "forwards",
+                    opacity: 0,
+                    width: "100%",
+                  }}
+                >
+                  <Typography
+                    component={"h3"}
+                    sx={{
+                      color: "white",
+                      letterSpacing: 3,
+                      marginBottom: { xs: 2, md: 1 },
+                      fontWeight: "300",
+                      fontSize: { xs: 35, md: 55 },
+                      textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+                    }}
+                  >
+                    <FormattedMessage id="web-applications" />
+                  </Typography>
+                </Box>
+                <div
+                  style={{ height: 2, width: 200, backgroundColor: "#896daf" }}
+                />
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    animation: `${fadeIn} 1s ease-out`,
+                    animationDelay: "0.7s",
+                    animationFillMode: "forwards",
+                    opacity: 0,
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      color: "white",
+                      letterSpacing: 2,
+                      fontWeight: "300",
+                      fontSize: 16,
+                      marginTop: 1,
+                      textShadow: "1px 1px 3px rgba(0, 0, 0, 0.3)",
+                    }}
+                  >
+                    <FormattedMessage id="we-design" />
+                  </Typography>
+                </Box>
+              </Box>
+            </motion.div>
           </Box>
 
           <Box
@@ -190,63 +329,8 @@ export default function Index() {
               display: "flex",
               flexDirection: "column",
               marginBottom: 3,
+              marginLeft: { xs: 2, md: 15 },
             }}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                marginTop: 2,
-                animation: `${fadeIn} 1s ease-out`,
-                animationDelay: "0.5s",
-                animationFillMode: "forwards",
-                opacity: 0,
-              }}
-            >
-              <Typography
-                variant="h2"
-                sx={{
-                  color: "white",
-                  letterSpacing: 3,
-                  marginBottom: { xs: 2, md: 1 },
-                  fontWeight: "400",
-                  fontSize: { xs: 35, md: 50 },
-                  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-                }}
-              >
-                <FormattedMessage id="web-applications" />
-              </Typography>
-            </Box>
-            <div
-              style={{ height: 2, width: 200, backgroundColor: "#896daf" }}
-            />
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                animation: `${fadeIn} 1s ease-out`,
-                animationDelay: "0.7s",
-                animationFillMode: "forwards",
-                opacity: 0,
-              }}
-            >
-              <Typography
-                sx={{
-                  color: "white",
-                  letterSpacing: 2,
-                  fontWeight: "300",
-                  fontSize: 16,
-                  marginTop: 1,
-                  textShadow: "1px 1px 3px rgba(0, 0, 0, 0.3)",
-                }}
-              >
-                <FormattedMessage id="we-design" />
-              </Typography>
-            </Box>
-          </Box>
-
-          <Box
-            sx={{ display: "flex", flexDirection: "column", marginBottom: 3 }}
           >
             <Box
               sx={{
@@ -265,8 +349,8 @@ export default function Index() {
                   color: "white",
                   letterSpacing: 3,
                   marginBottom: { xs: 2, md: 1 },
-                  fontWeight: "400",
-                  fontSize: { xs: 35, md: 50 },
+                  fontWeight: "300",
+                  fontSize: { xs: 35, md: 55 },
                   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
                 }}
               >
@@ -301,7 +385,13 @@ export default function Index() {
             </Box>
           </Box>
 
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              marginLeft: { xs: 2, md: 15 },
+            }}
+          >
             <Box
               sx={{
                 display: "flex",
@@ -319,8 +409,8 @@ export default function Index() {
                   color: "white",
                   letterSpacing: 3,
                   marginBottom: { xs: 2, md: 1 },
-                  fontWeight: "400",
-                  fontSize: { xs: 35, md: 50 },
+                  fontWeight: "300",
+                  fontSize: { xs: 35, md: 55 },
                   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
                 }}
               >

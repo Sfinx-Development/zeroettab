@@ -31,7 +31,7 @@ export default function Header(): JSX.Element {
           <img
             src="https://i.imgur.com/5Fk6tu4.png"
             alt="Zeroett"
-            width={isMobile ? 200 : 350}
+            width={isMobile ? 300 : 350}
             style={{ marginBottom: isMobile ? 16 : 0 }}
           />
         </Link>

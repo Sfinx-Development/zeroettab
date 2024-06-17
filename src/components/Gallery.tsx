@@ -35,8 +35,8 @@ export default function Gallery() {
         alignItems: "center",
         width: "100%",
         justifyContent: "center",
-        marginY: 4,
-        minHeight: "250px",
+        marginY: 8,
+        minHeight: "300px",
         position: "relative",
         overflow: "hidden",
         backgroundColor: "rgba(0, 0, 0, 0.7)",
@@ -81,8 +81,8 @@ export default function Gallery() {
             sx={{
               display:
                 imageInFocus === i.id ? "block" : { xs: "none", sm: "block" },
-              height: imageInFocus === i.id ? 250 : 200,
-              minWidth: imageInFocus === i.id ? 400 : 150,
+              height: imageInFocus === i.id ? 300 : 250,
+              minWidth: imageInFocus === i.id ? 500 : 250,
               filter:
                 imageInFocus === i.id ? "none" : "blur(2px) grayscale(80%)",
               transition: "all 0.5s ease",
