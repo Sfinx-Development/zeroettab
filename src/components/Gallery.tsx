@@ -14,10 +14,10 @@ const Gallery = () => {
   const [imageInFocus, setImageInFocus] = useState<number>(1);
 
   const images: Image[] = [
-    { id: 1, url: "https://i.imgur.com/U7CiaGM.png", alt: "webpage" },
+    { id: 1, url: "https://i.imgur.com/TofNZWm.png", alt: "webpage" },
     { id: 2, url: "https://i.imgur.com/Y0HEktb.png", alt: "webpage" },
     { id: 3, url: "https://i.imgur.com/kKyCoTP.png", alt: "webpage" },
-    { id: 4, url: "https://i.imgur.com/A0IOVjh.png", alt: "webpage" },
+    { id: 4, url: "https://i.imgur.com/dFcgK62.png", alt: "webpage" },
     { id: 5, url: "https://i.imgur.com/Q6nDVVa.png", alt: "webpage" },
   ];
 
