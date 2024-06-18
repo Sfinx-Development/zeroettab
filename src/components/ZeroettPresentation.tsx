@@ -1,5 +1,6 @@
 import { keyframes } from "@emotion/react";
 import { Box, Typography } from "@mui/material";
+import { FormattedMessage } from "react-intl";
 
 const fadeIn = keyframes`
   from {
@@ -83,8 +84,7 @@ export default function ZeroettPresentation() {
             variant="body1"
             sx={{ marginTop: 2, lineHeight: 1.8, color: "white" }}
           >
-            Zeroett AB erbjuder mjukvarulösningar, skräddarsydda hemsidor,
-            e-tjänster, mobilappar, backend-utveckling och databashantering.
+            <FormattedMessage id="zeroett-offers" />
           </Typography>
         </Box>
       </Box>

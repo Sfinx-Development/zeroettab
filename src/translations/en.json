@@ -44,10 +44,11 @@
     "company-name": "Name of your company",
     "company-does": "What does your company do?",
     "application-purpose": "What is the purpose of your idea/application?",
-    "appllication-type": "What kind of application? (Web site, mobile app, server, database..)",
+    "application-type": "What kind of application? (Web site, mobile app, server, database..)",
     "target-group": "What is the indended target group?",
     "budget-time": "What is your budget and time frame?",
     "other": "Other",
     "info": "Information",
-    "describe": "Describe your idea"
+    "describe": "Describe your idea",
+    "zeroett-offers": "Zeroett AB offers software solutions, custom websites, e-services, mobile apps, backend development, and database management."
 }

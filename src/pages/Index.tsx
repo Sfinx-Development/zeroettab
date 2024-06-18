@@ -4,24 +4,16 @@ import Instagram from "@mui/icons-material/Instagram";
 import LanguageIcon from "@mui/icons-material/Language";
 import PhoneIcon from "@mui/icons-material/Phone";
 import StorageIcon from "@mui/icons-material/Storage";
-import {
-  Box,
-  Button,
-  Grid,
-  Link,
-  Typography,
-  keyframes,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, Button, Grid, Link, Typography, keyframes } from "@mui/material";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useNavigate } from "react-router-dom";
 import Gallery from "../components/Gallery";
+import TextInfo from "../components/TextInfo";
 import ZeroettPresentation from "../components/ZeroettPresentation";
+import { useScreenSize } from "../contexts/screenSizeContext";
 
-// Keyframes for the animation
 const fadeIn = keyframes`
   from {
     opacity: 0;
@@ -33,18 +25,12 @@ const fadeIn = keyframes`
   }
 `;
 
-const fadeInAnimation = {
-  hidden: { opacity: 0, x: -50 },
-  visible: { opacity: 1, x: 0 },
-};
-
 export default function Index() {
   const navigate = useNavigate();
   const iconsRef = useRef<HTMLDivElement>(null);
   const controls = useAnimation();
   const [isVisible, setIsVisible] = useState(false);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const { isMobile } = useScreenSize();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -82,7 +68,6 @@ export default function Index() {
         overflowX: "hidden",
         width: "100%",
         alignItems: "start",
-        marginTop: 2,
         flexGrow: 1,
         minHeight: "100vh",
         zIndex: 1,
@@ -97,7 +82,6 @@ export default function Index() {
           height: "auto",
           width: "100%",
           alignItems: "start",
-          marginTop: 2,
           zIndex: 1,
         }}
       >
@@ -172,13 +156,14 @@ export default function Index() {
             </Box>
           </Box>
 
-          {!isMobile && (
+          {/* {!isMobile && (
             <Box
               ref={iconsRef}
               sx={{
                 width: "100%",
                 display: "flex",
                 height: "auto",
+
                 flexDirection: "column",
                 alignItems: "end",
                 marginTop: 2,
@@ -208,7 +193,7 @@ export default function Index() {
               >
                 <LanguageIcon
                   sx={{
-                    fontSize: 80,
+                    fontSize: isMobile ? 40 : 80,
                     color: "white",
                     marginBottom: 7,
                   }}
@@ -229,7 +214,7 @@ export default function Index() {
                 />
               </motion.div>
             </Box>
-          )}
+          )} */}
         </Box>
 
         <Box
@@ -237,213 +222,35 @@ export default function Index() {
             flex: 1,
             display: "flex",
             flexDirection: "column",
-            alignItems: "flex-start",
-            justifyContent: "flex-start",
+            alignItems: isMobile ? "center" : "flex-start",
+            justifyContent: isMobile ? "center" : "flex-start",
             marginLeft: { xs: 0, md: 2 },
           }}
         >
           <ZeroettPresentation />
-
-          <Box
-            sx={{
+          <div
+            style={{
               display: "flex",
-              flexDirection: "row",
+              flexDirection: "column",
               width: "100%",
-              position: "relative",
-              marginLeft: { xs: 2, md: 15 },
-              marginBottom: 3,
             }}
           >
-            <motion.div
-              variants={fadeInAnimation}
-              initial="hidden"
-              animate="visible"
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                  flex: 1,
-                  flexDirection: "column",
-                  width: "100%",
-                  marginBottom: 3,
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    marginTop: 2,
-                    animation: `${fadeIn} 1s ease-out`,
-                    animationDelay: "0.5s",
-                    animationFillMode: "forwards",
-                    opacity: 0,
-                    width: "100%",
-                  }}
-                >
-                  <Typography
-                    component={"h3"}
-                    sx={{
-                      color: "white",
-                      letterSpacing: 3,
-                      marginBottom: { xs: 2, md: 1 },
-                      fontWeight: "300",
-                      fontSize: { xs: 35, md: 55 },
-                      textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-                    }}
-                  >
-                    <FormattedMessage id="web-applications" />
-                  </Typography>
-                </Box>
-                <div
-                  style={{ height: 2, width: 200, backgroundColor: "#896daf" }}
-                />
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    animation: `${fadeIn} 1s ease-out`,
-                    animationDelay: "0.7s",
-                    animationFillMode: "forwards",
-                    opacity: 0,
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      color: "white",
-                      letterSpacing: 2,
-                      fontWeight: "300",
-                      fontSize: 16,
-                      marginTop: 1,
-                      textShadow: "1px 1px 3px rgba(0, 0, 0, 0.3)",
-                    }}
-                  >
-                    <FormattedMessage id="we-design" />
-                  </Typography>
-                </Box>
-              </Box>
-            </motion.div>
-          </Box>
-
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              marginBottom: 3,
-              marginLeft: { xs: 2, md: 15 },
-            }}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                marginTop: 2,
-                animation: `${fadeIn} 1s ease-out`,
-                animationDelay: "0.9s",
-                animationFillMode: "forwards",
-                opacity: 0,
-              }}
-            >
-              <Typography
-                variant="h2"
-                sx={{
-                  color: "white",
-                  letterSpacing: 3,
-                  marginBottom: { xs: 2, md: 1 },
-                  fontWeight: "300",
-                  fontSize: { xs: 35, md: 55 },
-                  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-                }}
-              >
-                <FormattedMessage id="mobile-applications" />
-              </Typography>
-            </Box>
-            <div
-              style={{ height: 2, width: 200, backgroundColor: "#896daf" }}
+            <TextInfo
+              title="web-applications"
+              text="we-design"
+              icon={LanguageIcon}
             />
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                animation: `${fadeIn} 1s ease-out`,
-                animationDelay: "1.1s",
-                animationFillMode: "forwards",
-                opacity: 0,
-              }}
-            >
-              <Typography
-                sx={{
-                  color: "white",
-                  letterSpacing: 2,
-                  fontWeight: "300",
-                  fontSize: 16,
-                  marginTop: 1,
-                  textShadow: "1px 1px 3px rgba(0, 0, 0, 0.3)",
-                }}
-              >
-                <FormattedMessage id="building-apps" />
-              </Typography>
-            </Box>
-          </Box>
-
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              marginLeft: { xs: 2, md: 15 },
-            }}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                marginTop: 2,
-                animation: `${fadeIn} 1s ease-out`,
-                animationDelay: "1.3s",
-                animationFillMode: "forwards",
-                opacity: 0,
-              }}
-            >
-              <Typography
-                variant="h2"
-                sx={{
-                  color: "white",
-                  letterSpacing: 3,
-                  marginBottom: { xs: 2, md: 1 },
-                  fontWeight: "300",
-                  fontSize: { xs: 35, md: 55 },
-                  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-                }}
-              >
-                <FormattedMessage id="backend-solutions" />
-              </Typography>
-            </Box>
-            <div
-              style={{ height: 2, width: 200, backgroundColor: "#896daf" }}
+            <TextInfo
+              title="mobile-applications"
+              text="building-apps"
+              icon={AppsIcon}
             />
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                animation: `${fadeIn} 1s ease-out`,
-                animationDelay: "1.5s",
-                animationFillMode: "forwards",
-                opacity: 0,
-              }}
-            >
-              <Typography
-                sx={{
-                  color: "white",
-                  letterSpacing: 2,
-                  fontWeight: "300",
-                  fontSize: 16,
-                  marginTop: 1,
-                  textShadow: "1px 1px 3px rgba(0, 0, 0, 0.3)",
-                }}
-              >
-                <FormattedMessage id="robust-and" />
-              </Typography>
-            </Box>
-          </Box>
+            <TextInfo
+              title="backend-solutions"
+              text="robust-and"
+              icon={StorageIcon}
+            />
+          </div>
         </Box>
       </Box>
 

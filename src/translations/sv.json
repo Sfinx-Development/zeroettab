@@ -1,7 +1,7 @@
 {
     "about": "Om Oss",
     "contact": "Kontakt",
-    "project": "Projekt",
+    "projects": "Projekt",
     "lets-talk": "Let's talk",
     "web-applications": "Web-applikationer",
     "mobile-applications": "Mobil-applikationer",
@@ -44,10 +44,11 @@
     "company-name": "Namn på företag",
     "company-does": "Vad gör ditt företag?",
     "application-purpose": "Vad är syftet med applikationen/idén?",
-    "appllication-type": "Vilken typ av applikation? (Webbsida, mobilapp, server...)",
+    "application-type": "Vilken typ av applikation? (Webbsida, mobilapp, server...)",
     "target-group": "Vad är den tänkta målgruppen?",
     "budget-time": "Vad är din budget och tidsram?",
     "other": "Övrigt",
     "info": "Uppgifter",
-    "describe": "Beskriv din idé"
+    "describe": "Beskriv din idé",
+    "zeroett-offers": "Zeroett AB erbjuder mjukvarulösningar, skräddarsydda hemsidor, e-tjänster, mobilappar, backend-utveckling och databashantering."
 }
