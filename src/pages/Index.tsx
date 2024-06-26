@@ -349,7 +349,7 @@ export default function Index() {
               },
             }}
           >
-            Kontakt
+            <FormattedMessage id="contact" />
           </Button>
         </Grid>
 
