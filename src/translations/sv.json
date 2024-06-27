@@ -1,6 +1,6 @@
 {
     "about": "Om Oss",
-    "home": "Hem",
+    "home": "Startsidan",
     "contact": "Kontakt",
     "projects": "Projekt",
     "offers": "Vad vi erbjuder",
@@ -52,5 +52,11 @@
     "other": "Övrigt",
     "info": "Uppgifter",
     "describe": "Beskriv din idé",
-    "zeroett-offers": "Zeroett AB erbjuder mjukvarulösningar, skräddarsydda hemsidor, e-tjänster, mobilappar, backend-utveckling och databashantering."
+    "zeroett-offers": "Zeroett AB erbjuder mjukvarulösningar, skräddarsydda hemsidor, e-tjänster, mobilappar, backend-utveckling och databashantering.",
+    "offers-webpages": "Hemsidor och Webbshoppar",
+    "webpages-description": "- Mobilresponsivt / enhetsanpassat\n- SEO för tillgänglighet på webben\n- Design och funktioner efter dina önskemål och behov\n- Gratis uppdatering för information och bilder\n- Möjlighet till vidareutveckling av tjänst\n- Möjlighet till statistik månadsvis\n- Support - via vår mail i första hand",
+    "offers-mobile": "Mobilapplikationer",
+    "mobile-description": "- Plattform-specifik utveckling\n- Användarvänliga gränssnitt\n- Integration med tredjepartstjänster\n- Regelbundna uppdateringar och underhåll\n- Support - via vår mail i första hand",
+    "offers-backend": "Backend med API och databaslösningar",
+    "backend-description": "- Byggd för skalbarhet och prestanda\n- Integration med frontend och tredjepartstjänster\n- Regelbunden övervakning och underhåll\n- Anpassningsbara lösningar för specifika behov\n- Support - via vår mail i första hand"
 }

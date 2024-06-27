@@ -52,5 +52,11 @@
     "other": "Other",
     "info": "Information",
     "describe": "Describe your idea",
-    "zeroett-offers": "Zeroett AB offers software solutions, custom websites, e-services, mobile apps, backend development, and database management."
+    "zeroett-offers": "Zeroett AB offers software solutions, custom websites, e-services, mobile apps, backend development, and database management.",
+    "offers-webpages": "Websites and Webshops",
+    "webpages-description": "- Mobile responsive / device adaptable\n- SEO to improve web visibility\n- Design and features according to your wishes and needs\n- Free updates for new information and photos\n- Possibility for further development of the service\n- Possibility for monthly statistics\n- Support - available on our email",
+    "offers-mobile": "Mobile Applications",
+    "mobile-description": "- Platform-specific development\n- User-friendly interfaces\n- Integration with third-party services\n- Regular updates and maintenance\n- Support - available on our email",
+    "offers-backend": "Backend with API and Database Solutions",
+    "backend-description": "- Built for scalability and performance\n- Integration with frontend and third-party services\n- Regular monitoring and maintenance\n- Customizable solutions for specific needs\n- Support - available on our email"
 }

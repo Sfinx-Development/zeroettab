@@ -1,4 +1,5 @@
 import { Box, Typography, keyframes } from "@mui/material";
+import { FormattedMessage, useIntl } from "react-intl";
 
 const fadeIn = keyframes`
   from {
@@ -11,7 +12,46 @@ const fadeIn = keyframes`
   }
 `;
 
-export default function Offers() {
+interface Service {
+  title: string;
+  descriptionId: string; // Key for accessing localized description
+  imgSrc: string;
+  imgAlt: string;
+}
+
+const Offers = () => {
+  const intl = useIntl();
+
+  const services: Service[] = [
+    {
+      title: "offers-webpages",
+      descriptionId: "webpages-description",
+      imgSrc: "https://i.imgur.com/KSbsIhH.png",
+      imgAlt: "Websites",
+    },
+    {
+      title: "offers-mobile",
+      descriptionId: "mobile-description",
+      imgSrc: "https://i.imgur.com/CU0RgID.jpg",
+      imgAlt: "Mobile Apps",
+    },
+    {
+      title: "offers-backend",
+      descriptionId: "backend-description",
+      imgSrc: "https://i.imgur.com/yjzC7k6.png",
+      imgAlt: "Backend",
+    },
+  ];
+
+  const formatTextWithLineBreaks = (text: string) => {
+    const lines = text.split("\n");
+    return lines.map((line, index) => (
+      <div key={index}>
+        {line.trim()} <br />
+      </div>
+    ));
+  };
+
   return (
     <Box
       sx={{
@@ -28,40 +68,7 @@ export default function Offers() {
         animation: `${fadeIn} 1s ease-out`,
       }}
     >
-      {[
-        {
-          title: "Hemsidor och Webbshoppar",
-          description: `- Mobilresponsivt / enhetsanpassat
-                        - SEO för att bli mer tillgänglig på webben
-                        - Design och funktioner efter dina önskemål och behov
-                        - 30 min gratis uppdatering i månaden
-                        - Möjlighet till vidareutveckling av tjänst
-                        - Möjlighet till statistik månadsvis
-                        - Support - alltid tillgängliga på vår mail zeroettab@gmail.com`,
-          imgSrc: "https://i.imgur.com/KSbsIhH.png",
-          imgAlt: "Websites",
-        },
-        {
-          title: "Mobilapplikationer",
-          description: `- Plattform-specifik utveckling
-                        - Användarvänliga gränssnitt
-                        - Integration med tredjepartstjänster
-                        - Regelbundna uppdateringar och underhåll
-                        - Support - alltid tillgängliga på vår mail zeroettab@gmail.com`,
-          imgSrc: "https://i.imgur.com/CU0RgID.jpg",
-          imgAlt: "Mobile Apps",
-        },
-        {
-          title: "Backend med API och databaslösningar",
-          description: `- Byggd för skalbarhet och prestanda
-                        - Integration med frontend och tredjepartstjänster
-                        - Regelbunden övervakning och underhåll
-                        - Anpassningsbara lösningar för specifika behov
-                        - Support, alltid tillgängliga på vår mail`,
-          imgSrc: "https://i.imgur.com/yjzC7k6.png",
-          imgAlt: "Backend",
-        },
-      ].map((service, index) => (
+      {services.map((service, index) => (
         <Box
           key={index}
           sx={{
@@ -102,7 +109,7 @@ export default function Offers() {
                 textAlign: { xs: "center", md: "start" },
               }}
             >
-              {service.title}
+              <FormattedMessage id={service.title} />
             </Typography>
             <div
               style={{
@@ -151,12 +158,9 @@ export default function Offers() {
                 variant="body1"
                 sx={{ marginTop: 2, lineHeight: 1.8, color: "white" }}
               >
-                {service.description.split("\n").map((line, i) => (
-                  <span key={i}>
-                    {line}
-                    <br />
-                  </span>
-                ))}
+                {formatTextWithLineBreaks(
+                  intl.formatMessage({ id: service.descriptionId })
+                )}
               </Typography>
             </Box>
           </Box>
@@ -164,4 +168,6 @@ export default function Offers() {
       ))}
     </Box>
   );
-}
+};
+
+export default Offers;
