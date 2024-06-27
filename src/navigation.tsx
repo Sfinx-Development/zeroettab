@@ -12,6 +12,7 @@ import RootLayout from "./pages/RootLayout";
 import { IntlProvider } from "react-intl";
 import messages_en from "./translations/en.json";
 import messages_sv from "./translations/sv.json";
+import Offers from "./pages/Offers";
 
 const Navigation = () => {
   const { language } = useLanguageContext();
@@ -29,6 +30,7 @@ const Navigation = () => {
           <Route path="contact" element={<Contact />}></Route>
           <Route path="about" element={<About />}></Route>
           <Route path="projects" element={<Projects />}></Route>
+          <Route path="offers" element={<Offers />}></Route>
           <Route path="*" element={<Error />}></Route>
         </Route>
       </Routes>
