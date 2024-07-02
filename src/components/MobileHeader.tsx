@@ -1,13 +1,14 @@
 import ContactMailIcon from "@mui/icons-material/ContactMail";
+import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import MenuIcon from "@mui/icons-material/Menu";
 import WorkIcon from "@mui/icons-material/Work";
-import HomeIcon from "@mui/icons-material/Home";
 import {
   Box,
   Drawer,
   IconButton,
+  Link,
   List,
   ListItem,
   Slide,
@@ -15,9 +16,9 @@ import {
   useTheme,
 } from "@mui/material";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useScreenSize } from "../contexts/screenSizeContext";
+// import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
+import { useScreenSize } from "../contexts/screenSizeContext";
 import LetsTalkPhone from "./LetsTalkPhone";
 
 export default function CustomHeader2(): JSX.Element {
@@ -66,7 +67,7 @@ export default function CustomHeader2(): JSX.Element {
           marginLeft: isMobile ? 0 : 10,
         }}
       >
-        <Link to="/" style={{ textDecoration: "none" }}>
+        <Link href="/" sx={{ textDecoration: "none" }}>
           <img
             src="https://i.imgur.com/5Fk6tu4.png"
             alt="Zeroett"
@@ -93,8 +94,17 @@ export default function CustomHeader2(): JSX.Element {
         }}
       >
         <LetsTalkPhone />
-        <IconButton onClick={handleToggleMenu}>
-          <MenuIcon sx={{ color: "white", fontSize: 40 }} />
+        <IconButton
+          onClick={handleToggleMenu}
+          sx={{
+            color: "white",
+            backgroundColor: "#662c9c",
+            "&:hover": { backgroundColor: "#422a75" },
+            borderRadius: "50%",
+            marginX: 2,
+          }}
+        >
+          <MenuIcon />
         </IconButton>
 
         <Drawer
@@ -141,18 +151,26 @@ export default function CustomHeader2(): JSX.Element {
                   }}
                 >
                   <Link
-                    to={link.href}
-                    style={{
+                    href={link.href}
+                    sx={{
                       textDecoration: "none",
                       display: "flex",
-                      paddingTop: 6,
+                      paddingTop: 3,
                       alignItems: "center",
-                      paddingBottom: 6,
-                      color: "#896daf",
+                      // paddingBottom: 6,
                     }}
                     onClick={handleCloseMenu}
                   >
-                    {link.icon}
+                    <IconButton
+                      sx={{
+                        color: "white",
+                        backgroundColor: "#662c9c",
+                        "&:hover": { backgroundColor: "#422a75" },
+                        borderRadius: "50%",
+                      }}
+                    >
+                      {link.icon}
+                    </IconButton>
                     <Typography
                       sx={{
                         color: "white",

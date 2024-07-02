@@ -1,39 +1,25 @@
-import { keyframes } from "@emotion/react";
 import { Box, Link, Typography } from "@mui/material";
+import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { FormattedMessage } from "react-intl";
 import { useScreenSize } from "../contexts/screenSizeContext";
 
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
-
-const scaleUp = keyframes`
-  from {
-    transform: scale(0.8);
-  }
-  to {
-    transform: scale(1);
-  }
-`;
-
 export default function ZeroettPresentation() {
   const { isMobile } = useScreenSize();
   const logoRef = useRef<HTMLDivElement | null>(null);
+  const controls = useAnimation();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("animate");
+            controls.start({
+              opacity: 1,
+              scale: 1,
+              y: 0,
+              transition: { duration: 1, ease: "easeOut" },
+            });
           }
         });
       },
@@ -49,7 +35,7 @@ export default function ZeroettPresentation() {
         observer.unobserve(logoRef.current);
       }
     };
-  }, []);
+  }, [controls]);
 
   return (
     <Box
@@ -63,28 +49,20 @@ export default function ZeroettPresentation() {
         justifyContent: "center",
         flexGrow: 1,
         zIndex: 1,
-        animation: `${fadeIn} 1s ease-out`,
       }}
     >
-      <Box
+      <motion.div
         ref={logoRef}
+        initial={{ opacity: 0, scale: 0.8, y: 20 }}
+        animate={controls}
         sx={{
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
           alignItems: "center",
           borderRadius: 2,
-          flex: 1,
           padding: { xs: 0, md: 4 },
           margin: "auto",
-          animation: `${fadeIn} 1s ease-out, ${scaleUp} 1s ease-out`,
-          animationDelay: "0.5s",
-          animationFillMode: "forwards",
-          opacity: 0,
           zIndex: 2,
-          "&.animate": {
-            opacity: 1,
-            animation: `${fadeIn} 1s ease-out, ${scaleUp} 1s ease-out`,
-          },
         }}
       >
         <Box
@@ -127,52 +105,7 @@ export default function ZeroettPresentation() {
             <FormattedMessage id="zeroett-offers" />
           </Typography>
         </Box>
-        {/* 
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "flex-start",
-            flex: 1,
-            marginLeft: isMobile ? 0 : 0,
-            marginTop: isMobile ? 4 : 0,
-            width: "100%",
-            height: "auto",
-          }}
-        >
-          {[1, 2, 3].map((num, index) => (
-            <Box
-              key={index}
-              sx={{
-                animation: `${slideIn} 1s ease-out`,
-                animationDelay: `${0.5 + index * 0.3}s`,
-                opacity: 0,
-                animationFillMode: "forwards",
-                zIndex: 3 - index,
-                marginLeft: index > 0 ? -20 : 0,
-                "&.animate": {
-                  opacity: 1,
-                },
-              }}
-              className="photo-box"
-            >
-              <img
-                src={getPhoto(num)}
-                alt={`Photo ${num}`}
-                style={{
-                  width: isMobile ? 100 : 200,
-                  height: isMobile ? 100 : 120,
-                  borderRadius: 8,
-                  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
-                  transition: "transform 0.5s ease",
-                  transform: `translateY(${index % 2 === 0 ? 10 : -10}px)`,
-                }}
-              />
-            </Box>
-          ))}
-        </Box> */}
-      </Box>
+      </motion.div>
     </Box>
   );
 }
