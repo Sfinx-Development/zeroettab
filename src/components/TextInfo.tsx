@@ -1,4 +1,4 @@
-import { Box, Typography, keyframes } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { FormattedMessage } from "react-intl";
@@ -14,17 +14,6 @@ const fadeInAnimation = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 },
 };
-
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
 
 const TextInfo = ({ title, text, icon: Icon }: TextInfoProps) => {
   const { isMobile } = useScreenSize();
@@ -68,13 +57,18 @@ const TextInfo = ({ title, text, icon: Icon }: TextInfoProps) => {
     <Box
       ref={containerRef}
       sx={{
+        width: "100%",
         display: "flex",
-        flexDirection: "row",
-        minWidth: "100%",
-        justifyContent: isMobile ? "center" : "start",
-        marginLeft: { xs: 0, md: 0 },
+        flexDirection: "column",
+        alignItems: "center",
         marginBottom: 3,
-        alignItems: "flex-start",
+        padding: { xs: "16px", md: "32px" },
+        backgroundColor: "rgba(0,0,0,0.7)",
+        borderRadius: 8,
+        boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
+        overflow: "hidden",
+        textAlign: "center",
+        color: "white",
       }}
     >
       <motion.div
@@ -85,11 +79,8 @@ const TextInfo = ({ title, text, icon: Icon }: TextInfoProps) => {
         {Icon && (
           <Icon
             sx={{
-              fontSize: isMobile ? 30 : 60,
-              color: "white",
-              marginTop: isMobile ? 2.5 : 4,
-              paddingX: 2,
-              marginLeft: 0,
+              fontSize: isMobile ? 40 : 80,
+              marginBottom: 2,
             }}
           />
         )}
@@ -99,66 +90,39 @@ const TextInfo = ({ title, text, icon: Icon }: TextInfoProps) => {
         initial="hidden"
         animate={isVisible ? "visible" : "hidden"}
       >
-        <Box
+        <Typography
+          component="h3"
+          variant="h3"
           sx={{
-            display: "flex",
-            flex: 1,
-            flexDirection: "column",
-            width: "100%",
-            marginBottom: 3,
+            marginBottom: 1,
+            letterSpacing: 2,
+            fontWeight: 500,
+            fontSize: { xs: 24, md: 36 },
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              marginTop: 2,
-              opacity: 0,
-              width: "100%",
-              animation: `${fadeIn} 1s ease-out`,
-              animationDelay: "0.5s",
-              animationFillMode: "forwards",
-            }}
-          >
-            <Typography
-              component={"h3"}
-              sx={{
-                color: "white",
-                letterSpacing: 3,
-                marginBottom: { xs: 2, md: 1 },
-                fontWeight: "300",
-                fontSize: { xs: 26, md: 55 },
-                textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-              }}
-            >
-              <FormattedMessage id={title} />
-            </Typography>
-          </Box>
-          <div style={{ height: 2, width: 200, backgroundColor: "#896daf" }} />
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              opacity: 0,
-              animation: `${fadeIn} 1s ease-out`,
-              animationDelay: "0.7s",
-              animationFillMode: "forwards",
-            }}
-          >
-            <Typography
-              sx={{
-                color: "white",
-                letterSpacing: 2,
-                fontWeight: "300",
-                fontSize: 15,
-                marginTop: 1,
-                textShadow: "1px 1px 3px rgba(0, 0, 0, 0.3)",
-              }}
-            >
-              <FormattedMessage id={text} />
-            </Typography>
-          </Box>
-        </Box>
+          <FormattedMessage id={title} />
+        </Typography>
+        <Box
+          sx={{
+            height: 2,
+            width: 50,
+            backgroundColor: "#896daf",
+            margin: "auto",
+            marginBottom: 2,
+          }}
+        />
+        <Typography
+          variant="body1"
+          sx={{
+            letterSpacing: 1,
+            fontWeight: 300,
+            fontSize: 16,
+            textShadow: "1px 1px 3px rgba(0, 0, 0, 0.3)",
+          }}
+        >
+          <FormattedMessage id={text} />
+        </Typography>
       </motion.div>
     </Box>
   );

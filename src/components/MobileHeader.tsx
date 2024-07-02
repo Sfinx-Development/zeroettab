@@ -18,6 +18,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useScreenSize } from "../contexts/screenSizeContext";
 import { FormattedMessage } from "react-intl";
+import LetsTalkPhone from "./LetsTalkPhone";
 
 export default function CustomHeader2(): JSX.Element {
   const theme = useTheme();
@@ -48,17 +49,18 @@ export default function CustomHeader2(): JSX.Element {
         justifyContent: "space-between",
         width: "100%",
         boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-        flexDirection: "row",
+        flexDirection: "column",
         position: "relative",
       }}
       component={"header"}
     >
       <Box
         sx={{
-          paddingY: 2,
+          paddingY: 0,
           paddingX: { xs: 0, md: 3 },
           marginX: { xs: 0, md: 1 },
           display: "flex",
+          alignItems: "center",
           justifyContent: isMobile ? "center" : "flex-start",
           width: isMobile ? "100%" : "auto",
           marginLeft: isMobile ? 0 : 10,
@@ -68,8 +70,7 @@ export default function CustomHeader2(): JSX.Element {
           <img
             src="https://i.imgur.com/5Fk6tu4.png"
             alt="Zeroett"
-            width={280}
-            style={{ marginBottom: isMobile ? 16 : 0 }}
+            width={180}
           />
         </Link>
       </Box>
@@ -78,7 +79,20 @@ export default function CustomHeader2(): JSX.Element {
           display: "flex",
           alignItems: "center",
         }}
+      ></Box>
+      <Box
+        sx={{
+          paddingY: 0,
+          paddingX: { xs: 0, md: 3 },
+          marginX: { xs: 0, md: 1 },
+          display: "flex",
+          alignItems: "center",
+          justifyContent: isMobile ? "flex-start" : "flex-start",
+          width: isMobile ? "100%" : "auto",
+          marginLeft: isMobile ? 0 : 10,
+        }}
       >
+        <LetsTalkPhone />
         <IconButton onClick={handleToggleMenu}>
           <MenuIcon sx={{ color: "white", fontSize: 40 }} />
         </IconButton>

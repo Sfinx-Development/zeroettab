@@ -147,7 +147,7 @@ export default function Projects() {
                 maxWidth: 345,
                 backgroundColor: "transparent",
                 boxShadow: "none",
-                borderRadius: 4,
+                borderRadius: 2,
                 transition: "transform 0.3s ease",
                 "&:hover": {
                   transform: "scale(1.05)",

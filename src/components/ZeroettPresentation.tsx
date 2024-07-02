@@ -103,9 +103,13 @@ export default function ZeroettPresentation() {
           >
             <Link href="/" sx={{ textDecoration: "none" }}>
               <img
-                src="https://i.imgur.com/5Fk6tu4.png"
+                src={
+                  isMobile
+                    ? "https://i.imgur.com/IMSL19B.png"
+                    : "https://i.imgur.com/5Fk6tu4.png"
+                }
                 alt="Zeroett"
-                width={isMobile ? 350 : 600}
+                width={isMobile ? 100 : 600}
                 style={{ marginBottom: isMobile ? 16 : 0 }}
               />
             </Link>

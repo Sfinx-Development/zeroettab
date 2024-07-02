@@ -1,15 +1,12 @@
 import AppsIcon from "@mui/icons-material/Apps";
-import EmailIcon from "@mui/icons-material/Email";
-import Instagram from "@mui/icons-material/Instagram";
 import LanguageIcon from "@mui/icons-material/Language";
-import PhoneIcon from "@mui/icons-material/Phone";
 import StorageIcon from "@mui/icons-material/Storage";
-import { Box, Button, Grid, Link, Typography, keyframes } from "@mui/material";
+import { Box, Button, Grid, Typography, keyframes } from "@mui/material";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useNavigate } from "react-router-dom";
-import Gallery from "../components/Gallery";
+import LetsTalk from "../components/LetsTalk";
 import TextInfo from "../components/TextInfo";
 import ZeroettPresentation from "../components/ZeroettPresentation";
 import { useScreenSize } from "../contexts/screenSizeContext";
@@ -85,94 +82,26 @@ export default function Index() {
           zIndex: 1,
         }}
       >
-        <Box>
-          <Box
-            sx={{
-              display: "flex",
-              flex: 1 / 4,
-              flexDirection: "column",
-              alignItems: "start",
-              justifyContent: "center",
-              gap: 2,
-              paddingLeft: 4,
-              marginTop: -10,
-              borderRadius: 8,
-              minHeight: { xs: 200, md: 400 },
-              minWidth: { xs: 200, md: 240 },
-              marginBottom: { xs: 4, md: 0 },
-            }}
-          >
-            <Typography
-              sx={{
-                color: "white",
-                fontSize: 18,
-                letterSpacing: 2,
-                marginBottom: 1,
-              }}
-            >
-              <FormattedMessage id="lets-talk" />
-            </Typography>
-            <div style={{ height: 2, width: 50, backgroundColor: "#896daf" }} />
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              <EmailIcon sx={{ color: "white" }} />
-              <a
-                href="mailto:zeroettab@gmail.com"
-                style={{ textDecoration: "none" }}
-              >
-                <Typography sx={{ color: "white", fontSize: 16 }}>
-                  zeroettab@gmail.com
-                </Typography>
-              </a>
-            </Box>
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              <PhoneIcon sx={{ color: "white" }} />
-              <a
-                href="tel:0737000820"
-                style={{ color: "inherit", textDecoration: "none" }}
-              >
-                <Typography sx={{ color: "white", fontSize: 16 }}>
-                  0737000820
-                </Typography>
-              </a>
-              <a
-                href="tel:0723372475"
-                style={{ color: "inherit", textDecoration: "none" }}
-              >
-                <Typography sx={{ color: "white", fontSize: 16 }}>
-                  / 0723372475
-                </Typography>
-              </a>
-            </Box>
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              <Instagram sx={{ color: "white" }} />
-              <Link
-                href="https://www.instagram.com/zeroettab"
-                sx={{ textDecoration: "none" }}
-              >
-                <Typography sx={{ color: "white", fontSize: 16 }}>
-                  Zeroett's instagram
-                </Typography>
-              </Link>
-            </Box>
-          </Box>
-        </Box>
-
         <Box
           sx={{
             flex: 1,
             display: "flex",
             flexDirection: "column",
-            alignItems: isMobile ? "center" : "flex-start",
-            justifyContent: isMobile ? "center" : "flex-start",
-            marginLeft: { xs: 0, md: 2 },
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
+          {!isMobile && <LetsTalk />}
+
           <ZeroettPresentation />
-          <div
-            style={{
+
+          {/* <Gallery /> */}
+          <Box
+            sx={{
               display: "flex",
               flexDirection: "column",
               width: "100%",
+              alignItems: "center",
             }}
           >
             <TextInfo
@@ -190,11 +119,9 @@ export default function Index() {
               text="robust-and"
               icon={StorageIcon}
             />
-          </div>
+          </Box>
         </Box>
       </Box>
-
-      <Gallery />
       <Grid
         container
         item
@@ -221,7 +148,7 @@ export default function Index() {
             flex: 1,
             width: "100%",
             backgroundColor: "rgba(0, 0, 0, 0.7)",
-            borderRadius: 8,
+            borderRadius: 2,
             padding: 4,
             boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.3)",
             maxWidth: "100%",

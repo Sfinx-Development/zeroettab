@@ -76,7 +76,7 @@ const Offers = () => {
             flexDirection: "column",
             alignItems: "center",
             backgroundColor: "rgba(0, 0, 0, 0.7)",
-            borderRadius: 8,
+            borderRadius: 2,
             padding: 4,
             boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.3)",
             maxWidth: "80%",

@@ -38,6 +38,7 @@ export default function Header(): JSX.Element {
         width: "100%",
         flexDirection: isMobile ? "column" : "row",
         zIndex: 1,
+        paddingY: 1,
         // backgroundColor: "red",
       }}
       component={"header"}
@@ -135,6 +136,13 @@ export default function Header(): JSX.Element {
           >
             <FormattedMessage id="contact" />
           </Typography>
+        </Link>
+        <Link>
+          <img
+            src="https://i.imgur.com/IMSL19B.png"
+            height="100"
+            alt="logo"
+          ></img>
         </Link>
         <Link
           sx={{
