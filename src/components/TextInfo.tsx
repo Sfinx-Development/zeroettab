@@ -89,6 +89,7 @@ const TextInfo = ({ title, text, icon: Icon }: TextInfoProps) => {
               color: "white",
               marginTop: isMobile ? 2.5 : 4,
               paddingX: 2,
+              marginLeft: 0,
             }}
           />
         )}
@@ -149,7 +150,7 @@ const TextInfo = ({ title, text, icon: Icon }: TextInfoProps) => {
                 color: "white",
                 letterSpacing: 2,
                 fontWeight: "300",
-                fontSize: 16,
+                fontSize: 15,
                 marginTop: 1,
                 textShadow: "1px 1px 3px rgba(0, 0, 0, 0.3)",
               }}

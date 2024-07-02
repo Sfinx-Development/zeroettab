@@ -95,10 +95,10 @@ export default function Index() {
               justifyContent: "center",
               gap: 2,
               paddingLeft: 4,
-              marginTop: 0,
+              marginTop: -10,
               borderRadius: 8,
               minHeight: { xs: 200, md: 400 },
-              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+              minWidth: { xs: 200, md: 240 },
               marginBottom: { xs: 4, md: 0 },
             }}
           >
@@ -155,66 +155,6 @@ export default function Index() {
               </Link>
             </Box>
           </Box>
-
-          {/* {!isMobile && (
-            <Box
-              ref={iconsRef}
-              sx={{
-                width: "100%",
-                display: "flex",
-                height: "auto",
-
-                flexDirection: "column",
-                alignItems: "end",
-                marginTop: 2,
-                justifyContent: "center",
-              }}
-            >
-              <motion.div
-                animate={controls}
-                initial={{ opacity: 0, y: 20 }}
-                custom={0}
-                style={{ marginBottom: 20 }}
-              >
-                <AppsIcon
-                  sx={{
-                    fontSize: 80,
-                    color: "white",
-                    marginBottom: 10,
-                  }}
-                />
-              </motion.div>
-
-              <motion.div
-                animate={controls}
-                initial={{ opacity: 0, y: 20 }}
-                custom={1}
-                style={{ marginBottom: 20 }}
-              >
-                <LanguageIcon
-                  sx={{
-                    fontSize: isMobile ? 40 : 80,
-                    color: "white",
-                    marginBottom: 7,
-                  }}
-                />
-              </motion.div>
-
-              <motion.div
-                animate={controls}
-                initial={{ opacity: 0, y: 20 }}
-                custom={2}
-              >
-                <StorageIcon
-                  sx={{
-                    fontSize: 80,
-                    color: "white",
-                    marginBottom: 10,
-                  }}
-                />
-              </motion.div>
-            </Box>
-          )} */}
         </Box>
 
         <Box

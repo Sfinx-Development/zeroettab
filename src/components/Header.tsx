@@ -38,42 +38,50 @@ export default function Header(): JSX.Element {
         width: "100%",
         flexDirection: isMobile ? "column" : "row",
         zIndex: 1,
-        backgroundColor: "transparent",
+        // backgroundColor: "red",
       }}
       component={"header"}
     >
       <Box
         sx={{
-          paddingY: 2,
-          paddingX: { xs: 0, md: 3 },
-          marginX: { xs: 0, md: 1 },
-          display: "flex",
-          justifyContent: isMobile ? "center" : "flex-start",
-          width: isMobile ? "100%" : "auto",
-          marginLeft: isMobile ? 0 : 10,
-        }}
-      >
-        <Link href="/" sx={{ textDecoration: "none" }}>
-          <img
-            src="https://i.imgur.com/5Fk6tu4.png"
-            alt="Zeroett"
-            width={isMobile ? 350 : 350}
-            style={{ marginBottom: isMobile ? 16 : 0 }}
-          />
-        </Link>
-      </Box>
-      <Box
-        sx={{
           display: "flex",
           paddingY: 2,
+          width: "100%",
           paddingX: { xs: 0, md: 3 },
           marginX: { xs: 0, md: 1 },
           alignItems: "center",
-          justifyContent: isMobile ? "center" : "flex-end",
-          width: isMobile ? "100%" : "auto",
+          justifyContent: "space-around",
+          // width: isMobile ? "100%" : "auto",
           gap: 2,
         }}
       >
+        <Link
+          sx={{
+            textDecoration: "none",
+            transition: "color 0.3s",
+            "&:hover": {
+              color: "#4c9173",
+            },
+          }}
+          href="/"
+        >
+          <Typography
+            sx={{
+              color: "white",
+              letterSpacing: 2,
+              fontWeight: "300",
+              fontSize: isMobile ? 18 : 20,
+              lineHeight: 1.5,
+              transition: "color 0.3s",
+              "&:hover": {
+                color: "#896daf",
+              },
+              whiteSpace: "nowrap",
+            }}
+          >
+            <FormattedMessage id="home" />
+          </Typography>
+        </Link>
         <Link
           sx={{
             textDecoration: "none",

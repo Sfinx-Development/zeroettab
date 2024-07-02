@@ -19,7 +19,7 @@ const RootLayout = () => {
         padding: 0,
         flexGrow: 1,
         position: "relative",
-        backgroundImage: "url('https://i.imgur.com/qcKABMi.jpeg')",
+        backgroundImage: "url('https://i.imgur.com/kFmeAx8.png')",
         backgroundSize: "cover",
       }}
     >
