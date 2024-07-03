@@ -1,11 +1,9 @@
-import { Box, Link, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { FormattedMessage } from "react-intl";
-import { useScreenSize } from "../contexts/screenSizeContext";
 
 export default function ZeroettPresentation() {
-  const { isMobile } = useScreenSize();
   const logoRef = useRef<HTMLDivElement | null>(null);
   const controls = useAnimation();
 
@@ -51,61 +49,38 @@ export default function ZeroettPresentation() {
         zIndex: 1,
       }}
     >
-      <motion.div
-        ref={logoRef}
-        initial={{ opacity: 0, scale: 0.8, y: 20 }}
-        animate={controls}
+      <Box
         sx={{
+          backgroundImage: `url("https://i.imgur.com/xW034na.jpeg")`,
+          minHeight: "500px",
+          backgroundAttachment: "fixed",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
           display: "flex",
-          flexDirection: { xs: "column", md: "row" },
           alignItems: "center",
-          borderRadius: 2,
-          padding: { xs: 0, md: 4 },
-          margin: "auto",
-          zIndex: 2,
+          justifyContent: "center",
+          color: "white",
+          fontSize: "1.5rem",
+          textAlign: "center",
+          padding: 4,
         }}
       >
-        <Box
-          sx={{ flex: 1, padding: 2, textAlign: { xs: "center", md: "left" } }}
+        <Typography
+          component={motion.div}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          sx={{
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            padding: 2,
+            borderRadius: 1,
+            fontSize: 30,
+          }}
         >
-          <Box
-            sx={{
-              paddingY: 2,
-              paddingX: { xs: 0, md: 0 },
-              marginX: { xs: 0, md: 1 },
-              display: "flex",
-              justifyContent: isMobile ? "center" : "flex-start",
-              width: isMobile ? "100%" : "auto",
-              marginLeft: isMobile ? 0 : 10,
-            }}
-          >
-            <Link href="/" sx={{ textDecoration: "none" }}>
-              <img
-                src={
-                  isMobile
-                    ? "https://i.imgur.com/IMSL19B.png"
-                    : "https://i.imgur.com/5Fk6tu4.png"
-                }
-                alt="Zeroett"
-                width={isMobile ? 100 : 600}
-                style={{ marginBottom: isMobile ? 16 : 0 }}
-              />
-            </Link>
-          </Box>
-          <Typography
-            variant="h6"
-            sx={{
-              marginTop: 2,
-              marginLeft: 3,
-              lineHeight: 1.8,
-              color: "white",
-              fontWeight: "300",
-            }}
-          >
-            <FormattedMessage id="zeroett-offers" />
-          </Typography>
-        </Box>
-      </motion.div>
+          <FormattedMessage id="zeroett-offers" />
+        </Typography>
+      </Box>
     </Box>
   );
 }

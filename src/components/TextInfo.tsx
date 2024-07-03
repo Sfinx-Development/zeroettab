@@ -1,129 +1,99 @@
 import { Box, Typography } from "@mui/material";
-import { motion, useAnimation } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import { FormattedMessage } from "react-intl";
-import { useScreenSize } from "../contexts/screenSizeContext";
+import { FaRegLightbulb } from "react-icons/fa";
 
 interface TextInfoProps {
   title: string;
   text: string;
-  icon: React.ElementType;
+  icon?: React.ElementType;
 }
 
-const fadeInAnimation = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-};
-
-const TextInfo = ({ title, text, icon: Icon }: TextInfoProps) => {
-  const { isMobile } = useScreenSize();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const controls = useAnimation();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (containerRef.current) {
-        const top = containerRef.current.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
-        // Check if the element is in the viewport
-        if (top < windowHeight * 0.75 && top > -windowHeight * 0.25) {
-          setIsVisible(true);
-        } else {
-          setIsVisible(false);
-        }
-      }
-    };
-
-    // Call handleScroll initially and on scroll
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    if (isVisible) {
-      controls.start((i) => ({
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.5, delay: i * 0.2 },
-      }));
-    } else {
-      controls.start({ opacity: 0, y: 20 });
-    }
-  }, [isVisible, controls]);
-
+const TextInfo = ({
+  title,
+  text,
+  icon: Icon = FaRegLightbulb,
+}: TextInfoProps) => {
   return (
     <Box
-      ref={containerRef}
       sx={{
-        width: "100%",
+        height: "100vh",
+        background: "#7E57C2", // Lila bakgrundsfärg
+        fontSize: "24px",
         display: "flex",
         flexDirection: "column",
+        width: "100%",
+        justifyContent: "center",
         alignItems: "center",
-        marginBottom: 3,
-        padding: { xs: "16px", md: "32px" },
-        backgroundColor: "rgba(0,0,0,0.7)",
-        borderRadius: 8,
-        boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
-        overflow: "hidden",
-        textAlign: "center",
+        padding: 4,
         color: "white",
+        textAlign: "center",
+        boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
+      {/* Subtil gradient över bakgrunden */}
+      <Box
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          background:
+            "linear-gradient(135deg, rgba(0,0,0,0.1), rgba(0,0,0,0.3))",
+          zIndex: 1,
+          pointerEvents: "none",
+        }}
+      />
+
       <motion.div
-        animate={controls}
         initial={{ opacity: 0, y: 20 }}
-        style={{ marginBottom: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        style={{ marginBottom: 20, zIndex: 2 }}
       >
         {Icon && (
-          <Icon
-            sx={{
-              fontSize: isMobile ? 40 : 80,
-              marginBottom: 2,
-            }}
-          />
+          <Icon size={60} style={{ marginBottom: 16, color: "#FFFFFF" }} />
         )}
       </motion.div>
-      <motion.div
-        variants={fadeInAnimation}
-        initial="hidden"
-        animate={isVisible ? "visible" : "hidden"}
+
+      <Typography
+        variant="h3"
+        component={motion.div}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        sx={{
+          letterSpacing: 1,
+          fontWeight: 600,
+          fontSize: { xs: 32, md: 48 },
+          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
+          zIndex: 2,
+        }}
       >
-        <Typography
-          component="h3"
-          variant="h3"
-          sx={{
-            marginBottom: 1,
-            letterSpacing: 2,
-            fontWeight: 500,
-            fontSize: { xs: 24, md: 36 },
-            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-          }}
-        >
-          <FormattedMessage id={title} />
-        </Typography>
-        <Box
-          sx={{
-            height: 2,
-            width: 50,
-            backgroundColor: "#896daf",
-            margin: "auto",
-            marginBottom: 2,
-          }}
-        />
-        <Typography
-          variant="body1"
-          sx={{
-            letterSpacing: 1,
-            fontWeight: 300,
-            fontSize: 16,
-            textShadow: "1px 1px 3px rgba(0, 0, 0, 0.3)",
-          }}
-        >
-          <FormattedMessage id={text} />
-        </Typography>
-      </motion.div>
+        <FormattedMessage id={title} />
+      </Typography>
+
+      <Typography
+        variant="body1"
+        component={motion.div}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.2 }}
+        sx={{
+          marginTop: 2,
+          maxWidth: "80%",
+          letterSpacing: 0.5,
+          fontWeight: 300,
+          fontSize: 18,
+          textShadow: "1px 1px 3px rgba(0, 0, 0, 0.2)",
+          zIndex: 2,
+        }}
+      >
+        <FormattedMessage id={text} />
+      </Typography>
     </Box>
   );
 };
