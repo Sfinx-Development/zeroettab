@@ -2,7 +2,7 @@ import { Box, Link, Typography } from "@mui/material";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { FormattedMessage } from "react-intl";
-import LetsTalk from "./LetsTalk";
+// import LetsTalk from "./LetsTalk";
 import { useScreenSize } from "../contexts/screenSizeContext";
 
 export default function ZeroettPresentation() {

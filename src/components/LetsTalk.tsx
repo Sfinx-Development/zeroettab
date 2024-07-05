@@ -1,7 +1,8 @@
 import EmailIcon from "@mui/icons-material/Email";
 import Instagram from "@mui/icons-material/Instagram";
 import PhoneIcon from "@mui/icons-material/Phone";
-import { Box, Grid, Link, Paper, Typography } from "@mui/material";
+import { Box, Grid, Link } from "@mui/material";
+// Paper, Typography
 
 export default function LetsTalk() {
   return (
