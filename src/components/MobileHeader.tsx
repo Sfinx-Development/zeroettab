@@ -37,7 +37,7 @@ export default function CustomHeader2(): JSX.Element {
   const links = [
     { label: "home", href: "/", icon: <HomeIcon /> },
     { label: "about", href: "/about", icon: <InfoIcon /> },
-    { label: "contact", href: "/contact", icon: <ContactMailIcon /> },
+    { label: "contact", href: "/contact", icon: <ContactMailIcon sx={{ fontSize: 20 }} /> },
     { label: "projects", href: "/projects", icon: <WorkIcon /> },
     { label: "offers", href: "/offers", icon: <LocalOfferIcon /> },
   ];
@@ -47,40 +47,19 @@ export default function CustomHeader2(): JSX.Element {
       sx={{
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between",
+        justifyContent: "left",
         width: "100%",
-        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+        // boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
         flexDirection: "column",
+        zindex: 1000,
         position: "relative",
+        // position: "sticky",
+        // top: 0,
+        // backgroundColor: "black"
       }}
       component={"header"}
     >
-      <Box
-        sx={{
-          paddingY: 0,
-          paddingX: { xs: 0, md: 3 },
-          marginX: { xs: 0, md: 1 },
-          display: "flex",
-          alignItems: "center",
-          justifyContent: isMobile ? "center" : "flex-start",
-          width: isMobile ? "100%" : "auto",
-          marginLeft: isMobile ? 0 : 10,
-        }}
-      >
-        <Link href="/" sx={{ textDecoration: "none" }}>
-          <img
-            src="https://i.imgur.com/5Fk6tu4.png"
-            alt="Zeroett"
-            width={180}
-          />
-        </Link>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-        }}
-      ></Box>
+     
       <Box
         sx={{
           paddingY: 0,
@@ -91,8 +70,37 @@ export default function CustomHeader2(): JSX.Element {
           justifyContent: isMobile ? "flex-start" : "flex-start",
           width: isMobile ? "100%" : "auto",
           marginLeft: isMobile ? 0 : 10,
+         
         }}
       >
+         <Box
+        sx={{
+          paddingY: 0,
+          paddingX: { xs: 0, md: 3 },
+          marginX: { xs: 0, md: 1 },
+          display: "flex",
+          alignItems: "center",
+          justifyContent: isMobile ? "center" : "flex-start",
+          width: isMobile ? "100%" : "auto",
+          marginLeft: isMobile ? 0 : 10,
+         
+        }}
+      >
+        <Link href="/" sx={{ textDecoration: "none" }}>
+          <img
+            src="https://i.imgur.com/5Fk6tu4.png"
+            alt="Zeroett"
+            width={130}
+          />
+        </Link>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+           
+        }}
+      ></Box>
         <LetsTalkPhone />
         <IconButton
           onClick={handleToggleMenu}
@@ -101,10 +109,11 @@ export default function CustomHeader2(): JSX.Element {
             backgroundColor: "#662c9c",
             "&:hover": { backgroundColor: "#422a75" },
             borderRadius: "50%",
-            marginX: 2,
+            marginX: 1,
+            
           }}
         >
-          <MenuIcon />
+          <MenuIcon sx={{ fontSize: 30 }} />
         </IconButton>
 
         <Drawer
@@ -157,6 +166,7 @@ export default function CustomHeader2(): JSX.Element {
                       display: "flex",
                       paddingTop: 3,
                       alignItems: "center",
+                      
                       // paddingBottom: 6,
                     }}
                     onClick={handleCloseMenu}
@@ -167,14 +177,16 @@ export default function CustomHeader2(): JSX.Element {
                         backgroundColor: "#662c9c",
                         "&:hover": { backgroundColor: "#422a75" },
                         borderRadius: "50%",
+                        
                       }}
                     >
                       {link.icon}
                     </IconButton>
+                    
                     <Typography
                       sx={{
                         color: "white",
-                        fontSize: 24,
+                        fontSize: 20,
                         letterSpacing: 2,
                         fontWeight: "300",
                         marginLeft: 2,
