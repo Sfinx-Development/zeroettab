@@ -53,7 +53,9 @@ export default function ZeroettPresentation() {
         zIndex: 1,
       }}
     >
-      <motion.div
+      <Box
+        component={motion.div}
+      // <motion.div
         ref={logoRef}
         initial={{ opacity: 0, scale: 0.8, y: 20 }}
         animate={controls}
@@ -113,7 +115,8 @@ export default function ZeroettPresentation() {
             <FormattedMessage id="zeroett-offers" />
           </Typography>
         </Box>
-      </motion.div>
+        </Box>
+      {/* </motion.div> */}
     </Box>
   );
 }
