@@ -56,6 +56,7 @@ export default function Index() {
     }
   }, [isVisible, controls]);
   return (
+    
     <Box
       sx={{
         display: "flex",
@@ -70,6 +71,7 @@ export default function Index() {
         zIndex: 1,
       }}
     >
+      
       <Box
         sx={{
           display: "flex",
@@ -82,6 +84,7 @@ export default function Index() {
           zIndex: 1,
         }}
       >
+        
         <Box
           sx={{
             flex: 1,
@@ -91,9 +94,10 @@ export default function Index() {
             justifyContent: "center",
           }}
         >
+           <ZeroettPresentation />
           {!isMobile && <LetsTalk />}
 
-          <ZeroettPresentation />
+         
 
           {/* <Gallery /> */}
           <Box
