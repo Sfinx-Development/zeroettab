@@ -1,12 +1,14 @@
-import AppsIcon from "@mui/icons-material/Apps";
-import LanguageIcon from "@mui/icons-material/Language";
-import StorageIcon from "@mui/icons-material/Storage";
 import { Box } from "@mui/material";
 import { useAnimation } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import BackendPresentation from "../components/BackendPresent";
+import MobilePresentation from "../components/MobilePresent";
 import TellUsIndex from "../components/TellUsIndex";
-import TextInfo from "../components/TextInfo";
+import WebsitePresentation from "../components/WebsitePresent";
 import ZeroettPresentation from "../components/ZeroettPresentation";
+import WebsiteImage from "../components/WebsiteImage";
+import MobileImage from "../components/MobileImage";
+import BackendImage from "../components/BackendImage";
 
 export default function Index() {
   const iconsRef = useRef<HTMLDivElement>(null);
@@ -76,8 +78,13 @@ export default function Index() {
       {/* {!isMobile && <LetsTalk />} */}
 
       <ZeroettPresentation />
-
-      {/* <Gallery /> */}
+      <WebsitePresentation />
+      <WebsiteImage />
+      <MobilePresentation />
+      <MobileImage />
+      <BackendPresentation />
+      <BackendImage />
+      {/* <Gallery />
       <Box
         sx={{
           display: "flex",
@@ -101,7 +108,7 @@ export default function Index() {
           text="robust-and"
           icon={StorageIcon}
         />
-      </Box>
+      </Box> */}
 
       <TellUsIndex />
     </Box>
