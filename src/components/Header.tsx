@@ -37,8 +37,12 @@ export default function Header(): JSX.Element {
         justifyContent: "space-between",
         width: "100%",
         flexDirection: isMobile ? "column" : "row",
-        zIndex: 1,
+        zIndex: 999,
         paddingY: 1,
+        position: "sticky",
+        top: 0,
+        // backgroundImage: "url('https://i.imgur.com/kFmeAx8.png')",
+        backgroundColor: "black"
         // backgroundColor: "red",
       }}
       component={"header"}
