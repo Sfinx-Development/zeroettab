@@ -148,7 +148,7 @@ export default function Header(): JSX.Element {
             <FormattedMessage id="contact" />
           </Typography>
         </Link>
-        <Link>
+        <Link  href="/">
           <img
             src="https://i.imgur.com/IMSL19B.png"
             height="100"
