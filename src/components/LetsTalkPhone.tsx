@@ -12,6 +12,7 @@ export default function LetsTalkPhone() {
         textAlign: "center",
         // background: "linear-gradient(135deg,#2C1541 0%, #291040 100%)",
         // backgroundColor: "white",
+        // en textändring
         alignItems: "center",
         boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.1)",
       
