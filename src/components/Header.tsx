@@ -41,8 +41,15 @@ export default function Header(): JSX.Element {
         paddingY: 1,
         position: "sticky",
         top: 0,
+     
+
+        backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 50%, rgba(0, 0, 0, 0))", // Gradient som börjar med mörkare svart och fade-out vid 50% ned
+        transition: "background-image 0.3s ease", // Övergång för gradienten
+        boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",  // Ljusskugga för övergångseffekt
         // backgroundImage: "url('https://i.imgur.com/kFmeAx8.png')",
-        backgroundColor: "black"
+        //  backgroundColor: "black",
+        // transition: "background-color 0.10s ease",
+        // boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.10)", 
         // backgroundColor: "red",
       }}
       component={"header"}
