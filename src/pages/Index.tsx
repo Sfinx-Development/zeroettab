@@ -111,18 +111,15 @@ export default function Index() {
             <TextInfo
               title="web-applications"
               text="we-design"
-              icon={LanguageIcon}
-            />
+              icon={LanguageIcon} href={"/offers"}            />
             <TextInfo
               title="mobile-applications"
               text="building-apps"
-              icon={AppsIcon}
-            />
+              icon={AppsIcon} href={"/offers"}            />
             <TextInfo
               title="backend-solutions"
               text="robust-and"
-              icon={StorageIcon}
-            />
+              icon={StorageIcon} href={"/offers"}            />
           </Box>
         </Box>
       </Box>

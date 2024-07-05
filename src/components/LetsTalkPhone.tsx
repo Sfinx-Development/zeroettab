@@ -14,7 +14,7 @@ export default function LetsTalkPhone() {
         // backgroundColor: "white",
         alignItems: "center",
         boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.1)",
-        zIndex: 9999
+      
       }}
     >
       <Box
