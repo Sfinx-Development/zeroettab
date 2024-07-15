@@ -2,6 +2,7 @@ import { Button, Grid, Typography, Box, keyframes } from "@mui/material";
 import { motion } from "framer-motion";
 import { FormattedMessage } from "react-intl";
 import { useNavigate } from "react-router-dom";
+import LightbulbIcon from "@mui/icons-material/Lightbulb";
 
 const fadeIn = keyframes`
   from {
@@ -36,7 +37,7 @@ const TellUsIndex = () => {
         alignItems: "center",
         color: "white",
         textAlign: "center",
-        boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
+        // boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
         height: "100vh",
         padding: 4,
       }}
@@ -54,7 +55,7 @@ const TellUsIndex = () => {
           backgroundColor: "rgba(30, 30, 30, 0.9)",
           borderRadius: 2,
           padding: 4,
-          boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.3)",
+          // boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.3)",
           maxWidth: "100%",
           margin: "auto",
           animation: `${fadeIn} 1s ease-out`,
@@ -85,7 +86,7 @@ const TellUsIndex = () => {
           sx={{
             height: 2,
             width: 250,
-            backgroundColor: "#896daf",
+            backgroundColor: "#6e578a",
             marginBottom: 1,
           }}
         />
@@ -121,7 +122,7 @@ const TellUsIndex = () => {
           }}
           variant="contained"
           sx={{
-            backgroundColor: "#662c9c",
+            backgroundColor: "#6e578a",
             "&:hover": {
               backgroundColor: "#422a75",
             },
@@ -143,7 +144,7 @@ const TellUsIndex = () => {
           padding: 4,
         }}
       >
-        <motion.img
+        {/* <motion.img
           src="https://i.imgur.com/LWnnKCt.png"
           alt="lightbulb"
           height="300px"
@@ -152,7 +153,8 @@ const TellUsIndex = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
           style={{ filter: "drop-shadow(0px 4px 20px rgba(0, 0, 0, 0.3))" }}
-        />
+        /> */}
+        <LightbulbIcon sx={{ color: "#a295bd", fontSize: 200 }} />
       </Grid>
     </Grid>
   );

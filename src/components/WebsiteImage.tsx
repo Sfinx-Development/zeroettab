@@ -1,7 +1,6 @@
-import { Box, Typography } from "@mui/material";
-import { motion, useAnimation } from "framer-motion";
+import { Box, Button } from "@mui/material";
+import { useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
-import { FormattedMessage } from "react-intl";
 
 export default function WebsiteImage() {
   const logoRef = useRef<HTMLDivElement | null>(null);
@@ -43,6 +42,7 @@ export default function WebsiteImage() {
         flexDirection: "column",
         margin: 0,
         minHeight: 400,
+        width: "100%",
         alignItems: "center",
         justifyContent: "center",
         flexGrow: 1,
@@ -61,25 +61,23 @@ export default function WebsiteImage() {
           alignItems: "center",
           justifyContent: "center",
           color: "white",
+          width: "100%",
           fontSize: "1.5rem",
           textAlign: "center",
           padding: 4,
         }}
       >
-        <Typography
-          component={motion.div}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
+        <Button
           sx={{
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            backgroundColor: "rgba(0, 0, 0, 0.7)",
             padding: 2,
             borderRadius: 1,
             fontSize: 30,
+            color: "white",
           }}
         >
-          <FormattedMessage id="zeroett-offers" />
-        </Typography>
+          Till erbjudanden för hemsida
+        </Button>
       </Box>
     </Box>
   );

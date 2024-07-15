@@ -1,103 +1,241 @@
-import { Box, Typography } from "@mui/material";
-import { motion, useAnimation } from "framer-motion";
-import { useEffect, useRef } from "react";
-import { FormattedMessage } from "react-intl";
+import { Box, Button, Typography } from "@mui/material";
+import { motion } from "framer-motion";
+import React from "react";
+import { useInView } from "react-intersection-observer";
+import { FormattedMessage, useIntl } from "react-intl";
+import { useScreenSize } from "../contexts/screenSizeContext";
 
 export default function WebsitePresentation() {
-  const logoRef = useRef<HTMLDivElement | null>(null);
-  const controls = useAnimation();
+  const intl = useIntl();
+  const { isMobile } = useScreenSize();
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            controls.start({
-              opacity: 1,
-              scale: 1,
-              y: 0,
-              transition: { duration: 1, ease: "easeOut" },
-            });
-          }
-        });
-      },
-      { threshold: 0.1 }
+  const AnimatedBox = ({ children }) => {
+    const { ref, inView } = useInView({
+      threshold: 0.1,
+      triggerOnce: false,
+    });
+
+    return (
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 50 }}
+        animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        transition={{ duration: 0.75, ease: "easeOut" }}
+        style={{ width: "100%", display: "flex", justifyContent: "flex-start" }}
+      >
+        {children}
+      </motion.div>
     );
-
-    if (logoRef.current) {
-      observer.observe(logoRef.current);
-    }
-
-    return () => {
-      if (logoRef.current) {
-        observer.unobserve(logoRef.current);
-      }
-    };
-  }, [controls]);
+  };
 
   return (
     <Box
       sx={{
-        height: "1000px",
-        fontSize: "24px",
-        display: "flex",
-        flexDirection: "column",
-        width: "100%",
-        justifyContent: "center",
-        alignItems: "center",
-        color: "white",
-        textAlign: "center",
         position: "relative",
+        width: "100%",
+        minHeight: "100vh",
+        textAlign: "center",
         overflow: "hidden",
-        backgroundColor: "#1E1E1E",
+        background: "linear-gradient(135deg, #a295bd 0%, #6e578a 100%)",
+        padding: 4,
       }}
     >
       <Box
         sx={{
-          ackgroundImage: `url("https://i.imgur.com/kKyCoTP.png")`,
-          minHeight: "500px",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100vh",
+          backgroundImage: `url("https://i.imgur.com/kKyCoTP.png")`,
           backgroundAttachment: "fixed",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
+          zIndex: -1,
+          filter: "brightness(0.5)",
+        }}
+      />
+
+      <Box
+        sx={{
+          minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
           justifyContent: "center",
-          color: "white",
-          fontSize: "1.5rem",
-          textAlign: "center",
-          padding: 4,
+          alignItems: "center",
+          gap: 10,
         }}
       >
-        <Typography
-          component={motion.div}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
+        <Box
           sx={{
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            padding: 2,
-            borderRadius: 1,
-            fontSize: 30,
+            position: "relative",
+            width: "100%",
+            maxWidth: "800px",
+            padding: 4,
+            zIndex: 2,
+            textAlign: "left",
+            color: "white",
           }}
         >
-          <FormattedMessage id="web-applications" />
-        </Typography>
-        <Typography
-          component={motion.div}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
+          <AnimatedBox>
+            <Typography
+              sx={{
+                fontSize: { xs: 24, md: 40 },
+                marginBottom: 2,
+                letterSpacing: 2,
+                color: "white",
+              }}
+            >
+              <FormattedMessage id="offers-webpages" />
+            </Typography>
+          </AnimatedBox>
+          <AnimatedBox>
+            <Box
+              sx={{
+                fontSize: { xs: 18, md: 20 },
+                marginBottom: 4,
+                display: "flex",
+                flexDirection: "column",
+                gap: 1,
+              }}
+            >
+              <Typography sx={{ color: "white" }}>
+                Byggs från grunden
+              </Typography>
+              <Typography sx={{ color: "white" }}>Skräddarsytt</Typography>
+              <Typography sx={{ color: "white" }}>SEO</Typography>
+              <Typography sx={{ color: "white" }}>DESIGN</Typography>
+              <Typography sx={{ color: "white" }}>UNDERHÅLLNING</Typography>
+            </Box>
+          </AnimatedBox>
+          <Button
+            sx={{
+              backgroundColor: "rgba(30, 30, 30, 0.8)",
+              color: "white",
+              "&:hover": {
+                backgroundColor: "rgba(50, 50, 50, 0.8)",
+              },
+            }}
+            variant="contained"
+          >
+            Läs mer
+          </Button>
+        </Box>
+
+        <Box
           sx={{
-            // backgroundColor: "rgba(0, 0, 0, 0.5)",
-            padding: 2,
-            borderRadius: 1,
-            fontSize: 30,
+            position: "relative",
+            width: "100%",
+            maxWidth: "800px",
+            padding: 4,
+            zIndex: 2,
+            textAlign: "left",
+            color: "white",
           }}
         >
-          <FormattedMessage id="we-design" />
-        </Typography>
+          <AnimatedBox>
+            <Typography
+              sx={{
+                fontSize: { xs: 24, md: 40 },
+                marginBottom: 2,
+                letterSpacing: 2,
+                color: "white",
+              }}
+            >
+              <FormattedMessage id="mobile-applications" />
+            </Typography>
+          </AnimatedBox>
+          <AnimatedBox>
+            <Box
+              sx={{
+                fontSize: { xs: 18, md: 20 },
+                marginBottom: 4,
+                display: "flex",
+                flexDirection: "column",
+                gap: 1,
+              }}
+            >
+              <Typography sx={{ color: "white" }}>
+                Byggs från grunden
+              </Typography>
+              <Typography sx={{ color: "white" }}>Skräddarsytt</Typography>
+              <Typography sx={{ color: "white" }}>IOS och Android</Typography>
+              <Typography sx={{ color: "white" }}>DESIGN</Typography>
+              <Typography sx={{ color: "white" }}>UNDERHÅLLNING</Typography>
+            </Box>
+          </AnimatedBox>
+          <Button
+            sx={{
+              backgroundColor: "rgba(30, 30, 30, 0.8)",
+              color: "white",
+              "&:hover": {
+                backgroundColor: "rgba(50, 50, 50, 0.8)",
+              },
+            }}
+            variant="contained"
+          >
+            Läs mer
+          </Button>
+        </Box>
+
+        <Box
+          sx={{
+            position: "relative",
+            width: "100%",
+            maxWidth: "800px",
+            padding: 4,
+            zIndex: 2,
+            textAlign: "left",
+            color: "white",
+          }}
+        >
+          <AnimatedBox>
+            <Typography
+              sx={{
+                fontSize: { xs: 24, md: 40 },
+                marginBottom: 2,
+                letterSpacing: 2,
+                color: "white",
+              }}
+            >
+              <FormattedMessage id="backend-solutions" />
+            </Typography>
+          </AnimatedBox>
+          <AnimatedBox>
+            <Box
+              sx={{
+                fontSize: { xs: 18, md: 20 },
+                marginBottom: 4,
+                display: "flex",
+                flexDirection: "column",
+                gap: 1,
+              }}
+            >
+              <Typography sx={{ color: "white" }}>
+                Byggs från grunden
+              </Typography>
+              <Typography sx={{ color: "white" }}>Skräddarsytt</Typography>
+              <Typography sx={{ color: "white" }}>
+                Anpassade lösningar
+              </Typography>
+              <Typography sx={{ color: "white" }}>DESIGN</Typography>
+              <Typography sx={{ color: "white" }}>UNDERHÅLLNING</Typography>
+            </Box>
+          </AnimatedBox>
+          <Button
+            sx={{
+              backgroundColor: "rgba(30, 30, 30, 0.8)",
+              color: "white",
+              "&:hover": {
+                backgroundColor: "rgba(50, 50, 50, 0.8)",
+              },
+            }}
+            variant="contained"
+          >
+            Läs mer
+          </Button>
+        </Box>
       </Box>
     </Box>
   );
