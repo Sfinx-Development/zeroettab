@@ -12,8 +12,10 @@ export default function LetsTalkPhone() {
         textAlign: "center",
         // background: "linear-gradient(135deg,#2C1541 0%, #291040 100%)",
         // backgroundColor: "white",
+        // en textändring
         alignItems: "center",
         boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.1)",
+      
       }}
     >
       <Box
@@ -21,27 +23,28 @@ export default function LetsTalkPhone() {
           display: "flex",
           alignItems: "center",
           gap: 1,
-          marginLeft: 4,
+          marginLeft: 6,
+          
         }}
       >
         <Link
           href="mailto:zeroettab@gmail.com"
           sx={{ textDecoration: "none", color: "#662c9c" }}
         >
-          <EmailIcon sx={{ fontSize: 35, color: "white" }} />
+          <EmailIcon sx={{ fontSize: 30, color: "white" }} />
         </Link>
         <Link
           href="tel:0737000820"
           sx={{ textDecoration: "none", color: "white" }}
         >
-          <PhoneIcon sx={{ fontSize: 35, color: "white" }} />
+          <PhoneIcon sx={{ fontSize: 30, color: "white" }} />
         </Link>
 
         <Link
           href="https://www.instagram.com/zeroettab"
           sx={{ textDecoration: "none", color: "white" }}
         >
-          <Instagram sx={{ fontSize: 35, color: "white" }} />
+          <Instagram sx={{ fontSize: 30, color: "white" }} />
         </Link>
       </Box>
     </Box>
