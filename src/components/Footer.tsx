@@ -12,7 +12,6 @@ export default function Footer() {
         backgroundColor: "rgba(0,0,0,0.8)",
         zIndex: 2,
         width: "100%",
-        boxShadow: "0 -4px 10px rgba(0, 0, 0, 0.5)",
       }}
     >
       <Box

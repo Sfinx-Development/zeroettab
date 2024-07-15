@@ -56,7 +56,6 @@ export default function Index() {
     }
   }, [isVisible, controls]);
   return (
-    
     <Box
       sx={{
         display: "flex",
@@ -71,7 +70,6 @@ export default function Index() {
         zIndex: 1,
       }}
     >
-      
       <Box
         sx={{
           display: "flex",
@@ -84,7 +82,6 @@ export default function Index() {
           zIndex: 1,
         }}
       >
-        
         <Box
           sx={{
             flex: 1,
@@ -94,10 +91,9 @@ export default function Index() {
             justifyContent: "center",
           }}
         >
-           <ZeroettPresentation />
           {!isMobile && <LetsTalk />}
 
-         
+          <ZeroettPresentation />
 
           {/* <Gallery /> */}
           <Box
@@ -111,15 +107,18 @@ export default function Index() {
             <TextInfo
               title="web-applications"
               text="we-design"
-              icon={LanguageIcon} href={"/offers"}            />
+              icon={LanguageIcon}
+            />
             <TextInfo
               title="mobile-applications"
               text="building-apps"
-              icon={AppsIcon} href={"/offers"}            />
+              icon={AppsIcon}
+            />
             <TextInfo
               title="backend-solutions"
               text="robust-and"
-              icon={StorageIcon} href={"/offers"}            />
+              icon={StorageIcon}
+            />
           </Box>
         </Box>
       </Box>
