@@ -2,7 +2,6 @@ import { Box } from "@mui/material";
 import { useAnimation } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import AboutUsIndex from "../components/AboutUsIndex";
-import BackendImage from "../components/BackendImage";
 import TellUsIndex from "../components/TellUsIndex";
 import WebsitePresentation from "../components/WebsitePresent";
 import ZeroettPresentation from "../components/ZeroettPresentation";

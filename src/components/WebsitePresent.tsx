@@ -1,14 +1,9 @@
 import { Box, Button, Typography } from "@mui/material";
 import { motion } from "framer-motion";
-import React from "react";
 import { useInView } from "react-intersection-observer";
-import { FormattedMessage, useIntl } from "react-intl";
-import { useScreenSize } from "../contexts/screenSizeContext";
+import { FormattedMessage } from "react-intl";
 
 export default function WebsitePresentation() {
-  const intl = useIntl();
-  const { isMobile } = useScreenSize();
-
   const AnimatedBox = ({ children }) => {
     const { ref, inView } = useInView({
       threshold: 0.1,
