@@ -1,7 +1,11 @@
 import { Outlet } from "react-router-dom";
 import Footer from "../components/Footer";
+import Header from "../components/Header";
+import MobileHeader from "../components/MobileHeader";
+import { useScreenSize } from "../contexts/screenSizeContext";
 
 const RootLayout = () => {
+  const { isMobile } = useScreenSize();
   return (
     <div
       style={{
@@ -26,9 +30,10 @@ const RootLayout = () => {
           left: 0,
           width: "100%",
           height: "100%",
+          backgroundColor: "rgba(0, 0, 0, 0.6)",
         }}
       ></div>
-      {/* {isMobile ? <MobileHeader /> : <Header />} */}
+      {isMobile ? <MobileHeader /> : <Header />}
 
       <main
         style={{
