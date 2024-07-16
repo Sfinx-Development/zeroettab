@@ -5,17 +5,21 @@ import { CustomerProvider } from "./context/customerContext";
 import { LanguageProvider } from "./context/languageContext";
 import { ScreenSizeProvider } from "./contexts/screenSizeContext";
 import Navigation from "./navigation";
+import { Provider } from "react-redux";
+import store from "./slices/store";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <LanguageProvider>
-      <BrowserRouter>
-        <CustomerProvider>
-          <ScreenSizeProvider>
-            <Navigation />
-          </ScreenSizeProvider>
-        </CustomerProvider>
-      </BrowserRouter>
-    </LanguageProvider>
+    <Provider store={store}>
+      <LanguageProvider>
+        <BrowserRouter>
+          <CustomerProvider>
+            <ScreenSizeProvider>
+              <Navigation />
+            </ScreenSizeProvider>
+          </CustomerProvider>
+        </BrowserRouter>
+      </LanguageProvider>
+    </Provider>
   </React.StrictMode>
 );
