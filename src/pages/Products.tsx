@@ -1,5 +1,184 @@
-import { Box } from "@mui/material";
+import {
+  Box,
+  keyframes,
+  Typography,
+  Grid,
+  Card,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Button,
+} from "@mui/material";
+import { useState, useEffect } from "react";
+
+const fadeIn = keyframes`
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  `;
+
+const mockProducts = [
+  {
+    id: "1",
+    name: "Product 1",
+    description: "Description for product 1",
+    price: 100,
+    imageUrl: "https://via.placeholder.com/150",
+  },
+  {
+    id: "2",
+    name: "Product 2",
+    description: "Description for product 2",
+    price: 200,
+    imageUrl: "https://via.placeholder.com/150",
+  },
+  {
+    id: "3",
+    name: "Product 3",
+    description: "Description for product 3",
+    price: 300,
+    imageUrl: "https://via.placeholder.com/150",
+  },
+];
 
 export default function Products() {
-  return <Box></Box>;
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    // Simulate fetching products from an API
+    setProducts(mockProducts);
+  }, []);
+
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        padding: 0,
+        margin: 0,
+        width: "100%",
+        alignItems: "center",
+        flexGrow: 1,
+        backgroundColor: "black",
+        minHeight: "100vh",
+        zIndex: 1,
+        animation: `${fadeIn} 1s ease-out`,
+      }}
+    >
+      <Box
+        sx={{
+          backgroundColor: "black",
+          display: "flex",
+          width: "100%",
+          justifyContent: "space-around",
+          alignItems: "center",
+          padding: 2,
+          flexWrap: "wrap",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            textAlign: "center",
+            margin: 2,
+          }}
+        >
+          <img
+            src={"https://i.imgur.com/sbMjvxp.png"}
+            alt="Tshirt"
+            style={{
+              height: 300,
+              width: "auto",
+              borderRadius: 8,
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
+              transition: "transform 0.3s ease",
+            }}
+          />
+          <Typography sx={{ color: "white", padding: 2 }}>
+            Något här om att Zeroett även har kläder
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            textAlign: "center",
+            margin: 2,
+          }}
+        >
+          <img
+            src={"https://i.imgur.com/H7vLh5J.png"}
+            alt="Girl with tshirt"
+            style={{
+              height: 300,
+              width: "auto",
+              borderRadius: 8,
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
+              transition: "transform 0.3s ease",
+            }}
+          />
+          <Typography sx={{ color: "white", padding: 2 }}>
+            Upptäck vår senaste kollektion
+          </Typography>
+        </Box>
+      </Box>
+
+      <Typography
+        variant="h4"
+        sx={{ color: "white", margin: 4, textAlign: "center" }}
+      >
+        Våra Produkter
+      </Typography>
+
+      <Grid container spacing={3} sx={{ padding: 3 }}>
+        {products.map((product) => (
+          <Grid item xs={12} sm={6} md={4} key={product.id}>
+            <Card
+              sx={{
+                maxWidth: 345,
+                margin: "auto",
+                transition: "0.3s",
+                boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
+                "&:hover": {
+                  boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)",
+                },
+              }}
+            >
+              <CardMedia
+                component="img"
+                alt={product.name}
+                height="140"
+                image={product.imageUrl}
+                title={product.name}
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  {product.name}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  {product.description}
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small" color="primary">
+                  Köp nu
+                </Button>
+                <Typography variant="h6" color="textPrimary">
+                  {product.price} SEK
+                </Typography>
+              </CardActions>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
+  );
 }
