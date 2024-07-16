@@ -10,8 +10,8 @@ import LetsTalk from "../components/LetsTalk";
 import TextInfo from "../components/TextInfo";
 import ZeroettPresentation from "../components/ZeroettPresentation";
 import { useScreenSize } from "../contexts/screenSizeContext";
-import { useAppDispatch,  } from "../slices/store";
 import { Product, addProductAsync } from "../slices/productSlice";
+import { useAppDispatch } from "../slices/store";
 
 const fadeIn = keyframes`
   from {
@@ -34,19 +34,26 @@ export default function Index() {
   const dispatch = useAppDispatch();
 
   const handleAddProduct = () => {
-    const product: Product= {
+    const product: Product = {
       id: "123",
-      name:"Test",
+      name: "Test",
       description: "hej produkt",
       price: 53,
       in_store: true,
       amount: 5,
-
-      
-
+      subcategory_id: "1",
+      weight: 200,
+      length: 50,
+      width: 30,
+      height: 20,
+      color: "black",
+      size: 36,
+      material: "cotton",
+      rabatt: 0,
+      launch_date: new Date().toISOString(),
     };
-dispatch(addProductAsync(product));
-}
+    dispatch(addProductAsync(product));
+  };
   useEffect(() => {
     const handleScroll = () => {
       if (iconsRef.current) {
@@ -74,7 +81,6 @@ dispatch(addProductAsync(product));
     }
   }, [isVisible, controls]);
   return (
-    
     <Box
       sx={{
         display: "flex",
@@ -89,7 +95,6 @@ dispatch(addProductAsync(product));
         zIndex: 1,
       }}
     >
-      
       <Box
         sx={{
           display: "flex",
@@ -102,7 +107,6 @@ dispatch(addProductAsync(product));
           zIndex: 1,
         }}
       >
-        
         <Box
           sx={{
             flex: 1,
@@ -112,10 +116,8 @@ dispatch(addProductAsync(product));
             justifyContent: "center",
           }}
         >
-           <ZeroettPresentation />
+          <ZeroettPresentation />
           {!isMobile && <LetsTalk />}
-
-         
 
           {/* <Gallery /> */}
           <Box
@@ -129,20 +131,24 @@ dispatch(addProductAsync(product));
             <TextInfo
               title="web-applications"
               text="we-design"
-              icon={LanguageIcon} href={"/offers"}            />
+              icon={LanguageIcon}
+              href={"/offers"}
+            />
             <TextInfo
               title="mobile-applications"
               text="building-apps"
-              icon={AppsIcon} href={"/offers"}            />
+              icon={AppsIcon}
+              href={"/offers"}
+            />
             <TextInfo
               title="backend-solutions"
               text="robust-and"
-              icon={StorageIcon} href={"/offers"}            />
+              icon={StorageIcon}
+              href={"/offers"}
+            />
           </Box>
 
           <Button onClick={() => handleAddProduct()}>LÄGG TILL PRODUKT </Button>
-
-         
         </Box>
       </Box>
       <Grid

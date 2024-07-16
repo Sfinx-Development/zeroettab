@@ -1,26 +1,26 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { addProductToDB } from "../api/product";
 
 export interface Product {
-    id: string;
-    name: string;
-    description: string;
-    price: number;
-    in_store: boolean;
-    amount: number;
-    // subcategory_id: string;
-    // weight: number;
-    // length: number;
-    // width: number;
-    // height: number;
-    // color: string;
-    // size: number; // eller string
-    // material: string;
-    // rabatt: number;
-    // launch_date: string; // String för slice
-  }
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  in_store: boolean;
+  amount: number;
+  subcategory_id: string;
+  weight: number;
+  length: number;
+  width: number;
+  height: number;
+  color: string;
+  size: number; // eller string
+  material: string;
+  rabatt: number;
+  launch_date: string; // String för slice
+}
 
 interface ProductState {
   products: Product[];
@@ -32,14 +32,13 @@ export const initialState: ProductState = {
   error: null,
 };
 
-
 export const addProductAsync = createAsyncThunk<
   Product,
   Product,
   { rejectValue: string }
->("Products/addProduct", async (todo, thunkAPI) => {
+>("Products/addProduct", async (product, thunkAPI) => {
   try {
-    const createdProduct = await addProductToDB(todo);
+    const createdProduct = await addProductToDB(product);
     if (createdProduct) {
       return createdProduct;
     } else {
@@ -50,13 +49,10 @@ export const addProductAsync = createAsyncThunk<
   }
 });
 
-
-
 const ProductSlice = createSlice({
   name: "Product",
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(addProductAsync.fulfilled, (state, action) => {
@@ -68,11 +64,9 @@ const ProductSlice = createSlice({
       .addCase(addProductAsync.rejected, (state) => {
         state.error =
           "Något gick fel när produkten skapades. Försök igen senare.";
-      })
-
+      });
   },
 });
-
 
 export const ProductReduces = ProductSlice.reducer;
 export type { ProductState };

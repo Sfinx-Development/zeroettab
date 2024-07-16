@@ -1,15 +1,16 @@
 import {
   Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Grid,
   keyframes,
   Typography,
-  Grid,
-  Card,
-  CardMedia,
-  CardContent,
-  CardActions,
-  Button,
 } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { Product } from "../slices/productSlice";
 
 const fadeIn = keyframes`
     from {
@@ -22,37 +23,13 @@ const fadeIn = keyframes`
     }
   `;
 
-const mockProducts = [
-  {
-    id: "1",
-    name: "Product 1",
-    description: "Description for product 1",
-    price: 100,
-    imageUrl: "https://via.placeholder.com/150",
-  },
-  {
-    id: "2",
-    name: "Product 2",
-    description: "Description for product 2",
-    price: 200,
-    imageUrl: "https://via.placeholder.com/150",
-  },
-  {
-    id: "3",
-    name: "Product 3",
-    description: "Description for product 3",
-    price: 300,
-    imageUrl: "https://via.placeholder.com/150",
-  },
-];
-
 export default function Products() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
 
-  useEffect(() => {
-    // Simulate fetching products from an API
-    setProducts(mockProducts);
-  }, []);
+  //   useEffect(() => {
+  //     // Simulate fetching products from an API
+  //     setProducts(mockProducts);
+  //   }, []);
 
   return (
     <Box
@@ -156,7 +133,7 @@ export default function Products() {
                 component="img"
                 alt={product.name}
                 height="140"
-                image={product.imageUrl}
+                image={"https://i.imgur.com/sbMjvxp.png"}
                 title={product.name}
               />
               <CardContent>
@@ -172,7 +149,7 @@ export default function Products() {
                   Köp nu
                 </Button>
                 <Typography variant="h6" color="textPrimary">
-                  {product.price} SEK
+                  {product.amount} SEK
                 </Typography>
               </CardActions>
             </Card>
