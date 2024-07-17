@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { addProductToDB } from "../api/product";
+import { addProductToDB, getProductsFromDB } from "../api/product";
 
 export interface Product {
   id: string;
@@ -36,7 +36,7 @@ export const addProductAsync = createAsyncThunk<
   Product,
   Product,
   { rejectValue: string }
->("Products/addProduct", async (product, thunkAPI) => {
+>("products/addProduct", async (product, thunkAPI) => {
   try {
     const createdProduct = await addProductToDB(product);
     if (createdProduct) {
@@ -46,6 +46,23 @@ export const addProductAsync = createAsyncThunk<
     }
   } catch (error) {
     throw new Error("Något gick fel vid .");
+  }
+});
+
+export const getProductAsync = createAsyncThunk<
+  Product[],
+  void,
+  { rejectValue: string }
+>("products/getProducts", async (_, thunkAPI) => {
+  try {
+    const products = await getProductsFromDB();
+    if (products) {
+      return products;
+    } else {
+      return thunkAPI.rejectWithValue("failed to fetch products");
+    }
+  } catch (error) {
+    throw new Error("Något gick fel vid hämtning av products.");
   }
 });
 
@@ -64,6 +81,16 @@ const ProductSlice = createSlice({
       .addCase(addProductAsync.rejected, (state) => {
         state.error =
           "Något gick fel när produkten skapades. Försök igen senare.";
+      })
+      .addCase(getProductAsync.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.products = action.payload;
+          state.error = null;
+        }
+      })
+      .addCase(getProductAsync.rejected, (state) => {
+        state.error =
+          "Något gick fel när produkter hämtades. Försök igen senare.";
       });
   },
 });

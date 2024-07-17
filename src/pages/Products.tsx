@@ -9,8 +9,9 @@ import {
   keyframes,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
-import { Product } from "../slices/productSlice";
+import { useEffect } from "react";
+import { getProductAsync } from "../slices/productSlice";
+import { useAppDispatch, useAppSelector } from "../slices/store";
 
 const fadeIn = keyframes`
     from {
@@ -24,12 +25,12 @@ const fadeIn = keyframes`
   `;
 
 export default function Products() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const products = useAppSelector((state) => state.productSlice.products);
+  const dispatch = useAppDispatch();
 
-  //   useEffect(() => {
-  //     // Simulate fetching products from an API
-  //     setProducts(mockProducts);
-  //   }, []);
+  useEffect(() => {
+    dispatch(getProductAsync());
+  }, []);
 
   return (
     <Box
