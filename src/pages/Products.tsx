@@ -10,7 +10,12 @@ import {
   Typography,
 } from "@mui/material";
 import { useEffect } from "react";
-import { getProductAsync } from "../slices/productSlice";
+import { useNavigate } from "react-router-dom";
+import {
+  getProductAsync,
+  Product,
+  setActiveProduct,
+} from "../slices/productSlice";
 import { useAppDispatch, useAppSelector } from "../slices/store";
 
 const fadeIn = keyframes`
@@ -27,10 +32,16 @@ const fadeIn = keyframes`
 export default function Products() {
   const products = useAppSelector((state) => state.productSlice.products);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getProductAsync());
   }, []);
+
+  const handleNavigateToDetail = (product: Product) => {
+    dispatch(setActiveProduct(product));
+    navigate("/product-detail");
+  };
 
   return (
     <Box
@@ -146,7 +157,11 @@ export default function Products() {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" color="primary">
+                <Button
+                  size="small"
+                  color="primary"
+                  onClick={() => handleNavigateToDetail(product)}
+                >
                   Köp nu
                 </Button>
                 <Typography variant="h6" color="textPrimary">

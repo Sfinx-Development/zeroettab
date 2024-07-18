@@ -24,11 +24,13 @@ export interface Product {
 
 interface ProductState {
   products: Product[];
+  activeProduct: Product | undefined;
   error: string | null;
 }
 
 export const initialState: ProductState = {
   products: [],
+  activeProduct: undefined,
   error: null,
 };
 
@@ -69,7 +71,11 @@ export const getProductAsync = createAsyncThunk<
 const ProductSlice = createSlice({
   name: "Product",
   initialState,
-  reducers: {},
+  reducers: {
+    setActiveProduct: (state, action) => {
+      state.activeProduct = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(addProductAsync.fulfilled, (state, action) => {
@@ -97,3 +103,4 @@ const ProductSlice = createSlice({
 
 export const ProductReduces = ProductSlice.reducer;
 export type { ProductState };
+export const { setActiveProduct } = ProductSlice.actions;
