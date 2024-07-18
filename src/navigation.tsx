@@ -14,6 +14,7 @@ import Projects from "./pages/Projects";
 import RootLayout from "./pages/RootLayout";
 import messages_en from "./translations/en.json";
 import messages_sv from "./translations/sv.json";
+import ProductDetail from "./pages/ProductDetail";
 
 const Navigation = () => {
   const { language } = useLanguageContext();
@@ -33,6 +34,7 @@ const Navigation = () => {
           <Route path="projects" element={<Projects />}></Route>
           <Route path="offers" element={<Offers />}></Route>
           <Route path="products" element={<Products />}></Route>
+          <Route path="product-detail" element={<ProductDetail />}></Route>
           <Route path="*" element={<Error />}></Route>
         </Route>
       </Routes>
