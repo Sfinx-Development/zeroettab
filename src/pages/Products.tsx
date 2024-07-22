@@ -13,8 +13,8 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   getProductAsync,
+  getProductsAsync,
   Product,
-  setActiveProduct,
 } from "../slices/productSlice";
 import { useAppDispatch, useAppSelector } from "../slices/store";
 
@@ -34,14 +34,15 @@ export default function Products() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    dispatch(getProductAsync());
-  }, []);
-
   const handleNavigateToDetail = (product: Product) => {
-    dispatch(setActiveProduct(product));
+    // dispatch(setActiveProduct(product));
+    dispatch(getProductAsync(product.id));
     navigate("/product-detail");
   };
+
+  useEffect(() => {
+    dispatch(getProductsAsync());
+  });
 
   return (
     <Box
