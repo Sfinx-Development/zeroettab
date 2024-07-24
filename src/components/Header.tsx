@@ -9,9 +9,11 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import { useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useLanguageContext } from "../context/languageContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Header(): JSX.Element {
   const theme = useTheme();
@@ -19,6 +21,7 @@ export default function Header(): JSX.Element {
 
   const { language, setLanguage } = useLanguageContext();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const navigate = useNavigate();
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -208,17 +211,30 @@ export default function Header(): JSX.Element {
             <FormattedMessage id="offers" />
           </Typography>
         </Link>
-        <IconButton
-          onClick={handleClick}
-          sx={{
-            color: "white",
-            backgroundColor: "#662c9c",
-            "&:hover": { backgroundColor: "#422a75" },
-            borderRadius: "50%",
-          }}
-        >
-          <LanguageIcon />
-        </IconButton>
+        <Box sx={{ display: "flex", gap: 3 }}>
+          <IconButton
+            onClick={handleClick}
+            sx={{
+              color: "white",
+              backgroundColor: "#662c9c",
+              "&:hover": { backgroundColor: "#422a75" },
+              borderRadius: "50%",
+            }}
+          >
+            <LanguageIcon />
+          </IconButton>
+          <IconButton
+            onClick={() => navigate("/cart")}
+            sx={{
+              color: "white",
+              backgroundColor: "#662c9c",
+              "&:hover": { backgroundColor: "#422a75" },
+              borderRadius: "50%",
+            }}
+          >
+            <ShoppingBagIcon />
+          </IconButton>
+        </Box>
         <Menu
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}

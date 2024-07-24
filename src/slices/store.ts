@@ -1,14 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { ProductReduces } from "./productSlice";
 import localStorageMiddleware from "../middleware/localstorageMiddleware";
-
-
+import { CartReducer } from "./cartSlice";
+import { ProductReduces } from "./productSlice";
 
 const store = configureStore({
   reducer: {
-    productSlice: ProductReduces
-
+    productSlice: ProductReduces,
+    cartSlice: CartReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(localStorageMiddleware),

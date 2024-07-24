@@ -9,7 +9,9 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { useAppSelector } from "../slices/store";
+import { addItem, setCart } from "../slices/cartSlice";
+import { Product } from "../slices/productSlice";
+import { useAppDispatch, useAppSelector } from "../slices/store";
 
 const fadeIn = keyframes`
     from {
@@ -27,6 +29,37 @@ export default function ProductDetail() {
     (state) => state.productSlice.activeProduct
   );
   const [size, setSize] = useState("");
+  const cart = useAppSelector((state) => state.cartSlice.cart);
+  const dispatch = useAppDispatch();
+
+  const handleAddToCart = (product: Product) => {
+    if (cart) {
+      const newItem = {
+        id: new Date().toISOString(),
+        cart_id: cart.id,
+        product_id: product.id,
+        quantity: 1,
+        price: product.price,
+      };
+      dispatch(addItem(newItem));
+    } else {
+      const newCart = {
+        id: new Date().toISOString(),
+        created_date: new Date().toISOString(),
+        items: [
+          {
+            id: new Date().toISOString(),
+            cart_id: new Date().toISOString(),
+            product_id: product.id,
+            quantity: 1,
+            price: product.price,
+          },
+        ],
+      };
+      dispatch(setCart(newCart));
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -131,6 +164,8 @@ export default function ProductDetail() {
               color: "#3c52b2",
             },
           }}
+          disabled={activeProduct?.amount == 0}
+          onClick={() => handleAddToCart(activeProduct)}
         >
           <Typography
             sx={{
@@ -140,7 +175,7 @@ export default function ProductDetail() {
               color: "white",
             }}
           >
-            Lägg i varukorg
+            {activeProduct?.amount == 0 ? "Slut i lager" : "Lägg i varukorg"}
           </Typography>
         </Button>
       </Box>
