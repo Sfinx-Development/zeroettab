@@ -1,7 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { addProductToDB, getProductsFromDB } from "../api/product";
+import {
+  addProductToDB,
+  getProductFromDB,
+  getProductsFromDB,
+} from "../api/product";
 
 export interface Product {
   id: string;
@@ -10,7 +14,6 @@ export interface Product {
   price: number;
   in_store: boolean;
   amount: number;
-  subcategory_id: string;
   weight: number;
   length: number;
   width: number;
@@ -22,6 +25,9 @@ export interface Product {
   launch_date: string; // String för slice
 }
 
+const storedProducts = localStorage.getItem("products");
+const storedActiveProduct = localStorage.getItem("activeProduct");
+
 interface ProductState {
   products: Product[];
   activeProduct: Product | undefined;
@@ -29,8 +35,10 @@ interface ProductState {
 }
 
 export const initialState: ProductState = {
-  products: [],
-  activeProduct: undefined,
+  products: storedProducts ? JSON.parse(storedProducts) : [],
+  activeProduct: storedActiveProduct
+    ? JSON.parse(storedActiveProduct)
+    : undefined,
   error: null,
 };
 
@@ -51,7 +59,7 @@ export const addProductAsync = createAsyncThunk<
   }
 });
 
-export const getProductAsync = createAsyncThunk<
+export const getProductsAsync = createAsyncThunk<
   Product[],
   void,
   { rejectValue: string }
@@ -68,13 +76,30 @@ export const getProductAsync = createAsyncThunk<
   }
 });
 
+export const getProductAsync = createAsyncThunk<
+  Product,
+  string,
+  { rejectValue: string }
+>("products/getProduct", async (id, thunkAPI) => {
+  try {
+    const products = await getProductFromDB(id);
+    if (products) {
+      return products;
+    } else {
+      return thunkAPI.rejectWithValue("failed to fetch product");
+    }
+  } catch (error) {
+    throw new Error("Något gick fel vid hämtning av product.");
+  }
+});
+
 const ProductSlice = createSlice({
   name: "Product",
   initialState,
   reducers: {
-    setActiveProduct: (state, action) => {
-      state.activeProduct = action.payload;
-    },
+    // setActiveProduct: (state, action) => {
+    //   state.activeProduct = action.payload;
+    // },
   },
   extraReducers: (builder) => {
     builder
@@ -88,19 +113,29 @@ const ProductSlice = createSlice({
         state.error =
           "Något gick fel när produkten skapades. Försök igen senare.";
       })
-      .addCase(getProductAsync.fulfilled, (state, action) => {
+      .addCase(getProductsAsync.fulfilled, (state, action) => {
         if (action.payload) {
           state.products = action.payload;
           state.error = null;
         }
       })
-      .addCase(getProductAsync.rejected, (state) => {
+      .addCase(getProductsAsync.rejected, (state) => {
         state.error =
           "Något gick fel när produkter hämtades. Försök igen senare.";
+      })
+      .addCase(getProductAsync.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.activeProduct = action.payload;
+          state.error = null;
+        }
+      })
+      .addCase(getProductAsync.rejected, (state) => {
+        state.error =
+          "Något gick fel när produkten hämtades. Försök igen senare.";
       });
   },
 });
 
 export const ProductReduces = ProductSlice.reducer;
 export type { ProductState };
-export const { setActiveProduct } = ProductSlice.actions;
+// export const { setActiveProduct } = ProductSlice.actions;

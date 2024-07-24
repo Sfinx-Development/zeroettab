@@ -5,7 +5,7 @@ export interface Product {
   price: number;
   in_store: boolean;
   amount: number;
-  subcategory_id: string;
+  // subcategory_id: string;
   weight: number;
   length: number;
   width: number;
