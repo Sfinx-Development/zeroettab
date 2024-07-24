@@ -14,7 +14,6 @@ export interface Product {
   price: number;
   in_store: boolean;
   amount: number;
-  subcategory_id: string;
   weight: number;
   length: number;
   width: number;
@@ -26,6 +25,9 @@ export interface Product {
   launch_date: string; // String för slice
 }
 
+const storedProducts = localStorage.getItem("products");
+const storedActiveProduct = localStorage.getItem("activeProduct");
+
 interface ProductState {
   products: Product[];
   activeProduct: Product | undefined;
@@ -33,8 +35,10 @@ interface ProductState {
 }
 
 export const initialState: ProductState = {
-  products: [],
-  activeProduct: undefined,
+  products: storedProducts ? JSON.parse(storedProducts) : [],
+  activeProduct: storedActiveProduct
+    ? JSON.parse(storedActiveProduct)
+    : undefined,
   error: null,
 };
 
@@ -93,9 +97,9 @@ const ProductSlice = createSlice({
   name: "Product",
   initialState,
   reducers: {
-    setActiveProduct: (state, action) => {
-      state.activeProduct = action.payload;
-    },
+    // setActiveProduct: (state, action) => {
+    //   state.activeProduct = action.payload;
+    // },
   },
   extraReducers: (builder) => {
     builder
@@ -134,4 +138,4 @@ const ProductSlice = createSlice({
 
 export const ProductReduces = ProductSlice.reducer;
 export type { ProductState };
-export const { setActiveProduct } = ProductSlice.actions;
+// export const { setActiveProduct } = ProductSlice.actions;

@@ -31,7 +31,7 @@ export default function ProductDetail() {
     <Box
       sx={{
         display: "flex",
-        flexDirection: "row",
+        flexDirection: { xs: "column", md: "row" },
         padding: 0,
         margin: 0,
         width: "100%",
@@ -56,10 +56,10 @@ export default function ProductDetail() {
         >
           <img
             src={"https://i.imgur.com/sbMjvxp.png"}
-            alt="Tshirt"
+            alt={activeProduct?.name}
             style={{
-              height: "100%",
-              width: "auto",
+              maxHeight: "100%",
+              maxWidth: "100%",
               borderRadius: 8,
               //   boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
               transition: "transform 0.3s ease",
@@ -77,9 +77,24 @@ export default function ProductDetail() {
         }}
       >
         <Typography
-          sx={{ marginY: 4, fontSize: 32, fontWeight: 300, letterSpacing: 2 }}
+          sx={{
+            marginTop: { xs: 0, md: 4 },
+            fontSize: 32,
+            fontWeight: 300,
+            letterSpacing: 2,
+          }}
         >
           {activeProduct?.name}
+        </Typography>
+        <Typography
+          sx={{
+            marginBottom: 4,
+            fontSize: 32,
+            fontWeight: 300,
+            letterSpacing: 2,
+          }}
+        >
+          {activeProduct?.price} SEK
         </Typography>
         <Typography
           sx={{
@@ -87,6 +102,7 @@ export default function ProductDetail() {
             fontSize: 18,
             fontWeight: 300,
             letterSpacing: 2,
+            marginX: 2,
           }}
         >
           {activeProduct?.description}

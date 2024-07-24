@@ -36,8 +36,10 @@ export default function Products() {
 
   const handleNavigateToDetail = (product: Product) => {
     // dispatch(setActiveProduct(product));
-    dispatch(getProductAsync(product.id));
-    navigate("/product-detail");
+    console.log("ID ÄR : ", product.id);
+    dispatch(getProductAsync(product.id)).then(() => {
+      navigate("/product-detail");
+    });
   };
 
   useEffect(() => {
@@ -53,7 +55,7 @@ export default function Products() {
         margin: 0,
         width: "100%",
         alignItems: "center",
-        flexGrow: 1,
+        // flexGrow: 1,
         backgroundColor: "black",
         minHeight: "100vh",
         zIndex: 1,
@@ -67,7 +69,7 @@ export default function Products() {
           width: "100%",
           justifyContent: "space-around",
           alignItems: "center",
-          padding: 2,
+          // padding: 2,
           flexWrap: "wrap",
         }}
       >
@@ -85,7 +87,7 @@ export default function Products() {
             alt="Tshirt"
             style={{
               height: 300,
-              width: "auto",
+              maxWidth: "100%",
               borderRadius: 8,
               boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
               transition: "transform 0.3s ease",
@@ -108,8 +110,8 @@ export default function Products() {
             src={"https://i.imgur.com/H7vLh5J.png"}
             alt="Girl with tshirt"
             style={{
-              height: 300,
-              width: "auto",
+              maxHeight: 300,
+              maxWidth: "100%",
               borderRadius: 8,
               boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
               transition: "transform 0.3s ease",
@@ -128,7 +130,12 @@ export default function Products() {
         Våra Produkter
       </Typography>
 
-      <Grid container spacing={3} sx={{ padding: 3 }}>
+      <Grid
+        container
+        spacing={3}
+        sx={{ padding: 3 }}
+        style={{ backgroundColor: "white", height: "100%" }}
+      >
         {products.map((product) => (
           <Grid item xs={12} sm={6} md={4} key={product.id}>
             <Card
@@ -136,7 +143,7 @@ export default function Products() {
                 maxWidth: 345,
                 margin: "auto",
                 transition: "0.3s",
-                boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
+                boxShadow: "0 8px 40px -12px rgba(0,0,0,0)",
                 "&:hover": {
                   boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)",
                 },
@@ -145,7 +152,7 @@ export default function Products() {
               <CardMedia
                 component="img"
                 alt={product.name}
-                height="140"
+                height="320"
                 image={"https://i.imgur.com/sbMjvxp.png"}
                 title={product.name}
               />
