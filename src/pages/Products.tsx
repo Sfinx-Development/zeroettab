@@ -153,7 +153,8 @@ export default function Products() {
                 component="img"
                 alt={product.name}
                 height="320"
-                image={"https://i.imgur.com/sbMjvxp.png"}
+                width="250"
+                image={product.imageUrl}
                 title={product.name}
               />
               <CardContent>

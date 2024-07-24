@@ -23,6 +23,7 @@ export interface Product {
   material: string;
   rabatt: number;
   launch_date: string; // String för slice
+  imageUrl: string;
 }
 
 const storedProducts = localStorage.getItem("products");

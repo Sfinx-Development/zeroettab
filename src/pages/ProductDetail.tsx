@@ -88,11 +88,12 @@ export default function ProductDetail() {
           }}
         >
           <img
-            src={"https://i.imgur.com/sbMjvxp.png"}
+            src={activeProduct?.imageUrl}
             alt={activeProduct?.name}
             style={{
               maxHeight: "100%",
               maxWidth: "100%",
+              minWidth: "330px",
               borderRadius: 8,
               //   boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
               transition: "transform 0.3s ease",
