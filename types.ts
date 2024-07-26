@@ -41,23 +41,3 @@ export interface Image_To_Product {
   product_id: string;
   image_id: string;
 }
-
-export interface User {
-  id: string; // skapas vid betalning?
-}
-
-export interface Order {
-  id: string;
-  user_id: string;
-  total_amount: number;
-  created_date: string;
-  status: string; //om den är skickad , packad osv
-}
-
-export interface OrderItem {
-  id: string;
-  order_id: string;
-  product_id: string;
-  quantity: number;
-  price: number;
-}
