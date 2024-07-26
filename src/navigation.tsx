@@ -5,6 +5,7 @@ import {
   useLanguageContext,
 } from "./context/languageContext";
 import About from "./pages/About";
+import Cart from "./pages/Cart";
 import Contact from "./pages/Contact";
 import Error from "./pages/Error";
 import Index from "./pages/Index";
@@ -13,7 +14,6 @@ import ProductDetail from "./pages/ProductDetail";
 import Products from "./pages/Products";
 import Projects from "./pages/Projects";
 import RootLayout from "./pages/RootLayout";
-import Cart from "./slices/Cart";
 import messages_en from "./translations/en.json";
 import messages_sv from "./translations/sv.json";
 

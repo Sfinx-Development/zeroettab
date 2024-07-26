@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { addItem, setCart } from "../slices/cartSlice";
+import { addItem, setCart, updateItem } from "../slices/cartSlice";
 import { Product } from "../slices/productSlice";
 import { useAppDispatch, useAppSelector } from "../slices/store";
 
@@ -34,14 +34,24 @@ export default function ProductDetail() {
 
   const handleAddToCart = (product: Product) => {
     if (cart) {
-      const newItem = {
-        id: new Date().toISOString(),
-        cart_id: cart.id,
-        product_id: product.id,
-        quantity: 1,
-        price: product.price,
-      };
-      dispatch(addItem(newItem));
+      const itemExists = cart.items.find((i) => i.product_id == product.id);
+      if (itemExists != null) {
+        const itemQuantity = itemExists.quantity + 1;
+        const updatedItem = {
+          ...itemExists,
+          quantity: itemQuantity,
+        };
+        dispatch(updateItem(updatedItem));
+      } else {
+        const newItem = {
+          id: new Date().toISOString(),
+          cart_id: cart.id,
+          product_id: product.id,
+          quantity: 1,
+          price: product.price,
+        };
+        dispatch(addItem(newItem));
+      }
     } else {
       const newCart = {
         id: new Date().toISOString(),

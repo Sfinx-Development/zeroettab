@@ -211,7 +211,34 @@ export default function Header(): JSX.Element {
             <FormattedMessage id="offers" />
           </Typography>
         </Link>
-        <Box sx={{ display: "flex", gap: 3 }}>
+        <Link
+          sx={{
+            textDecoration: "none",
+            transition: "color 0.3s",
+            "&:hover": {
+              color: "#4c9173",
+            },
+          }}
+          href="/products"
+        >
+          <Typography
+            sx={{
+              color: "white",
+              letterSpacing: 2,
+              fontWeight: "300",
+              fontSize: isMobile ? 18 : 20,
+              lineHeight: 1.5,
+              transition: "color 0.3s",
+              "&:hover": {
+                color: "#896daf",
+              },
+              whiteSpace: "nowrap",
+            }}
+          >
+            <FormattedMessage id="products" />
+          </Typography>
+        </Link>
+        <Box sx={{ display: "flex", gap: 2 }}>
           <IconButton
             onClick={handleClick}
             sx={{
