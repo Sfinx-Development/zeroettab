@@ -9,7 +9,9 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { useAppSelector } from "../slices/store";
+import { addItem, setCart, updateItem } from "../slices/cartSlice";
+import { Product } from "../slices/productSlice";
+import { useAppDispatch, useAppSelector } from "../slices/store";
 
 const fadeIn = keyframes`
     from {
@@ -27,6 +29,47 @@ export default function ProductDetail() {
     (state) => state.productSlice.activeProduct
   );
   const [size, setSize] = useState("");
+  const cart = useAppSelector((state) => state.cartSlice.cart);
+  const dispatch = useAppDispatch();
+
+  const handleAddToCart = (product: Product) => {
+    if (cart) {
+      const itemExists = cart.items.find((i) => i.product_id == product.id);
+      if (itemExists != null) {
+        const itemQuantity = itemExists.quantity + 1;
+        const updatedItem = {
+          ...itemExists,
+          quantity: itemQuantity,
+        };
+        dispatch(updateItem(updatedItem));
+      } else {
+        const newItem = {
+          id: new Date().toISOString(),
+          cart_id: cart.id,
+          product_id: product.id,
+          quantity: 1,
+          price: product.price,
+        };
+        dispatch(addItem(newItem));
+      }
+    } else {
+      const newCart = {
+        id: new Date().toISOString(),
+        created_date: new Date().toISOString(),
+        items: [
+          {
+            id: new Date().toISOString(),
+            cart_id: new Date().toISOString(),
+            product_id: product.id,
+            quantity: 1,
+            price: product.price,
+          },
+        ],
+      };
+      dispatch(setCart(newCart));
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -55,11 +98,12 @@ export default function ProductDetail() {
           }}
         >
           <img
-            src={"https://i.imgur.com/sbMjvxp.png"}
+            src={activeProduct?.imageUrl}
             alt={activeProduct?.name}
             style={{
               maxHeight: "100%",
               maxWidth: "100%",
+              minWidth: "330px",
               borderRadius: 8,
               //   boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
               transition: "transform 0.3s ease",
@@ -131,6 +175,8 @@ export default function ProductDetail() {
               color: "#3c52b2",
             },
           }}
+          disabled={activeProduct?.amount == 0}
+          onClick={() => handleAddToCart(activeProduct)}
         >
           <Typography
             sx={{
@@ -140,7 +186,7 @@ export default function ProductDetail() {
               color: "white",
             }}
           >
-            Lägg i varukorg
+            {activeProduct?.amount == 0 ? "Slut i lager" : "Lägg i varukorg"}
           </Typography>
         </Button>
       </Box>

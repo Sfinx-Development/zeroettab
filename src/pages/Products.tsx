@@ -1,16 +1,14 @@
 import {
   Box,
   Button,
-  Card,
-  CardActions,
   CardContent,
-  CardMedia,
   Grid,
   keyframes,
   Typography,
 } from "@mui/material";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { addItem, setCart, updateItem } from "../slices/cartSlice";
 import {
   getProductAsync,
   getProductsAsync,
@@ -33,6 +31,7 @@ export default function Products() {
   const products = useAppSelector((state) => state.productSlice.products);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const cart = useAppSelector((state) => state.cartSlice.cart);
 
   const handleNavigateToDetail = (product: Product) => {
     // dispatch(setActiveProduct(product));
@@ -45,6 +44,45 @@ export default function Products() {
   useEffect(() => {
     dispatch(getProductsAsync());
   });
+
+  const handleAddToCart = (product: Product) => {
+    if (cart) {
+      const itemExists = cart.items.find((i) => i.product_id == product.id);
+      console.log("ITEM : ", itemExists);
+      if (itemExists != null) {
+        const itemQuantity = itemExists.quantity + 1;
+        const updatedItem = {
+          ...itemExists,
+          quantity: itemQuantity,
+        };
+        dispatch(updateItem(updatedItem));
+      } else {
+        const newItem = {
+          id: new Date().toISOString(),
+          cart_id: cart.id,
+          product_id: product.id,
+          quantity: 1,
+          price: product.price,
+        };
+        dispatch(addItem(newItem));
+      }
+    } else {
+      const newCart = {
+        id: new Date().toISOString(),
+        created_date: new Date().toISOString(),
+        items: [
+          {
+            id: new Date().toISOString(),
+            cart_id: new Date().toISOString(),
+            product_id: product.id,
+            quantity: 1,
+            price: product.price,
+          },
+        ],
+      };
+      dispatch(setCart(newCart));
+    }
+  };
 
   return (
     <Box
@@ -62,74 +100,6 @@ export default function Products() {
         animation: `${fadeIn} 1s ease-out`,
       }}
     >
-      <Box
-        sx={{
-          backgroundColor: "black",
-          display: "flex",
-          width: "100%",
-          justifyContent: "space-around",
-          alignItems: "center",
-          // padding: 2,
-          flexWrap: "wrap",
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
-            margin: 2,
-          }}
-        >
-          <img
-            src={"https://i.imgur.com/sbMjvxp.png"}
-            alt="Tshirt"
-            style={{
-              height: 300,
-              maxWidth: "100%",
-              borderRadius: 8,
-              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
-              transition: "transform 0.3s ease",
-            }}
-          />
-          <Typography sx={{ color: "white", padding: 2 }}>
-            Något här om att Zeroett även har kläder
-          </Typography>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
-            margin: 2,
-          }}
-        >
-          <img
-            src={"https://i.imgur.com/H7vLh5J.png"}
-            alt="Girl with tshirt"
-            style={{
-              maxHeight: 300,
-              maxWidth: "100%",
-              borderRadius: 8,
-              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
-              transition: "transform 0.3s ease",
-            }}
-          />
-          <Typography sx={{ color: "white", padding: 2 }}>
-            Upptäck vår senaste kollektion
-          </Typography>
-        </Box>
-      </Box>
-
-      <Typography
-        variant="h4"
-        sx={{ color: "white", margin: 4, textAlign: "center" }}
-      >
-        Våra Produkter
-      </Typography>
-
       <Grid
         container
         spacing={3}
@@ -138,7 +108,7 @@ export default function Products() {
       >
         {products.map((product) => (
           <Grid item xs={12} sm={6} md={4} key={product.id}>
-            <Card
+            <Box
               sx={{
                 maxWidth: 345,
                 margin: "auto",
@@ -149,12 +119,11 @@ export default function Products() {
                 },
               }}
             >
-              <CardMedia
-                component="img"
+              <img
+                onClick={() => handleNavigateToDetail(product)}
+                src={product.imageUrl}
                 alt={product.name}
-                height="320"
-                image={"https://i.imgur.com/sbMjvxp.png"}
-                title={product.name}
+                style={{ height: "250px" }}
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
@@ -164,19 +133,16 @@ export default function Products() {
                   {product.description}
                 </Typography>
               </CardContent>
-              <CardActions>
-                <Button
-                  size="small"
-                  color="primary"
-                  onClick={() => handleNavigateToDetail(product)}
-                >
-                  Köp nu
-                </Button>
-                <Typography variant="h6" color="textPrimary">
-                  {product.amount} SEK
-                </Typography>
-              </CardActions>
-            </Card>
+              <Button
+                sx={{ padding: 1, backgroundColor: "black", color: "white" }}
+                onClick={() => handleAddToCart(product)}
+              >
+                <Typography>Köp nu</Typography>
+              </Button>
+              <Typography variant="h6" color="textPrimary">
+                {product.amount} SEK
+              </Typography>
+            </Box>
           </Grid>
         ))}
       </Grid>

@@ -1,22 +1,3 @@
-export interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  in_store: boolean;
-  amount: number;
-  // subcategory_id: string;
-  weight: number;
-  length: number;
-  width: number;
-  height: number;
-  color: string;
-  size: number; // eller string
-  material: string;
-  rabatt: number;
-  launch_date: string; // String för slice
-}
-
 export interface Delivery {
   id: string;
   method: string; // tex Klarna
@@ -63,20 +44,6 @@ export interface Image_To_Product {
 
 export interface User {
   id: string; // skapas vid betalning?
-}
-
-export interface Cart {
-  id: string;
-  user_id: string;
-  created_date: string;
-}
-
-export interface CartItem {
-  id: string;
-  cart_id: string;
-  product_id: string;
-  quantity: number; // hur många av en produkt
-  price: number;
 }
 
 export interface Order {
