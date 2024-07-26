@@ -2,7 +2,10 @@ import { keyframes } from "@emotion/react";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { Box, Button, IconButton, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 import { updateItem } from "../slices/cartSlice";
+import { addOrderAsync, Order, OrderItem } from "../slices/orderSlice";
 import { Product } from "../slices/productSlice";
 import { useAppDispatch, useAppSelector } from "../slices/store";
 
@@ -21,6 +24,7 @@ export default function Cart() {
   const cart = useAppSelector((state) => state.cartSlice.cart);
   const products = useAppSelector((state) => state.productSlice.products);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   function getProduct(productId: string) {
     return products.find((p) => p.id === productId);
@@ -53,6 +57,37 @@ export default function Cart() {
         };
         dispatch(updateItem(updatedItem));
       }
+    }
+  };
+
+  const handleMakeOrder = () => {
+    const orderItems = cart?.items.map((item) => {
+      const orderItem: OrderItem = {
+        id: uuidv4(),
+        order_id: uuidv4(),
+        product_id: item.product_id,
+        quantity: item.quantity,
+        price: item.price,
+      };
+      return orderItem;
+    });
+    if (orderItems) {
+      const totalPrice =
+        orderItems?.reduce(
+          (acc, item) => acc + item.price * item.quantity,
+          0
+        ) || 0;
+      const newOrder: Order = {
+        id: uuidv4(),
+        user_id: "123",
+        items: orderItems,
+        total_amount: totalPrice,
+        created_date: new Date().toISOString(),
+        status: "Waiting for payment",
+      };
+
+      dispatch(addOrderAsync(newOrder));
+      navigate("/orderconfirmation");
     }
   };
 
@@ -179,6 +214,7 @@ export default function Cart() {
         <Box sx={{ width: "90%" }}>
           <Button
             fullWidth
+            onClick={() => handleMakeOrder()}
             sx={{ padding: 2, backgroundColor: "black", color: "white" }}
           >
             Betalning
