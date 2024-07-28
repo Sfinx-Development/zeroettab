@@ -27,13 +27,6 @@ export default function OrderConfirmation() {
     return products.find((p) => p.id === productId);
   }
 
-  const calculateTotalPrice = () => {
-    return order.items.reduce(
-      (acc, item) => acc + item.price * item.quantity,
-      0
-    );
-  };
-
   return (
     <Box
       sx={{
@@ -142,7 +135,7 @@ export default function OrderConfirmation() {
             {order.items.reduce((acc, item) => acc + item.quantity, 0)}
           </Typography>
           <Typography variant="body1">
-            Totalt pris: {calculateTotalPrice()} SEK
+            Totalt pris: {order.total_amount} SEK
           </Typography>
           <Box sx={{ display: "flex", justifyContent: "center", marginTop: 3 }}>
             <Button

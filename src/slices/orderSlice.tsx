@@ -42,6 +42,10 @@ export const addOrderAsync = createAsyncThunk<
   { rejectValue: string }
 >("orders/addOrder", async (order, thunkAPI) => {
   try {
+    const totalAmount =
+      order.items?.reduce((acc, item) => acc + item.price * item.quantity, 0) ||
+      0;
+    order.total_amount = totalAmount;
     const createdOrder = await addOrderToDB(order);
     if (createdOrder) {
       return createdOrder;

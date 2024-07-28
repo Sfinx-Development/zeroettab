@@ -94,13 +94,19 @@ export default function Products() {
         width: "100%",
         alignItems: "center",
         // flexGrow: 1,
-        backgroundColor: "black",
+        backgroundColor: "white",
         minHeight: "100vh",
         zIndex: 1,
         animation: `${fadeIn} 1s ease-out`,
       }}
     >
-      <Grid
+      <Typography variant="h3" sx={{ mb: 3, color: "#333" }}>
+        Produkter kommer snart!
+      </Typography>
+      <Typography variant="h6" sx={{ color: "#555" }}>
+        Vi kommer få upp produkter på hemsidan inom kort. Håll ut!
+      </Typography>
+      {/* <Grid
         container
         spacing={3}
         sx={{ padding: 3 }}
@@ -145,7 +151,7 @@ export default function Products() {
             </Box>
           </Grid>
         ))}
-      </Grid>
+      </Grid> */}
     </Box>
   );
 }

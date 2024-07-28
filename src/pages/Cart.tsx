@@ -8,6 +8,7 @@ import { updateItem } from "../slices/cartSlice";
 import { addOrderAsync, Order, OrderItem } from "../slices/orderSlice";
 import { Product } from "../slices/productSlice";
 import { useAppDispatch, useAppSelector } from "../slices/store";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const fadeIn = keyframes`
     from {
@@ -91,6 +92,13 @@ export default function Cart() {
     }
   };
 
+  const calculateTotalPrice = () => {
+    return cart?.items.reduce(
+      (acc, item) => acc + item.price * item.quantity,
+      0
+    );
+  };
+
   return (
     <Box
       sx={{
@@ -105,6 +113,43 @@ export default function Cart() {
         animation: `${fadeIn} 1s ease-out`,
       }}
     >
+      {!cart ||
+        (cart.items.length === 0 && (
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center",
+              padding: 4,
+              width: "100%",
+            }}
+          >
+            <ShoppingCartIcon sx={{ fontSize: 80, color: "#aaa", mb: 2 }} />
+            <Typography
+              sx={{ letterSpacing: 2, fontSize: 26, mb: 2, color: "#333" }}
+            >
+              Varukorgen är tom
+            </Typography>
+            <Typography sx={{ fontSize: 16, color: "#777", mb: 4 }}>
+              Det ser ut som att du inte har lagt till några produkter i din
+              varukorg än.
+            </Typography>
+            <Button
+              variant="contained"
+              onClick={() => navigate("/products")}
+              sx={{
+                padding: "10px 20px",
+                fontSize: 16,
+                textTransform: "none",
+                borderRadius: 2,
+                backgroundColor: "black",
+              }}
+            >
+              <Typography>Fortsätt handla</Typography>
+            </Button>
+          </Box>
+        ))}
       <Box
         sx={{
           display: "flex",
@@ -187,40 +232,45 @@ export default function Cart() {
           );
         })}
       </Box>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          paddingY: 2,
-          // paddingX: { xs: 2, md: 4 },
-          width: { xs: "100%", md: "30%" },
-          alignItems: { xs: "center", md: "flex-start" },
-        }}
-      >
+      {cart && cart?.items.length > 0 && (
         <Box
           sx={{
-            marginBottom: 2,
-            width: "90%",
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
+            paddingY: 2,
+            // paddingX: { xs: 2, md: 4 },
+            width: { xs: "100%", md: "30%" },
+            alignItems: { xs: "center", md: "flex-start" },
           }}
         >
-          <Typography variant="h6">Ordersummering</Typography>
-          <Typography>Summa: 100 SEK</Typography>
-          <Typography>Frakt: 49 SEK</Typography>
-          <Typography sx={{ fontWeight: 500 }}>Totalt: 149 SEK</Typography>
-        </Box>
-        <Box sx={{ width: "90%" }}>
-          <Button
-            fullWidth
-            onClick={() => handleMakeOrder()}
-            sx={{ padding: 2, backgroundColor: "black", color: "white" }}
+          <Box
+            sx={{
+              marginBottom: 2,
+              width: "90%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
           >
-            Betalning
-          </Button>
+            <Typography variant="h6">I varukorgen</Typography>
+            <Typography>Summa: {calculateTotalPrice()} SEK</Typography>
+            <Typography>Frakt: 0 SEK</Typography>
+            <Typography sx={{ fontWeight: 500 }}>
+              Totalt: {calculateTotalPrice()}
+            </Typography>
+          </Box>
+          <Box sx={{ width: "90%" }}>
+            <Button
+              fullWidth
+              disabled={!cart || cart?.items.length == 0}
+              onClick={() => handleMakeOrder()}
+              sx={{ padding: 2, backgroundColor: "black", color: "white" }}
+            >
+              <Typography sx={{ color: "white" }}>Betalning</Typography>
+            </Button>
+          </Box>
         </Box>
-      </Box>
+      )}
     </Box>
   );
 }
