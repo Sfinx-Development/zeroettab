@@ -9,9 +9,11 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import { useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useLanguageContext } from "../context/languageContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Header(): JSX.Element {
   const theme = useTheme();
@@ -19,6 +21,7 @@ export default function Header(): JSX.Element {
 
   const { language, setLanguage } = useLanguageContext();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const navigate = useNavigate();
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -41,15 +44,14 @@ export default function Header(): JSX.Element {
         paddingY: 1,
         position: "sticky",
         top: 0,
-     
-
-        backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 50%, rgba(0, 0, 0, 0))", // Gradient som börjar med mörkare svart och fade-out vid 50% ned
+        backgroundImage:
+          "linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 50%, rgba(0, 0, 0, 0))", // Gradient som börjar med mörkare svart och fade-out vid 50% ned
         transition: "background-image 0.3s ease", // Övergång för gradienten
-        boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",  // Ljusskugga för övergångseffekt
+        // boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", // Ljusskugga för övergångseffekt
         // backgroundImage: "url('https://i.imgur.com/kFmeAx8.png')",
         //  backgroundColor: "black",
         // transition: "background-color 0.10s ease",
-        // boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.10)", 
+        // boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.10)",
         // backgroundColor: "red",
       }}
       component={"header"}
@@ -148,7 +150,7 @@ export default function Header(): JSX.Element {
             <FormattedMessage id="contact" />
           </Typography>
         </Link>
-        <Link  href="/">
+        <Link href="/">
           <img
             src="https://i.imgur.com/IMSL19B.png"
             height="100"
@@ -209,17 +211,57 @@ export default function Header(): JSX.Element {
             <FormattedMessage id="offers" />
           </Typography>
         </Link>
-        <IconButton
-          onClick={handleClick}
+        <Link
           sx={{
-            color: "white",
-            backgroundColor: "#662c9c",
-            "&:hover": { backgroundColor: "#422a75" },
-            borderRadius: "50%",
+            textDecoration: "none",
+            transition: "color 0.3s",
+            "&:hover": {
+              color: "#4c9173",
+            },
           }}
+          href="/products"
         >
-          <LanguageIcon />
-        </IconButton>
+          <Typography
+            sx={{
+              color: "white",
+              letterSpacing: 2,
+              fontWeight: "300",
+              fontSize: isMobile ? 18 : 20,
+              lineHeight: 1.5,
+              transition: "color 0.3s",
+              "&:hover": {
+                color: "#896daf",
+              },
+              whiteSpace: "nowrap",
+            }}
+          >
+            <FormattedMessage id="products" />
+          </Typography>
+        </Link>
+        <Box sx={{ display: "flex", gap: 2 }}>
+          <IconButton
+            onClick={handleClick}
+            sx={{
+              color: "white",
+              backgroundColor: "#662c9c",
+              "&:hover": { backgroundColor: "#422a75" },
+              borderRadius: "50%",
+            }}
+          >
+            <LanguageIcon />
+          </IconButton>
+          <IconButton
+            onClick={() => navigate("/cart")}
+            sx={{
+              color: "white",
+              backgroundColor: "#662c9c",
+              "&:hover": { backgroundColor: "#422a75" },
+              borderRadius: "50%",
+            }}
+          >
+            <ShoppingBagIcon />
+          </IconButton>
+        </Box>
         <Menu
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
