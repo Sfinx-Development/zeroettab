@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  CardContent,
-  Grid,
-  keyframes,
-  Typography,
-} from "@mui/material";
+import { Box, keyframes, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { addItem, setCart, updateItem } from "../slices/cartSlice";
@@ -28,11 +21,13 @@ const fadeIn = keyframes`
   `;
 
 export default function Products() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const products = useAppSelector((state) => state.productSlice.products);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const cart = useAppSelector((state) => state.cartSlice.cart);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleNavigateToDetail = (product: Product) => {
     // dispatch(setActiveProduct(product));
     console.log("ID ÄR : ", product.id);
@@ -45,6 +40,7 @@ export default function Products() {
     dispatch(getProductsAsync());
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleAddToCart = (product: Product) => {
     if (cart) {
       const itemExists = cart.items.find((i) => i.product_id == product.id);

@@ -1,6 +1,7 @@
 import { keyframes } from "@emotion/react";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
@@ -8,7 +9,6 @@ import { updateItem } from "../slices/cartSlice";
 import { addOrderAsync, Order, OrderItem } from "../slices/orderSlice";
 import { Product } from "../slices/productSlice";
 import { useAppDispatch, useAppSelector } from "../slices/store";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const fadeIn = keyframes`
     from {
@@ -209,22 +209,25 @@ export default function Cart() {
                   maxWidth: { sm: "150px" },
                 }}
               >
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginBottom: 1,
-                  }}
-                >
-                  <IconButton onClick={() => handleAddToCart(product)}>
-                    <AddIcon />
-                  </IconButton>
-                  <IconButton onClick={() => handleRemoveFromCart(product)}>
-                    <RemoveIcon />
-                  </IconButton>
-                </Box>
+                {product && (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginBottom: 1,
+                    }}
+                  >
+                    {" "}
+                    <IconButton onClick={() => handleAddToCart(product)}>
+                      <AddIcon />
+                    </IconButton>
+                    <IconButton onClick={() => handleRemoveFromCart(product)}>
+                      <RemoveIcon />
+                    </IconButton>
+                  </Box>
+                )}
                 <Typography>{item.quantity} ST</Typography>
                 <Typography>Pris: {product?.price} SEK</Typography>
               </Box>
