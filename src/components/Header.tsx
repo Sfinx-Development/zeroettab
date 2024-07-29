@@ -211,7 +211,7 @@ export default function Header(): JSX.Element {
             <FormattedMessage id="offers" />
           </Typography>
         </Link>
-        <Link
+        {/* <Link
           sx={{
             textDecoration: "none",
             transition: "color 0.3s",
@@ -237,31 +237,62 @@ export default function Header(): JSX.Element {
           >
             <FormattedMessage id="products" />
           </Typography>
-        </Link>
-        <Box sx={{ display: "flex", gap: 2 }}>
-          <IconButton
-            onClick={handleClick}
+        </Link> */}
+        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2, marginTop: "-55px" }}>
+          <Box sx={{ display: "flex", gap: 2 }}>
+            <IconButton
+              onClick={handleClick}
+              sx={{
+                color: "white",
+                backgroundColor: "#662c9c",
+                "&:hover": { backgroundColor: "#422a75" },
+                borderRadius: "50%",
+              }}
+            >
+              <LanguageIcon />
+            </IconButton>
+            <IconButton
+              onClick={() => navigate("/cart")}
+              sx={{
+                color: "white",
+                backgroundColor: "#662c9c",
+                "&:hover": { backgroundColor: "#422a75" },
+                borderRadius: "50%",
+              }}
+            >
+              <ShoppingBagIcon />
+            </IconButton>
+          </Box>
+          <Link
             sx={{
-              color: "white",
-              backgroundColor: "#662c9c",
-              "&:hover": { backgroundColor: "#422a75" },
-              borderRadius: "50%",
+              textDecoration: "none",
+              transition: "color 0.3s",
+              "&:hover": {
+                color: "#4c9173",
+              },
             }}
+            href="/products"
           >
-            <LanguageIcon />
-          </IconButton>
-          <IconButton
-            onClick={() => navigate("/cart")}
-            sx={{
-              color: "white",
-              backgroundColor: "#662c9c",
-              "&:hover": { backgroundColor: "#422a75" },
-              borderRadius: "50%",
-            }}
-          >
-            <ShoppingBagIcon />
-          </IconButton>
+            <Typography
+              sx={{
+                color: "white",
+                letterSpacing: 2,
+                fontWeight: "300",
+                fontSize: isMobile ? 18 : 20,
+                lineHeight: 1.5,
+                transition: "color 0.3s",
+                "&:hover": {
+                  color: "#896daf",
+                },
+                whiteSpace: "nowrap",
+              }}
+            >
+              <FormattedMessage id="products" />
+            </Typography>
+          </Link>
         </Box>
+      </Box>
+
         <Menu
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
@@ -284,6 +315,6 @@ export default function Header(): JSX.Element {
           </MenuItem>
         </Menu>
       </Box>
-    </Box>
+   
   );
 }
