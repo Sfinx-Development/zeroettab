@@ -103,14 +103,14 @@ export default function Cart() {
     <Box
       sx={{
         display: "flex",
-        flexDirection: { xs: "column", md: "row" },
+        flexDirection: { xs: "column", md: "column" },
         padding: 0,
         margin: 0,
         width: "100%",
-        backgroundColor: "white",
         minHeight: "100vh",
         zIndex: 1,
         animation: `${fadeIn} 1s ease-out`,
+        backgroundColor: "white",
       }}
     >
       {!cart ||

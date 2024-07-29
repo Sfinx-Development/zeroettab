@@ -100,12 +100,25 @@ export default function Products() {
         animation: `${fadeIn} 1s ease-out`,
       }}
     >
-      <Typography variant="h3" sx={{ mb: 3, color: "#333" }}>
-        Produkter kommer snart!
-      </Typography>
-      <Typography variant="h6" sx={{ color: "#555" }}>
-        Vi kommer få upp produkter på hemsidan inom kort. Håll ut!
-      </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          textAlign: "center",
+          padding: 4,
+          width: "100%",
+        }}
+      >
+        <Typography
+          sx={{ letterSpacing: 2, fontSize: 26, mb: 2, color: "#333" }}
+        >
+          Produkter kommer snart!
+        </Typography>
+        <Typography sx={{ fontSize: 16, color: "#777", mb: 4 }}>
+          Vi jobbar med att få upp produkter här inom en snar framtid. Håll ut!
+        </Typography>
+      </Box>
       {/* <Grid
         container
         spacing={3}
