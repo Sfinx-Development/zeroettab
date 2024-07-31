@@ -20,6 +20,7 @@ import { useState } from "react";
 // import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { useNavigate } from "react-router-dom";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import { useScreenSize } from "../contexts/screenSizeContext";
 import LetsTalkPhone from "./LetsTalkPhone";
 
@@ -113,7 +114,7 @@ export default function CustomHeader2(): JSX.Element {
               // marginX: 1,
             }}
           >
-            <StorefrontIcon sx={{ fontSize: 30 }} />
+            <ShoppingBagIcon sx={{ fontSize: 30 }} />
           </IconButton>
         </Box>
         <IconButton
