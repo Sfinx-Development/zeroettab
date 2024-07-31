@@ -238,7 +238,15 @@ export default function Header(): JSX.Element {
             <FormattedMessage id="products" />
           </Typography>
         </Link> */}
-        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2, marginTop: "-55px" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 2,
+            marginTop: "-55px",
+          }}
+        >
           <Box sx={{ display: "flex", gap: 2 }}>
             <IconButton
               onClick={handleClick}
@@ -293,28 +301,23 @@ export default function Header(): JSX.Element {
         </Box>
       </Box>
 
-        <Menu
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={() => handleClose(language)}
-          sx={{ mt: 1 }}
-        >
-          <MenuItem onClick={() => handleClose("sv")}>
-            <Typography
-              sx={{ color: language === "sv" ? "#662c9c" : "inherit" }}
-            >
-              Svenska
-            </Typography>
-          </MenuItem>
-          <MenuItem onClick={() => handleClose("en")}>
-            <Typography
-              sx={{ color: language === "en" ? "#662c9c" : "inherit" }}
-            >
-              English
-            </Typography>
-          </MenuItem>
-        </Menu>
-      </Box>
-   
+      <Menu
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={() => handleClose(language)}
+        sx={{ mt: 1 }}
+      >
+        <MenuItem onClick={() => handleClose("sv")}>
+          <Typography sx={{ color: language === "sv" ? "#662c9c" : "inherit" }}>
+            Svenska
+          </Typography>
+        </MenuItem>
+        <MenuItem onClick={() => handleClose("en")}>
+          <Typography sx={{ color: language === "en" ? "#662c9c" : "inherit" }}>
+            English
+          </Typography>
+        </MenuItem>
+      </Menu>
+    </Box>
   );
 }
