@@ -114,7 +114,7 @@ export default function Cart() {
       }}
     >
       {!cart ||
-        cart == undefined ||
+        cart == null ||
         (cart.items.length === 0 && (
           <Box
             sx={{
