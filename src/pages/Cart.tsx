@@ -121,7 +121,7 @@ export default function Cart() {
               flexDirection: "column",
               alignItems: "center",
               textAlign: "center",
-              padding: 4,
+              paddingY: 2,
               width: "100%",
             }}
           >

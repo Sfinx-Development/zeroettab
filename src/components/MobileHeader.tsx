@@ -3,6 +3,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import MenuIcon from "@mui/icons-material/Menu";
+import StorefrontIcon from "@mui/icons-material/Storefront";
 import WorkIcon from "@mui/icons-material/Work";
 import {
   Box,
@@ -18,6 +19,7 @@ import {
 import { useState } from "react";
 // import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
+import { useNavigate } from "react-router-dom";
 import { useScreenSize } from "../contexts/screenSizeContext";
 import LetsTalkPhone from "./LetsTalkPhone";
 
@@ -37,10 +39,16 @@ export default function CustomHeader2(): JSX.Element {
   const links = [
     { label: "home", href: "/", icon: <HomeIcon /> },
     { label: "about", href: "/about", icon: <InfoIcon /> },
-    { label: "contact", href: "/contact", icon: <ContactMailIcon sx={{ fontSize: 20 }} /> },
+    {
+      label: "contact",
+      href: "/contact",
+      icon: <ContactMailIcon sx={{ fontSize: 20 }} />,
+    },
     { label: "projects", href: "/projects", icon: <WorkIcon /> },
     { label: "offers", href: "/offers", icon: <LocalOfferIcon /> },
+    { label: "products", href: "/products", icon: <StorefrontIcon /> },
   ];
+  const navigate = useNavigate();
 
   return (
     <Box
@@ -53,13 +61,14 @@ export default function CustomHeader2(): JSX.Element {
         flexDirection: "column",
         zindex: 1000,
         position: "relative",
+        paddingTop: 2,
+        // backgroundColor: "red",
         // position: "sticky",
         // top: 0,
         // backgroundColor: "black"
       }}
       component={"header"}
     >
-     
       <Box
         sx={{
           paddingY: 0,
@@ -70,38 +79,43 @@ export default function CustomHeader2(): JSX.Element {
           justifyContent: isMobile ? "flex-start" : "flex-start",
           width: isMobile ? "100%" : "auto",
           marginLeft: isMobile ? 0 : 10,
-         
         }}
       >
-         <Box
-        sx={{
-          paddingY: 0,
-          paddingX: { xs: 0, md: 3 },
-          marginX: { xs: 0, md: 1 },
-          display: "flex",
-          alignItems: "center",
-          justifyContent: isMobile ? "center" : "flex-start",
-          width: isMobile ? "100%" : "auto",
-          marginLeft: isMobile ? 0 : 10,
-         
-        }}
-      >
-        <Link href="/" sx={{ textDecoration: "none" }}>
-          <img
-            src="https://i.imgur.com/5Fk6tu4.png"
-            alt="Zeroett"
-            width={130}
-          />
-        </Link>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-           
-        }}
-      ></Box>
-        <LetsTalkPhone />
+        <Box
+          sx={{
+            paddingY: 0,
+            paddingX: { xs: 0, md: 3 },
+            marginX: { xs: 0, md: 1 },
+            display: "flex",
+            alignItems: "center",
+            justifyContent: isMobile ? "center" : "flex-start",
+            width: isMobile ? "100%" : "auto",
+            marginLeft: isMobile ? 0 : 10,
+          }}
+        >
+          <Link href="/" sx={{ textDecoration: "none" }}>
+            <img
+              src="https://i.imgur.com/5Fk6tu4.png"
+              alt="Zeroett"
+              width={150}
+            />
+          </Link>
+        </Box>
+
+        <Box sx={{ display: "flex" }}>
+          <IconButton
+            onClick={() => navigate("/cart")}
+            sx={{
+              color: "white",
+              backgroundColor: "#662c9c",
+              "&:hover": { backgroundColor: "#422a75" },
+              borderRadius: "50%",
+              // marginX: 1,
+            }}
+          >
+            <StorefrontIcon sx={{ fontSize: 30 }} />
+          </IconButton>
+        </Box>
         <IconButton
           onClick={handleToggleMenu}
           sx={{
@@ -110,7 +124,6 @@ export default function CustomHeader2(): JSX.Element {
             "&:hover": { backgroundColor: "#422a75" },
             borderRadius: "50%",
             marginX: 1,
-            
           }}
         >
           <MenuIcon sx={{ fontSize: 30 }} />
@@ -166,7 +179,7 @@ export default function CustomHeader2(): JSX.Element {
                       display: "flex",
                       paddingTop: 3,
                       alignItems: "center",
-                      
+
                       // paddingBottom: 6,
                     }}
                     onClick={handleCloseMenu}
@@ -177,12 +190,11 @@ export default function CustomHeader2(): JSX.Element {
                         backgroundColor: "#662c9c",
                         "&:hover": { backgroundColor: "#422a75" },
                         borderRadius: "50%",
-                        
                       }}
                     >
                       {link.icon}
                     </IconButton>
-                    
+
                     <Typography
                       sx={{
                         color: "white",
@@ -201,6 +213,7 @@ export default function CustomHeader2(): JSX.Element {
           </List>
         </Drawer>
       </Box>
+      <LetsTalkPhone />
     </Box>
   );
 }

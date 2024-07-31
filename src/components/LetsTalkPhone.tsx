@@ -8,14 +8,13 @@ export default function LetsTalkPhone() {
     <Box
       sx={{
         width: "100%",
-        paddingY: { xs: 4, md: 2 },
+        paddingY: { xs: 2, md: 2 },
         textAlign: "center",
         // background: "linear-gradient(135deg,#2C1541 0%, #291040 100%)",
         // backgroundColor: "white",
         // en textändring
         alignItems: "center",
         boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.1)",
-      
       }}
     >
       <Box
@@ -23,8 +22,7 @@ export default function LetsTalkPhone() {
           display: "flex",
           alignItems: "center",
           gap: 1,
-          marginLeft: 6,
-          
+          justifyContent: "center",
         }}
       >
         <Link

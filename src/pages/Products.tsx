@@ -1,13 +1,8 @@
 import { Box, keyframes, Typography } from "@mui/material";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { addItem, setCart, updateItem } from "../slices/cartSlice";
-import {
-  getProductAsync,
-  getProductsAsync,
-  Product,
-} from "../slices/productSlice";
-import { useAppDispatch, useAppSelector } from "../slices/store";
+// import { addItem, setCart, updateItem } from "../slices/cartSlice";
+import { getProductsAsync } from "../slices/productSlice";
+import { useAppDispatch } from "../slices/store";
 
 const fadeIn = keyframes`
     from {
@@ -22,63 +17,63 @@ const fadeIn = keyframes`
 
 export default function Products() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const products = useAppSelector((state) => state.productSlice.products);
+  // const products = useAppSelector((state) => state.productSlice.products);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const cart = useAppSelector((state) => state.cartSlice.cart);
+  // const navigate = useNavigate();
+  // const cart = useAppSelector((state) => state.cartSlice.cart);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleNavigateToDetail = (product: Product) => {
-    // dispatch(setActiveProduct(product));
-    console.log("ID ÄR : ", product.id);
-    dispatch(getProductAsync(product.id)).then(() => {
-      navigate("/product-detail");
-    });
-  };
+  // const handleNavigateToDetail = (product: Product) => {
+  //   // dispatch(setActiveProduct(product));
+  //   console.log("ID ÄR : ", product.id);
+  //   dispatch(getProductAsync(product.id)).then(() => {
+  //     navigate("/product-detail");
+  //   });
+  // };
 
   useEffect(() => {
     dispatch(getProductsAsync());
   });
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleAddToCart = (product: Product) => {
-    if (cart) {
-      const itemExists = cart.items.find((i) => i.product_id == product.id);
-      console.log("ITEM : ", itemExists);
-      if (itemExists != null) {
-        const itemQuantity = itemExists.quantity + 1;
-        const updatedItem = {
-          ...itemExists,
-          quantity: itemQuantity,
-        };
-        dispatch(updateItem(updatedItem));
-      } else {
-        const newItem = {
-          id: new Date().toISOString(),
-          cart_id: cart.id,
-          product_id: product.id,
-          quantity: 1,
-          price: product.price,
-        };
-        dispatch(addItem(newItem));
-      }
-    } else {
-      const newCart = {
-        id: new Date().toISOString(),
-        created_date: new Date().toISOString(),
-        items: [
-          {
-            id: new Date().toISOString(),
-            cart_id: new Date().toISOString(),
-            product_id: product.id,
-            quantity: 1,
-            price: product.price,
-          },
-        ],
-      };
-      dispatch(setCart(newCart));
-    }
-  };
+  // const handleAddToCart = (product: Product) => {
+  //   if (cart) {
+  //     const itemExists = cart.items.find((i) => i.product_id == product.id);
+  //     console.log("ITEM : ", itemExists);
+  //     if (itemExists != null) {
+  //       const itemQuantity = itemExists.quantity + 1;
+  //       const updatedItem = {
+  //         ...itemExists,
+  //         quantity: itemQuantity,
+  //       };
+  //       dispatch(updateItem(updatedItem));
+  //     } else {
+  //       const newItem = {
+  //         id: new Date().toISOString(),
+  //         cart_id: cart.id,
+  //         product_id: product.id,
+  //         quantity: 1,
+  //         price: product.price,
+  //       };
+  //       dispatch(addItem(newItem));
+  //     }
+  //   } else {
+  //     const newCart = {
+  //       id: new Date().toISOString(),
+  //       created_date: new Date().toISOString(),
+  //       items: [
+  //         {
+  //           id: new Date().toISOString(),
+  //           cart_id: new Date().toISOString(),
+  //           product_id: product.id,
+  //           quantity: 1,
+  //           price: product.price,
+  //         },
+  //       ],
+  //     };
+  //     dispatch(setCart(newCart));
+  //   }
+  // };
 
   return (
     <Box
@@ -102,7 +97,7 @@ export default function Products() {
           flexDirection: "column",
           alignItems: "center",
           textAlign: "center",
-          padding: 4,
+          paddingY: 4,
           width: "100%",
         }}
       >

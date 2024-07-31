@@ -10,8 +10,6 @@ import LetsTalk from "../components/LetsTalk";
 import TextInfo from "../components/TextInfo";
 import ZeroettPresentation from "../components/ZeroettPresentation";
 import { useScreenSize } from "../contexts/screenSizeContext";
-import { Product, addProductAsync } from "../slices/productSlice";
-import { useAppDispatch } from "../slices/store";
 
 const fadeIn = keyframes`
   from {
@@ -31,29 +29,6 @@ export default function Index() {
   const [isVisible, setIsVisible] = useState(false);
   const { isMobile } = useScreenSize();
 
-  const dispatch = useAppDispatch();
-
-  const handleAddProduct = () => {
-    const product: Product = {
-      id: "123",
-      name: "Test",
-      description: "hej produkt",
-      price: 53,
-      in_store: true,
-      amount: 5,
-      subcategory_id: "1",
-      weight: 200,
-      length: 50,
-      width: 30,
-      height: 20,
-      color: "black",
-      size: 36,
-      material: "cotton",
-      rabatt: 0,
-      launch_date: new Date().toISOString(),
-    };
-    dispatch(addProductAsync(product));
-  };
   useEffect(() => {
     const handleScroll = () => {
       if (iconsRef.current) {
@@ -147,8 +122,6 @@ export default function Index() {
               href={"/offers"}
             />
           </Box>
-
-          <Button onClick={() => handleAddProduct()}>LÄGG TILL PRODUKT </Button>
         </Box>
       </Box>
       <Grid

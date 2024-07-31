@@ -166,29 +166,31 @@ export default function ProductDetail() {
             <MenuItem value={"L"}>L</MenuItem>
           </Select>
         </FormControl>
-        <Button
-          sx={{
-            backgroundColor: "black",
-            marginY: 4,
-            "&:hover": {
-              backgroundColor: "rgba(0,0,0,0.5)",
-              color: "#3c52b2",
-            },
-          }}
-          disabled={activeProduct?.amount == 0}
-          onClick={() => handleAddToCart(activeProduct)}
-        >
-          <Typography
+        {activeProduct && (
+          <Button
             sx={{
-              fontSize: 18,
-              fontWeight: 300,
-              letterSpacing: 2,
-              color: "white",
+              backgroundColor: "black",
+              marginY: 4,
+              "&:hover": {
+                backgroundColor: "rgba(0,0,0,0.5)",
+                color: "#3c52b2",
+              },
             }}
+            disabled={activeProduct?.amount == 0}
+            onClick={() => handleAddToCart(activeProduct)}
           >
-            {activeProduct?.amount == 0 ? "Slut i lager" : "Lägg i varukorg"}
-          </Typography>
-        </Button>
+            <Typography
+              sx={{
+                fontSize: 18,
+                fontWeight: 300,
+                letterSpacing: 2,
+                color: "white",
+              }}
+            >
+              {activeProduct?.amount == 0 ? "Slut i lager" : "Lägg i varukorg"}
+            </Typography>
+          </Button>
+        )}
       </Box>
     </Box>
   );
