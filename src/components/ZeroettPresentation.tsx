@@ -3,6 +3,7 @@ import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { FormattedMessage } from "react-intl";
 // import LetsTalk from "./LetsTalk";
+import LetsTalkPhone from "./LetsTalkPhone";
 import { useScreenSize } from "../contexts/screenSizeContext";
 
 export default function ZeroettPresentation() {
@@ -112,10 +113,12 @@ export default function ZeroettPresentation() {
             
             }}
           >
+             < LetsTalkPhone />
             <FormattedMessage id="zeroett-offers" />
           </Typography>
         </Box>
         </Box>
+       
       {/* </motion.div> */}
     </Box>
   );
