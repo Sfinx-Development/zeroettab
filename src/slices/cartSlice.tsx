@@ -10,6 +10,7 @@ export interface CartItem {
   id: string;
   cart_id: string;
   product_id: string;
+  size:string;
   quantity: number;
   price: number;
 }

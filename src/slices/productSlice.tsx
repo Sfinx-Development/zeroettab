@@ -7,22 +7,26 @@ import {
   getProductsFromDB,
 } from "../api/product";
 
+export interface Size {
+  label: string;
+  amount: number;
+}
+
 export interface Product {
   id: string;
   name: string;
   description: string;
   price: number;
   in_store: boolean;
-  amount: number;
   weight: number;
   length: number;
   width: number;
   height: number;
   color: string;
-  size: number; // eller string
+  sizes: Size[];
   material: string;
   rabatt: number;
-  launch_date: string; // String för slice
+  launch_date: string;
   imageUrl: string;
 }
 
