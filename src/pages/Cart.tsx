@@ -48,8 +48,11 @@ export default function Cart() {
       );
 
       setGroupedItems(Object.values(grouped));
+    } else {
+      console.log("hEJ");
+      console.log("CAAAART:", cart);
     }
-  }, [cart]);
+  }, []);
 
   function getProduct(productId: string): Product | undefined {
     return products.find((p) => p.id === productId);
@@ -146,132 +149,132 @@ export default function Cart() {
         backgroundColor: "white",
       }}
     >
-      {!cart ||
-        cart == null ||
-        (cart.items.length === 0 && (
-          <Box
+      {cart && cart.items.length == 0 ? (
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            textAlign: "center",
+            paddingY: 2,
+            width: "100%",
+          }}
+        >
+          <ShoppingCartIcon sx={{ fontSize: 80, color: "#aaa", mb: 2 }} />
+          <Typography
+            sx={{ letterSpacing: 2, fontSize: 26, mb: 2, color: "#333" }}
+          >
+            Varukorgen är tom
+          </Typography>
+          <Typography sx={{ fontSize: 16, color: "#777", mb: 4 }}>
+            Det ser ut som att du inte har lagt till några produkter i din
+            varukorg än.
+          </Typography>
+          <Button
+            variant="contained"
+            onClick={() => navigate("/products")}
             sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textAlign: "center",
-              paddingY: 2,
-              width: "100%",
+              padding: "10px 20px",
+              fontSize: 16,
+              textTransform: "none",
+              borderRadius: 2,
+              backgroundColor: "black",
             }}
           >
-            <ShoppingCartIcon sx={{ fontSize: 80, color: "#aaa", mb: 2 }} />
-            <Typography
-              sx={{ letterSpacing: 2, fontSize: 26, mb: 2, color: "#333" }}
-            >
-              Varukorgen är tom
-            </Typography>
-            <Typography sx={{ fontSize: 16, color: "#777", mb: 4 }}>
-              Det ser ut som att du inte har lagt till några produkter i din
-              varukorg än.
-            </Typography>
-            <Button
-              variant="contained"
-              onClick={() => navigate("/products")}
-              sx={{
-                padding: "10px 20px",
-                fontSize: 16,
-                textTransform: "none",
-                borderRadius: 2,
-                backgroundColor: "black",
-              }}
-            >
-              <Typography>Fortsätt handla</Typography>
-            </Button>
-          </Box>
-        ))}
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          paddingY: 1,
-          width: { xs: "100%", md: "70%" },
-          alignItems: "center",
-          maxHeight: { xs: "auto", md: "600px" },
-          overflowY: "auto",
-          marginBottom: 2,
-        }}
-      >
-        {groupedItems.map((item) => {
-          const product = getProduct(item.product_id);
-          return (
-            <Box
-              key={`${item.product_id}-${item.size}`}
-              sx={{
-                backgroundColor: "white",
-                display: "flex",
-                flexDirection: { xs: "column", sm: "row" },
-                padding: 2,
-                width: "90%",
-                alignItems: "center",
-                marginBottom: 2,
-                boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-                borderRadius: 2,
-              }}
-            >
-              <img
-                src={product?.imageUrl}
-                alt={`Product ${item.product_id}`}
-                style={{ height: 100, width: 80, objectFit: "cover" }}
-              />
+            <Typography>Fortsätt handla</Typography>
+          </Button>
+        </Box>
+      ) : (
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            paddingY: 1,
+            width: { xs: "100%", md: "70%" },
+            alignItems: "center",
+            maxHeight: { xs: "auto", md: "600px" },
+            overflowY: "auto",
+            marginBottom: 2,
+          }}
+        >
+          {groupedItems.map((item) => {
+            const product = getProduct(item.product_id);
+            return (
               <Box
+                key={`${item.product_id}-${item.size}`}
                 sx={{
-                  paddingX: { xs: 2, sm: 4 },
-                  width: { xs: "100%", sm: "auto" },
-                  textAlign: { xs: "center", sm: "left" },
-                  marginBottom: { xs: 1, sm: 0 },
-                }}
-              >
-                <Typography sx={{ fontSize: 20, marginY: 1 }}>
-                  {product?.name}
-                </Typography>
-                <Typography>Storlek: {item?.size}</Typography>
-                <Typography>Färg: {product?.color}</Typography>
-              </Box>
-              <Box
-                sx={{
-                  paddingX: { xs: 2, sm: 4 },
+                  backgroundColor: "white",
                   display: "flex",
-                  flexDirection: "column",
+                  flexDirection: { xs: "column", sm: "row" },
+                  padding: 2,
+                  width: "90%",
                   alignItems: "center",
-                  justifyContent: "space-between",
-                  width: "100%",
-                  maxWidth: { sm: "150px" },
+                  marginBottom: 2,
+                  boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+                  borderRadius: 2,
                 }}
               >
-                {product && (
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginBottom: 1,
-                    }}
-                  >
-                    <IconButton
-                      onClick={() => handleAddToCart(product, item.size)}
+                <img
+                  src={product?.imageUrl}
+                  alt={`Product ${item.product_id}`}
+                  style={{ height: 100, width: 80, objectFit: "cover" }}
+                />
+                <Box
+                  sx={{
+                    paddingX: { xs: 2, sm: 4 },
+                    width: { xs: "100%", sm: "auto" },
+                    textAlign: { xs: "center", sm: "left" },
+                    marginBottom: { xs: 1, sm: 0 },
+                  }}
+                >
+                  <Typography sx={{ fontSize: 20, marginY: 1 }}>
+                    {product?.name}
+                  </Typography>
+                  <Typography>Storlek: {item?.size}</Typography>
+                  <Typography>Färg: {product?.color}</Typography>
+                </Box>
+                <Box
+                  sx={{
+                    paddingX: { xs: 2, sm: 4 },
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    width: "100%",
+                    maxWidth: { sm: "150px" },
+                  }}
+                >
+                  {product && (
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        marginBottom: 1,
+                      }}
                     >
-                      <AddIcon />
-                    </IconButton>
-                    <IconButton
-                      onClick={() => handleRemoveFromCart(product, item.size)}
-                    >
-                      <RemoveIcon />
-                    </IconButton>
-                  </Box>
-                )}
-                <Typography>{item.quantity} ST</Typography>
-                <Typography>Pris: {product?.price} SEK</Typography>
+                      <IconButton
+                        onClick={() => handleAddToCart(product, item.size)}
+                      >
+                        <AddIcon />
+                      </IconButton>
+                      <IconButton
+                        onClick={() => handleRemoveFromCart(product, item.size)}
+                      >
+                        <RemoveIcon />
+                      </IconButton>
+                    </Box>
+                  )}
+                  <Typography>{item.quantity} ST</Typography>
+                  <Typography>Pris: {product?.price} SEK</Typography>
+                </Box>
               </Box>
-            </Box>
-          );
-        })}
-      </Box>
+            );
+          })}
+        </Box>
+      )}
+
       {cart && cart?.items.length > 0 && (
         <Box
           sx={{

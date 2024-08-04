@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { v4 as uuidv4 } from "uuid";
 
 export interface Cart {
   id: string;
@@ -10,20 +11,33 @@ export interface CartItem {
   id: string;
   cart_id: string;
   product_id: string;
-  size:string;
+  size: string;
   quantity: number;
   price: number;
 }
 
 interface CartState {
-  cart: Cart | null;
+  cart: Cart | undefined;
 }
+
+const createNewCart = (): Cart => {
+  return {
+    id: uuidv4(),
+    created_date: new Date().toISOString(),
+    items: [],
+  };
+};
 
 const getInitialCartState = (): CartState => {
   const storedCart = localStorage.getItem("cart");
-  return storedCart ? { cart: JSON.parse(storedCart) } : { cart: null };
+  if (storedCart) {
+    return { cart: JSON.parse(storedCart) };
+  } else {
+    const newCart = createNewCart();
+    localStorage.setItem("cart", JSON.stringify(newCart));
+    return { cart: newCart };
+  }
 };
-
 const initialState: CartState = getInitialCartState();
 
 const cartSlice = createSlice({
@@ -64,7 +78,7 @@ const cartSlice = createSlice({
       }
     },
     clearCart: (state) => {
-      state.cart = null;
+      state.cart = undefined;
       localStorage.removeItem("cart");
     },
   },

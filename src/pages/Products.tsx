@@ -1,11 +1,6 @@
-import { Box, CardContent, Grid, keyframes, Typography } from "@mui/material";
-import { useEffect } from "react";
+import { Box, keyframes, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import {
-  getProductAsync,
-  getProductsAsync,
-  Product,
-} from "../slices/productSlice";
+import { getProductAsync, Product } from "../slices/productSlice";
 import { useAppDispatch, useAppSelector } from "../slices/store";
 
 const fadeIn = keyframes`
@@ -35,9 +30,9 @@ export default function Products() {
     });
   };
 
-  useEffect(() => {
-    dispatch(getProductsAsync());
-  });
+  // useEffect(() => {
+  //   dispatch(getProductsAsync());
+  // });
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   // const handleAddToCart = (product: Product) => {
@@ -96,7 +91,7 @@ export default function Products() {
         animation: `${fadeIn} 1s ease-out`,
       }}
     >
-      {/* <Box
+      <Box
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -114,8 +109,8 @@ export default function Products() {
         <Typography sx={{ fontSize: 16, color: "#777", mb: 4 }}>
           Vi jobbar med att få upp produkter här inom en snar framtid. Håll ut!
         </Typography>
-      </Box> */}
-      <Grid
+      </Box>
+      {/* <Grid
         container
         spacing={3}
         sx={{ padding: 3 }}
@@ -138,7 +133,7 @@ export default function Products() {
                 onClick={() => handleNavigateToDetail(product)}
                 src={product.imageUrl}
                 alt={product.name}
-                style={{ height: "250px" }}
+                style={{ width: "100%" }}
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
@@ -148,19 +143,13 @@ export default function Products() {
                   {product.description}
                 </Typography>
               </CardContent>
-              {/* <Button
-                sx={{ padding: 1, backgroundColor: "black", color: "white" }}
-                onClick={() => handleAddToCart(product)}
-              >
-                <Typography>Köp nu</Typography>
-              </Button> */}
               <Typography variant="h6" color="textPrimary">
                 {product.price} SEK
               </Typography>
             </Box>
           </Grid>
         ))}
-      </Grid>
+      </Grid> */}
     </Box>
   );
 }
