@@ -9,7 +9,6 @@ export default function ZeroettPresentation() {
   const { isMobile } = useScreenSize();
   const logoRef = useRef<HTMLDivElement | null>(null);
   const controls = useAnimation();
-  
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -55,7 +54,7 @@ export default function ZeroettPresentation() {
     >
       <Box
         component={motion.div}
-      // <motion.div
+        // <motion.div
         ref={logoRef}
         initial={{ opacity: 0, scale: 0.8, y: 20 }}
         animate={controls}
@@ -63,8 +62,8 @@ export default function ZeroettPresentation() {
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
           alignItems: "center",
-          borderRadius: 2,
-          padding: { xs: 0, md: 4 },
+          // borderRadius: 2,
+          // padding: { xs: 0, md: 4 },
           margin: "auto",
           zIndex: 2,
         }}
@@ -102,25 +101,22 @@ export default function ZeroettPresentation() {
               marginTop: 2,
               // marginLeft: 3,
               lineHeight: 1.8,
-            
+
               color: "white",
               fontWeight: "300",
               justifyContent: "center",
-          
-               display: isMobile ? "block" : "none",
-           
-            
+
+              display: isMobile ? "block" : "none",
             }}
           >
             <FormattedMessage id="zeroett-offers" />
           </Typography>
         </Box>
-        </Box>
+      </Box>
       {/* </motion.div> */}
     </Box>
   );
 }
-
 
 // import React, { useState, useEffect, useRef } from 'react';
 // import { Box, Link, Typography } from "@mui/material";
@@ -128,7 +124,6 @@ export default function ZeroettPresentation() {
 // import { FormattedMessage } from "react-intl";
 // import LetsTalk from "./LetsTalk";
 // import { useScreenSize } from "../contexts/screenSizeContext";
-
 
 // export default function ZeroettPresentation() {
 //   const { isMobile } = useScreenSize();
