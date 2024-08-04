@@ -32,8 +32,13 @@ export default function ProductDetail() {
   const cart = useAppSelector((state) => state.cartSlice.cart);
   const dispatch = useAppDispatch();
 
+  const sizesLeft = (product: Product) => {
+    const sizeLeft = product.sizes.find((s) => s.label == size);
+    return sizeLeft ? sizeLeft.amount : 0;
+  };
+
   const handleAddToCart = (product: Product) => {
-    if (cart && size) {
+    if (cart && size && sizesLeft(product) > 0) {
       const itemExists = cart.items.find((i) => i.product_id == product.id);
       if (itemExists != null && itemExists.size == size) {
         const itemQuantity = itemExists.quantity + 1;
