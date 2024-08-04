@@ -3,6 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import {
   addProductToDB,
+  editProductInDB,
   getProductFromDB,
   getProductsFromDB,
 } from "../api/product";
@@ -64,6 +65,23 @@ export const addProductAsync = createAsyncThunk<
   }
 });
 
+export const updateProductAsync = createAsyncThunk<
+  Product,
+  Product,
+  { rejectValue: string }
+>("products/updateProduct", async (product, thunkAPI) => {
+  try {
+    const updatedProduct = await editProductInDB(product);
+    if (updatedProduct) {
+      return updatedProduct;
+    } else {
+      return thunkAPI.rejectWithValue("failed to update product");
+    }
+  } catch (error) {
+    throw new Error("Något gick fel vid .");
+  }
+});
+
 export const getProductsAsync = createAsyncThunk<
   Product[],
   void,
@@ -115,6 +133,23 @@ const ProductSlice = createSlice({
         }
       })
       .addCase(addProductAsync.rejected, (state) => {
+        state.error =
+          "Något gick fel när produkten skapades. Försök igen senare.";
+      })
+      .addCase(updateProductAsync.fulfilled, (state, action) => {
+        if (action.payload) {
+          const index = state.products.findIndex(
+            (p) => p.id == action.payload.id
+          );
+          if (index) {
+            state.products[index] = action.payload;
+            state.error = null;
+          } else {
+            state.error = "Något gick fel vid uppdatering av produkt";
+          }
+        }
+      })
+      .addCase(updateProductAsync.rejected, (state) => {
         state.error =
           "Något gick fel när produkten skapades. Försök igen senare.";
       })
