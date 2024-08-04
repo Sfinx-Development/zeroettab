@@ -62,8 +62,8 @@ export default function ZeroettPresentation() {
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
           alignItems: "center",
-          // borderRadius: 2,
-          // padding: { xs: 0, md: 4 },
+          borderRadius: 2,
+          padding: { xs: 0, md: 4 },
           margin: "auto",
           zIndex: 2,
         }}
