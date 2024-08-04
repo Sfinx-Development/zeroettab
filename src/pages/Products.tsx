@@ -1,7 +1,4 @@
 import { Box, keyframes, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { getProductAsync, Product } from "../slices/productSlice";
-import { useAppDispatch, useAppSelector } from "../slices/store";
 
 const fadeIn = keyframes`
     from {
@@ -16,19 +13,19 @@ const fadeIn = keyframes`
 
 export default function Products() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const products = useAppSelector((state) => state.productSlice.products);
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  // const products = useAppSelector((state) => state.productSlice.products);
+  // const dispatch = useAppDispatch();
+  // const navigate = useNavigate();
   // const cart = useAppSelector((state) => state.cartSlice.cart);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleNavigateToDetail = (product: Product) => {
-    // dispatch(setActiveProduct(product));
-    console.log("ID ÄR : ", product.id);
-    dispatch(getProductAsync(product.id)).then(() => {
-      navigate("/product-detail");
-    });
-  };
+  // const handleNavigateToDetail = (product: Product) => {
+  //   // dispatch(setActiveProduct(product));
+  //   console.log("ID ÄR : ", product.id);
+  //   dispatch(getProductAsync(product.id)).then(() => {
+  //     navigate("/product-detail");
+  //   });
+  // };
 
   // useEffect(() => {
   //   dispatch(getProductsAsync());
