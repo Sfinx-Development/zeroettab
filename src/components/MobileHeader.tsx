@@ -22,7 +22,7 @@ import { FormattedMessage } from "react-intl";
 import { useNavigate } from "react-router-dom";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import { useScreenSize } from "../contexts/screenSizeContext";
-import LetsTalkPhone from "./LetsTalkPhone";
+// import LetsTalkPhone from "./LetsTalkPhone";
 
 export default function CustomHeader2(): JSX.Element {
   const theme = useTheme();
@@ -89,7 +89,7 @@ export default function CustomHeader2(): JSX.Element {
             marginX: { xs: 0, md: 1 },
             display: "flex",
             alignItems: "center",
-            justifyContent: isMobile ? "center" : "flex-start",
+            justifyContent: isMobile ? "flex-start" : "flex-start",
             width: isMobile ? "100%" : "auto",
             marginLeft: isMobile ? 0 : 10,
           }}
@@ -114,7 +114,7 @@ export default function CustomHeader2(): JSX.Element {
               // marginX: 1,
             }}
           >
-            <ShoppingBagIcon sx={{ fontSize: 30 }} />
+            <ShoppingBagIcon sx={{ fontSize: 25 }} />
           </IconButton>
         </Box>
         <IconButton
@@ -127,7 +127,7 @@ export default function CustomHeader2(): JSX.Element {
             marginX: 1,
           }}
         >
-          <MenuIcon sx={{ fontSize: 30 }} />
+          <MenuIcon sx={{ fontSize: 25 }} />
         </IconButton>
 
         <Drawer
@@ -214,7 +214,7 @@ export default function CustomHeader2(): JSX.Element {
           </List>
         </Drawer>
       </Box>
-      <LetsTalkPhone />
+      {/* <LetsTalkPhone /> */}
     </Box>
   );
 }
