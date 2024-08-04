@@ -1,6 +1,7 @@
 import {
   addDoc,
   collection,
+  doc,
   getDoc,
   getDocs,
   query,
@@ -31,6 +32,27 @@ export const addProductToDB = async (product: Product) => {
     throw new Error("Failed to add product");
   }
 };
+
+export const editProductInDB = async (product: Product) => {
+  try {
+    const productCollectionRef = collection(db, "products");
+
+    const productRef = doc(productCollectionRef, product.id);
+
+    const updatedProductData = {
+      ...product,
+      sizes: product.sizes,
+    };
+
+    await updateDoc(productRef, updatedProductData);
+
+    return product;
+  } catch (error) {
+    console.error("Error editing product: ", error);
+    throw new Error("Failed to edit product");
+  }
+};
+
 export const getProductsFromDB = async () => {
   try {
     const todoCollectionRef = collection(db, "products");

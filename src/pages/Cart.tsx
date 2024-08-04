@@ -6,9 +6,9 @@ import { Box, Button, IconButton, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import { CartItem, updateItem } from "../slices/cartSlice";
+import { CartItem, clearCart, updateItem } from "../slices/cartSlice";
 import { addOrderAsync, Order, OrderItem } from "../slices/orderSlice";
-import { Product } from "../slices/productSlice";
+import { Product, Size, updateProductAsync } from "../slices/productSlice";
 import { useAppDispatch, useAppSelector } from "../slices/store";
 
 const fadeIn = keyframes`
@@ -52,7 +52,7 @@ export default function Cart() {
       console.log("hEJ");
       console.log("CAAAART:", cart);
     }
-  }, []);
+  }, [cart]);
 
   function getProduct(productId: string): Product | undefined {
     return products.find((p) => p.id === productId);
@@ -61,6 +61,30 @@ export default function Cart() {
   const sizesLeft = (product: Product, cartItem: CartItem) => {
     const size = product.sizes.find((s) => s.label == cartItem.size);
     return size ? size.amount : 0;
+  };
+
+  const updatedQuantity = (product: Product): Size[] => {
+    const sizeMap: { [key: string]: number } = {};
+
+    cart?.items
+      .filter((item) => item.product_id === product.id)
+      .forEach((item) => {
+        if (sizeMap[item.size]) {
+          sizeMap[item.size] += item.quantity;
+        } else {
+          sizeMap[item.size] = item.quantity;
+        }
+      });
+
+    return product.sizes.map((size) => {
+      const purchasedQuantity = sizeMap[size.label] || 0;
+      const updatedQuantity = size.amount - purchasedQuantity;
+
+      return {
+        label: size.label,
+        amount: updatedQuantity,
+      };
+    });
   };
 
   const handleAddToCart = (product: Product, sizeLabel: string) => {
@@ -124,6 +148,15 @@ export default function Cart() {
       };
 
       dispatch(addOrderAsync(newOrder));
+      products.forEach((p) => {
+        const sizeArray = updatedQuantity(p);
+        const productToUpdate: Product = {
+          ...p,
+          sizes: sizeArray,
+        };
+        dispatch(updateProductAsync(productToUpdate));
+      });
+      dispatch(clearCart());
       navigate("/orderconfirmation");
     }
   };
