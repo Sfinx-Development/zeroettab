@@ -48,9 +48,6 @@ export default function Cart() {
       );
 
       setGroupedItems(Object.values(grouped));
-    } else {
-      console.log("hEJ");
-      console.log("CAAAART:", cart);
     }
   }, [cart]);
 
