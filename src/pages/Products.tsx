@@ -1,8 +1,7 @@
 import { Box, keyframes, Typography } from "@mui/material";
-import { useEffect } from "react";
-// import { addItem, setCart, updateItem } from "../slices/cartSlice";
-import { getProductsAsync } from "../slices/productSlice";
-import { useAppDispatch } from "../slices/store";
+import { useNavigate } from "react-router-dom";
+import { getProductAsync, Product } from "../slices/productSlice";
+import { useAppDispatch, useAppSelector } from "../slices/store";
 
 const fadeIn = keyframes`
     from {
@@ -17,23 +16,23 @@ const fadeIn = keyframes`
 
 export default function Products() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // const products = useAppSelector((state) => state.productSlice.products);
+  const products = useAppSelector((state) => state.productSlice.products);
   const dispatch = useAppDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   // const cart = useAppSelector((state) => state.cartSlice.cart);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // const handleNavigateToDetail = (product: Product) => {
-  //   // dispatch(setActiveProduct(product));
-  //   console.log("ID ÄR : ", product.id);
-  //   dispatch(getProductAsync(product.id)).then(() => {
-  //     navigate("/product-detail");
-  //   });
-  // };
+  const handleNavigateToDetail = (product: Product) => {
+    // dispatch(setActiveProduct(product));
+    console.log("ID ÄR : ", product.id);
+    dispatch(getProductAsync(product.id)).then(() => {
+      navigate("/product-detail");
+    });
+  };
 
-  useEffect(() => {
-    dispatch(getProductsAsync());
-  });
+  // useEffect(() => {
+  //   dispatch(getProductsAsync());
+  // });
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   // const handleAddToCart = (product: Product) => {
@@ -54,6 +53,7 @@ export default function Products() {
   //         product_id: product.id,
   //         quantity: 1,
   //         price: product.price,
+  //         size: size
   //       };
   //       dispatch(addItem(newItem));
   //     }
@@ -133,7 +133,7 @@ export default function Products() {
                 onClick={() => handleNavigateToDetail(product)}
                 src={product.imageUrl}
                 alt={product.name}
-                style={{ height: "250px" }}
+                style={{ width: "100%" }}
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
@@ -143,14 +143,8 @@ export default function Products() {
                   {product.description}
                 </Typography>
               </CardContent>
-              <Button
-                sx={{ padding: 1, backgroundColor: "black", color: "white" }}
-                onClick={() => handleAddToCart(product)}
-              >
-                <Typography>Köp nu</Typography>
-              </Button>
               <Typography variant="h6" color="textPrimary">
-                {product.amount} SEK
+                {product.price} SEK
               </Typography>
             </Box>
           </Grid>

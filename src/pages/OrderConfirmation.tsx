@@ -98,7 +98,7 @@ export default function OrderConfirmation() {
               <Typography variant="h6" sx={{ marginY: 1 }}>
                 {product?.name}
               </Typography>
-              <Typography variant="body2">Storlek: {product?.size}</Typography>
+              {/* <Typography variant="body2">Storlek: {product?.size}</Typography> */}
               <Typography variant="body2">Färg: {product?.color}</Typography>
             </Box>
             <Box

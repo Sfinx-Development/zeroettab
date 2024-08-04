@@ -32,10 +32,15 @@ export default function ProductDetail() {
   const cart = useAppSelector((state) => state.cartSlice.cart);
   const dispatch = useAppDispatch();
 
+  const sizesLeft = (product: Product) => {
+    const sizeLeft = product.sizes.find((s) => s.label == size);
+    return sizeLeft ? sizeLeft.amount : 0;
+  };
+
   const handleAddToCart = (product: Product) => {
-    if (cart) {
+    if (cart && size && sizesLeft(product) > 0) {
       const itemExists = cart.items.find((i) => i.product_id == product.id);
-      if (itemExists != null) {
+      if (itemExists != null && itemExists.size == size) {
         const itemQuantity = itemExists.quantity + 1;
         const updatedItem = {
           ...itemExists,
@@ -49,6 +54,7 @@ export default function ProductDetail() {
           product_id: product.id,
           quantity: 1,
           price: product.price,
+          size: size,
         };
         dispatch(addItem(newItem));
       }
@@ -63,12 +69,15 @@ export default function ProductDetail() {
             product_id: product.id,
             quantity: 1,
             price: product.price,
+            size: size,
           },
         ],
       };
       dispatch(setCart(newCart));
     }
   };
+
+  const allSizesOutOfStock = activeProduct?.sizes.every((s) => s.amount === 0);
 
   return (
     <Box
@@ -161,9 +170,13 @@ export default function ProductDetail() {
             label="Age"
             onChange={(event) => setSize(event?.target.value)}
           >
-            <MenuItem value={"S"}>S</MenuItem>
-            <MenuItem value={"M"}>M</MenuItem>
-            <MenuItem value={"L"}>L</MenuItem>
+            {activeProduct?.sizes
+              .filter((s) => s.amount > 0)
+              .map((s) => (
+                <MenuItem key={s.label} value={s.label}>
+                  {s.label}
+                </MenuItem>
+              ))}
           </Select>
         </FormControl>
         {activeProduct && (
@@ -176,7 +189,6 @@ export default function ProductDetail() {
                 color: "#3c52b2",
               },
             }}
-            disabled={activeProduct?.amount == 0}
             onClick={() => handleAddToCart(activeProduct)}
           >
             <Typography
@@ -187,7 +199,7 @@ export default function ProductDetail() {
                 color: "white",
               }}
             >
-              {activeProduct?.amount == 0 ? "Slut i lager" : "Lägg i varukorg"}
+              {allSizesOutOfStock ? "Slut i lager" : "Lägg i varukorg"}
             </Typography>
           </Button>
         )}

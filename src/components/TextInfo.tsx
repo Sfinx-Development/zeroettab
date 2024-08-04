@@ -8,7 +8,7 @@ interface TextInfoProps {
   title: string;
   text: string;
   icon: React.ElementType;
-  href: string; // Add href prop for navigation
+  href: string;
 }
 
 const fadeInAnimation = {
@@ -27,7 +27,6 @@ const TextInfo = ({ title, text, icon: Icon, href }: TextInfoProps) => {
       if (containerRef.current) {
         const top = containerRef.current.getBoundingClientRect().top;
         const windowHeight = window.innerHeight;
-        // Check if the element is in the viewport
         if (top < windowHeight * 0.75 && top > -windowHeight * 0.25) {
           setIsVisible(true);
         } else {
@@ -36,7 +35,6 @@ const TextInfo = ({ title, text, icon: Icon, href }: TextInfoProps) => {
       }
     };
 
-    // Call handleScroll initially and on scroll
     handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -55,44 +53,54 @@ const TextInfo = ({ title, text, icon: Icon, href }: TextInfoProps) => {
   }, [isVisible, controls]);
 
   return (
-    <Link href={href} underline="none" sx={{ width: "100%" }}> {/* Wrap the box with the Link component */}
+    <Link
+      href={href}
+      underline="none"
+      sx={{ width: "100%", display: "flex", justifyContent: "center" }}
+    >
       <Box
         ref={containerRef}
+        component={motion.div}
+        animate={controls}
+        initial="hidden"
+        variants={fadeInAnimation}
         sx={{
           width: "100%",
+          maxWidth: "800px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           marginBottom: 3,
           padding: { xs: "16px", md: "32px" },
-          backgroundColor: "rgba(0,0,0,0.7)",
+          backgroundColor: "rgba(0, 0, 0, 0.7)",
           borderRadius: 8,
           boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
           overflow: "hidden",
           textAlign: "center",
           color: "white",
-          textDecoration: "none", // Ensure no underline on link
-          cursor: "pointer", // Change cursor to pointer on hover
+          textDecoration: "none",
+          cursor: "pointer",
         }}
       >
-        <motion.div
-          animate={controls}
-          initial={{ opacity: 0, y: 20 }}
-          style={{ marginBottom: 20 }}
-        >
-          {Icon && (
+        {Icon && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.5 }}
+            style={{ marginBottom: 20 }}
+          >
             <Icon
               sx={{
                 fontSize: isMobile ? 40 : 80,
                 marginBottom: 2,
               }}
             />
-          )}
-        </motion.div>
+          </motion.div>
+        )}
         <motion.div
-          variants={fadeInAnimation}
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
+          variants={fadeInAnimation}
         >
           <Typography
             component="h3"
