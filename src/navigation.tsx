@@ -10,14 +10,13 @@ import Contact from "./pages/Contact";
 import Error from "./pages/Error";
 import Index from "./pages/Index";
 import Offers from "./pages/Offers";
+import OrderConfirmation from "./pages/OrderConfirmation";
 import ProductDetail from "./pages/ProductDetail";
 import Products from "./pages/Products";
 import Projects from "./pages/Projects";
 import RootLayout from "./pages/RootLayout";
 import messages_en from "./translations/en.json";
 import messages_sv from "./translations/sv.json";
-import OrderConfirmation from "./pages/OrderConfirmation";
-import ContactForm from "./pages/ContactForm";
 
 const Navigation = () => {
   const { language } = useLanguageContext();
@@ -39,7 +38,6 @@ const Navigation = () => {
           <Route path="products" element={<Products />}></Route>
           <Route path="product-detail" element={<ProductDetail />}></Route>
           <Route path="cart" element={<Cart />}></Route>
-          <Route path="contactform" element={<ContactForm />}></Route>
           <Route
             path="orderconfirmation"
             element={<OrderConfirmation />}
