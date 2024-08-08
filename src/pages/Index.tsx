@@ -10,6 +10,7 @@ import LetsTalk from "../components/LetsTalk";
 import TextInfo from "../components/TextInfo";
 import ZeroettPresentation from "../components/ZeroettPresentation";
 import { useScreenSize } from "../contexts/screenSizeContext";
+import CookieBanner from "../components/Cookies";
 
 const fadeIn = keyframes`
   from {
@@ -120,6 +121,7 @@ export default function Index() {
             justifyContent: "center",
           }}
         >
+          <CookieBanner />
           <ZeroettPresentation />
           {!isMobile && <LetsTalk />}
 
