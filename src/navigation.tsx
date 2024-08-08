@@ -17,6 +17,7 @@ import RootLayout from "./pages/RootLayout";
 import messages_en from "./translations/en.json";
 import messages_sv from "./translations/sv.json";
 import OrderConfirmation from "./pages/OrderConfirmation";
+import ContactForm from "./pages/ContactForm";
 
 const Navigation = () => {
   const { language } = useLanguageContext();
@@ -38,6 +39,7 @@ const Navigation = () => {
           <Route path="products" element={<Products />}></Route>
           <Route path="product-detail" element={<ProductDetail />}></Route>
           <Route path="cart" element={<Cart />}></Route>
+          <Route path="contactform" element={<ContactForm />}></Route>
           <Route
             path="orderconfirmation"
             element={<OrderConfirmation />}
