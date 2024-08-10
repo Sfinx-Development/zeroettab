@@ -6,8 +6,10 @@ import { Box, Button, IconButton, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import { PaymentOrder } from "../../types";
 import { CartItem, clearCart, updateItem } from "../slices/cartSlice";
 import { addOrderAsync, Order, OrderItem } from "../slices/orderSlice";
+import { addPaymentOrder } from "../slices/paymentSlice";
 import { Product, Size, updateProductAsync } from "../slices/productSlice";
 import { useAppDispatch, useAppSelector } from "../slices/store";
 
@@ -118,6 +120,33 @@ export default function Cart() {
     }
   };
 
+  const TESTPAYMENT = () => {
+    const paymentOrder: PaymentOrder = {
+      operation: "Purchase",
+      currency: "SEK",
+      amount: 300,
+      vatAmount: 375,
+      description: "Test Purchase",
+      userAgent: "Mozilla/5.0...",
+      language: "sv-SE",
+      urls: {
+        hostUrls: ["https://example.com", "https://example.net"], //Seamless View only
+        paymentUrl: "https://example.com/perform-payment", //Seamless View only
+        completeUrl: "https://example.com/payment-completed",
+        cancelUrl: "https://example.com/payment-cancelled", //Redirect only
+        callbackUrl: "https://api.example.com/payment-callback",
+        logoUrl: "https://example.com/logo.png", //Redirect only
+      },
+      payeeInfo: {
+        payeeId: "dba92aba-effe-4000-a617-55629072d2c4",
+        payeeReference: "AB832",
+        payeeName: "Merchant1",
+        orderReference: "or-123456",
+      },
+    };
+    dispatch(addPaymentOrder(paymentOrder));
+  };
+
   const handleMakeOrder = () => {
     const orderItems = cart?.items.map((item) => {
       const orderItem: OrderItem = {
@@ -179,6 +208,7 @@ export default function Cart() {
         backgroundColor: "white",
       }}
     >
+      <Button onClick={() => TESTPAYMENT()}>TESTA BETALNING POOST</Button>
       {cart && cart.items.length == 0 ? (
         <Box
           sx={{
