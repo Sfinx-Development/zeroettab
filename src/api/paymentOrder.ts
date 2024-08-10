@@ -5,7 +5,7 @@ export function PostPaymentOrder(paymentOrder: PaymentOrder) {
   const requestBody = {
     paymentOrder,
   };
-  const bearer = import.meta.env;
+  const bearer = import.meta.env.VITE_SWEDBANK_DEV;
 
   return fetch(uri, {
     method: "POST",
