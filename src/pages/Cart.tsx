@@ -120,28 +120,42 @@ export default function Cart() {
     }
   };
 
+  function generatePayeeReference(isMerchantSettlement: boolean) {
+    if (isMerchantSettlement) {
+      return Math.floor(100000000000 + Math.random() * 900000000000).toString();
+    } else {
+      const chars =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      let reference = "";
+      for (let i = 0; i < 30; i++) {
+        reference += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return reference;
+    }
+  }
+
   const TESTPAYMENT = () => {
     const payeeId = import.meta.env.VITE_SWEDBANK_PAYEEID;
     const paymentOrder: PaymentOrder = {
       operation: "Purchase",
       currency: "SEK",
-      amount: 300,
-      vatAmount: 75,
+      amount: 10000,
+      vatAmount: 5000,
       description: "Test Purchase",
       userAgent: "Mozilla/5.0...",
       language: "sv-SE",
       urls: {
-        hostUrls: [], //Seamless View only
-        paymentUrl: "", //Seamless View only
+        hostUrls: ["https://localhost:5173/cart"], //Seamless View only
+        paymentUrl: "https://localhost:5173/cart", //Seamless View only
         completeUrl: "https://localhost:5173/cart",
-        cancelUrl: "", //Redirect only
+        cancelUrl: "https://localhost:5173/cart", //Redirect only
         callbackUrl: "https://localhost:5173/cart",
         logoUrl: "", //Redirect only
       },
       payeeInfo: {
         payeeId: payeeId,
-        payeeReference: "26731",
-        payeeName: "Merchant1",
+        payeeReference: generatePayeeReference(true),
+        payeeName: "Angelina Holmqvist Khalifa",
         orderReference: "or-123456",
       },
     };
