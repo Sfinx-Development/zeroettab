@@ -121,25 +121,26 @@ export default function Cart() {
   };
 
   const TESTPAYMENT = () => {
+    const payeeId = import.meta.env.VITE_SWEDBANK_PAYEEID;
     const paymentOrder: PaymentOrder = {
       operation: "Purchase",
       currency: "SEK",
       amount: 300,
-      vatAmount: 375,
+      vatAmount: 75,
       description: "Test Purchase",
       userAgent: "Mozilla/5.0...",
       language: "sv-SE",
       urls: {
-        hostUrls: ["https://example.com", "https://example.net"], //Seamless View only
-        paymentUrl: "https://example.com/perform-payment", //Seamless View only
-        completeUrl: "https://example.com/payment-completed",
-        cancelUrl: "https://example.com/payment-cancelled", //Redirect only
-        callbackUrl: "https://api.example.com/payment-callback",
-        logoUrl: "https://example.com/logo.png", //Redirect only
+        hostUrls: [], //Seamless View only
+        paymentUrl: "", //Seamless View only
+        completeUrl: "https://localhost:5173/cart",
+        cancelUrl: "", //Redirect only
+        callbackUrl: "https://localhost:5173/cart",
+        logoUrl: "", //Redirect only
       },
       payeeInfo: {
-        payeeId: "dba92aba-effe-4000-a617-55629072d2c4",
-        payeeReference: "AB832",
+        payeeId: payeeId,
+        payeeReference: "26731",
         payeeName: "Merchant1",
         orderReference: "or-123456",
       },
