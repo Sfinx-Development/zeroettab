@@ -42,7 +42,7 @@ export interface Image_To_Product {
   image_id: string;
 }
 
-export interface PaymentOrder {
+export interface PaymentOrderOutgoing {
   operation: string;
   currency: string;
   amount: number;
@@ -64,4 +64,48 @@ export interface PaymentOrder {
     payeeName: string;
     orderReference: string;
   };
+}
+
+interface ResourceReference {
+  id: string;
+}
+
+interface Operation {
+  method: string;
+  href: string;
+  rel: string;
+  contentType: string;
+}
+
+export interface PaymentOrderIncoming {
+  id: string;
+  created: string;
+  updated: string;
+  operation: string;
+  status: string;
+  currency: string;
+  amount: number;
+  vatAmount: number;
+  description: string;
+  initiatingSystemUserAgent: string;
+  language: string;
+  availableInstruments: string[];
+  implementation: string;
+  integration: string;
+  instrumentMode: boolean;
+  guestMode: boolean;
+  urls: ResourceReference;
+  payeeInfo: ResourceReference;
+  payer: ResourceReference;
+  history: ResourceReference;
+  failed: ResourceReference;
+  aborted: ResourceReference;
+  paid: ResourceReference;
+  cancelled: ResourceReference;
+  reversed: ResourceReference;
+  financialTransactions: ResourceReference;
+  failedAttempts: ResourceReference;
+  postPurchaseFailedAttempts: ResourceReference;
+  metadata: ResourceReference;
+  operations: Operation[];
 }

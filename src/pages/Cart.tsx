@@ -6,10 +6,10 @@ import { Box, Button, IconButton, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import { PaymentOrder } from "../../types";
+import { PaymentOrderOutgoing } from "../../types";
 import { CartItem, clearCart, updateItem } from "../slices/cartSlice";
 import { addOrderAsync, Order, OrderItem } from "../slices/orderSlice";
-import { addPaymentOrder } from "../slices/paymentSlice";
+import { addPaymentOrderOutgoing } from "../slices/paymentSlice";
 import { Product, Size, updateProductAsync } from "../slices/productSlice";
 import { useAppDispatch, useAppSelector } from "../slices/store";
 
@@ -134,9 +134,9 @@ export default function Cart() {
     }
   }
 
-  const TESTPAYMENT = () => {
+  const TESTPAYMENT = (order: Order) => {
     const payeeId = import.meta.env.VITE_SWEDBANK_PAYEEID;
-    const paymentOrder: PaymentOrder = {
+    const paymentOrder: PaymentOrderOutgoing = {
       operation: "Purchase",
       currency: "SEK",
       amount: 10000,
@@ -156,10 +156,10 @@ export default function Cart() {
         payeeId: payeeId,
         payeeReference: generatePayeeReference(true),
         payeeName: "Angelina Holmqvist Khalifa",
-        orderReference: "or-123456",
+        orderReference: order.reference,
       },
     };
-    dispatch(addPaymentOrder(paymentOrder));
+    dispatch(addPaymentOrderOutgoing(paymentOrder));
   };
 
   const handleMakeOrder = () => {
@@ -181,7 +181,7 @@ export default function Cart() {
         ) || 0;
       const newOrder: Order = {
         id: uuidv4(),
-        user_id: "123",
+        reference: "or-" + uuidv4(),
         items: orderItems,
         total_amount: totalPrice,
         created_date: new Date().toISOString(),
@@ -198,6 +198,7 @@ export default function Cart() {
         dispatch(updateProductAsync(productToUpdate));
       });
       dispatch(clearCart());
+      TESTPAYMENT(newOrder);
       navigate("/orderconfirmation");
     }
   };
@@ -223,7 +224,7 @@ export default function Cart() {
         backgroundColor: "white",
       }}
     >
-      <Button onClick={() => TESTPAYMENT()}>TESTA BETALNING POOST</Button>
+      {/* <Button onClick={() => TESTPAYMENT()}>TESTA BETALNING POOST</Button> */}
       {cart && cart.items.length == 0 ? (
         <Box
           sx={{

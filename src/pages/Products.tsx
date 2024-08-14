@@ -1,7 +1,12 @@
-import { Box, keyframes, Typography } from "@mui/material";
+import { Box, CardContent, Grid, keyframes, Typography } from "@mui/material";
 import { useEffect } from "react";
-import { getProductsAsync } from "../slices/productSlice";
-import { useAppDispatch } from "../slices/store";
+import { useNavigate } from "react-router-dom";
+import {
+  getProductAsync,
+  getProductsAsync,
+  Product,
+} from "../slices/productSlice";
+import { useAppDispatch, useAppSelector } from "../slices/store";
 
 const fadeIn = keyframes`
     from {
@@ -16,19 +21,19 @@ const fadeIn = keyframes`
 
 export default function Products() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // const products = useAppSelector((state) => state.productSlice.products);
+  const products = useAppSelector((state) => state.productSlice.products);
   const dispatch = useAppDispatch();
-  // const navigate = useNavigate();
-  // // const cart = useAppSelector((state) => state.cartSlice.cart);
+  const navigate = useNavigate();
+  // const cart = useAppSelector((state) => state.cartSlice.cart);
 
-  // // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // const handleNavigateToDetail = (product: Product) => {
-  //   // dispatch(setActiveProduct(product));
-  //   console.log("ID ÄR : ", product.id);
-  //   dispatch(getProductAsync(product.id)).then(() => {
-  //     navigate("/product-detail");
-  //   });
-  // };
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleNavigateToDetail = (product: Product) => {
+    // dispatch(setActiveProduct(product));
+    console.log("ID ÄR : ", product.id);
+    dispatch(getProductAsync(product.id)).then(() => {
+      navigate("/product-detail");
+    });
+  };
 
   useEffect(() => {
     dispatch(getProductsAsync());
@@ -69,7 +74,7 @@ export default function Products() {
           Vi jobbar med att få upp produkter här inom en snar framtid. Håll ut!
         </Typography>
       </Box>
-      {/* <Grid
+      <Grid
         container
         spacing={3}
         sx={{ padding: 3 }}
@@ -108,7 +113,7 @@ export default function Products() {
             </Box>
           </Grid>
         ))}
-      </Grid> */}
+      </Grid>
     </Box>
   );
 }

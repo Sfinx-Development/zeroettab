@@ -1,26 +1,34 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { PaymentOrder } from "../../types";
-import { PostPaymentOrder } from "../api/paymentOrder";
+import { PaymentOrderIncoming, PaymentOrderOutgoing } from "../../types";
+import { PostPaymentOrder } from "../api/SWEDBANKpaymentOrder";
+import { addPaymentOrderIncomingToDB } from "../api/paymentOrder";
 
 interface PaymentState {
-  paymentOrder: PaymentOrder | null;
+  paymentOrderOutgoing: PaymentOrderOutgoing | null;
+  paymentOrderIncoming: PaymentOrderIncoming | null;
   error: string | null;
 }
 
 export const initialState: PaymentState = {
-  paymentOrder: null,
+  paymentOrderOutgoing: null,
+  paymentOrderIncoming: null,
   error: null,
 };
 
-export const addPaymentOrder = createAsyncThunk<
-  PaymentOrder,
-  PaymentOrder,
+export const addPaymentOrderOutgoing = createAsyncThunk<
+  PaymentOrderIncoming,
+  PaymentOrderOutgoing,
   { rejectValue: string }
->("payments/addPaymentOrders", async (paymentOrder, thunkAPI) => {
+>("payments/addPaymentOrderOutgoing", async (paymentOrder, thunkAPI) => {
   try {
     const response = await PostPaymentOrder(paymentOrder);
     if (response) {
-      return response;
+      const paymentOrderIncoming = await addPaymentOrderIncomingToDB(response);
+      if (paymentOrderIncoming) {
+        return paymentOrderIncoming;
+      } else {
+        return thunkAPI.rejectWithValue("failed to create payment ordcer");
+      }
     } else {
       return thunkAPI.rejectWithValue("failed to create payment ordcer");
     }
@@ -29,20 +37,36 @@ export const addPaymentOrder = createAsyncThunk<
   }
 });
 
+// export const addPaymentOrderIncoming = createAsyncThunk<
+//   PaymentOrderIncoming,
+//   PaymentOrderIncoming,
+//   { rejectValue: string }
+// >("payments/addPaymentOrderIncoming", async (paymentOrder, thunkAPI) => {
+//   try {
+//     const response = await addPaymentOrderIncomingToDB(paymentOrder);
+//     if (response) {
+//       return response;
+//     } else {
+//       return thunkAPI.rejectWithValue("failed to create payment ordcer");
+//     }
+//   } catch (error) {
+//     throw new Error("Något gick fel vid .");
+//   }
+// });
+
 const paymentSlice = createSlice({
   name: "payments",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-
-      .addCase(addPaymentOrder.fulfilled, (state, action) => {
+      .addCase(addPaymentOrderOutgoing.fulfilled, (state, action) => {
         if (action.payload) {
-          state.paymentOrder = action.payload;
+          state.paymentOrderIncoming = action.payload;
           state.error = null;
         }
       })
-      .addCase(addPaymentOrder.rejected, (state) => {
+      .addCase(addPaymentOrderOutgoing.rejected, (state) => {
         state.error =
           "Något gick fel när payment ordern hämtades. Försök igen senare.";
       });
