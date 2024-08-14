@@ -1,4 +1,4 @@
-import { PaymentOrderOutgoing } from "../../types";
+import { PaymentOrderIncoming, PaymentOrderOutgoing } from "../../types";
 
 export async function PostPaymentOrder(paymentOrder: PaymentOrderOutgoing) {
   const uri = "/psp/paymentorders";
@@ -29,7 +29,7 @@ export async function PostPaymentOrder(paymentOrder: PaymentOrderOutgoing) {
       return response.json();
     })
     .then((data) => {
-      return data as PaymentOrderOutgoing;
+      return data as PaymentOrderIncoming;
     })
     .catch((error) => {
       console.error(error);

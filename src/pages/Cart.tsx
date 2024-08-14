@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 import { PaymentOrderOutgoing } from "../../types";
 import { CartItem, clearCart, updateItem } from "../slices/cartSlice";
 import { addOrderAsync, Order, OrderItem } from "../slices/orderSlice";
-import { addPaymentOrder } from "../slices/paymentSlice";
+import { addPaymentOrderOutgoing } from "../slices/paymentSlice";
 import { Product, Size, updateProductAsync } from "../slices/productSlice";
 import { useAppDispatch, useAppSelector } from "../slices/store";
 
@@ -159,7 +159,7 @@ export default function Cart() {
         orderReference: order.reference,
       },
     };
-    dispatch(addPaymentOrder(paymentOrder));
+    dispatch(addPaymentOrderOutgoing(paymentOrder));
   };
 
   const handleMakeOrder = () => {
