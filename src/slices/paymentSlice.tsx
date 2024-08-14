@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { PaymentOrder } from "../../types";
-import { PostPaymentOrder } from "../api/paymentOrder";
+import { PostPaymentOrder } from "../api/SWEDBANKpaymentOrder";
 
 interface PaymentState {
   paymentOrder: PaymentOrder | null;

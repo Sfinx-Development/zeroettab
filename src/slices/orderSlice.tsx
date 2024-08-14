@@ -1,13 +1,13 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { addOrderToDB, getOrderFromDB } from "../api/order";
 
-export interface User {
-  id: string; // skapas vid betalning?
-}
+// export interface User {
+//   id: string; // skapas vid betalning?
+// }
 
 export interface Order {
   id: string;
-  user_id: string;
+  reference: string;
   total_amount: number;
   created_date: string;
   status: string;
