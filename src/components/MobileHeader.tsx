@@ -166,11 +166,12 @@ export default function CustomHeader2(): JSX.Element {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "flex-start",
+                    justifyContent: "center",
                     transition: "background-color 0.3s ease",
                     "&:hover": {
-                      backgroundColor: "#f3f3f3",
+                      backgroundColor: "rgba(255,255,255,0.2)",
                     },
-                    marginBottom: 2,
+                    marginY: 1,
                   }}
                 >
                   <Link
@@ -178,7 +179,7 @@ export default function CustomHeader2(): JSX.Element {
                     sx={{
                       textDecoration: "none",
                       display: "flex",
-                      paddingTop: 3,
+                      paddingY: 1.5,
                       alignItems: "center",
 
                       // paddingBottom: 6,

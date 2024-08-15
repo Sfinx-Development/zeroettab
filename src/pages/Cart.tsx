@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { PaymentOrderOutgoing } from "../../types";
+import SeamlessCheckout from "../components/SeamlessCheckout";
 import { CartItem, clearCart, updateItem } from "../slices/cartSlice";
 import { addOrderAsync, Order, OrderItem } from "../slices/orderSlice";
 import { addPaymentOrderOutgoing } from "../slices/paymentSlice";
@@ -34,6 +35,34 @@ export default function Cart() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [groupedItems, setGroupedItems] = useState<GroupedCartItem[]>([]);
+  // const [checkoutView, setCheckoutView] = useState<string | null>();
+  const incomingPaymentOrder = useAppSelector(
+    (state) => state.paymentSlice.paymentOrderIncoming
+  );
+  // useEffect(() => {
+  //   if (incomingPaymentOrder) {
+  //     const checkoutOperation = incomingPaymentOrder.operations.find(
+  //       (o) => o.rel === "view-checkout"
+  //     );
+  //     if (checkoutOperation) {
+  //       setCheckoutView(checkoutOperation.href);
+  //       console.log("NU ", checkoutOperation.href);
+  //     }
+  //   }
+  // }, [incomingPaymentOrder]);
+
+  // useEffect(() => {
+  //   if (checkoutView) {
+  //     const script = document.createElement("script");
+  //     script.src = checkoutView;
+  //     // script.async = true;
+  //     document.body.appendChild(script);
+
+  //     return () => {
+  //       document.body.removeChild(script);
+  //     };
+  //   }
+  // }, [checkoutView]);
 
   useEffect(() => {
     if (cart) {
@@ -199,7 +228,7 @@ export default function Cart() {
       });
       dispatch(clearCart());
       TESTPAYMENT(newOrder);
-      navigate("/orderconfirmation");
+      // navigate("/orderconfirmation");
     }
   };
 
@@ -224,7 +253,8 @@ export default function Cart() {
         backgroundColor: "white",
       }}
     >
-      {/* <Button onClick={() => TESTPAYMENT()}>TESTA BETALNING POOST</Button> */}
+      {/* {/* <Button onClick={() => TESTPAYMENT()}>TESTA BETALNING POOST</Button> */}
+      {incomingPaymentOrder && <SeamlessCheckout />}
       {cart && cart.items.length == 0 ? (
         <Box
           sx={{
