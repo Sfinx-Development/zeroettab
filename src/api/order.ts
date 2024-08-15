@@ -1,6 +1,7 @@
 import {
   addDoc,
   collection,
+  doc,
   getDoc,
   getDocs,
   query,
@@ -31,6 +32,27 @@ export const addOrderToDB = async (order: Order) => {
     throw new Error("Failed to add product");
   }
 };
+
+export const editOrderInDB = async (order: Order) => {
+  try {
+    const orderCollectionRef = collection(db, "orders");
+
+    const orderRef = doc(orderCollectionRef, order.id);
+
+    const updatedOrderData = {
+      ...order,
+      status: "Paid",
+    };
+
+    await updateDoc(orderRef, updatedOrderData);
+
+    return order;
+  } catch (error) {
+    console.error("Error editing order: ", error);
+    throw new Error("Failed to edit order");
+  }
+};
+
 //   export const getProductsFromDB = async () => {
 //     try {
 //       const todoCollectionRef = collection(db, "products");
