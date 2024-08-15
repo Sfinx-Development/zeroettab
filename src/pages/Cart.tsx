@@ -168,7 +168,7 @@ export default function Cart() {
     const paymentOrder: PaymentOrderOutgoing = {
       operation: "Purchase",
       currency: "SEK",
-      amount: 10000,
+      amount: order.total_amount * 100,
       vatAmount: 5000,
       description: "Test Purchase",
       userAgent: "Mozilla/5.0...",
