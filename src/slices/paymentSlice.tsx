@@ -6,12 +6,14 @@ import { addPaymentOrderIncomingToDB } from "../api/paymentOrder";
 interface PaymentState {
   paymentOrderOutgoing: PaymentOrderOutgoing | null;
   paymentOrderIncoming: PaymentOrderIncoming | null;
+  checkoutUrl: string | null;
   error: string | null;
 }
 
 export const initialState: PaymentState = {
   paymentOrderOutgoing: null,
   paymentOrderIncoming: null,
+  checkoutUrl: null,
   error: null,
 };
 
