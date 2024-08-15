@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { addOrderToDB, getOrderFromDB } from "../api/order";
+import { addOrderToDB, editOrderInDB, getOrderFromDB } from "../api/order";
 
 // export interface User {
 //   id: string; // skapas vid betalning?
@@ -54,6 +54,23 @@ export const addOrderAsync = createAsyncThunk<
     }
   } catch (error) {
     throw new Error("Något gick fel vid .");
+  }
+});
+
+export const updateOrderAsync = createAsyncThunk<
+  Order,
+  Order,
+  { rejectValue: string }
+>("orders/updateOrder", async (order, thunkAPI) => {
+  try {
+    const updatedOrder = await editOrderInDB(order);
+    if (updatedOrder) {
+      return updatedOrder;
+    } else {
+      return thunkAPI.rejectWithValue("failed to update order");
+    }
+  } catch (error) {
+    throw new Error("Något gick fel vid uppdatering av order.");
   }
 });
 
@@ -134,7 +151,18 @@ const orderSlice = createSlice({
         }
       })
       .addCase(addOrderAsync.rejected, (state) => {
-        state.error = "Något gick fel när ordern hämtades. Försök igen senare.";
+        state.error =
+          "Något gick fel när ordern uppdaterades. Försök igen senare.";
+      })
+      .addCase(updateOrderAsync.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.order = action.payload;
+          state.error = null;
+        }
+      })
+      .addCase(updateOrderAsync.rejected, (state) => {
+        state.error =
+          "Något gick fel när ordern uppdaterades. Försök igen senare.";
       });
   },
 });

@@ -222,6 +222,7 @@ export default function Cart() {
         const sizeArray = updatedQuantity(p);
         const productToUpdate: Product = {
           ...p,
+          in_store: p.sizes.some((s) => s.amount > 0) ? true : false,
           sizes: sizeArray,
         };
         dispatch(updateProductAsync(productToUpdate));
