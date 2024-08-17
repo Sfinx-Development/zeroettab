@@ -17,6 +17,7 @@ export default function OrderConfirmation() {
   const incomingPaymentOrder = useAppSelector(
     (state) => state.paymentSlice.paymentOrderIncoming
   );
+  const paymentInfo = useAppSelector((state) => state.paymentSlice.paymentInfo);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -37,7 +38,17 @@ export default function OrderConfirmation() {
         dispatch(updateOrderAsync(updatedOrder));
       });
     }
-  }, [order, incomingPaymentOrder, dispatch]);
+  }, [incomingPaymentOrder]);
+
+  useEffect(() => {
+    if (paymentInfo && order) {
+      const orderUpdatedPayment: Order = {
+        ...order,
+        paymentInfo: paymentInfo,
+      };
+      dispatch(updateOrderAsync(orderUpdatedPayment));
+    }
+  }, [paymentInfo]);
 
   function getProduct(productId: string) {
     return products.find((p) => p.id === productId);

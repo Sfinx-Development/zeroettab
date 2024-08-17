@@ -8,11 +8,32 @@ import {
   addPaymentOrderIncomingToDB,
   getPaymentOrderFromDBByReference,
 } from "../api/paymentOrder";
+import { PaymentDetails } from "./orderSlice";
+
+export interface PaymentDetails {
+  msisdn: string;
+}
+
+export interface PaymentInfo {
+  id: string;
+  number: number;
+  instrument: string;
+  payeeReference: string;
+  orderReference: string;
+  transactionType: string;
+  amount: number;
+  submittedAmount: number;
+  feeAmount: number;
+  discountAmount: number;
+  paymentTokenGenerated: boolean;
+  details: PaymentDetails;
+}
 
 interface PaymentState {
   paymentOrderOutgoing: PaymentOrderOutgoing | null;
   paymentOrderIncoming: PaymentOrderIncoming | null;
   checkoutUrl: string | null;
+  paymentInfo:PaymentInfo|null;
   error: string | null;
 }
 
@@ -20,6 +41,7 @@ export const initialState: PaymentState = {
   paymentOrderOutgoing: null,
   paymentOrderIncoming: getPaymentOrderIncomingFromLocalStorage(),
   checkoutUrl: null,
+  paymentInfo: null,
   error: null,
 };
 
@@ -127,6 +149,16 @@ const paymentSlice = createSlice({
       .addCase(getPaymentOrderIncoming.rejected, (state) => {
         state.error =
           "Något gick fel när payment ordern hämtades. Försök igen senare.";
+      })
+      .addCase(getPaymentValidation.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.paymentInfo = action.payload;
+          state.error = null;
+        }
+      })
+      .addCase(getPaymentValidation.rejected, (state) => {
+        state.error =
+          "Något gick fel när validering av betalning hämtades. Försök igen senare.";
       });
   },
 });

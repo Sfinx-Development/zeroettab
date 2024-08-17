@@ -1,4 +1,5 @@
 import { PaymentOrderIncoming, PaymentOrderOutgoing } from "../../types";
+import { PaymentInfo } from "../slices/paymentSlice";
 
 export async function PostPaymentOrder(paymentOrder: PaymentOrderOutgoing) {
   const uri = "/psp/paymentorders";
@@ -62,7 +63,8 @@ export async function GetPaymentValidation(paidUrl: string) {
       return response.json();
     })
     .then((data) => {
-      return data as PaymentOrderIncoming;
+      console.log("DATA", data);
+      return data as PaymentInfo;
     })
     .catch((error) => {
       console.error(error);

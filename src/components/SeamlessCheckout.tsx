@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../slices/store";
+import { useAppSelector } from "../slices/store";
 
 export default function SeamlessCheckout() {
   const [checkoutView, setCheckoutView] = useState<string | null>(null);
@@ -7,8 +7,6 @@ export default function SeamlessCheckout() {
   const incomingPaymentOrder = useAppSelector(
     (state) => state.paymentSlice.paymentOrderIncoming
   );
-  const order = useAppSelector((state) => state.orderSlice.order);
-  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (incomingPaymentOrder) {
