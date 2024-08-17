@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useAppSelector } from "../slices/store";
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../slices/store";
 
 export default function SeamlessCheckout() {
   const [checkoutView, setCheckoutView] = useState<string | null>(null);
@@ -7,6 +7,8 @@ export default function SeamlessCheckout() {
   const incomingPaymentOrder = useAppSelector(
     (state) => state.paymentSlice.paymentOrderIncoming
   );
+  const order = useAppSelector((state) => state.orderSlice.order);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (incomingPaymentOrder) {
@@ -25,16 +27,20 @@ export default function SeamlessCheckout() {
       const script = document.createElement("script");
       script.src = checkoutView;
       script.onload = () => {
-        // Initiera Seamless Checkout när scriptet har laddats
         if (typeof payex !== "undefined" && payex.hostedView) {
-          payex.hostedView
-            .checkout({
-              container: {
-                checkout: "checkout-container",
-              },
-              culture: "sv-SE",
-            })
-            .open();
+          const checkout = payex.hostedView.checkout({
+            container: {
+              checkout: "checkout-container",
+            },
+            culture: "sv-SE",
+          });
+
+          checkout.open();
+
+          // // Start polling for payment status
+          // if (incomingPaymentOrder) {
+          //   startPollingForPaymentStatus(incomingPaymentOrder.id);
+          // }
         } else {
           console.error("Payex library not loaded");
         }
@@ -44,14 +50,13 @@ export default function SeamlessCheckout() {
       };
 
       document.head.appendChild(script);
-
       setIsInitialized(true);
 
       return () => {
         document.head.removeChild(script);
       };
     }
-  }, [checkoutView, isInitialized]);
+  }, [checkoutView, isInitialized, incomingPaymentOrder]);
 
   return (
     <div

@@ -42,10 +42,29 @@ export const getPaymentOrderFromDB = async (id: string) => {
 
     const querySnapshot = await getDocs(q);
     const docSnapshot = querySnapshot.docs[0];
-    return docSnapshot.data() as PaymentOrderIncoming;
+    return docSnapshot.data().paymentOrder as PaymentOrderIncoming;
   } catch (error) {
     console.error("Error getting paymentOrderIncoming: ", error);
     throw new Error("Failed to get paymentOrderIncoming");
   }
 };
 
+export const getPaymentOrderFromDBByReference = async (
+  orderReference: string
+) => {
+  try {
+    const paymentOrderCollectionRef = collection(db, "paymentOrderIncoming");
+
+    const q = query(
+      paymentOrderCollectionRef,
+      where("orderReference", "==", orderReference)
+    );
+
+    const querySnapshot = await getDocs(q);
+    const docSnapshot = querySnapshot.docs[0];
+    return docSnapshot.data().paymentOrder as PaymentOrderIncoming;
+  } catch (error) {
+    console.error("Error getting paymentOrderIncoming: ", error);
+    throw new Error("Failed to get paymentOrderIncoming");
+  }
+};

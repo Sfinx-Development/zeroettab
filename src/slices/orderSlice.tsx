@@ -48,6 +48,7 @@ export const addOrderAsync = createAsyncThunk<
     order.total_amount = totalAmount;
     const createdOrder = await addOrderToDB(order);
     if (createdOrder) {
+      localStorage.setItem("order", JSON.stringify(createdOrder));
       return createdOrder;
     } else {
       return thunkAPI.rejectWithValue("failed to create order");

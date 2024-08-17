@@ -176,7 +176,7 @@ export default function Cart() {
       urls: {
         hostUrls: ["https://localhost:5173/cart"], //Seamless View only
         paymentUrl: "https://localhost:5173/cart", //Seamless View only
-        completeUrl: "https://localhost:5173/cart",
+        completeUrl: "https://localhost:5173/orderconfirmation",
         cancelUrl: "https://localhost:5173/cart", //Redirect only
         callbackUrl: "https://localhost:5173/cart",
         logoUrl: "", //Redirect only
@@ -229,7 +229,6 @@ export default function Cart() {
       });
       dispatch(clearCart());
       TESTPAYMENT(newOrder);
-      // navigate("/orderconfirmation");
     }
   };
 
