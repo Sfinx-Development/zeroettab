@@ -18,6 +18,7 @@ export interface CartItem {
 
 interface CartState {
   cart: Cart | undefined;
+  isCheckVisible: boolean;
 }
 
 const createNewCart = (): Cart => {
@@ -31,11 +32,11 @@ const createNewCart = (): Cart => {
 const getInitialCartState = (): CartState => {
   const storedCart = localStorage.getItem("cart");
   if (storedCart) {
-    return { cart: JSON.parse(storedCart) };
+    return { cart: JSON.parse(storedCart), isCheckVisible: false };
   } else {
     const newCart = createNewCart();
     localStorage.setItem("cart", JSON.stringify(newCart));
-    return { cart: newCart };
+    return { cart: newCart, isCheckVisible: false };
   }
 };
 const initialState: CartState = getInitialCartState();
@@ -52,6 +53,7 @@ const cartSlice = createSlice({
       if (state.cart) {
         state.cart.items.push(action.payload);
         localStorage.setItem("cart", JSON.stringify(state.cart));
+        state.isCheckVisible = true;
       }
     },
     removeItem: (state, action: PayloadAction<string>) => {
@@ -75,15 +77,25 @@ const cartSlice = createSlice({
           );
         }
         localStorage.setItem("cart", JSON.stringify(state.cart));
+        state.isCheckVisible = true;
       }
     },
     clearCart: (state) => {
       state.cart = undefined;
       localStorage.removeItem("cart");
     },
+    setVisible: (state, action: PayloadAction<boolean>) => {
+      state.isCheckVisible = action.payload;
+    },
   },
 });
 
-export const { setCart, addItem, removeItem, clearCart, updateItem } =
-  cartSlice.actions;
+export const {
+  setCart,
+  addItem,
+  removeItem,
+  clearCart,
+  updateItem,
+  setVisible,
+} = cartSlice.actions;
 export const CartReducer = cartSlice.reducer;

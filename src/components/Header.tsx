@@ -1,4 +1,5 @@
 import LanguageIcon from "@mui/icons-material/Language";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import {
   Box,
   IconButton,
@@ -9,11 +10,12 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
-import { useLanguageContext } from "../context/languageContext";
 import { useNavigate } from "react-router-dom";
+import { useLanguageContext } from "../context/languageContext";
+import { useAppSelector } from "../slices/store";
+import Badge from "@mui/material/Badge";
 
 export default function Header(): JSX.Element {
   const theme = useTheme();
@@ -22,6 +24,13 @@ export default function Header(): JSX.Element {
   const { language, setLanguage } = useLanguageContext();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const navigate = useNavigate();
+  const [isWiggling, setIsWiggling] = useState(false);
+  const cart = useAppSelector((state) => state.cartSlice.cart);
+
+  const handleWiggle = () => {
+    setIsWiggling(true);
+    setTimeout(() => setIsWiggling(false), 2000);
+  };
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -32,6 +41,30 @@ export default function Header(): JSX.Element {
     setAnchorEl(null);
   };
 
+  // const cartItems = useAppSelector((state) => state.cartSlice.cart?.items);
+  const isVisible = useAppSelector(
+    (state) => state.cartSlice.isCheckVisible as boolean
+  );
+
+  useEffect(() => {
+    if (isVisible) {
+      handleWiggle();
+    }
+  }, [isVisible]);
+
+  useEffect(() => {
+    if (!isVisible) {
+      setIsWiggling(false);
+    }
+  }, [isVisible]);
+
+  const getTotalAmountCartItems = () => {
+    if (cart) {
+      return cart.items.reduce((total, item) => total + item.quantity, 0);
+    } else {
+      return 0;
+    }
+  };
   return (
     <Box
       sx={{
@@ -260,16 +293,35 @@ export default function Header(): JSX.Element {
               <LanguageIcon />
             </IconButton>
             <IconButton
-              onClick={() => navigate("/cart")}
+              onClick={() => {
+                handleWiggle();
+                navigate("/cart"); // Navigera till "/cart" samtidigt
+              }}
               sx={{
                 color: "white",
                 backgroundColor: "#662c9c",
+                animation: isWiggling
+                  ? "wiggle 0.3s ease-in-out infinite"
+                  : "none",
                 "&:hover": { backgroundColor: "#422a75" },
                 borderRadius: "50%",
+                "@keyframes wiggle": {
+                  "0%, 100%": {
+                    transform: "rotate(-5deg)",
+                  },
+                  "50%": {
+                    transform: "rotate(5deg)",
+                  },
+                },
               }}
             >
-              <ShoppingBagIcon />
+              {cart && cart.items.length > 0 && (
+                <Badge badgeContent={getTotalAmountCartItems()} color="success">
+                  <ShoppingBagIcon />
+                </Badge>
+              )}
             </IconButton>
+            {/* <AnimatedCheckIcon isVisible={isVisible} /> */}
           </Box>
           <Link
             sx={{

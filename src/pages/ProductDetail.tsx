@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { addItem, setCart, updateItem } from "../slices/cartSlice";
+import { addItem, setCart, setVisible, updateItem } from "../slices/cartSlice";
 import { Product } from "../slices/productSlice";
 import { useAppDispatch, useAppSelector } from "../slices/store";
 
@@ -74,6 +74,7 @@ export default function ProductDetail() {
         ],
       };
       dispatch(setCart(newCart));
+      dispatch(setVisible(true));
     }
   };
 
