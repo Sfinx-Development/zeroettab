@@ -8,7 +8,6 @@ import {
   addPaymentOrderIncomingToDB,
   getPaymentOrderFromDBByReference,
 } from "../api/paymentOrder";
-import { PaymentDetails } from "./orderSlice";
 
 export interface PaymentDetails {
   msisdn: string;
@@ -33,7 +32,7 @@ interface PaymentState {
   paymentOrderOutgoing: PaymentOrderOutgoing | null;
   paymentOrderIncoming: PaymentOrderIncoming | null;
   checkoutUrl: string | null;
-  paymentInfo:PaymentInfo|null;
+  paymentInfo: PaymentInfo | null;
   error: string | null;
 }
 
@@ -104,7 +103,7 @@ export const getPaymentOrderIncoming = createAsyncThunk<
 });
 
 export const getPaymentValidation = createAsyncThunk<
-  PaymentOrderIncoming,
+  PaymentInfo,
   string,
   { rejectValue: string }
 >("payments/getPaymentValidation", async (validationUrl, thunkAPI) => {
@@ -123,7 +122,12 @@ export const getPaymentValidation = createAsyncThunk<
 const paymentSlice = createSlice({
   name: "payments",
   initialState,
-  reducers: {},
+  reducers: {
+    clearPaymentOrder: (state) => {
+      state.paymentOrderIncoming = null;
+      localStorage.removeItem("paymentOrderIncoming");
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(addPaymentOrderOutgoing.fulfilled, (state, action) => {
@@ -163,4 +167,5 @@ const paymentSlice = createSlice({
   },
 });
 
+export const { clearPaymentOrder } = paymentSlice.actions;
 export const PaymentReducer = paymentSlice.reducer;

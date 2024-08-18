@@ -165,6 +165,7 @@ export default function Cart() {
 
   const TESTPAYMENT = (order: Order) => {
     const payeeId = import.meta.env.VITE_SWEDBANK_PAYEEID;
+    const payeeName = import.meta.env.VITE_SWEDBANK_PAYEENAME;
     const paymentOrder: PaymentOrderOutgoing = {
       operation: "Purchase",
       currency: "SEK",
@@ -184,7 +185,7 @@ export default function Cart() {
       payeeInfo: {
         payeeId: payeeId,
         payeeReference: generatePayeeReference(true),
-        payeeName: "Angelina Holmqvist Khalifa",
+        payeeName: payeeName,
         orderReference: order.reference,
       },
     };

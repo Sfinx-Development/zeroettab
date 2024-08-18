@@ -8,7 +8,10 @@ import {
 } from "@mui/material";
 import { useEffect } from "react";
 import { Order, updateOrderAsync } from "../slices/orderSlice";
-import { getPaymentValidation } from "../slices/paymentSlice";
+import {
+  clearPaymentOrder,
+  getPaymentValidation,
+} from "../slices/paymentSlice";
 import { useAppDispatch, useAppSelector } from "../slices/store";
 
 export default function OrderConfirmation() {
@@ -21,22 +24,18 @@ export default function OrderConfirmation() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    console.log("paid", incomingPaymentOrder);
     if (order && incomingPaymentOrder?.paid.id) {
-      console.log(
-        " paymentorder URL: ",
-        incomingPaymentOrder.paid.id,
-        "order: ",
-        order
+      dispatch(getPaymentValidation(incomingPaymentOrder.paid.id)).then(
+        (fulfilled) => {
+          if (fulfilled) {
+            const updatedOrder: Order = {
+              ...order,
+              status: "Paid",
+            };
+            dispatch(updateOrderAsync(updatedOrder));
+          }
+        }
       );
-
-      dispatch(getPaymentValidation(incomingPaymentOrder.paid.id)).then(() => {
-        const updatedOrder: Order = {
-          ...order,
-          status: "Paid",
-        };
-        dispatch(updateOrderAsync(updatedOrder));
-      });
     }
   }, [incomingPaymentOrder]);
 
@@ -48,6 +47,7 @@ export default function OrderConfirmation() {
       };
       dispatch(updateOrderAsync(orderUpdatedPayment));
     }
+    dispatch(clearPaymentOrder());
   }, [paymentInfo]);
 
   function getProduct(productId: string) {
