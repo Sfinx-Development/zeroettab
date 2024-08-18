@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { addOrderToDB, editOrderInDB, getOrderFromDB } from "../api/order";
+import { PaymentInfo } from "./paymentSlice";
 
 // export interface User {
 //   id: string; // skapas vid betalning?
@@ -12,6 +13,7 @@ export interface Order {
   created_date: string;
   status: string;
   items: OrderItem[];
+  paymentInfo?: PaymentInfo;
 }
 
 export interface OrderItem {
@@ -48,6 +50,7 @@ export const addOrderAsync = createAsyncThunk<
     order.total_amount = totalAmount;
     const createdOrder = await addOrderToDB(order);
     if (createdOrder) {
+      localStorage.setItem("order", JSON.stringify(createdOrder));
       return createdOrder;
     } else {
       return thunkAPI.rejectWithValue("failed to create order");

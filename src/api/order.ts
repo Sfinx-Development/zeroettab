@@ -41,7 +41,6 @@ export const editOrderInDB = async (order: Order) => {
 
     const updatedOrderData = {
       ...order,
-      status: "Paid",
     };
 
     await updateDoc(orderRef, updatedOrderData);
