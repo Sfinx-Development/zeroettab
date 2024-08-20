@@ -6,11 +6,11 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Order, updateOrderAsync } from "../slices/orderSlice";
 import {
   clearPaymentOrder,
-  getPaymentValidation,
+  getPaymentPaidValidation,
 } from "../slices/paymentSlice";
 import { useAppDispatch, useAppSelector } from "../slices/store";
 
@@ -21,31 +21,46 @@ export default function OrderConfirmation() {
     (state) => state.paymentSlice.paymentOrderIncoming
   );
   const paymentInfo = useAppSelector((state) => state.paymentSlice.paymentInfo);
+  const paymentFailed = useAppSelector(
+    (state) => state.paymentSlice.paymentFailed
+  );
+  const paymentCancelled = useAppSelector(
+    (state) => state.paymentSlice.paymentCancelled
+  );
+  const paymentAborted = useAppSelector(
+    (state) => state.paymentSlice.paymentAborted
+  );
+  const [paymentError, setPaymentError] = useState(false);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (order && incomingPaymentOrder?.paid.id) {
-      dispatch(getPaymentValidation(incomingPaymentOrder.paid.id)).then(
-        (fulfilled) => {
-          if (fulfilled) {
-            const updatedOrder: Order = {
-              ...order,
-              status: "Paid",
-            };
-            dispatch(updateOrderAsync(updatedOrder));
-          }
-        }
-      );
+    if (order && incomingPaymentOrder && incomingPaymentOrder.paid?.id) {
+      console.log("FÖRSTA: HÄMTAR VALIDERING STATUS");
+      dispatch(getPaymentPaidValidation(incomingPaymentOrder));
     }
-  }, [incomingPaymentOrder]);
+  }, []);
 
   useEffect(() => {
+    console.log("PAYMENTINFO: ", paymentInfo);
     if (paymentInfo && order) {
+      console.log("ANDRA UPPDATERAR ORDER: ", order?.status);
       const orderUpdatedPayment: Order = {
         ...order,
+        status: "Paid",
         paymentInfo: paymentInfo,
       };
       dispatch(updateOrderAsync(orderUpdatedPayment));
+    }
+    dispatch(clearPaymentOrder());
+  }, [paymentInfo]);
+
+  useEffect(() => {
+    console.log("ORDER: ", order?.status);
+  }, [order]);
+
+  useEffect(() => {
+    if (paymentAborted || paymentCancelled || (paymentFailed && order)) {
+      setPaymentError(true);
     }
     dispatch(clearPaymentOrder());
   }, [paymentInfo]);
@@ -72,6 +87,15 @@ export default function OrderConfirmation() {
         alignItems: "center",
       }}
     >
+      {paymentError && paymentAborted && (
+        <Typography>Betalning {paymentAborted.abortReason}</Typography>
+      )}
+      {paymentError && paymentCancelled && (
+        <Typography>Betalning {paymentCancelled.cancelReason}</Typography>
+      )}
+      {paymentError && paymentFailed && (
+        <Typography>Betalning {paymentFailed.problem.detail}</Typography>
+      )}
       {order && order.status === "Paid" ? (
         <>
           <Paper

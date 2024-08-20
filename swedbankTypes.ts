@@ -22,10 +22,14 @@ export interface PaymentOrder {
   };
 }
 //TYPER FÖR STATUSAR PÅ BETALNING, ABORTED, CANCELLED, FAILED:
+
+//ABORTED
 export interface PaymentAborted {
   id: string;
   abortReason: string;
 }
+
+//CANCELLED
 export interface CancelledPaymentToken {
   type: string;
   token: string;
@@ -54,7 +58,8 @@ export interface PaymentCancelled {
   details: CancelledPaymentDetails;
 }
 
-export interface FailedPaymentProblem {
+//FAILED
+export interface FailedPaymentProblemDetails {
   name: string;
   description: string;
 }
@@ -63,7 +68,7 @@ export interface FailedPaymentProblem {
   title: string;
   status: number;
   detail: string;
-  problems: FailedPaymentProblem[];
+  problems: FailedPaymentProblemDetails[];
 }
 export interface PaymentFailed {
   id: string;

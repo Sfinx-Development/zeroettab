@@ -1,7 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+  PaymentAborted,
+  PaymentCancelled,
+  PaymentFailed,
+} from "../../swedbankTypes";
 import { PaymentOrderIncoming, PaymentOrderOutgoing } from "../../types";
 import {
-  GetPaymentValidation,
+  GetPaymentAbortedValidation,
+  GetPaymentCancelledValidation,
+  GetPaymentFailedValidation,
+  GetPaymentPaidValidation,
   PostPaymentOrder,
 } from "../api/SWEDBANKpaymentOrder";
 import {
@@ -33,6 +41,9 @@ interface PaymentState {
   paymentOrderIncoming: PaymentOrderIncoming | null;
   checkoutUrl: string | null;
   paymentInfo: PaymentInfo | null;
+  paymentFailed: PaymentFailed | null;
+  paymentAborted: PaymentAborted | null;
+  paymentCancelled: PaymentCancelled | null;
   error: string | null;
 }
 
@@ -41,6 +52,9 @@ export const initialState: PaymentState = {
   paymentOrderIncoming: getPaymentOrderIncomingFromLocalStorage(),
   checkoutUrl: null,
   paymentInfo: null,
+  paymentFailed: null,
+  paymentAborted: null,
+  paymentCancelled: null,
   error: null,
 };
 
@@ -101,21 +115,37 @@ export const getPaymentOrderIncoming = createAsyncThunk<
     throw new Error("Något gick fel vid .");
   }
 });
-
-export const getPaymentValidation = createAsyncThunk<
-  PaymentInfo,
-  string,
+export const getPaymentPaidValidation = createAsyncThunk<
+  PaymentInfo | PaymentAborted | PaymentCancelled | PaymentFailed,
+  PaymentOrderIncoming,
   { rejectValue: string }
->("payments/getPaymentValidation", async (validationUrl, thunkAPI) => {
+>("payments/getPaymentValidation", async (order, thunkAPI) => {
   try {
-    const response = await GetPaymentValidation(validationUrl);
+    const response = await GetPaymentPaidValidation(order.paid.id);
     if (response) {
       return response;
-    } else {
-      return thunkAPI.rejectWithValue("failed to get payment validation");
     }
+
+    const failed = await GetPaymentFailedValidation(order.failed.id);
+    if (failed) {
+      return failed;
+    }
+
+    const aborted = await GetPaymentAbortedValidation(order.aborted.id);
+    if (aborted) {
+      return aborted;
+    }
+
+    const cancelled = await GetPaymentCancelledValidation(order.cancelled.id);
+    if (cancelled) {
+      return cancelled;
+    }
+
+    return thunkAPI.rejectWithValue("failed to get payment validation");
   } catch (error) {
-    throw new Error("Något gick fel vid hämtning av betalningsvalidering.");
+    return thunkAPI.rejectWithValue(
+      "Något gick fel vid hämtning av betalningsvalidering."
+    );
   }
 });
 
@@ -154,13 +184,24 @@ const paymentSlice = createSlice({
         state.error =
           "Något gick fel när payment ordern hämtades. Försök igen senare.";
       })
-      .addCase(getPaymentValidation.fulfilled, (state, action) => {
-        if (action.payload) {
-          state.paymentInfo = action.payload;
-          state.error = null;
+      .addCase(getPaymentPaidValidation.fulfilled, (state, action) => {
+        const payload = action.payload;
+        console.log("PAYLOAD: ", action.payload);
+
+        if ("paid" in payload) {
+          state.paymentInfo = payload as PaymentInfo;
+          console.log("SÄTTS SOM PAYMENTINFO");
+        } else if ("abortReason" in payload) {
+          state.paymentAborted = payload as PaymentAborted;
+        } else if ("cancelReason" in payload) {
+          state.paymentCancelled = payload as unknown as PaymentCancelled;
+        } else if ("problem" in payload) {
+          state.paymentFailed = payload as PaymentFailed;
+        } else {
+          state.error = "Unknown payment status";
         }
       })
-      .addCase(getPaymentValidation.rejected, (state) => {
+      .addCase(getPaymentPaidValidation.rejected, (state) => {
         state.error =
           "Något gick fel när validering av betalning hämtades. Försök igen senare.";
       });

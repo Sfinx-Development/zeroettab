@@ -1,3 +1,8 @@
+import {
+  PaymentAborted,
+  PaymentCancelled,
+  PaymentFailed,
+} from "../../swedbankTypes";
 import { PaymentOrderIncoming, PaymentOrderOutgoing } from "../../types";
 import { PaymentInfo } from "../slices/paymentSlice";
 
@@ -98,7 +103,7 @@ export async function GetPaymentFailedValidation(paidUrl: string) {
     })
     .then((data) => {
       console.log("DATA", data);
-      return data as PaymentInfo;
+      return data as PaymentFailed;
     })
     .catch((error) => {
       console.error(error);
@@ -132,7 +137,7 @@ export async function GetPaymentCancelledValidation(paidUrl: string) {
     })
     .then((data) => {
       console.log("DATA", data);
-      return data as PaymentInfo;
+      return data as PaymentCancelled;
     })
     .catch((error) => {
       console.error(error);
@@ -166,7 +171,7 @@ export async function GetPaymentAbortedValidation(paidUrl: string) {
     })
     .then((data) => {
       console.log("DATA", data);
-      return data as PaymentInfo;
+      return data as PaymentAborted;
     })
     .catch((error) => {
       console.error(error);
