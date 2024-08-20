@@ -74,3 +74,53 @@ export interface PaymentFailed {
   id: string;
   problem: FailedPaymentProblem;
 }
+
+export interface TransationOrderItem {
+  reference: string;
+  name: string;
+  type: string;
+  class: string;
+  itemUrl?: string;
+  imageUrl?: string;
+  description: string;
+  discountDescription?: string;
+  quantity: number;
+  quantityUnit: string;
+  unitPrice: number;
+  discountPrice?: number;
+  vatPercent: number;
+  amount: number;
+  vatAmount: number;
+}
+
+export interface Transaction {
+  description: string;
+  amount: number;
+  vatAmount: number;
+  payeeReference: string;
+  receiptReference: string;
+  orderItems: TransationOrderItem[];
+}
+
+export interface PaymentTransaction {
+  id: string;
+  created: string; // ISO 8601 date string
+  updated: string;
+  type: string;
+  state: string;
+  amount: number;
+  vatAmount: number;
+  description: string;
+  payeeReference: string;
+  receiptReference: string;
+}
+
+export interface Capture {
+  id: string;
+  transaction: PaymentTransaction;
+}
+
+export interface PaymentCapture {
+  payment: string;
+  capture: Capture;
+}

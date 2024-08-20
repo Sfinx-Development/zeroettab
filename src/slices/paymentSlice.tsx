@@ -2,10 +2,13 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   PaymentAborted,
   PaymentCancelled,
+  PaymentCapture,
   PaymentFailed,
+  Transaction,
 } from "../../swedbankTypes";
 import { PaymentOrderIncoming, PaymentOrderOutgoing } from "../../types";
 import {
+  CapturePayment,
   GetPaymentAbortedValidation,
   GetPaymentCancelledValidation,
   GetPaymentFailedValidation,
@@ -44,6 +47,7 @@ interface PaymentState {
   paymentFailed: PaymentFailed | null;
   paymentAborted: PaymentAborted | null;
   paymentCancelled: PaymentCancelled | null;
+  paymentCapture: PaymentCapture | null;
   error: string | null;
 }
 
@@ -55,6 +59,7 @@ export const initialState: PaymentState = {
   paymentFailed: null,
   paymentAborted: null,
   paymentCancelled: null,
+  paymentCapture: null,
   error: null,
 };
 
@@ -149,6 +154,23 @@ export const getPaymentPaidValidation = createAsyncThunk<
   }
 });
 
+export const getPaymentCaptureAsync = createAsyncThunk<
+  PaymentCapture,
+  { transaction: Transaction; url: string },
+  { rejectValue: string }
+>("payments/getPaymentCaptureAsync", async ({ transaction, url }, thunkAPI) => {
+  try {
+    const response = await CapturePayment(transaction, url);
+    if (response) {
+      return response;
+    } else {
+      return thunkAPI.rejectWithValue("failed to capture payment");
+    }
+  } catch (error) {
+    throw new Error("Något gick fel vid Betalning (Capture).");
+  }
+});
+
 const paymentSlice = createSlice({
   name: "payments",
   initialState,
@@ -204,6 +226,15 @@ const paymentSlice = createSlice({
       .addCase(getPaymentPaidValidation.rejected, (state) => {
         state.error =
           "Något gick fel när validering av betalning hämtades. Försök igen senare.";
+      })
+      .addCase(getPaymentCaptureAsync.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.paymentCapture = action.payload;
+          state.error = null;
+        }
+      })
+      .addCase(getPaymentCaptureAsync.rejected, (state) => {
+        state.error = "Något gick fel när betalning bearbetades.";
       });
   },
 });
