@@ -42,7 +42,7 @@
 // export default MySvgImage;
 
 
-import React from 'react';
+
 
 const MySvgImage = () => (
     <svg
