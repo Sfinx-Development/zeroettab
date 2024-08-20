@@ -1,4 +1,5 @@
 import LanguageIcon from "@mui/icons-material/Language";
+import MySvgImage from "./SvgImage";
 import {
   Box,
   IconButton,
@@ -151,11 +152,10 @@ export default function Header(): JSX.Element {
           </Typography>
         </Link>
         <Link href="/">
-          <img
-            src="https://i.imgur.com/IMSL19B.png"
-            height="100"
-            alt="logo"
-          ></img>
+          <MySvgImage />
+          {/* <svg
+         
+          ></svg> */}
         </Link>
         <Link
           sx={{
@@ -243,8 +243,8 @@ export default function Header(): JSX.Element {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: 2,
-            marginTop: "-55px",
+            gap: 0.5,
+            marginTop: "-42px",
           }}
         >
           <Box sx={{ display: "flex", gap: 2 }}>
