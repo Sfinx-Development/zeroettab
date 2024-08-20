@@ -190,6 +190,7 @@ export default function Cart() {
       },
     };
     dispatch(addPaymentOrderOutgoing(paymentOrder));
+    dispatch(clearCart());
   };
 
   const handleMakeOrder = () => {
@@ -228,7 +229,6 @@ export default function Cart() {
         };
         dispatch(updateProductAsync(productToUpdate));
       });
-      dispatch(clearCart());
       TESTPAYMENT(newOrder);
     }
   };
@@ -238,6 +238,16 @@ export default function Cart() {
       (acc, item) => acc + item.price * item.quantity,
       0
     );
+  };
+
+  const getTotalAmountPerProduct = (
+    product: Product | undefined,
+    item: CartItem
+  ) => {
+    if (product) {
+      return product.price * item.quantity;
+    }
+    return 1;
   };
 
   return (
@@ -255,7 +265,9 @@ export default function Cart() {
       }}
     >
       {/* {/* <Button onClick={() => TESTPAYMENT()}>TESTA BETALNING POOST</Button> */}
-      {incomingPaymentOrder && <SeamlessCheckout />}
+      {incomingPaymentOrder && incomingPaymentOrder.operations && (
+        <SeamlessCheckout />
+      )}
       {cart && cart.items.length == 0 ? (
         <Box
           sx={{
@@ -374,7 +386,9 @@ export default function Cart() {
                     </Box>
                   )}
                   <Typography>{item.quantity} ST</Typography>
-                  <Typography>Pris: {product?.price} SEK</Typography>
+                  <Typography>
+                    Pris: {getTotalAmountPerProduct(product, item)} SEK
+                  </Typography>
                 </Box>
               </Box>
             );

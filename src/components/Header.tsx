@@ -10,12 +10,12 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import Badge from "@mui/material/Badge";
 import { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useNavigate } from "react-router-dom";
 import { useLanguageContext } from "../context/languageContext";
 import { useAppSelector } from "../slices/store";
-import Badge from "@mui/material/Badge";
 
 export default function Header(): JSX.Element {
   const theme = useTheme();
@@ -315,10 +315,12 @@ export default function Header(): JSX.Element {
                 },
               }}
             >
-              {cart && cart.items.length > 0 && (
+              {cart && cart.items.length > 0 ? (
                 <Badge badgeContent={getTotalAmountCartItems()} color="success">
                   <ShoppingBagIcon />
                 </Badge>
+              ) : (
+                <ShoppingBagIcon />
               )}
             </IconButton>
             {/* <AnimatedCheckIcon isVisible={isVisible} /> */}
