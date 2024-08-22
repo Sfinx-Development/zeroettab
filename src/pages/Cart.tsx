@@ -8,8 +8,13 @@ import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { PaymentOrderOutgoing } from "../../types";
 import SeamlessCheckout from "../components/SeamlessCheckout";
-import { CartItem, clearCart, updateItem } from "../slices/cartSlice";
-import { addOrderAsync, Order, OrderItem } from "../slices/orderSlice";
+import { CartItem, updateItem } from "../slices/cartSlice";
+import {
+  addOrderAsync,
+  Order,
+  OrderItem,
+  updateOrderAsync,
+} from "../slices/orderSlice";
 import { addPaymentOrderOutgoing } from "../slices/paymentSlice";
 import { Product, Size, updateProductAsync } from "../slices/productSlice";
 import { useAppDispatch, useAppSelector } from "../slices/store";
@@ -39,6 +44,71 @@ export default function Cart() {
   const incomingPaymentOrder = useAppSelector(
     (state) => state.paymentSlice.paymentOrderIncoming
   );
+  const paymentInfo = useAppSelector((state) => state.paymentSlice.paymentInfo);
+  const order = useAppSelector((state) => state.orderSlice.order);
+
+  useEffect(() => {
+    if (incomingPaymentOrder && order) {
+      // if (paymentInfo.instrument === "CreditCard") {
+      //   console.log("CREDIT CARD VILLKORLET :)");
+      // const mappedItems: TransationOrderItem[] = order.items.map((item) => {
+      //   const product = products.find((p) => p.id === item.product_id);
+
+      //   if (!product) {
+      //     throw new Error(`Product with id ${item.product_id} not found`);
+      //   }
+
+      //   return {
+      //     reference: product.id,
+      //     name: product.name,
+      //     type: product.description, //kategori
+      //     class: product.description, // kategori med?
+      //     // imageUrl: item.imageUrl,
+      //     description: product.description,
+      //     // discountDescription: item.discountDescription,
+      //     quantity: item.quantity,
+      //     quantityUnit: "psc",
+      //     unitPrice: product.price,
+      //     discountPrice: product.rabatt,
+      //     vatPercent: 5000, // momsen i basenheter tex 25% = 2500
+      //     amount: item.quantity * product.price, // totala belopp för denna produkten
+      //     vatAmount: item.quantity * product.price * 0.25, // momsen
+      //   };
+      // });
+
+      // const transaction: Transaction = {
+      //   description: "Capturing payment",
+      //   amount: order.total_amount,
+      //   vatAmount: order.total_amount * 0.25,
+      //   payeeReference:
+      //     order.paymentInfo?.payeeReference || "DefaultReference",
+      //   receiptReference: "123", //något annat`?
+      //   // orderItems: mappedItems,
+      // };
+      // const url = incomingPaymentOrder?.operations.find(
+      //   (o) => o.rel == "view-checkout"
+      // );
+      // const captureUrl = url + "/captures";
+      // dispatch(
+      //   getPaymentCaptureAsync({ transaction: transaction, url: captureUrl })
+      // );
+
+      console.log("ANDRA UPPDATERAR ORDER: ", order.status);
+      const orderUpdatedPayment: Order = {
+        ...order,
+        status: "Paid",
+      };
+      dispatch(updateOrderAsync(orderUpdatedPayment));
+      // }
+    }
+    // dispatch(clearPaymentOrder());
+  }, [paymentInfo]);
+
+  useEffect(() => {
+    if (order?.status == "Paid") {
+      navigate("/orderConfirmation");
+    }
+  }, [order]);
   // useEffect(() => {
   //   if (incomingPaymentOrder) {
   //     const checkoutOperation = incomingPaymentOrder.operations.find(
@@ -190,7 +260,7 @@ export default function Cart() {
       },
     };
     dispatch(addPaymentOrderOutgoing(paymentOrder));
-    dispatch(clearCart());
+    // dispatch(clearCart());
   };
 
   const handleMakeOrder = () => {
@@ -233,6 +303,12 @@ export default function Cart() {
     }
   };
 
+  useEffect(() => {
+    if (paymentInfo && paymentInfo?.instrument == "CreditCard") {
+      navigate("/orderConfirmation");
+    }
+  }, [paymentInfo]);
+
   const calculateTotalPrice = () => {
     return cart?.items.reduce(
       (acc, item) => acc + item.price * item.quantity,
@@ -268,7 +344,7 @@ export default function Cart() {
       {incomingPaymentOrder && incomingPaymentOrder.operations && (
         <SeamlessCheckout />
       )}
-      {cart && cart.items.length == 0 ? (
+      {!cart || cart?.items.length == 0 ? (
         <Box
           sx={{
             display: "flex",

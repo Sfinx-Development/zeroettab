@@ -1,8 +1,8 @@
 import {
   PaymentAborted,
   PaymentCancelled,
-  PaymentCapture,
   PaymentFailed,
+  PaymentOrderResponse,
   Transaction,
 } from "../../swedbankTypes";
 import { PaymentOrderIncoming, PaymentOrderOutgoing } from "../../types";
@@ -37,6 +37,7 @@ export async function PostPaymentOrder(paymentOrder: PaymentOrderOutgoing) {
       return response.json();
     })
     .then((data) => {
+      console.log("RESPONSE PÅ PAYMENT ORDER: ", data);
       return data as PaymentOrderIncoming;
     })
     .catch((error) => {
@@ -70,7 +71,6 @@ export async function GetPaymentPaidValidation(paidUrl: string) {
       return response.json();
     })
     .then((data) => {
-      console.log("DATA", data);
       return data as PaymentInfo;
     })
     .catch((error) => {
@@ -181,10 +181,14 @@ export async function GetPaymentAbortedValidation(paidUrl: string) {
     });
 }
 
-export async function CapturePayment(
-  transaction: Transaction,
-  captureUrl: string
-) {
+//HAR JAG GJORT DEN TYPEN SOM SKICKAS OCH TAS EMOT FÖR 3.0 OCH INTE FÖR 3.1????
+export async function CapturePayment({
+  transaction,
+  captureUrl,
+}: {
+  transaction: Transaction;
+  captureUrl: string;
+}): Promise<PaymentOrderResponse | null> {
   const uri = captureUrl;
   const requestBody = {
     transaction,
@@ -213,7 +217,7 @@ export async function CapturePayment(
       return response.json();
     })
     .then((data) => {
-      return data as PaymentCapture;
+      return data as PaymentOrderResponse;
     })
     .catch((error) => {
       console.error(error);

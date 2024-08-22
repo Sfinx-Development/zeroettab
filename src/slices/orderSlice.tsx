@@ -160,6 +160,7 @@ const orderSlice = createSlice({
       .addCase(updateOrderAsync.fulfilled, (state, action) => {
         if (action.payload) {
           state.order = action.payload;
+          localStorage.setItem("order", JSON.stringify(action.payload));
           state.error = null;
         }
       })
