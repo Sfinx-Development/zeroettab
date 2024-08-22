@@ -66,9 +66,9 @@ export interface PaymentOrderOutgoing {
   };
 }
 
-interface ResourceReference {
-  id: string;
-}
+// interface ResourceReference {
+//   id: string;
+// }
 
 interface Operation {
   method: string;
@@ -77,35 +77,79 @@ interface Operation {
   contentType: string;
 }
 
-export interface PaymentOrderIncoming {
+// export interface PaymentOrderIncoming {
+//   id: string;
+//   created: string;
+//   updated: string;
+//   operation: string;
+//   status: string;
+//   currency: string;
+//   amount: number;
+//   vatAmount: number;
+//   description: string;
+//   initiatingSystemUserAgent: string;
+//   language: string;
+//   availableInstruments: string[];
+//   implementation: string;
+//   integration: string;
+//   instrumentMode: boolean;
+//   guestMode: boolean;
+//   urls: ResourceReference;
+//   payeeInfo: ResourceReference;
+//   payer: ResourceReference;
+//   history: ResourceReference;
+//   failed: ResourceReference;
+//   aborted: ResourceReference;
+//   paid: ResourceReference;
+//   cancelled: ResourceReference;
+//   reversed: ResourceReference;
+//   financialTransactions: ResourceReference;
+//   failedAttempts: ResourceReference;
+//   postPurchaseFailedAttempts: ResourceReference;
+//   metadata: ResourceReference;
+//   operations: Operation[];
+// }
+
+export interface PaymentOrderId {
   id: string;
+}
+
+// Typdefinition för paymentOrder
+export interface PaymentOrder {
+  id: string;
+  amount: number;
+  currency: string;
+  description: string;
   created: string;
   updated: string;
   operation: string;
   status: string;
-  currency: string;
-  amount: number;
+  payeeInfo: PaymentOrderId;
+  payer: PaymentOrderId;
+  urls: PaymentOrderId;
+  aborted: PaymentOrderId;
+  cancelled: PaymentOrderId;
+  failed: PaymentOrderId;
+  failedAttempts: PaymentOrderId;
+  financialTransactions: PaymentOrderId;
+  history: PaymentOrderId;
+  metadata: PaymentOrderId;
+  paid: PaymentOrderId;
+  postPurchaseFailedAttempts: PaymentOrderId;
+  reversed: PaymentOrderId;
   vatAmount: number;
-  description: string;
-  initiatingSystemUserAgent: string;
-  language: string;
   availableInstruments: string[];
-  implementation: string;
-  integration: string;
-  instrumentMode: boolean;
   guestMode: boolean;
-  urls: ResourceReference;
-  payeeInfo: ResourceReference;
-  payer: ResourceReference;
-  history: ResourceReference;
-  failed: ResourceReference;
-  aborted: ResourceReference;
-  paid: ResourceReference;
-  cancelled: ResourceReference;
-  reversed: ResourceReference;
-  financialTransactions: ResourceReference;
-  failedAttempts: ResourceReference;
-  postPurchaseFailedAttempts: ResourceReference;
-  metadata: ResourceReference;
+  implementation: string;
+  initiatingSystemUserAgent: string;
+  instrumentMode: boolean;
+  integration: string;
+  language: string;
+}
+
+// Typdefinition för incomingPaymentOrder
+export interface PaymentOrderIncoming {
+  id: string;
   operations: Operation[];
+  paymentOrder: PaymentOrder;
 }

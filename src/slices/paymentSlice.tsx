@@ -3,19 +3,19 @@ import {
   PaymentAborted,
   PaymentCancelled,
   PaymentFailed,
+  PaymentOrderResponse,
+  Transaction,
 } from "../../swedbankTypes";
 import { PaymentOrderIncoming, PaymentOrderOutgoing } from "../../types";
 import {
+  CapturePayment,
   GetPaymentAbortedValidation,
   GetPaymentCancelledValidation,
   GetPaymentFailedValidation,
   GetPaymentPaidValidation,
   PostPaymentOrder,
 } from "../api/SWEDBANKpaymentOrder";
-import {
-  addPaymentOrderIncomingToDB,
-  getPaymentOrderFromDBByReference,
-} from "../api/paymentOrder";
+import { addPaymentOrderIncomingToDB } from "../api/paymentOrder";
 
 export interface PaymentDetails {
   msisdn: string;
@@ -44,6 +44,7 @@ interface PaymentState {
   paymentFailed: PaymentFailed | null;
   paymentAborted: PaymentAborted | null;
   paymentCancelled: PaymentCancelled | null;
+  paymentCapture: PaymentOrderResponse | null;
   error: string | null;
 }
 
@@ -51,25 +52,39 @@ export const initialState: PaymentState = {
   paymentOrderOutgoing: null,
   paymentOrderIncoming: getPaymentOrderIncomingFromLocalStorage(),
   checkoutUrl: null,
-  paymentInfo: null,
+  paymentInfo: getPaymentInfoFromLocalStorage(),
   paymentFailed: null,
   paymentAborted: null,
   paymentCancelled: null,
+  paymentCapture: null,
   error: null,
 };
 
-export default function getPaymentOrderIncomingFromLocalStorage(): PaymentOrderIncoming | null {
+function getPaymentOrderIncomingFromLocalStorage(): PaymentOrderIncoming | null {
   const paymentOrderIncoming = localStorage.getItem("paymentOrderIncoming");
 
   if (paymentOrderIncoming) {
     try {
-      return JSON.parse(paymentOrderIncoming)
-        .paymentOrder as PaymentOrderIncoming;
+      return JSON.parse(paymentOrderIncoming) as PaymentOrderIncoming;
     } catch (error) {
       console.error(
         "Error parsing paymentOrderIncoming from localStorage:",
         error
       );
+      return null;
+    }
+  }
+  return null;
+}
+
+function getPaymentInfoFromLocalStorage(): PaymentInfo | null {
+  const paymentInfo = localStorage.getItem("paymentInfo");
+
+  if (paymentInfo) {
+    try {
+      return JSON.parse(paymentInfo) as PaymentInfo;
+    } catch (error) {
+      console.error("Error parsing paymentInfo from localStorage:", error);
       return null;
     }
   }
@@ -99,44 +114,52 @@ export const addPaymentOrderOutgoing = createAsyncThunk<
   }
 });
 
-export const getPaymentOrderIncoming = createAsyncThunk<
-  PaymentOrderIncoming,
-  string,
-  { rejectValue: string }
->("payments/getPaymentOrderIncoming", async (orderReference, thunkAPI) => {
-  try {
-    const response = await getPaymentOrderFromDBByReference(orderReference);
-    if (response) {
-      return response;
-    } else {
-      return thunkAPI.rejectWithValue("failed to create payment ordcer");
-    }
-  } catch (error) {
-    throw new Error("Något gick fel vid .");
-  }
-});
+// export const getPaymentOrderIncoming = createAsyncThunk<
+//   PaymentOrderIncoming,
+//   string,
+//   { rejectValue: string }
+// >("payments/getPaymentOrderIncoming", async (orderReference, thunkAPI) => {
+//   try {
+//     const response = await getPaymentOrderFromDBByReference(orderReference);
+//     if (response) {
+//       return response;
+//     } else {
+//       return thunkAPI.rejectWithValue("failed to create payment ordcer");
+//     }
+//   } catch (error) {
+//     throw new Error("Något gick fel vid .");
+//   }
+// });
 export const getPaymentPaidValidation = createAsyncThunk<
   PaymentInfo | PaymentAborted | PaymentCancelled | PaymentFailed,
   PaymentOrderIncoming,
   { rejectValue: string }
 >("payments/getPaymentValidation", async (order, thunkAPI) => {
   try {
-    const response = await GetPaymentPaidValidation(order.paid.id);
+    console.log("DETTA HÄNDER ENS");
+    const response = await GetPaymentPaidValidation(order.paymentOrder.paid.id);
     if (response) {
+      localStorage.setItem("paymentInfo", JSON.stringify(response));
       return response;
     }
 
-    const failed = await GetPaymentFailedValidation(order.failed.id);
+    const failed = await GetPaymentFailedValidation(
+      order.paymentOrder.failed.id
+    );
     if (failed) {
       return failed;
     }
 
-    const aborted = await GetPaymentAbortedValidation(order.aborted.id);
+    const aborted = await GetPaymentAbortedValidation(
+      order.paymentOrder.aborted.id
+    );
     if (aborted) {
       return aborted;
     }
 
-    const cancelled = await GetPaymentCancelledValidation(order.cancelled.id);
+    const cancelled = await GetPaymentCancelledValidation(
+      order.paymentOrder.cancelled.id
+    );
     if (cancelled) {
       return cancelled;
     }
@@ -149,6 +172,26 @@ export const getPaymentPaidValidation = createAsyncThunk<
   }
 });
 
+export const getPaymentCaptureAsync = createAsyncThunk<
+  PaymentOrderResponse, // Return type
+  { transaction: Transaction; url: string }, // Argument type
+  { rejectValue: string } // ThunkAPI type
+>("payments/getPaymentCaptureAsync", async ({ transaction, url }, thunkAPI) => {
+  try {
+    const response = await CapturePayment({
+      transaction: transaction,
+      captureUrl: url,
+    });
+    if (response) {
+      return response;
+    } else {
+      return thunkAPI.rejectWithValue("failed to capture payment");
+    }
+  } catch (error) {
+    throw new Error("Något gick fel vid Betalning (Capture).");
+  }
+});
+
 const paymentSlice = createSlice({
   name: "payments",
   initialState,
@@ -156,6 +199,10 @@ const paymentSlice = createSlice({
     clearPaymentOrder: (state) => {
       state.paymentOrderIncoming = null;
       localStorage.removeItem("paymentOrderIncoming");
+    },
+    clearPaymentInfo: (state) => {
+      state.paymentOrderIncoming = null;
+      localStorage.removeItem("paymentInfo");
     },
   },
   extraReducers: (builder) => {
@@ -174,23 +221,21 @@ const paymentSlice = createSlice({
         state.error =
           "Något gick fel när payment ordern hämtades. Försök igen senare.";
       })
-      .addCase(getPaymentOrderIncoming.fulfilled, (state, action) => {
-        if (action.payload) {
-          state.paymentOrderIncoming = action.payload;
-          state.error = null;
-        }
-      })
-      .addCase(getPaymentOrderIncoming.rejected, (state) => {
-        state.error =
-          "Något gick fel när payment ordern hämtades. Försök igen senare.";
-      })
+      // .addCase(getPaymentOrderIncoming.fulfilled, (state, action) => {
+      //   if (action.payload) {
+      //     state.paymentOrderIncoming = action.payload;
+      //     state.error = null;
+      //   }
+      // })
+      // .addCase(getPaymentOrderIncoming.rejected, (state) => {
+      //   state.error =
+      //     "Något gick fel när payment ordern hämtades. Försök igen senare.";
+      // })
       .addCase(getPaymentPaidValidation.fulfilled, (state, action) => {
         const payload = action.payload;
         console.log("PAYLOAD: ", action.payload);
-
         if ("paid" in payload) {
-          state.paymentInfo = payload as PaymentInfo;
-          console.log("SÄTTS SOM PAYMENTINFO");
+          state.paymentInfo = payload.paid as PaymentInfo;
         } else if ("abortReason" in payload) {
           state.paymentAborted = payload as PaymentAborted;
         } else if ("cancelReason" in payload) {
@@ -204,9 +249,19 @@ const paymentSlice = createSlice({
       .addCase(getPaymentPaidValidation.rejected, (state) => {
         state.error =
           "Något gick fel när validering av betalning hämtades. Försök igen senare.";
+      })
+      .addCase(getPaymentCaptureAsync.fulfilled, (state, action) => {
+        if (action.payload) {
+          console.log("CAPTURE SVARET: ", action.payload);
+          state.paymentCapture = action.payload;
+          state.error = null;
+        }
+      })
+      .addCase(getPaymentCaptureAsync.rejected, (state) => {
+        state.error = "Något gick fel när betalning bearbetades.";
       });
   },
 });
 
-export const { clearPaymentOrder } = paymentSlice.actions;
+export const { clearPaymentOrder, clearPaymentInfo } = paymentSlice.actions;
 export const PaymentReducer = paymentSlice.reducer;

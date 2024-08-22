@@ -6,10 +6,14 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
-import { Order, updateOrderAsync } from "../slices/orderSlice";
+import { useEffect, useRef, useState } from "react";
+import { Transaction } from "../../swedbankTypes";
+import { clearCart } from "../slices/cartSlice";
+import { clearOrder, Order, updateOrderAsync } from "../slices/orderSlice";
 import {
+  clearPaymentInfo,
   clearPaymentOrder,
+  getPaymentCaptureAsync,
   getPaymentPaidValidation,
 } from "../slices/paymentSlice";
 import { useAppDispatch, useAppSelector } from "../slices/store";
@@ -32,18 +36,35 @@ export default function OrderConfirmation() {
   );
   const [paymentError, setPaymentError] = useState(false);
   const dispatch = useAppDispatch();
+  const hasNavigatedAway = useRef(false);
 
   useEffect(() => {
-    if (order && incomingPaymentOrder && incomingPaymentOrder.paid?.id) {
-      console.log("FÖRSTA: HÄMTAR VALIDERING STATUS");
+    if (
+      order &&
+      incomingPaymentOrder &&
+      incomingPaymentOrder.paymentOrder.paid.id
+    ) {
+      console.log(
+        "FÖRSTA: HÄMTAR VALIDERING STATUS INCOMING: ",
+        incomingPaymentOrder
+      );
       dispatch(getPaymentPaidValidation(incomingPaymentOrder));
     }
   }, []);
 
   useEffect(() => {
-    console.log("PAYMENTINFO: ", paymentInfo);
+    if (!hasNavigatedAway.current) {
+      return;
+    }
+    dispatch(clearPaymentOrder());
+    dispatch(clearCart());
+    dispatch(clearPaymentInfo());
+    dispatch(clearOrder());
+  }, [dispatch]);
+
+  useEffect(() => {
     if (paymentInfo && order) {
-      console.log("ANDRA UPPDATERAR ORDER: ", order?.status);
+      console.log("PAYMENTINFO: ", paymentInfo);
       const orderUpdatedPayment: Order = {
         ...order,
         status: "Paid",
@@ -51,19 +72,111 @@ export default function OrderConfirmation() {
       };
       dispatch(updateOrderAsync(orderUpdatedPayment));
     }
-    dispatch(clearPaymentOrder());
   }, [paymentInfo]);
 
   useEffect(() => {
-    console.log("ORDER: ", order?.status);
-  }, [order]);
+    console.log(
+      "sista PAYMENTINFO: ",
+      paymentInfo,
+      "ORDER : ",
+      order,
+      "incomingpaymentoder: ",
+      incomingPaymentOrder
+    );
+    if (
+      paymentInfo &&
+      order &&
+      order.status == "Paid" &&
+      incomingPaymentOrder
+    ) {
+      //swedbank har inte fått paymentinfo på prdern, det msåte ske separat för både swish o kort över här i useeffect
+      //SEDAN när paymentinfo och creeditcard DÅ köra en capture?!
+      console.log("PAYMENTINFO INSTRUMENT: ", paymentInfo.instrument);
+      console.log("PAYMENTINFO PÅ ORDER: ", order.paymentInfo);
+      console.log("INCOMINGGGGG: ", incomingPaymentOrder);
+      if (paymentInfo.instrument === "CreditCard" && order.paymentInfo) {
+        // const mappedItems: TransationOrderItem[] = order.items.map((item) => {
+        //   const product = products.find((p) => p.id === item.product_id);
+
+        //   if (!product) {
+        //     throw new Error(`Product with id ${item.product_id} not found`);
+        //   }
+
+        //   return {
+        //     reference: product.id,
+        //     name: product.name,
+        //     type: product.description, //kategori
+        //     class: product.description, // kategori med?
+        //     // imageUrl: item.imageUrl,
+        //     description: product.description,
+        //     // discountDescription: item.discountDescription,
+        //     quantity: item.quantity,
+        //     quantityUnit: "psc",
+        //     unitPrice: product.price,
+        //     discountPrice: product.rabatt,
+        //     vatPercent: 5000, // momsen i basenheter tex 25% = 2500
+        //     amount: item.quantity * product.price, // totala belopp för denna produkten
+        //     vatAmount: item.quantity * product.price * 0.25, // momsen
+        //   };
+        // });
+        console.log("NU CAPTURING");
+        const transaction: Transaction = {
+          description: "Capturing payment",
+          amount: order.total_amount,
+          vatAmount: order.total_amount * 0.25,
+          payeeReference:
+            order.paymentInfo?.payeeReference || "DefaultReference",
+          receiptReference: "123", //något annat`?
+          // orderItems: mappedItems,
+        };
+        const operation = incomingPaymentOrder.operations.find(
+          (o) => o.rel === "view-checkout"
+        );
+        if (operation) {
+          console.log("ADRESS: ", operation.href);
+          const captureUrl = operation.href + "/captures";
+          dispatch(
+            getPaymentCaptureAsync({
+              transaction: transaction,
+              url: captureUrl,
+            })
+          );
+        }
+      }
+    }
+    // else {
+    //   // if (incomingPaymentOrder) {
+    //   //   dispatch(getPaymentPaidValidation(incomingPaymentOrder));
+    //   // }
+    // }
+    // dispatch(clearOrder());
+  }, [paymentInfo]);
 
   useEffect(() => {
     if (paymentAborted || paymentCancelled || (paymentFailed && order)) {
       setPaymentError(true);
+      console.log("ERROR");
+      dispatch(clearPaymentOrder());
     }
-    dispatch(clearPaymentOrder());
   }, [paymentInfo]);
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      hasNavigatedAway.current = true;
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      if (hasNavigatedAway.current) {
+        dispatch(clearPaymentOrder());
+        dispatch(clearCart());
+        dispatch(clearPaymentInfo());
+        dispatch(clearOrder());
+      }
+    };
+  }, [dispatch]);
 
   function getProduct(productId: string) {
     return products.find((p) => p.id === productId);
@@ -96,7 +209,7 @@ export default function OrderConfirmation() {
       {paymentError && paymentFailed && (
         <Typography>Betalning {paymentFailed.problem.detail}</Typography>
       )}
-      {order && order.status === "Paid" ? (
+      {order && order.paymentInfo && order.status === "Paid" ? (
         <>
           <Paper
             elevation={3}
