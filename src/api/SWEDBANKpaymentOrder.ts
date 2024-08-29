@@ -9,7 +9,7 @@ import {
 import { PaymentOrderIncoming, PaymentOrderOutgoing } from "../../types";
 
 export async function PostPaymentOrder(paymentOrder: PaymentOrderOutgoing) {
-  const uri = "/psp/paymentorders";
+  const uri = "https://api.externalintegration.payex.com/psp/paymentorders";
   const requestBody = {
     paymentOrder,
   };
