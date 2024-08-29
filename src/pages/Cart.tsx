@@ -15,7 +15,10 @@ import {
   OrderItem,
   updateOrderAsync,
 } from "../slices/orderSlice";
-import { addPaymentOrderOutgoing } from "../slices/paymentSlice";
+import {
+  addPaymentOrderOutgoing,
+  getPaymentPaidValidation,
+} from "../slices/paymentSlice";
 import { Product, Size, updateProductAsync } from "../slices/productSlice";
 import { useAppDispatch, useAppSelector } from "../slices/store";
 
@@ -105,7 +108,8 @@ export default function Cart() {
   }, [paymentInfo]);
 
   useEffect(() => {
-    if (order?.status == "Paid") {
+    if (order?.status == "Paid" && incomingPaymentOrder) {
+      dispatch(getPaymentPaidValidation(incomingPaymentOrder));
       navigate("/orderConfirmation");
     }
   }, [order]);
@@ -285,6 +289,7 @@ export default function Cart() {
         reference: "or-" + uuidv4(),
         items: orderItems,
         total_amount: totalPrice,
+        vat_amount: totalPrice * 0.12,
         created_date: new Date().toISOString(),
         status: "Waiting for payment",
       };
@@ -304,7 +309,10 @@ export default function Cart() {
   };
 
   useEffect(() => {
-    if (paymentInfo && paymentInfo?.instrument == "CreditCard") {
+    if (
+      paymentInfo &&
+      paymentInfo.paymentOrder.paid.instrument == "CreditCard"
+    ) {
       navigate("/orderConfirmation");
     }
   }, [paymentInfo]);

@@ -75,23 +75,23 @@ export interface PaymentFailed {
   problem: FailedPaymentProblem;
 }
 
-// export interface TransationOrderItem {
-//   reference: string;
-//   name: string;
-//   type: string;
-//   class: string;
-//   itemUrl?: string;
-//   imageUrl?: string;
-//   description: string;
-//   discountDescription?: string;
-//   quantity: number;
-//   quantityUnit: string;
-//   unitPrice: number;
-//   discountPrice?: number;
-//   vatPercent: number;
-//   amount: number;
-//   vatAmount: number;
-// }
+export interface TransationOrderItem {
+  reference: string;
+  name: string;
+  type: string;
+  class: string;
+  itemUrl?: string;
+  imageUrl?: string;
+  description: string;
+  discountDescription?: string;
+  quantity: number;
+  quantityUnit: string;
+  unitPrice: number;
+  discountPrice?: number;
+  vatPercent: number;
+  amount: number;
+  vatAmount: number;
+}
 
 //CAPTURE:
 
@@ -101,7 +101,7 @@ export interface Transaction {
   vatAmount: number;
   payeeReference: string;
   receiptReference: string;
-  // orderItems: TransationOrderItem[];
+  orderItems: TransationOrderItem[];
 }
 
 export interface PaymentOrderResponse {
@@ -175,25 +175,105 @@ export interface Operation {
   contentType: string;
 }
 
-// export interface PaymentTransaction {
-//   // id: string;
-//   // created: string; // ISO 8601 date string
-//   // updated: string;
-//   // type: string;
-//   // state: string;
-//   amount: number;
-//   vatAmount: number;
-//   description: string;
-//   payeeReference: string;
-//   receiptReference: string;
-// }
+export interface Paid {
+  id: string;
+  number: number;
+  instrument: string;
+  payeeReference: string;
+  transactionType: string;
+  amount: number;
+  submittedAmount: number;
+  feeAmount: number;
+  discountAmount: number;
+  paymentTokenGenerated: boolean;
+  details: {
+    externalNonPaymentToken: string;
+    cardBrand: string;
+    cardType: string;
+    maskedPan: string;
+    expiryDate: string;
+    issuerAuthorizationApprovalCode: string;
+    acquirerTransactionType: string;
+    acquirerStan: string;
+    acquirerTerminalId: string;
+    acquirerTransactionTime: string; // ISO 8601 timestamp
+    transactionInitiator: string;
+    bin: string;
+    paymentAccountReference: string;
+  };
+}
 
-// export interface Capture {
-//   id: string;
-//   transaction: PaymentTransaction;
-// }
+export interface ValidPayment {
+  id: string;
+  created: string; // ISO 8601 timestamp
+  updated: string; // ISO 8601 timestamp
+  operation: string; // e.g., "Purchase"
+  status: string; // e.g., "Paid"
+  currency: string; // e.g., "SEK"
+  amount: number;
+  vatAmount: number;
+  remainingCaptureAmount: number;
+  remainingCancellationAmount: number;
+  description: string;
+  initiatingSystemUserAgent: string;
+  language: string;
+  availableInstruments: string[]; // Array of strings, e.g., ["CreditCard", "Invoice-PayExFinancingSe"]
+  implementation: string;
+  integration: string;
+  instrumentMode: boolean;
+  guestMode: boolean;
+  orderItems: {
+    id: string;
+  };
+  urls: {
+    id: string;
+  };
+  payeeInfo: {
+    id: string;
+  };
+  payer: {
+    id: string;
+  };
+  history: {
+    id: string;
+  };
+  failed: {
+    id: string;
+  };
+  aborted: {
+    id: string;
+  };
+  paid: Paid;
+  cancelled: {
+    id: string;
+    paymentTokenGenerated: boolean;
+  };
+  reversed: {
+    id: string;
+    paymentTokenGenerated: boolean;
+  };
+  financialTransactions: {
+    id: string;
+  };
+  failedAttempts: {
+    id: string;
+  };
+  postPurchaseFailedAttempts: {
+    id: string;
+  };
+  metadata: {
+    id: string;
+  };
+}
 
-// export interface PaymentCapture {
-//   payment: string;
-//   capture: Capture;
-// }
+export interface ValidPaymentOperation {
+  method: string; // HTTP method, e.g., "POST"
+  href: string; // URL for the operation
+  rel: string; // Relation type, e.g., "cancel", "capture"
+  contentType: string; // Content type of the request, e.g., "application/json"
+}
+
+export interface ValidPaymentOrder {
+  paymentOrder: ValidPayment;
+  operations: Operation[];
+}

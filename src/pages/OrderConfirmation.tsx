@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
-import { Transaction } from "../../swedbankTypes";
+import { Transaction, TransationOrderItem } from "../../swedbankTypes";
 import { clearCart } from "../slices/cartSlice";
 import { clearOrder, Order, updateOrderAsync } from "../slices/orderSlice";
 import {
@@ -68,10 +68,14 @@ export default function OrderConfirmation() {
       const orderUpdatedPayment: Order = {
         ...order,
         status: "Paid",
-        paymentInfo: paymentInfo,
+        paymentInfo: paymentInfo.paymentOrder.paid,
       };
       dispatch(updateOrderAsync(orderUpdatedPayment));
     }
+  }, [paymentInfo]);
+
+  useEffect(() => {
+    console.log("Updated paymentInfo:", paymentInfo);
   }, [paymentInfo]);
 
   useEffect(() => {
@@ -91,50 +95,56 @@ export default function OrderConfirmation() {
     ) {
       //swedbank har inte fått paymentinfo på prdern, det msåte ske separat för både swish o kort över här i useeffect
       //SEDAN när paymentinfo och creeditcard DÅ köra en capture?!
-      console.log("PAYMENTINFO INSTRUMENT: ", paymentInfo.instrument);
+      console.log(
+        "PAYMENTINFO INSTRUMENT: ",
+        paymentInfo.paymentOrder.paid.instrument
+      );
       console.log("PAYMENTINFO PÅ ORDER: ", order.paymentInfo);
       console.log("INCOMINGGGGG: ", incomingPaymentOrder);
-      if (paymentInfo.instrument === "CreditCard" && order.paymentInfo) {
-        // const mappedItems: TransationOrderItem[] = order.items.map((item) => {
-        //   const product = products.find((p) => p.id === item.product_id);
+      if (
+        paymentInfo.paymentOrder.paid.instrument === "CreditCard" &&
+        order.paymentInfo
+      ) {
+        const mappedItems: TransationOrderItem[] = order.items.map((item) => {
+          const product = products.find((p) => p.id === item.product_id);
 
-        //   if (!product) {
-        //     throw new Error(`Product with id ${item.product_id} not found`);
-        //   }
+          if (!product) {
+            throw new Error(`Product with id ${item.product_id} not found`);
+          }
 
-        //   return {
-        //     reference: product.id,
-        //     name: product.name,
-        //     type: product.description, //kategori
-        //     class: product.description, // kategori med?
-        //     // imageUrl: item.imageUrl,
-        //     description: product.description,
-        //     // discountDescription: item.discountDescription,
-        //     quantity: item.quantity,
-        //     quantityUnit: "psc",
-        //     unitPrice: product.price,
-        //     discountPrice: product.rabatt,
-        //     vatPercent: 5000, // momsen i basenheter tex 25% = 2500
-        //     amount: item.quantity * product.price, // totala belopp för denna produkten
-        //     vatAmount: item.quantity * product.price * 0.25, // momsen
-        //   };
-        // });
-        console.log("NU CAPTURING");
+          return {
+            reference: product.id,
+            name: product.name,
+            type: product.description, //kategori
+            class: product.description, // kategori med?
+            // imageUrl: item.imageUrl,
+            description: product.description,
+            // discountDescription: item.discountDescription,
+            quantity: item.quantity,
+            quantityUnit: "psc",
+            unitPrice: product.price,
+            discountPrice: product.rabatt,
+            vatPercent: 1200, // momsen i basenheter tex 25% = 2500
+            amount: item.quantity * product.price, // totala belopp för denna produkten
+            vatAmount: item.quantity * product.price * 0.12, // momsen
+          };
+        });
+        console.log("CAPTURING NU. ORDERN SER UT HSHÅR ", order);
         const transaction: Transaction = {
-          description: "Capturing payment",
-          amount: order.total_amount,
-          vatAmount: order.total_amount * 0.25,
+          description: "Capturing the authorized payment",
+          amount: order.total_amount * 100,
+          vatAmount: order.vat_amount * 100,
           payeeReference:
             order.paymentInfo?.payeeReference || "DefaultReference",
           receiptReference: "123", //något annat`?
-          // orderItems: mappedItems,
+          orderItems: mappedItems,
         };
-        const operation = incomingPaymentOrder.operations.find(
-          (o) => o.rel === "view-checkout"
+        const operation = paymentInfo.operations.find(
+          (o) => o.rel === "capture"
         );
         if (operation) {
           console.log("ADRESS: ", operation.href);
-          const captureUrl = operation.href + "/captures";
+          const captureUrl = operation.href;
           dispatch(
             getPaymentCaptureAsync({
               transaction: transaction,

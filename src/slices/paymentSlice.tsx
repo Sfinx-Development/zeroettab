@@ -5,6 +5,7 @@ import {
   PaymentFailed,
   PaymentOrderResponse,
   Transaction,
+  ValidPaymentOrder,
 } from "../../swedbankTypes";
 import { PaymentOrderIncoming, PaymentOrderOutgoing } from "../../types";
 import {
@@ -17,30 +18,11 @@ import {
 } from "../api/SWEDBANKpaymentOrder";
 import { addPaymentOrderIncomingToDB } from "../api/paymentOrder";
 
-export interface PaymentDetails {
-  msisdn: string;
-}
-
-export interface PaymentInfo {
-  id: string;
-  number: number;
-  instrument: string;
-  payeeReference: string;
-  orderReference: string;
-  transactionType: string;
-  amount: number;
-  submittedAmount: number;
-  feeAmount: number;
-  discountAmount: number;
-  paymentTokenGenerated: boolean;
-  details: PaymentDetails;
-}
-
 interface PaymentState {
   paymentOrderOutgoing: PaymentOrderOutgoing | null;
   paymentOrderIncoming: PaymentOrderIncoming | null;
   checkoutUrl: string | null;
-  paymentInfo: PaymentInfo | null;
+  paymentInfo: ValidPaymentOrder | null;
   paymentFailed: PaymentFailed | null;
   paymentAborted: PaymentAborted | null;
   paymentCancelled: PaymentCancelled | null;
@@ -77,12 +59,24 @@ function getPaymentOrderIncomingFromLocalStorage(): PaymentOrderIncoming | null 
   return null;
 }
 
-function getPaymentInfoFromLocalStorage(): PaymentInfo | null {
+function savePaymentInfoToLocalStorage(paymentInfo: ValidPaymentOrder | null) {
+  if (paymentInfo) {
+    try {
+      localStorage.setItem("paymentInfo", JSON.stringify(paymentInfo));
+    } catch (error) {
+      console.error("Error saving paymentInfo to localStorage:", error);
+    }
+  } else {
+    localStorage.removeItem("paymentInfo");
+  }
+}
+
+function getPaymentInfoFromLocalStorage(): ValidPaymentOrder | null {
   const paymentInfo = localStorage.getItem("paymentInfo");
 
   if (paymentInfo) {
     try {
-      return JSON.parse(paymentInfo) as PaymentInfo;
+      return JSON.parse(paymentInfo) as ValidPaymentOrder;
     } catch (error) {
       console.error("Error parsing paymentInfo from localStorage:", error);
       return null;
@@ -131,25 +125,23 @@ export const addPaymentOrderOutgoing = createAsyncThunk<
 //   }
 // });
 export const getPaymentPaidValidation = createAsyncThunk<
-  PaymentInfo | PaymentAborted | PaymentCancelled | PaymentFailed,
+  ValidPaymentOrder | PaymentAborted | PaymentCancelled | PaymentFailed,
   PaymentOrderIncoming,
   { rejectValue: string }
 >("payments/getPaymentValidation", async (order, thunkAPI) => {
   try {
-    console.log("DETTA HÄNDER ENS");
     const response = await GetPaymentPaidValidation(order.paymentOrder.paid.id);
     if (response) {
-      localStorage.setItem("paymentInfo", JSON.stringify(response));
+      console.log("paid VALIDATIONNNNNNNNNNN: ", response);
+      savePaymentInfoToLocalStorage(response);
       return response;
     }
-
     const failed = await GetPaymentFailedValidation(
       order.paymentOrder.failed.id
     );
     if (failed) {
       return failed;
     }
-
     const aborted = await GetPaymentAbortedValidation(
       order.paymentOrder.aborted.id
     );
@@ -233,18 +225,16 @@ const paymentSlice = createSlice({
       // })
       .addCase(getPaymentPaidValidation.fulfilled, (state, action) => {
         const payload = action.payload;
-        console.log("PAYLOAD: ", action.payload);
-        if ("paid" in payload) {
-          state.paymentInfo = payload.paid as PaymentInfo;
-        } else if ("abortReason" in payload) {
-          state.paymentAborted = payload as PaymentAborted;
-        } else if ("cancelReason" in payload) {
-          state.paymentCancelled = payload as unknown as PaymentCancelled;
-        } else if ("problem" in payload) {
-          state.paymentFailed = payload as PaymentFailed;
-        } else {
-          state.error = "Unknown payment status";
-        }
+        state.paymentInfo = payload as ValidPaymentOrder;
+        // } else if ("abortReason" in payload) {
+        //   state.paymentAborted = payload as PaymentAborted;
+        // } else if ("cancelReason" in payload) {
+        //   state.paymentCancelled = payload as unknown as PaymentCancelled;
+        // } else if ("problem" in payload) {
+        //   state.paymentFailed = payload as PaymentFailed;
+        // } else {
+        //   state.error = "Unknown payment status";
+        // }
       })
       .addCase(getPaymentPaidValidation.rejected, (state) => {
         state.error =
