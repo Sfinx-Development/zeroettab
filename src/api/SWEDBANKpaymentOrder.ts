@@ -4,9 +4,9 @@ import {
   PaymentFailed,
   PaymentOrderResponse,
   Transaction,
+  ValidPaymentOrder,
 } from "../../swedbankTypes";
 import { PaymentOrderIncoming, PaymentOrderOutgoing } from "../../types";
-import { PaymentInfo } from "../slices/paymentSlice";
 
 export async function PostPaymentOrder(paymentOrder: PaymentOrderOutgoing) {
   const uri = "/psp/paymentorders";
@@ -49,10 +49,10 @@ export async function PostPaymentOrder(paymentOrder: PaymentOrderOutgoing) {
 export async function GetPaymentPaidValidation(paidUrl: string) {
   const uri = paidUrl;
   const bearer = import.meta.env.VITE_SWEDBANK_BEARER;
-
+  const expandedNodeUrl = uri.replace("paid", "?$expand=paid");
   // const sessionId = import.meta.env.VITE_SWEDBANK_SESSIONID;
   console.log(bearer);
-  return fetch(uri, {
+  return fetch(expandedNodeUrl, {
     method: "GET",
     headers: {
       "Content-Type": "application/json;version=3.1",
@@ -71,7 +71,8 @@ export async function GetPaymentPaidValidation(paidUrl: string) {
       return response.json();
     })
     .then((data) => {
-      return data as PaymentInfo;
+      console.log("FINNS DET AUTHORIZAED?????: ", data);
+      return data as ValidPaymentOrder;
     })
     .catch((error) => {
       console.error(error);
@@ -195,8 +196,7 @@ export async function CapturePayment({
   };
   const bearer = import.meta.env.VITE_SWEDBANK_BEARER;
 
-  // const sessionId = import.meta.env.VITE_SWEDBANK_SESSIONID;
-  console.log(bearer);
+  const sessionId = import.meta.env.VITE_SWEDBANK_SESSIONID;
   return fetch(uri, {
     method: "POST",
     headers: {
@@ -204,8 +204,8 @@ export async function CapturePayment({
       Authorization: `Bearer ${bearer}`,
       // "User-Agent": "swedbankpay-sdk-dotnet/3.0.1",
       // Accept: "application/problem+json; q=1.0, application/json; q=0.9",
-      // "Session-Id": sessionId,
-      // Forwarded: "for=192.168.1.157; host=https://localhost:5173; proto=https",
+      "Session-Id": sessionId,
+      Forwarded: "for=192.168.1.157; host=https://localhost:5173; proto=https",
       Host: "api.externalintegration.payex.com",
     },
     body: JSON.stringify(requestBody),

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { addOrderToDB, editOrderInDB, getOrderFromDB } from "../api/order";
-import { PaymentInfo } from "./paymentSlice";
+import { Paid } from "../../swedbankTypes";
 
 // export interface User {
 //   id: string; // skapas vid betalning?
@@ -10,10 +10,11 @@ export interface Order {
   id: string;
   reference: string;
   total_amount: number;
+  vat_amount: number;
   created_date: string;
   status: string;
   items: OrderItem[];
-  paymentInfo?: PaymentInfo;
+  paymentInfo?: Paid;
 }
 
 export interface OrderItem {
