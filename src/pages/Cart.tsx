@@ -249,11 +249,11 @@ export default function Cart() {
       userAgent: "Mozilla/5.0...",
       language: "sv-SE",
       urls: {
-        hostUrls: ["https://localhost:5173/cart"], //Seamless View only
-        paymentUrl: "https://localhost:5173/cart", //Seamless View only
-        completeUrl: "https://localhost:5173/orderconfirmation",
-        cancelUrl: "https://localhost:5173/cart", //Redirect only
-        callbackUrl: "https://localhost:5173/cart",
+        hostUrls: ["https://testproductionzeroettwebshop.netlify.app/cart"], //Seamless View only
+        paymentUrl: "https://testproductionzeroettwebshop.netlify.app/cart", //Seamless View only
+        completeUrl: "https://testproductionzeroettwebshop.netlify.app/orderconfirmation",
+        cancelUrl: "https://testproductionzeroettwebshop.netlify.app/cart", //Redirect only
+        callbackUrl: "https://testproductionzeroettwebshop.netlify.app/cart",
         logoUrl: "", //Redirect only
       },
       payeeInfo: {
