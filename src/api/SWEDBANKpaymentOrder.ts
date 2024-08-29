@@ -15,8 +15,9 @@ export async function PostPaymentOrder(paymentOrder: PaymentOrderOutgoing) {
   };
   const bearer = import.meta.env.VITE_SWEDBANK_BEARER;
 
-  // const sessionId = import.meta.env.VITE_SWEDBANK_SESSIONID;
-  console.log(bearer);
+  const sessionId = import.meta.env.VITE_SWEDBANK_SESSIONID;
+
+  console.log("SESSION ID: ", sessionId, "beaerer: ", bearer);
   return fetch(uri, {
     method: "POST",
     headers: {
@@ -24,7 +25,7 @@ export async function PostPaymentOrder(paymentOrder: PaymentOrderOutgoing) {
       Authorization: `Bearer ${bearer}`,
       // "User-Agent": "swedbankpay-sdk-dotnet/3.0.1",
       // Accept: "application/problem+json; q=1.0, application/json; q=0.9",
-      // "Session-Id": sessionId,
+      "Session-Id": sessionId,
       // Forwarded: "for=192.168.1.157; host=https://localhost:5173; proto=https",
       Host: "api.externalintegration.payex.com",
     },
@@ -205,7 +206,7 @@ export async function CapturePayment({
       // "User-Agent": "swedbankpay-sdk-dotnet/3.0.1",
       // Accept: "application/problem+json; q=1.0, application/json; q=0.9",
       "Session-Id": sessionId,
-      Forwarded: "for=192.168.1.157; host=https://localhost:5173; proto=https",
+      // Forwarded: "for=192.168.1.157; host=https://localhost:5173; proto=https",
       Host: "api.externalintegration.payex.com",
     },
     body: JSON.stringify(requestBody),
