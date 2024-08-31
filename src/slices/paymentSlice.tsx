@@ -10,9 +10,6 @@ import {
 import { PaymentOrderIncoming, PaymentOrderOutgoing } from "../../types";
 import {
   CapturePayment,
-  GetPaymentAbortedValidation,
-  GetPaymentCancelledValidation,
-  GetPaymentFailedValidation,
   GetPaymentPaidValidation,
   PostPaymentOrder,
 } from "../api/SWEDBANKpaymentOrder";
@@ -125,36 +122,36 @@ export const addPaymentOrderOutgoing = createAsyncThunk<
 //   }
 // });
 export const getPaymentPaidValidation = createAsyncThunk<
-  ValidPaymentOrder | PaymentAborted | PaymentCancelled | PaymentFailed,
+  ValidPaymentOrder,
   PaymentOrderIncoming,
   { rejectValue: string }
 >("payments/getPaymentValidation", async (order, thunkAPI) => {
   try {
     const response = await GetPaymentPaidValidation(order.paymentOrder.paid.id);
     if (response) {
-      console.log("paid VALIDATIONNNNNNNNNNN: ", response);
+      console.log("PAID RESPONSE: ", response);
       savePaymentInfoToLocalStorage(response);
       return response;
     }
-    const failed = await GetPaymentFailedValidation(
-      order.paymentOrder.failed.id
-    );
-    if (failed) {
-      return failed;
-    }
-    const aborted = await GetPaymentAbortedValidation(
-      order.paymentOrder.aborted.id
-    );
-    if (aborted) {
-      return aborted;
-    }
+    // const failed = await GetPaymentFailedValidation(
+    //   order.paymentOrder.failed.id
+    // );
+    // if (failed) {
+    //   return failed;
+    // }
+    // const aborted = await GetPaymentAbortedValidation(
+    //   order.paymentOrder.aborted.id
+    // );
+    // if (aborted) {
+    //   return aborted;
+    // }
 
-    const cancelled = await GetPaymentCancelledValidation(
-      order.paymentOrder.cancelled.id
-    );
-    if (cancelled) {
-      return cancelled;
-    }
+    // const cancelled = await GetPaymentCancelledValidation(
+    //   order.paymentOrder.cancelled.id
+    // );
+    // if (cancelled) {
+    //   return cancelled;
+    // }
 
     return thunkAPI.rejectWithValue("failed to get payment validation");
   } catch (error) {

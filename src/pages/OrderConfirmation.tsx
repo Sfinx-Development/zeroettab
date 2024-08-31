@@ -129,14 +129,13 @@ export default function OrderConfirmation() {
             vatAmount: item.quantity * product.price * 0.12, // momsen
           };
         });
-        console.log("CAPTURING NU. ORDERN SER UT HSHÅR ", order);
         const transaction: Transaction = {
           description: "Capturing the authorized payment",
           amount: order.total_amount * 100,
           vatAmount: order.vat_amount * 100,
           payeeReference:
             order.paymentInfo?.payeeReference || "DefaultReference",
-          receiptReference: "123", //något annat`?
+          receiptReference: "123",
           orderItems: mappedItems,
         };
         const operation = paymentInfo.operations.find(
