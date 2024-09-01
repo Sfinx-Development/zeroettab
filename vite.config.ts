@@ -9,12 +9,12 @@ export default defineConfig({
     //   key: fs.readFileSync(path.resolve(__dirname, "certs/localhost.key")),
     //   cert: fs.readFileSync(path.resolve(__dirname, "certs/localhost.cert")),
     // },
-    // proxy: {
-    //   "/psp": {
-    //     target: "https://api.externalintegration.payex.com",
-    //     changeOrigin: true,
-    //     secure: false, // Ställ in detta på false om du använder självsignerade certifikat
-    //   },
-    // },
+    proxy: {
+      "/psp": {
+        target: "https://api.externalintegration.payex.com",
+        changeOrigin: true,
+        secure: false, // Ställ in detta på false om du använder självsignerade certifikat
+      },
+    },
   },
 });
