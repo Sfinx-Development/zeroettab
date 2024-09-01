@@ -17,6 +17,7 @@ import { clearOrder, Order, updateOrderAsync } from "../slices/orderSlice";
 import {
   clearPaymentInfo,
   clearPaymentOrder,
+  getPaymentByIdAsync,
   getPaymentCaptureAsync,
   getPaymentPaidValidation,
 } from "../slices/paymentSlice";
@@ -87,6 +88,9 @@ export default function OrderConfirmation() {
     if (paymentInfo && order && incomingPaymentOrder) {
       //swedbank har inte fått paymentinfo på prdern, det msåte ske separat för både swish o kort över här i useeffect
       //SEDAN när paymentinfo och creeditcard DÅ köra en capture?!
+      dispatch(
+        getPaymentByIdAsync({ url: incomingPaymentOrder.paymentOrder.id })
+      );
       if (
         paymentInfo.paymentOrder.paid.instrument === "CreditCard" &&
         order.paymentInfo

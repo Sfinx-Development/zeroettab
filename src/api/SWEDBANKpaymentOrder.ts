@@ -75,6 +75,38 @@ export async function GetPaymentPaidValidation(paidUrl: string) {
     });
 }
 
+export async function GetPaymentById(urlId: string) {
+  const uri = urlId;
+  const bearer = import.meta.env.VITE_SWEDBANK_BEARER;
+  // const sessionId = import.meta.env.VITE_SWEDBANK_SESSIONID;
+  return fetch(uri, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json;version=3.1",
+      Authorization: `Bearer ${bearer}`,
+      // "User-Agent": "swedbankpay-sdk-dotnet/3.0.1",
+      // Accept: "application/problem+json; q=1.0, application/json; q=0.9",
+      // "Session-Id": sessionId,
+      // Forwarded: "for=192.168.1.157; host=https://localhost:5173; proto=https",
+      Host: "api.externalintegration.payex.com",
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Nätverksfel - ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log("DATA MED ID URLEN:: ", data);
+      return data as PaymentOrderIncoming;
+    })
+    .catch((error) => {
+      console.error(error);
+      return null;
+    });
+}
+
 // export async function GetPaymentFailedValidation(paidUrl: string) {
 //   const uri = paidUrl;
 //   const bearer = import.meta.env.VITE_SWEDBANK_BEARER;

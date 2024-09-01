@@ -209,7 +209,7 @@ export default function Cart() {
         paymentUrl: "https://localhost:5173/cart", //Seamless View only
         completeUrl: "https://localhost:5173/orderconfirmation",
         cancelUrl: "https://localhost:5173/cart", //Redirect only
-        callbackUrl: "https://localhost:5173/cart",
+        callbackUrl: "https://localhost:5173/orderconfirmation",
         logoUrl: "", //Redirect only
       },
       payeeInfo: {
@@ -265,15 +265,6 @@ export default function Cart() {
       TESTPAYMENT(newOrder);
     }
   };
-
-  useEffect(() => {
-    if (
-      paymentInfo &&
-      paymentInfo.paymentOrder.paid.instrument == "CreditCard"
-    ) {
-      navigate("/orderConfirmation");
-    }
-  }, [paymentInfo]);
 
   const calculateTotalPrice = () => {
     return cart?.items.reduce(

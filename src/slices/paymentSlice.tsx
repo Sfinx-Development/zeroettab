@@ -11,6 +11,7 @@ import {
 import { PaymentOrderIncoming, PaymentOrderOutgoing } from "../../types";
 import {
   CapturePayment,
+  GetPaymentById,
   GetPaymentPaidValidation,
   PostPaymentOrder,
 } from "../api/SWEDBANKpaymentOrder";
@@ -171,6 +172,23 @@ export const getPaymentCaptureAsync = createAsyncThunk<
       transaction: transaction,
       captureUrl: url,
     });
+    if (response) {
+      return response;
+    } else {
+      return thunkAPI.rejectWithValue("failed to capture payment");
+    }
+  } catch (error) {
+    throw new Error("Något gick fel vid Betalning (Capture).");
+  }
+});
+
+export const getPaymentByIdAsync = createAsyncThunk<
+  PaymentOrderIncoming, // Return type
+  { url: string },
+  { rejectValue: string } // ThunkAPI type
+>("payments/getPaymentById", async ({ url }, thunkAPI) => {
+  try {
+    const response = await GetPaymentById(url);
     if (response) {
       return response;
     } else {

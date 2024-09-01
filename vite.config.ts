@@ -15,7 +15,7 @@ export default defineConfig({
       "/psp": {
         target: "https://api.externalintegration.payex.com",
         changeOrigin: true,
-        secure: false,
+        secure: true,
       },
     },
   },
