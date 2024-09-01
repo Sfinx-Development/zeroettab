@@ -209,7 +209,7 @@ export default function Cart() {
         paymentUrl: "https://localhost:5173/cart", //Seamless View only
         completeUrl: "https://localhost:5173/orderconfirmation",
         cancelUrl: "https://localhost:5173/cart", //Redirect only
-        callbackUrl: "https://localhost:5173/orderconfirmation",
+        callbackUrl: "https://localhost:3000/orderconfirmation",
         logoUrl: "", //Redirect only
       },
       payeeInfo: {
