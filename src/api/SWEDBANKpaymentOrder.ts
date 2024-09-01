@@ -1,6 +1,6 @@
 import {
+  OutgoingTransaction,
   PaymentOrderResponse,
-  Transaction,
   ValidPaymentOrder,
 } from "../../swedbankTypes";
 import { PaymentOrderIncoming, PaymentOrderOutgoing } from "../../types";
@@ -11,7 +11,6 @@ export async function PostPaymentOrder(paymentOrder: PaymentOrderOutgoing) {
     paymentOrder,
   };
   const bearer = import.meta.env.VITE_SWEDBANK_BEARER;
-
   // const sessionId = import.meta.env.VITE_SWEDBANK_SESSIONID;
   console.log(bearer);
   return fetch(uri, {
@@ -46,12 +45,12 @@ export async function PostPaymentOrder(paymentOrder: PaymentOrderOutgoing) {
 export async function GetPaymentPaidValidation(paidUrl: string) {
   const uri = paidUrl;
   const bearer = import.meta.env.VITE_SWEDBANK_BEARER;
-  const expandedNodeUrl = uri.replace("paid", "?$expand=paid");
+  const expandedNodeUrl = uri.replace("/paid", "?$expand=paid");
   // const sessionId = import.meta.env.VITE_SWEDBANK_SESSIONID;
   return fetch(expandedNodeUrl, {
-    method: "POST",
+    method: "GET",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json;version=3.1",
       Authorization: `Bearer ${bearer}`,
       // "User-Agent": "swedbankpay-sdk-dotnet/3.0.1",
       // Accept: "application/problem+json; q=1.0, application/json; q=0.9",
@@ -67,6 +66,7 @@ export async function GetPaymentPaidValidation(paidUrl: string) {
       return response.json();
     })
     .then((data) => {
+      console.log("DATA SOM GES SOM VALIDPAYMENTODEr: ", data);
       return data as ValidPaymentOrder;
     })
     .catch((error) => {
@@ -182,39 +182,48 @@ export async function CapturePayment({
   transaction,
   captureUrl,
 }: {
-  transaction: Transaction;
+  transaction: OutgoingTransaction;
   captureUrl: string;
 }): Promise<PaymentOrderResponse | null> {
   const uri = captureUrl;
   const requestBody = {
-    transaction,
+    transaction: transaction.transaction,
+    orderItems: transaction.orderItems,
   };
   const bearer = import.meta.env.VITE_SWEDBANK_BEARER;
 
-  const sessionId = import.meta.env.VITE_SWEDBANK_SESSIONID;
+  console.log("Request URI: ", uri);
+  console.log("Request Body: ", requestBody);
+  // const sessionId = import.meta.env.VITE_SWEDBANK_SESSIONID;
   return fetch(uri, {
     method: "POST",
     headers: {
       "Content-Type": "application/json;version=3.1",
       Authorization: `Bearer ${bearer}`,
+      Host: "api.externalintegration.payex.com",
+      // "Access-Control-Max-Age": "1000",
       // "User-Agent": "swedbankpay-sdk-dotnet/3.0.1",
       // Accept: "application/problem+json; q=1.0, application/json; q=0.9",
-      "Session-Id": sessionId,
-      // Forwarded: "for=192.168.1.157; host=https://localhost:5173; proto=https",
+      // "Session-Id": sessionId,
+      // Forwarded: "host=https://localhost:5173; proto=https",
     },
     body: JSON.stringify(requestBody),
   })
     .then((response) => {
+      console.log("Response Status: ", response.status);
       if (!response.ok) {
-        throw new Error(`Nätverksfel - ${response.status}`);
+        return response.text().then((text) => {
+          throw new Error(`Nätverksfel - ${response.status}: ${text}`);
+        });
       }
       return response.json();
     })
     .then((data) => {
+      console.log("Response Data: ", data);
       return data as PaymentOrderResponse;
     })
     .catch((error) => {
-      console.error(error);
+      console.error("Error in CapturePayment: ", error);
       return null;
     });
 }

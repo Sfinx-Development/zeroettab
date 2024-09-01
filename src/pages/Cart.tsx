@@ -52,50 +52,6 @@ export default function Cart() {
 
   useEffect(() => {
     if (incomingPaymentOrder && order) {
-      // if (paymentInfo.instrument === "CreditCard") {
-      //   console.log("CREDIT CARD VILLKORLET :)");
-      // const mappedItems: TransationOrderItem[] = order.items.map((item) => {
-      //   const product = products.find((p) => p.id === item.product_id);
-
-      //   if (!product) {
-      //     throw new Error(`Product with id ${item.product_id} not found`);
-      //   }
-
-      //   return {
-      //     reference: product.id,
-      //     name: product.name,
-      //     type: product.description, //kategori
-      //     class: product.description, // kategori med?
-      //     // imageUrl: item.imageUrl,
-      //     description: product.description,
-      //     // discountDescription: item.discountDescription,
-      //     quantity: item.quantity,
-      //     quantityUnit: "psc",
-      //     unitPrice: product.price,
-      //     discountPrice: product.rabatt,
-      //     vatPercent: 5000, // momsen i basenheter tex 25% = 2500
-      //     amount: item.quantity * product.price, // totala belopp för denna produkten
-      //     vatAmount: item.quantity * product.price * 0.25, // momsen
-      //   };
-      // });
-
-      // const transaction: Transaction = {
-      //   description: "Capturing payment",
-      //   amount: order.total_amount,
-      //   vatAmount: order.total_amount * 0.25,
-      //   payeeReference:
-      //     order.paymentInfo?.payeeReference || "DefaultReference",
-      //   receiptReference: "123", //något annat`?
-      //   // orderItems: mappedItems,
-      // };
-      // const url = incomingPaymentOrder?.operations.find(
-      //   (o) => o.rel == "view-checkout"
-      // );
-      // const captureUrl = url + "/captures";
-      // dispatch(
-      //   getPaymentCaptureAsync({ transaction: transaction, url: captureUrl })
-      // );
-
       console.log("ANDRA UPPDATERAR ORDER: ", order.status);
       const orderUpdatedPayment: Order = {
         ...order,
@@ -243,8 +199,8 @@ export default function Cart() {
     const paymentOrder: PaymentOrderOutgoing = {
       operation: "Purchase",
       currency: "SEK",
-      amount: order.total_amount * 100,
-      vatAmount: 5000,
+      amount: order.total_amount,
+      vatAmount: order.vat_amount,
       description: "Test Purchase",
       userAgent: "Mozilla/5.0...",
       language: "sv-SE",
@@ -274,7 +230,9 @@ export default function Cart() {
         order_id: uuidv4(),
         product_id: item.product_id,
         quantity: item.quantity,
-        price: item.price,
+        price: item.price * 100,
+        vatPercent: 1200,
+        vatAmount: 0,
       };
       return orderItem;
     });
@@ -289,7 +247,7 @@ export default function Cart() {
         reference: "or-" + uuidv4(),
         items: orderItems,
         total_amount: totalPrice,
-        vat_amount: totalPrice * 0.12,
+        vat_amount: totalPrice,
         created_date: new Date().toISOString(),
         status: "Waiting for payment",
       };

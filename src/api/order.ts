@@ -44,7 +44,7 @@ export const editOrderInDB = async (order: Order) => {
     };
 
     await updateDoc(orderRef, updatedOrderData);
-
+    console.log("UPPDATERAD ORDEr: ", order);
     return order;
   } catch (error) {
     console.error("Error editing order: ", error);

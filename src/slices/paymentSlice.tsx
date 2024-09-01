@@ -1,10 +1,11 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
+  OutgoingTransaction,
   PaymentAborted,
   PaymentCancelled,
   PaymentFailed,
   PaymentOrderResponse,
-  Transaction,
   ValidPaymentOrder,
 } from "../../swedbankTypes";
 import { PaymentOrderIncoming, PaymentOrderOutgoing } from "../../types";
@@ -129,7 +130,6 @@ export const getPaymentPaidValidation = createAsyncThunk<
   try {
     const response = await GetPaymentPaidValidation(order.paymentOrder.paid.id);
     if (response) {
-      console.log("PAID RESPONSE: ", response);
       savePaymentInfoToLocalStorage(response);
       return response;
     }
@@ -163,7 +163,7 @@ export const getPaymentPaidValidation = createAsyncThunk<
 
 export const getPaymentCaptureAsync = createAsyncThunk<
   PaymentOrderResponse, // Return type
-  { transaction: Transaction; url: string }, // Argument type
+  { transaction: OutgoingTransaction; url: string },
   { rejectValue: string } // ThunkAPI type
 >("payments/getPaymentCaptureAsync", async ({ transaction, url }, thunkAPI) => {
   try {
@@ -190,7 +190,7 @@ const paymentSlice = createSlice({
       localStorage.removeItem("paymentOrderIncoming");
     },
     clearPaymentInfo: (state) => {
-      state.paymentOrderIncoming = null;
+      state.paymentInfo = null;
       localStorage.removeItem("paymentInfo");
     },
   },
@@ -221,17 +221,8 @@ const paymentSlice = createSlice({
       //     "Något gick fel när payment ordern hämtades. Försök igen senare.";
       // })
       .addCase(getPaymentPaidValidation.fulfilled, (state, action) => {
-        const payload = action.payload;
-        state.paymentInfo = payload as ValidPaymentOrder;
-        // } else if ("abortReason" in payload) {
-        //   state.paymentAborted = payload as PaymentAborted;
-        // } else if ("cancelReason" in payload) {
-        //   state.paymentCancelled = payload as unknown as PaymentCancelled;
-        // } else if ("problem" in payload) {
-        //   state.paymentFailed = payload as PaymentFailed;
-        // } else {
-        //   state.error = "Unknown payment status";
-        // }
+        state.paymentInfo = action.payload;
+        state.error = null;
       })
       .addCase(getPaymentPaidValidation.rejected, (state) => {
         state.error =

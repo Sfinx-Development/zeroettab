@@ -6,8 +6,12 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
-import { Transaction, TransationOrderItem } from "../../swedbankTypes";
+import { useEffect, useRef } from "react";
+import {
+  OrderItemType,
+  OutgoingTransaction,
+  TransationOrderItem,
+} from "../../swedbankTypes";
 import { clearCart } from "../slices/cartSlice";
 import { clearOrder, Order, updateOrderAsync } from "../slices/orderSlice";
 import {
@@ -25,58 +29,51 @@ export default function OrderConfirmation() {
     (state) => state.paymentSlice.paymentOrderIncoming
   );
   const paymentInfo = useAppSelector((state) => state.paymentSlice.paymentInfo);
-  const paymentFailed = useAppSelector(
-    (state) => state.paymentSlice.paymentFailed
-  );
-  const paymentCancelled = useAppSelector(
-    (state) => state.paymentSlice.paymentCancelled
-  );
-  const paymentAborted = useAppSelector(
-    (state) => state.paymentSlice.paymentAborted
-  );
-  const [paymentError, setPaymentError] = useState(false);
+  // const paymentFailed = useAppSelector(
+  //   (state) => state.paymentSlice.paymentFailed
+  // );
+  // const paymentCancelled = useAppSelector(
+  //   (state) => state.paymentSlice.paymentCancelled
+  // );
+  // const paymentAborted = useAppSelector(
+  //   (state) => state.paymentSlice.paymentAborted
+  // );
+  // const [paymentError, setPaymentError] = useState(false);
   const dispatch = useAppDispatch();
   const hasNavigatedAway = useRef(false);
 
   useEffect(() => {
-    if (
-      order &&
-      incomingPaymentOrder &&
-      incomingPaymentOrder.paymentOrder.paid.id
-    ) {
-      console.log(
-        "FÖRSTA: HÄMTAR VALIDERING STATUS INCOMING: ",
-        incomingPaymentOrder
-      );
+    if (incomingPaymentOrder) {
       dispatch(getPaymentPaidValidation(incomingPaymentOrder));
     }
   }, []);
 
   useEffect(() => {
-    if (!hasNavigatedAway.current) {
-      return;
-    }
-    dispatch(clearPaymentOrder());
-    dispatch(clearCart());
-    dispatch(clearPaymentInfo());
-    dispatch(clearOrder());
-  }, [dispatch]);
+    console.log("ORDER: ", order);
+    console.log("PAYMENT INFO: ", paymentInfo);
 
-  useEffect(() => {
     if (paymentInfo && order) {
-      console.log("PAYMENTINFO: ", paymentInfo);
+      console.log("DISPATCHING updateOrderAsync");
       const orderUpdatedPayment: Order = {
         ...order,
         status: "Paid",
         paymentInfo: paymentInfo.paymentOrder.paid,
       };
       dispatch(updateOrderAsync(orderUpdatedPayment));
+    } else {
+      console.log("Order eller PaymentInfo saknas");
     }
   }, [paymentInfo]);
 
-  useEffect(() => {
-    console.log("Updated paymentInfo:", paymentInfo);
-  }, [paymentInfo]);
+  // useEffect(() => {
+  //   if (!hasNavigatedAway.current) {
+  //     return;
+  //   }
+  //   dispatch(clearPaymentOrder());
+  //   dispatch(clearCart());
+  //   dispatch(clearPaymentInfo());
+  //   dispatch(clearOrder());
+  // }, [dispatch]);
 
   useEffect(() => {
     console.log(
@@ -87,24 +84,16 @@ export default function OrderConfirmation() {
       "incomingpaymentoder: ",
       incomingPaymentOrder
     );
-    if (
-      paymentInfo &&
-      order &&
-      order.status == "Paid" &&
-      incomingPaymentOrder
-    ) {
+    if (paymentInfo && order && incomingPaymentOrder) {
       //swedbank har inte fått paymentinfo på prdern, det msåte ske separat för både swish o kort över här i useeffect
       //SEDAN när paymentinfo och creeditcard DÅ köra en capture?!
-      console.log(
-        "PAYMENTINFO INSTRUMENT: ",
-        paymentInfo.paymentOrder.paid.instrument
-      );
-      console.log("PAYMENTINFO PÅ ORDER: ", order.paymentInfo);
-      console.log("INCOMINGGGGG: ", incomingPaymentOrder);
       if (
         paymentInfo.paymentOrder.paid.instrument === "CreditCard" &&
         order.paymentInfo
       ) {
+        console.log("PAYMENTINFO PÅ ORDER: ", order.paymentInfo);
+        console.log("INCOMING: ", incomingPaymentOrder);
+        console.log("PAYMENTINFO: ", paymentInfo);
         const mappedItems: TransationOrderItem[] = order.items.map((item) => {
           const product = products.find((p) => p.id === item.product_id);
 
@@ -115,38 +104,37 @@ export default function OrderConfirmation() {
           return {
             reference: product.id,
             name: product.name,
-            type: product.description, //kategori
-            class: product.description, // kategori med?
+            type: OrderItemType.OTHER, //kategori
+            class: "Hoodie", // kategori med?
             // imageUrl: item.imageUrl,
             description: product.description,
             // discountDescription: item.discountDescription,
             quantity: item.quantity,
-            quantityUnit: "psc",
-            unitPrice: product.price,
+            quantityUnit: "pcs",
+            unitPrice: product.price * 100,
             discountPrice: product.rabatt,
-            vatPercent: 1200, // momsen i basenheter tex 25% = 2500
-            amount: item.quantity * product.price, // totala belopp för denna produkten
-            vatAmount: item.quantity * product.price * 0.12, // momsen
+            vatPercent: 1200,
+            amount: item.quantity * product.price * 100,
+            vatAmount: paymentInfo.paymentOrder.vatAmount,
           };
         });
-        const transaction: Transaction = {
-          description: "Capturing the authorized payment",
-          amount: order.total_amount * 100,
-          vatAmount: order.vat_amount * 100,
-          payeeReference:
-            order.paymentInfo?.payeeReference || "DefaultReference",
-          receiptReference: "123",
+        const outgoingTransaction: OutgoingTransaction = {
+          transaction: {
+            description: "Test Purchase",
+            amount: paymentInfo.paymentOrder.amount,
+            vatAmount: 0,
+            payeeReference: order.paymentInfo?.payeeReference,
+          },
           orderItems: mappedItems,
         };
         const operation = paymentInfo.operations.find(
           (o) => o.rel === "capture"
         );
         if (operation) {
-          console.log("ADRESS: ", operation.href);
           const captureUrl = operation.href;
           dispatch(
             getPaymentCaptureAsync({
-              transaction: transaction,
+              transaction: outgoingTransaction,
               url: captureUrl,
             })
           );
@@ -159,15 +147,14 @@ export default function OrderConfirmation() {
     //   // }
     // }
     // dispatch(clearOrder());
-  }, [paymentInfo]);
+  }, [order?.paymentInfo, paymentInfo]);
 
-  useEffect(() => {
-    if (paymentAborted || paymentCancelled || (paymentFailed && order)) {
-      setPaymentError(true);
-      console.log("ERROR");
-      dispatch(clearPaymentOrder());
-    }
-  }, [paymentInfo]);
+  // useEffect(() => {
+  //   if (paymentAborted || paymentCancelled || (paymentFailed && order)) {
+  //     setPaymentError(true);
+  //     dispatch(clearPaymentOrder());
+  //   }
+  // }, [paymentInfo]);
 
   useEffect(() => {
     const handleBeforeUnload = () => {
@@ -209,7 +196,7 @@ export default function OrderConfirmation() {
         alignItems: "center",
       }}
     >
-      {paymentError && paymentAborted && (
+      {/* {paymentError && paymentAborted && (
         <Typography>Betalning {paymentAborted.abortReason}</Typography>
       )}
       {paymentError && paymentCancelled && (
@@ -217,7 +204,7 @@ export default function OrderConfirmation() {
       )}
       {paymentError && paymentFailed && (
         <Typography>Betalning {paymentFailed.problem.detail}</Typography>
-      )}
+      )} */}
       {order && order.paymentInfo && order.status === "Paid" ? (
         <>
           <Paper

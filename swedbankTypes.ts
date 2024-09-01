@@ -75,14 +75,19 @@ export interface PaymentFailed {
   problem: FailedPaymentProblem;
 }
 
+export enum OrderItemType {
+  PRODUCT = "PRODUCT",
+  OTHER = "OTHER",
+}
+
 export interface TransationOrderItem {
   reference: string;
   name: string;
-  type: string;
+  type: OrderItemType;
   class: string;
   itemUrl?: string;
   imageUrl?: string;
-  description: string;
+  description?: string;
   discountDescription?: string;
   quantity: number;
   quantityUnit: string;
@@ -100,7 +105,10 @@ export interface Transaction {
   amount: number;
   vatAmount: number;
   payeeReference: string;
-  receiptReference: string;
+}
+
+export interface OutgoingTransaction {
+  transaction: Transaction;
   orderItems: TransationOrderItem[];
 }
 
