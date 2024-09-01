@@ -6,7 +6,7 @@ import {
 import { PaymentOrderIncoming, PaymentOrderOutgoing } from "../../types";
 
 export async function PostPaymentOrder(paymentOrder: PaymentOrderOutgoing) {
-  const uri = "https://api.externalintegration.payex.com/psp/paymentorders";
+  const uri = "/psp/paymentorders";
   const requestBody = {
     paymentOrder,
   };
@@ -43,7 +43,7 @@ export async function PostPaymentOrder(paymentOrder: PaymentOrderOutgoing) {
 }
 
 export async function GetPaymentPaidValidation(paidUrl: string) {
-  const uri = "https://api.externalintegration.payex.com" + paidUrl;
+  const uri = paidUrl;
   const bearer = import.meta.env.VITE_SWEDBANK_BEARER;
   const expandedNodeUrl = uri.replace("/paid", "?$expand=paid");
   // const sessionId = import.meta.env.VITE_SWEDBANK_SESSIONID;
@@ -185,7 +185,7 @@ export async function CapturePayment({
   transaction: OutgoingTransaction;
   captureUrl: string;
 }): Promise<PaymentOrderResponse | null> {
-  const uri = "https://api.externalintegration.payex.com" + captureUrl;
+  const uri = captureUrl;
   const requestBody = {
     transaction: transaction.transaction,
     orderItems: transaction.orderItems,
