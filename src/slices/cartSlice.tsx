@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
+import { createAdjustedDate } from "../utils/dateUtils";
 
 export interface Cart {
   id: string;
@@ -24,7 +25,7 @@ interface CartState {
 const createNewCart = (): Cart => {
   return {
     id: uuidv4(),
-    created_date: new Date().toISOString(),
+    created_date: createAdjustedDate().toISOString(),
     items: [],
   };
 };
