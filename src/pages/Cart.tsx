@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 import { PaymentOrderOutgoing } from "../../types";
 import SeamlessCheckout from "../components/SeamlessCheckout";
 import { CartItem, updateItem } from "../slices/cartSlice";
+import { createAdjustedDate } from "../utils/dateUtils";
 import {
   addOrderAsync,
   Order,
@@ -248,7 +249,7 @@ export default function Cart() {
         items: orderItems,
         total_amount: totalPrice,
         vat_amount: totalPrice,
-        created_date: new Date().toISOString(),
+        created_date: createAdjustedDate().toISOString(),
         status: "Waiting for payment",
       };
 

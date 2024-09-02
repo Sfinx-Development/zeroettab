@@ -1,4 +1,5 @@
 import { ReactNode, createContext, useContext, useState } from "react";
+import { createAdjustedDate } from "../utils/dateUtils";
 
 export type Customer = {
   name: string;
@@ -44,7 +45,8 @@ export function CustomerProvider({ children }: { children: ReactNode }) {
     targetGroup: "",
     budgetDescription: "",
     extraDescription: "",
-    dateCreated: new Date(),
+    // dateCreated: new Date(),
+    dateCreated: createAdjustedDate(),
   });
 
   const resetCustomer = () =>
@@ -63,7 +65,7 @@ export function CustomerProvider({ children }: { children: ReactNode }) {
       targetGroup: "",
       budgetDescription: "",
       extraDescription: "",
-      dateCreated: new Date(),
+      dateCreated: createAdjustedDate(),
     });
 
   return (

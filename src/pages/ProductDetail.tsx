@@ -1,4 +1,5 @@
 import { keyframes } from "@emotion/react";
+import { createAdjustedDate } from "../utils/dateUtils";
 import {
   Box,
   Button,
@@ -49,7 +50,7 @@ export default function ProductDetail() {
         dispatch(updateItem(updatedItem));
       } else {
         const newItem = {
-          id: new Date().toISOString(),
+          id: createAdjustedDate().toISOString(),
           cart_id: cart.id,
           product_id: product.id,
           quantity: 1,
@@ -60,12 +61,12 @@ export default function ProductDetail() {
       }
     } else {
       const newCart = {
-        id: new Date().toISOString(),
-        created_date: new Date().toISOString(),
+        id: createAdjustedDate().toISOString(),
+        created_date: createAdjustedDate().toISOString(),
         items: [
           {
-            id: new Date().toISOString(),
-            cart_id: new Date().toISOString(),
+            id: createAdjustedDate().toISOString(),
+            cart_id: createAdjustedDate().toISOString(),
             product_id: product.id,
             quantity: 1,
             price: product.price,
