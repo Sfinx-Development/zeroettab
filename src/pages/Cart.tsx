@@ -209,7 +209,7 @@ export default function Cart() {
         paymentUrl: "https://localhost:5173/cart", //Seamless View only
         completeUrl: "https://localhost:5173/orderconfirmation",
         cancelUrl: "https://localhost:5173/cart", //Redirect only
-        callbackUrl: "https://localhost:3000/callback", //till endpoint post och inte page
+        callbackUrl: "http://localhost:5135/swedbankpay/callback",
         logoUrl: "", //Redirect only
       },
       payeeInfo: {
