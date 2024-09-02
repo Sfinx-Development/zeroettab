@@ -63,12 +63,12 @@ export default function Cart() {
     // dispatch(clearPaymentOrder());
   }, [paymentInfo]);
 
-  useEffect(() => {
-    if (order?.status == "Paid" && incomingPaymentOrder) {
-      dispatch(getPaymentPaidValidation(incomingPaymentOrder));
-      navigate("/orderConfirmation");
-    }
-  }, [order]);
+  // useEffect(() => {
+  //   if (order?.status == "Paid" && incomingPaymentOrder) {
+  //     dispatch(getPaymentPaidValidation(incomingPaymentOrder));
+  //     navigate("/orderConfirmation");
+  //   }
+  // }, [order]);
   // useEffect(() => {
   //   if (incomingPaymentOrder) {
   //     const checkoutOperation = incomingPaymentOrder.operations.find(
@@ -209,7 +209,7 @@ export default function Cart() {
         paymentUrl: "https://localhost:5173/cart", //Seamless View only
         completeUrl: "https://localhost:5173/orderconfirmation",
         cancelUrl: "https://localhost:5173/cart", //Redirect only
-        callbackUrl: "https://localhost:3000/orderconfirmation",
+        callbackUrl: "https://localhost:3000/callback", //till endpoint post och inte page
         logoUrl: "", //Redirect only
       },
       payeeInfo: {
