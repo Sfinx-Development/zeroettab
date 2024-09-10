@@ -16,10 +16,7 @@ import {
   OrderItem,
   updateOrderAsync,
 } from "../slices/orderSlice";
-import {
-  addPaymentOrderOutgoing,
-  getPaymentPaidValidation,
-} from "../slices/paymentSlice";
+import { addPaymentOrderOutgoing } from "../slices/paymentSlice";
 import { Product, Size, updateProductAsync } from "../slices/productSlice";
 import { useAppDispatch, useAppSelector } from "../slices/store";
 
@@ -64,12 +61,12 @@ export default function Cart() {
     // dispatch(clearPaymentOrder());
   }, [paymentInfo]);
 
-  useEffect(() => {
-    if (order?.status == "Paid" && incomingPaymentOrder) {
-      dispatch(getPaymentPaidValidation(incomingPaymentOrder));
-      navigate("/orderConfirmation");
-    }
-  }, [order]);
+  // useEffect(() => {
+  //   if (order?.status == "Paid" && incomingPaymentOrder) {
+  //     dispatch(getPaymentPaidValidation(incomingPaymentOrder));
+  //     navigate("/orderConfirmation");
+  //   }
+  // }, [order]);
   // useEffect(() => {
   //   if (incomingPaymentOrder) {
   //     const checkoutOperation = incomingPaymentOrder.operations.find(
@@ -210,7 +207,8 @@ export default function Cart() {
         paymentUrl: "https://localhost:5173/cart", //Seamless View only
         completeUrl: "https://localhost:5173/orderconfirmation",
         cancelUrl: "https://localhost:5173/cart", //Redirect only
-        callbackUrl: "https://localhost:5173/orderconfirmation",
+        callbackUrl:
+          "https://swedbankpay-gad0dfg6fha9bpfh.swedencentral-01.azurewebsites.net/swedbankpay/callback",
         logoUrl: "", //Redirect only
       },
       payeeInfo: {

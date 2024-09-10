@@ -19,7 +19,6 @@ import {
   clearPaymentOrder,
   getPaymentByIdAsync,
   getPaymentCaptureAsync,
-  getPaymentPaidValidation,
 } from "../slices/paymentSlice";
 import { useAppDispatch, useAppSelector } from "../slices/store";
 
@@ -43,11 +42,11 @@ export default function OrderConfirmation() {
   const dispatch = useAppDispatch();
   const hasNavigatedAway = useRef(false);
 
-  useEffect(() => {
-    if (incomingPaymentOrder) {
-      dispatch(getPaymentPaidValidation(incomingPaymentOrder));
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (incomingPaymentOrder) {
+  //     dispatch(getPaymentPaidValidation(incomingPaymentOrder));
+  //   }
+  // }, []);
 
   useEffect(() => {
     console.log("ORDER: ", order);

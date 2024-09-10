@@ -1,0 +1,11 @@
+[build]
+  functions = "netlify-functions"
+
+[dev]
+  functions = "netlify-functions"
+
+[[redirects]]
+  from = "/orderconfirmation"
+  to = "/.netlify/functions/server"
+  status = 200
+  force = true
