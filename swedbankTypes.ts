@@ -105,11 +105,19 @@ export interface Transaction {
   amount: number;
   vatAmount: number;
   payeeReference: string;
+  captureUrl: string;
 }
 
 export interface OutgoingTransaction {
   transaction: Transaction;
-  orderItems: TransationOrderItem[];
+  // orderItems: TransationOrderItem[];
+}
+
+export interface OutgoingTransactionNoUrl {
+  description: string;
+  amount: number;
+  vatAmount: number;
+  payeeReference: string;
 }
 
 export interface PaymentOrderResponse {

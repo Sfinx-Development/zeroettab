@@ -153,3 +153,14 @@ export interface PaymentOrderIncoming {
   operations: Operation[];
   paymentOrder: PaymentOrder;
 }
+
+export interface CallbackData {
+  orderReference: string;
+  paymentOrder: CallbackPaymentOrder;
+}
+
+interface CallbackPaymentOrder {
+  id: string;
+  instrument: string;
+  number?: number;
+}

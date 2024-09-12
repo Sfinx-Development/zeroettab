@@ -7,18 +7,15 @@ import {
   Typography,
 } from "@mui/material";
 import { useEffect, useRef } from "react";
-import {
-  OrderItemType,
-  OutgoingTransaction,
-  TransationOrderItem,
-} from "../../swedbankTypes";
+import { OutgoingTransaction } from "../../swedbankTypes";
 import { clearCart } from "../slices/cartSlice";
 import { clearOrder, Order, updateOrderAsync } from "../slices/orderSlice";
 import {
   clearPaymentInfo,
   clearPaymentOrder,
-  getPaymentByIdAsync,
-  getPaymentCaptureAsync,
+  getCallbackAsync,
+  getPaymentPaidValidation,
+  postCaptureToInternalApi,
 } from "../slices/paymentSlice";
 import { useAppDispatch, useAppSelector } from "../slices/store";
 
@@ -29,6 +26,7 @@ export default function OrderConfirmation() {
     (state) => state.paymentSlice.paymentOrderIncoming
   );
   const paymentInfo = useAppSelector((state) => state.paymentSlice.paymentInfo);
+  const callbacks = useAppSelector((state) => state.paymentSlice.callbackData);
   // const paymentFailed = useAppSelector(
   //   (state) => state.paymentSlice.paymentFailed
   // );
@@ -42,18 +40,44 @@ export default function OrderConfirmation() {
   const dispatch = useAppDispatch();
   const hasNavigatedAway = useRef(false);
 
-  // useEffect(() => {
-  //   if (incomingPaymentOrder) {
-  //     dispatch(getPaymentPaidValidation(incomingPaymentOrder));
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (order) {
+      dispatch(getCallbackAsync(order.reference));
+    }
+  }, []);
 
   useEffect(() => {
-    console.log("ORDER: ", order);
-    console.log("PAYMENT INFO: ", paymentInfo);
+    if (incomingPaymentOrder) {
+      dispatch(getPaymentPaidValidation(incomingPaymentOrder));
+    }
+  }, [callbacks]);
 
+  useEffect(() => {
+    if (
+      paymentInfo &&
+      paymentInfo.paymentOrder.paid.instrument === "CreditCard" &&
+      order &&
+      order.paymentInfo
+    ) {
+      const operation = paymentInfo.operations.find((o) => o.rel === "capture");
+      if (operation) {
+        const outgoingTransaction: OutgoingTransaction = {
+          transaction: {
+            description: "Test Purchase",
+            amount: paymentInfo.paymentOrder.amount,
+            vatAmount: paymentInfo.paymentOrder.vatAmount,
+            payeeReference: order.paymentInfo.payeeReference,
+            captureUrl: operation.href,
+          },
+        };
+        dispatch(postCaptureToInternalApi(outgoingTransaction));
+      }
+    }
+    //sen om capture???
+  }, [paymentInfo]);
+
+  useEffect(() => {
     if (paymentInfo && order) {
-      console.log("DISPATCHING updateOrderAsync");
       const orderUpdatedPayment: Order = {
         ...order,
         status: "Paid",
@@ -66,91 +90,69 @@ export default function OrderConfirmation() {
   }, [paymentInfo]);
 
   // useEffect(() => {
-  //   if (!hasNavigatedAway.current) {
-  //     return;
+  //   if (paymentInfo && order && incomingPaymentOrder && callbacks) {
+  //     //swedbank har inte fått paymentinfo på prdern, det msåte ske separat för både swish o kort över här i useeffect
+  //     //SEDAN när paymentinfo och creeditcard DÅ köra en capture?!
+  //     dispatch(
+  //       getPaymentByIdAsync({ url: incomingPaymentOrder.paymentOrder.id })
+  //     );
+  // if (
+  //   paymentInfo.paymentOrder.paid.instrument === "CreditCard" &&
+  //   order.paymentInfo
+  // ) {
+
+  // const mappedItems: TransationOrderItem[] = order.items.map((item) => {
+  //   const product = products.find((p) => p.id === item.product_id);
+
+  //   if (!product) {
+  //     throw new Error(`Product with id ${item.product_id} not found`);
   //   }
-  //   dispatch(clearPaymentOrder());
-  //   dispatch(clearCart());
-  //   dispatch(clearPaymentInfo());
-  //   dispatch(clearOrder());
-  // }, [dispatch]);
 
-  useEffect(() => {
-    console.log(
-      "sista PAYMENTINFO: ",
-      paymentInfo,
-      "ORDER : ",
-      order,
-      "incomingpaymentoder: ",
-      incomingPaymentOrder
-    );
-    if (paymentInfo && order && incomingPaymentOrder) {
-      //swedbank har inte fått paymentinfo på prdern, det msåte ske separat för både swish o kort över här i useeffect
-      //SEDAN när paymentinfo och creeditcard DÅ köra en capture?!
-      dispatch(
-        getPaymentByIdAsync({ url: incomingPaymentOrder.paymentOrder.id })
-      );
-      if (
-        paymentInfo.paymentOrder.paid.instrument === "CreditCard" &&
-        order.paymentInfo
-      ) {
-        console.log("PAYMENTINFO PÅ ORDER: ", order.paymentInfo);
-        console.log("INCOMING: ", incomingPaymentOrder);
-        console.log("PAYMENTINFO: ", paymentInfo);
-        const mappedItems: TransationOrderItem[] = order.items.map((item) => {
-          const product = products.find((p) => p.id === item.product_id);
-
-          if (!product) {
-            throw new Error(`Product with id ${item.product_id} not found`);
-          }
-
-          return {
-            reference: product.id,
-            name: product.name,
-            type: OrderItemType.OTHER, //kategori
-            class: "Hoodie", // kategori med?
-            // imageUrl: item.imageUrl,
-            description: product.description,
-            // discountDescription: item.discountDescription,
-            quantity: item.quantity,
-            quantityUnit: "pcs",
-            unitPrice: product.price * 100,
-            discountPrice: product.rabatt,
-            vatPercent: 1200,
-            amount: item.quantity * product.price * 100,
-            vatAmount: paymentInfo.paymentOrder.vatAmount,
-          };
-        });
-        const outgoingTransaction: OutgoingTransaction = {
-          transaction: {
-            description: "Test Purchase",
-            amount: paymentInfo.paymentOrder.amount,
-            vatAmount: 0,
-            payeeReference: order.paymentInfo?.payeeReference,
-          },
-          orderItems: mappedItems,
-        };
-        const operation = paymentInfo.operations.find(
-          (o) => o.rel === "capture"
-        );
-        if (operation) {
-          const captureUrl = operation.href;
-          dispatch(
-            getPaymentCaptureAsync({
-              transaction: outgoingTransaction,
-              url: captureUrl,
-            })
-          );
-        }
-      }
-    }
-    // else {
-    //   // if (incomingPaymentOrder) {
-    //   //   dispatch(getPaymentPaidValidation(incomingPaymentOrder));
-    //   // }
-    // }
-    // dispatch(clearOrder());
-  }, [order?.paymentInfo, paymentInfo]);
+  //   return {
+  //     reference: product.id,
+  //     name: product.name,
+  //     type: OrderItemType.OTHER, //kategori
+  //     class: "Hoodie", // kategori med?
+  //     // imageUrl: item.imageUrl,
+  //     description: product.description,
+  //     // discountDescription: item.discountDescription,
+  //     quantity: item.quantity,
+  //     quantityUnit: "pcs",
+  //     unitPrice: product.price * 100,
+  //     discountPrice: product.rabatt,
+  //     vatPercent: 1200,
+  //     amount: item.quantity * product.price * 100,
+  //     vatAmount: paymentInfo.paymentOrder.vatAmount,
+  //   };
+  // });
+  //   const outgoingTransaction: OutgoingTransaction = {
+  //     transaction: {
+  //       description: "Test Purchase",
+  //       amount: paymentInfo.paymentOrder.amount,
+  //       vatAmount: 0,
+  //       payeeReference: order.paymentInfo.payeeReference,
+  //     },
+  //     // orderItems: mappedItems,
+  //   };
+  //   const operation = paymentInfo.operations.find((o) => o.rel === "capture");
+  //   if (operation) {
+  //     const captureUrl = operation.href;
+  //     dispatch(
+  //       getPaymentCaptureAsync({
+  //         transaction: outgoingTransaction,
+  //         url: captureUrl,
+  //       })
+  //     );
+  //   }
+  // }
+  // }
+  // else {
+  //   // if (incomingPaymentOrder) {
+  //   //   dispatch(getPaymentPaidValidation(incomingPaymentOrder));
+  //   // }
+  // }
+  // dispatch(clearOrder());
+  // }, [order?.paymentInfo, paymentInfo]);
 
   // useEffect(() => {
   //   if (paymentAborted || paymentCancelled || (paymentFailed && order)) {
@@ -220,10 +222,11 @@ export default function OrderConfirmation() {
             }}
           >
             <Typography variant="h4" align="center" gutterBottom>
-              Orderbekräftelse - BETALD {order.status}
+              Orderbekräftelse
             </Typography>
             <Typography variant="body1" align="center" gutterBottom>
-              Tack för din beställning! Här är en sammanfattning av din order:
+              Tack för din beställning! Du kommer få ett mail när betalningen är
+              genomförd. Här är en sammanfattning av din order:
             </Typography>
           </Paper>
 
