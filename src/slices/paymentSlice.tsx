@@ -8,14 +8,20 @@ import {
   PaymentOrderResponse,
   ValidPaymentOrder,
 } from "../../swedbankTypes";
-import { PaymentOrderIncoming, PaymentOrderOutgoing } from "../../types";
+import {
+  CallbackData,
+  PaymentOrderIncoming,
+  PaymentOrderOutgoing,
+} from "../../types";
 import {
   CapturePayment,
   GetPaymentById,
   GetPaymentPaidValidation,
   PostPaymentOrder,
 } from "../api/SWEDBANKpaymentOrder";
+import { getCallbackFromDb } from "../api/callback";
 import { addPaymentOrderIncomingToDB } from "../api/paymentOrder";
+import { PostCaptureToInternalApiDB } from "../api/paymentDetails";
 
 interface PaymentState {
   paymentOrderOutgoing: PaymentOrderOutgoing | null;
@@ -26,6 +32,7 @@ interface PaymentState {
   paymentAborted: PaymentAborted | null;
   paymentCancelled: PaymentCancelled | null;
   paymentCapture: PaymentOrderResponse | null;
+  callbackData: CallbackData | null;
   error: string | null;
 }
 
@@ -38,6 +45,7 @@ export const initialState: PaymentState = {
   paymentAborted: null,
   paymentCancelled: null,
   paymentCapture: null,
+  callbackData: null,
   error: null,
 };
 
@@ -199,6 +207,38 @@ export const getPaymentByIdAsync = createAsyncThunk<
   }
 });
 
+export const postCaptureToInternalApi = createAsyncThunk<
+  void,
+  OutgoingTransaction,
+  { rejectValue: string }
+>("payments/postOutgoingCapture", async (transaction, thunkAPI) => {
+  try {
+    await PostCaptureToInternalApiDB({ transaction: transaction });
+  } catch (error) {
+    return thunkAPI.rejectWithValue(
+      "Något gick fel vid post av outgoing transaction för att göra capture."
+    );
+  }
+});
+
+export const getCallbackAsync = createAsyncThunk<
+  CallbackData,
+  string,
+  { rejectValue: string }
+>("payments/getCallback", async (orderReference, thunkAPI) => {
+  try {
+    const response = await getCallbackFromDb(orderReference);
+    if (response) {
+      return response;
+    }
+    return thunkAPI.rejectWithValue("failed to get callbackdata");
+  } catch (error) {
+    return thunkAPI.rejectWithValue(
+      "Något gick fel vid hämtning av callbackdata."
+    );
+  }
+});
+
 const paymentSlice = createSlice({
   name: "payments",
   initialState,
@@ -228,16 +268,6 @@ const paymentSlice = createSlice({
         state.error =
           "Något gick fel när payment ordern hämtades. Försök igen senare.";
       })
-      // .addCase(getPaymentOrderIncoming.fulfilled, (state, action) => {
-      //   if (action.payload) {
-      //     state.paymentOrderIncoming = action.payload;
-      //     state.error = null;
-      //   }
-      // })
-      // .addCase(getPaymentOrderIncoming.rejected, (state) => {
-      //   state.error =
-      //     "Något gick fel när payment ordern hämtades. Försök igen senare.";
-      // })
       .addCase(getPaymentPaidValidation.fulfilled, (state, action) => {
         state.paymentInfo = action.payload;
         state.error = null;
@@ -255,6 +285,14 @@ const paymentSlice = createSlice({
       })
       .addCase(getPaymentCaptureAsync.rejected, (state) => {
         state.error = "Något gick fel när betalning bearbetades.";
+      })
+      .addCase(getCallbackAsync.rejected, (state) => {
+        state.error =
+          "Något gick fel när callback datan hämtades. Försök igen senare.";
+      })
+      .addCase(getCallbackAsync.fulfilled, (state, action) => {
+        state.callbackData = action.payload;
+        state.error = null;
       });
   },
 });

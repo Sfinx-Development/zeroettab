@@ -219,8 +219,8 @@ export async function CapturePayment({
 }): Promise<PaymentOrderResponse | null> {
   const uri = captureUrl;
   const requestBody = {
-    transaction: transaction.transaction,
-    orderItems: transaction.orderItems,
+    transaction: transaction,
+    // orderItems: transaction.orderItems,
   };
   const bearer = import.meta.env.VITE_SWEDBANK_BEARER;
 
