@@ -293,3 +293,29 @@ export interface ValidPaymentOrder {
   paymentOrder: ValidPayment;
   operations: Operation[];
 }
+// CaptureResponse type in TypeScript
+export interface CaptureResponse {
+  payment: string;
+  capture: CaptureDetails;
+}
+
+export interface CaptureDetails {
+  id: string;
+  transaction: TransactionDetails;
+}
+
+export interface TransactionDetails {
+  id: string;
+  created: string; // Use string for date; you can parse it later if needed
+  updated: string; // Same here for updated date
+  type: string;
+  state: string;
+  number: number;
+  amount: number;
+  vatAmount: number;
+  description: string;
+  payeeReference: string;
+  isOperational: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  operations: any[]; // If operations have a more specific structure, define it here
+}

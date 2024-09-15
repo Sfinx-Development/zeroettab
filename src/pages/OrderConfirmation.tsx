@@ -6,6 +6,7 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
+import emailjs from "emailjs-com";
 import { useEffect, useRef } from "react";
 import { OutgoingTransaction } from "../../swedbankTypes";
 import { clearCart } from "../slices/cartSlice";
@@ -14,6 +15,7 @@ import {
   clearPaymentInfo,
   clearPaymentOrder,
   getCallbackAsync,
+  getCaptureAsync,
   getPaymentPaidValidation,
   postCaptureToInternalApi,
 } from "../slices/paymentSlice";
@@ -27,6 +29,7 @@ export default function OrderConfirmation() {
   );
   const paymentInfo = useAppSelector((state) => state.paymentSlice.paymentInfo);
   const callbacks = useAppSelector((state) => state.paymentSlice.callbackData);
+  const capture = useAppSelector((state) => state.paymentSlice.capture);
   // const paymentFailed = useAppSelector(
   //   (state) => state.paymentSlice.paymentFailed
   // );
@@ -49,6 +52,7 @@ export default function OrderConfirmation() {
   useEffect(() => {
     if (incomingPaymentOrder) {
       dispatch(getPaymentPaidValidation(incomingPaymentOrder));
+      dispatch(getCaptureAsync(incomingPaymentOrder.id));
     }
   }, [callbacks]);
 
@@ -88,6 +92,38 @@ export default function OrderConfirmation() {
       console.log("Order eller PaymentInfo saknas");
     }
   }, [paymentInfo]);
+
+  useEffect(() => {
+    if (order && capture) {
+      console.log("SKICKAR CAPTURE :)");
+      sendEmailWithLink(order);
+    }
+  }, [capture]);
+
+  const sendEmailWithLink = (order: Order) => {
+    const receipt = `
+    <h1>Thank you for your purchase!</h1>
+    <p>Your payment was successful. Here are the details:</p>
+    <ul>
+      <li>Datum: ${new Date(order.created_date).toLocaleString()}</li>
+      <li>Totalt belopp: ${(order.total_amount / 100).toFixed(2)} SEK</li>
+      <li>Moms: ${(order.vat_amount / 100).toFixed(2)} SEK</li>
+      <li>Betalningsmetod: ${order.paymentInfo?.instrument}</li>
+      <li>Status: ${order.status}</li>
+    </ul>
+    <p>Vid frågor, tveka inte att kontakta oss på zeroett@gmail.com!.</p>
+  `;
+    const body = receipt;
+
+    const templateParams = {
+      from_name: "Zeroett",
+      order_number: order.reference,
+      store_name: "Zeroett Webshop",
+      message: ` ${body}`,
+    };
+
+    emailjs.send("service_f1l2auv", "template_y2qdt1g", templateParams);
+  };
 
   // useEffect(() => {
   //   if (paymentInfo && order && incomingPaymentOrder && callbacks) {
