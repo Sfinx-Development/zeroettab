@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
+  CaptureResponse,
   OutgoingTransaction,
   PaymentAborted,
   PaymentCancelled,
@@ -20,8 +21,9 @@ import {
   PostPaymentOrder,
 } from "../api/SWEDBANKpaymentOrder";
 import { getCallbackFromDb } from "../api/callback";
-import { addPaymentOrderIncomingToDB } from "../api/paymentOrder";
+import { getCaptureFromDb } from "../api/capture";
 import { PostCaptureToInternalApiDB } from "../api/paymentDetails";
+import { addPaymentOrderIncomingToDB } from "../api/paymentOrder";
 
 interface PaymentState {
   paymentOrderOutgoing: PaymentOrderOutgoing | null;
@@ -33,6 +35,7 @@ interface PaymentState {
   paymentCancelled: PaymentCancelled | null;
   paymentCapture: PaymentOrderResponse | null;
   callbackData: CallbackData | null;
+  capture: CaptureResponse | null;
   error: string | null;
 }
 
@@ -46,6 +49,7 @@ export const initialState: PaymentState = {
   paymentCancelled: null,
   paymentCapture: null,
   callbackData: null,
+  capture: null,
   error: null,
 };
 
@@ -239,6 +243,22 @@ export const getCallbackAsync = createAsyncThunk<
   }
 });
 
+export const getCaptureAsync = createAsyncThunk<
+  CaptureResponse,
+  string,
+  { rejectValue: string }
+>("payments/getCapture", async (paymentOrderId, thunkAPI) => {
+  try {
+    const response = await getCaptureFromDb(paymentOrderId);
+    if (response) {
+      return response as CaptureResponse;
+    }
+    return thunkAPI.rejectWithValue("failed to get capture");
+  } catch (error) {
+    return thunkAPI.rejectWithValue("Något gick fel vid hämtning av capture.");
+  }
+});
+
 const paymentSlice = createSlice({
   name: "payments",
   initialState,
@@ -292,6 +312,14 @@ const paymentSlice = createSlice({
       })
       .addCase(getCallbackAsync.fulfilled, (state, action) => {
         state.callbackData = action.payload;
+        state.error = null;
+      })
+      .addCase(getCaptureAsync.rejected, (state) => {
+        state.error =
+          "Något gick fel när callback datan hämtades. Försök igen senare.";
+      })
+      .addCase(getCaptureAsync.fulfilled, (state, action) => {
+        state.capture = action.payload;
         state.error = null;
       });
   },

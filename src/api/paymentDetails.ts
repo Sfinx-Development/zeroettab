@@ -1,9 +1,11 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
 import {
+  CaptureResponse,
   OutgoingTransaction,
   OutgoingTransactionNoUrl,
 } from "../../swedbankTypes";
 import { PaymentOrderIncoming } from "../../types";
+import { addCaptureToDB } from "./capture";
 import { db } from "./config";
 
 //ÄNDRA TYPEN N
@@ -60,9 +62,10 @@ export async function PostCaptureToInternalApiDB({
       throw new Error(`Nätverksfel - ${response.status}: ${errorText}`);
     }
 
-    const data = await response.json();
+    const data = (await response.json()) as CaptureResponse;
     console.log("Response Data: ", data);
-    return data;
+    const savedData = await addCaptureToDB(data);
+    return savedData;
   } catch (error) {
     console.error("Error in CapturePayment: ", error);
     return null;
