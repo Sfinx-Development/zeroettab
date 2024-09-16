@@ -15,7 +15,6 @@ import {
   clearPaymentInfo,
   clearPaymentOrder,
   getCallbackAsync,
-  getCaptureAsync,
   getPaymentPaidValidation,
   postCaptureToInternalApi,
 } from "../slices/paymentSlice";
@@ -52,7 +51,7 @@ export default function OrderConfirmation() {
   useEffect(() => {
     if (incomingPaymentOrder) {
       dispatch(getPaymentPaidValidation(incomingPaymentOrder));
-      dispatch(getCaptureAsync(incomingPaymentOrder.id));
+      // dispatch(getCaptureAsync(incomingPaymentOrder.id));
     }
   }, [callbacks]);
 

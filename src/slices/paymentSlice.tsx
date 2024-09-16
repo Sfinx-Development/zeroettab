@@ -49,7 +49,7 @@ export const initialState: PaymentState = {
   paymentCancelled: null,
   paymentCapture: null,
   callbackData: null,
-  capture: null,
+  capture: getCaptureFromLocalStorage(),
   error: null,
 };
 
@@ -90,6 +90,33 @@ function getPaymentInfoFromLocalStorage(): ValidPaymentOrder | null {
       return JSON.parse(paymentInfo) as ValidPaymentOrder;
     } catch (error) {
       console.error("Error parsing paymentInfo from localStorage:", error);
+      return null;
+    }
+  }
+
+  return null;
+}
+
+function saveCaptureToLocalStorage(capture: CaptureResponse | null) {
+  if (capture) {
+    try {
+      localStorage.setItem("capture", JSON.stringify(capture));
+    } catch (error) {
+      console.error("Error saving capture to localStorage:", error);
+    }
+  } else {
+    localStorage.removeItem("capture");
+  }
+}
+
+function getCaptureFromLocalStorage(): CaptureResponse | null {
+  const capture = localStorage.getItem("capture");
+
+  if (capture) {
+    try {
+      return JSON.parse(capture) as CaptureResponse;
+    } catch (error) {
+      console.error("Error parsing capture from localStorage:", error);
       return null;
     }
   }
@@ -212,12 +239,20 @@ export const getPaymentByIdAsync = createAsyncThunk<
 });
 
 export const postCaptureToInternalApi = createAsyncThunk<
-  void,
+  CaptureResponse,
   OutgoingTransaction,
   { rejectValue: string }
 >("payments/postOutgoingCapture", async (transaction, thunkAPI) => {
   try {
-    await PostCaptureToInternalApiDB({ transaction: transaction });
+    const capture = await PostCaptureToInternalApiDB({
+      transaction: transaction,
+    });
+    if (capture) {
+      saveCaptureToLocalStorage(capture);
+      return capture;
+    } else {
+      return thunkAPI.rejectWithValue("failed to capture payment");
+    }
   } catch (error) {
     return thunkAPI.rejectWithValue(
       "Något gick fel vid post av outgoing transaction för att göra capture."
@@ -251,9 +286,12 @@ export const getCaptureAsync = createAsyncThunk<
   try {
     const response = await getCaptureFromDb(paymentOrderId);
     if (response) {
+      console.log(response);
+      saveCaptureToLocalStorage(response);
       return response as CaptureResponse;
+    } else {
+      return thunkAPI.rejectWithValue("failed to get capture");
     }
-    return thunkAPI.rejectWithValue("failed to get capture");
   } catch (error) {
     return thunkAPI.rejectWithValue("Något gick fel vid hämtning av capture.");
   }
@@ -314,11 +352,11 @@ const paymentSlice = createSlice({
         state.callbackData = action.payload;
         state.error = null;
       })
-      .addCase(getCaptureAsync.rejected, (state) => {
+      .addCase(postCaptureToInternalApi.rejected, (state) => {
         state.error =
           "Något gick fel när callback datan hämtades. Försök igen senare.";
       })
-      .addCase(getCaptureAsync.fulfilled, (state, action) => {
+      .addCase(postCaptureToInternalApi.fulfilled, (state, action) => {
         state.capture = action.payload;
         state.error = null;
       });

@@ -64,8 +64,8 @@ export async function PostCaptureToInternalApiDB({
 
     const data = (await response.json()) as CaptureResponse;
     console.log("Response Data: ", data);
-    const savedData = await addCaptureToDB(data);
-    return savedData;
+    await addCaptureToDB(data);
+    return data;
   } catch (error) {
     console.error("Error in CapturePayment: ", error);
     return null;
