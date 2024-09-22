@@ -33,7 +33,7 @@ export async function PostCaptureToInternalApiDB({
   transaction: OutgoingTransaction;
 }) {
   const baseUrl =
-    "https://swedbankpay-gad0dfg6fha9bpfh.swedencentral-01.azurewebsites.net/swedbankpay/capture";
+    "https://swedbankpay-gad0dfg6fha9bpfh.swedencentral-01.azurewebsites.net/swedbankpay/captureZeroett";
   const captureUrl = transaction.transaction.captureUrl;
   const fullUrl = `${baseUrl}?captureUrl=${encodeURIComponent(captureUrl)}`; // Encoda URL:n för säkerhetsskull
 
