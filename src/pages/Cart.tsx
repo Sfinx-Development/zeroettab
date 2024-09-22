@@ -208,7 +208,7 @@ export default function Cart() {
         completeUrl: "https://localhost:5173/orderconfirmation",
         cancelUrl: "https://localhost:5173/cart", //Redirect only
         callbackUrl:
-          "https://swedbankpay-gad0dfg6fha9bpfh.swedencentral-01.azurewebsites.net/swedbankpay/callback",
+          "https://swedbankpay-gad0dfg6fha9bpfh.swedencentral-01.azurewebsites.net/swedbankpay/callbackZeroett",
         logoUrl: "", //Redirect only
       },
       payeeInfo: {

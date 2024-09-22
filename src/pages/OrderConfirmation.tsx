@@ -53,7 +53,7 @@ export default function OrderConfirmation() {
       dispatch(getPaymentPaidValidation(incomingPaymentOrder));
       // dispatch(getCaptureAsync(incomingPaymentOrder.id));
     }
-  }, [callbacks]);
+  }, []);
 
   useEffect(() => {
     if (
