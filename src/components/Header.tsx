@@ -1,14 +1,4 @@
-import LanguageIcon from "@mui/icons-material/Language";
-import {
-  Box,
-  IconButton,
-  Link,
-  Menu,
-  MenuItem,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, Link, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useLanguageContext } from "../context/languageContext";
@@ -39,18 +29,9 @@ export default function Header(): JSX.Element {
         width: "100%",
         flexDirection: isMobile ? "column" : "row",
         zIndex: 999,
-        paddingY: 1,
         position: "sticky",
+        backgroundColor: "#F7F7F7",
         top: 0,
-        backgroundImage:
-          "linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 50%, rgba(0, 0, 0, 0))", // Gradient som börjar med mörkare svart och fade-out vid 50% ned
-        transition: "background-image 0.3s ease", // Övergång för gradienten
-        // boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", // Ljusskugga för övergångseffekt
-        // backgroundImage: "url('https://i.imgur.com/kFmeAx8.png')",
-        //  backgroundColor: "black",
-        // transition: "background-color 0.10s ease",
-        // boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.10)",
-        // backgroundColor: "red",
       }}
       component={"header"}
     >
@@ -63,7 +44,6 @@ export default function Header(): JSX.Element {
           marginX: { xs: 0, md: 1 },
           alignItems: "center",
           justifyContent: "space-around",
-          // width: isMobile ? "100%" : "auto",
           gap: 2,
         }}
       >
@@ -72,48 +52,21 @@ export default function Header(): JSX.Element {
             textDecoration: "none",
             transition: "color 0.3s",
             "&:hover": {
-              color: "#4c9173",
-            },
-          }}
-          href="/"
-        >
-          <Typography
-            sx={{
-              color: "white",
-              letterSpacing: 2,
-              fontWeight: "300",
-              fontSize: isMobile ? 18 : 20,
-              lineHeight: 1.5,
-              transition: "color 0.3s",
-              "&:hover": {
-                color: "#896daf",
-              },
-              whiteSpace: "nowrap",
-            }}
-          >
-            <FormattedMessage id="home" />
-          </Typography>
-        </Link>
-        <Link
-          sx={{
-            textDecoration: "none",
-            transition: "color 0.3s",
-            "&:hover": {
-              color: "#4c9173",
+              color: "rgb(67, 61, 67)",
             },
           }}
           href="/about"
         >
           <Typography
             sx={{
-              color: "white",
+              color: "rgb(37,31,37)",
               letterSpacing: 2,
               fontWeight: "300",
-              fontSize: isMobile ? 18 : 20,
+              fontSize: isMobile ? 18 : 22,
               lineHeight: 1.5,
               transition: "color 0.3s",
               "&:hover": {
-                color: "#896daf",
+                color: "rgb(67, 61, 67)",
               },
               whiteSpace: "nowrap",
             }}
@@ -125,27 +78,24 @@ export default function Header(): JSX.Element {
           sx={{
             textDecoration: "none",
             transition: "color 0.3s",
-            "&:hover": {
-              color: "#4c9173",
-            },
           }}
-          href="/contact"
+          href="/offers"
         >
           <Typography
             sx={{
-              color: "white",
+              color: "rgb(37,31,37)",
               letterSpacing: 2,
               fontWeight: "300",
-              fontSize: isMobile ? 18 : 20,
+              fontSize: isMobile ? 18 : 22,
               lineHeight: 1.5,
               transition: "color 0.3s",
               "&:hover": {
-                color: "#896daf",
+                color: "rgb(67, 61, 67)",
               },
               whiteSpace: "nowrap",
             }}
           >
-            <FormattedMessage id="contact" />
+            <FormattedMessage id="offers" />
           </Typography>
         </Link>
         <Link href="/">
@@ -166,14 +116,14 @@ export default function Header(): JSX.Element {
         >
           <Typography
             sx={{
-              color: "white",
+              color: "rgb(37,31,37)",
               letterSpacing: 2,
               fontWeight: "300",
-              fontSize: isMobile ? 18 : 20,
+              fontSize: isMobile ? 18 : 22,
               lineHeight: 1.5,
               transition: "color 0.3s",
               "&:hover": {
-                color: "#896daf",
+                color: "rgb(67, 61, 67)",
               },
               whiteSpace: "nowrap",
             }}
@@ -185,30 +135,32 @@ export default function Header(): JSX.Element {
           sx={{
             textDecoration: "none",
             transition: "color 0.3s",
-            "&:hover": {
-              color: "#4c9173",
-            },
+            background:
+              "linear-gradient(to bottom,rgba(250,220,197,255), rgba(233, 189, 179, 1))",
+            paddingY: 1,
+            paddingX: 2,
+            borderRadius: 2,
           }}
-          href="/offers"
+          href="/contact"
         >
           <Typography
             sx={{
-              color: "white",
+              color: "rgb(37,31,37)",
               letterSpacing: 2,
               fontWeight: "300",
-              fontSize: isMobile ? 18 : 20,
+              fontSize: isMobile ? 18 : 22,
               lineHeight: 1.5,
               transition: "color 0.3s",
               "&:hover": {
-                color: "#896daf",
+                color: "rgb(67, 61, 67)",
               },
               whiteSpace: "nowrap",
             }}
           >
-            <FormattedMessage id="offers" />
+            <FormattedMessage id="contact" />
           </Typography>
         </Link>
-        <Box
+        {/* <Box
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -216,8 +168,8 @@ export default function Header(): JSX.Element {
             gap: 0.5,
             marginTop: "-42px",
           }}
-        >
-          <Box sx={{ display: "flex", gap: 2 }}>
+        > */}
+        {/* <Box sx={{ display: "flex", gap: 2 }}>
             <IconButton
               onClick={handleClick}
               sx={{
@@ -229,11 +181,11 @@ export default function Header(): JSX.Element {
             >
               <LanguageIcon />
             </IconButton>
-          </Box>
-        </Box>
+          </Box> */}
+        {/* </Box> */}
       </Box>
 
-      <Menu
+      {/* <Menu
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={() => handleClose(language)}
@@ -249,7 +201,7 @@ export default function Header(): JSX.Element {
             English
           </Typography>
         </MenuItem>
-      </Menu>
+      </Menu> */}
     </Box>
   );
 }
