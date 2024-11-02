@@ -25,7 +25,7 @@ export default function Header(): JSX.Element {
       sx={{
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between",
+        justifyContent: "center",
         width: "100%",
         flexDirection: isMobile ? "column" : "row",
         zIndex: 999,
@@ -39,12 +39,11 @@ export default function Header(): JSX.Element {
         sx={{
           display: "flex",
           paddingY: 2,
-          width: "100%",
+          width: "85%",
           paddingX: { xs: 0, md: 3 },
           marginX: { xs: 0, md: 1 },
           alignItems: "center",
           justifyContent: "space-around",
-          gap: 2,
         }}
       >
         <Link
@@ -108,9 +107,6 @@ export default function Header(): JSX.Element {
           sx={{
             textDecoration: "none",
             transition: "color 0.3s",
-            "&:hover": {
-              color: "#4c9173",
-            },
           }}
           href="/projects"
         >
