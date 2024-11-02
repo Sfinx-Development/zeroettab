@@ -1,5 +1,4 @@
 import LanguageIcon from "@mui/icons-material/Language";
-import MySvgImage from "./SvgImage";
 import {
   Box,
   IconButton,
@@ -10,11 +9,10 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import { useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useLanguageContext } from "../context/languageContext";
-import { useNavigate } from "react-router-dom";
+import MySvgImage from "./SvgImage";
 
 export default function Header(): JSX.Element {
   const theme = useTheme();
@@ -22,7 +20,6 @@ export default function Header(): JSX.Element {
 
   const { language, setLanguage } = useLanguageContext();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-  const navigate = useNavigate();
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -211,33 +208,6 @@ export default function Header(): JSX.Element {
             <FormattedMessage id="offers" />
           </Typography>
         </Link>
-        {/* <Link
-          sx={{
-            textDecoration: "none",
-            transition: "color 0.3s",
-            "&:hover": {
-              color: "#4c9173",
-            },
-          }}
-          href="/products"
-        >
-          <Typography
-            sx={{
-              color: "white",
-              letterSpacing: 2,
-              fontWeight: "300",
-              fontSize: isMobile ? 18 : 20,
-              lineHeight: 1.5,
-              transition: "color 0.3s",
-              "&:hover": {
-                color: "#896daf",
-              },
-              whiteSpace: "nowrap",
-            }}
-          >
-            <FormattedMessage id="products" />
-          </Typography>
-        </Link> */}
         <Box
           sx={{
             display: "flex",
@@ -259,45 +229,7 @@ export default function Header(): JSX.Element {
             >
               <LanguageIcon />
             </IconButton>
-            <IconButton
-              onClick={() => navigate("/cart")}
-              sx={{
-                color: "white",
-                backgroundColor: "#662c9c",
-                "&:hover": { backgroundColor: "#422a75" },
-                borderRadius: "50%",
-              }}
-            >
-              <ShoppingBagIcon />
-            </IconButton>
           </Box>
-          <Link
-            sx={{
-              textDecoration: "none",
-              transition: "color 0.3s",
-              "&:hover": {
-                color: "#4c9173",
-              },
-            }}
-            href="/products"
-          >
-            <Typography
-              sx={{
-                color: "white",
-                letterSpacing: 2,
-                fontWeight: "300",
-                fontSize: isMobile ? 18 : 20,
-                lineHeight: 1.5,
-                transition: "color 0.3s",
-                "&:hover": {
-                  color: "#896daf",
-                },
-                whiteSpace: "nowrap",
-              }}
-            >
-              <FormattedMessage id="products" />
-            </Typography>
-          </Link>
         </Box>
       </Box>
 

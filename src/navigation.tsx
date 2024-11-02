@@ -5,14 +5,10 @@ import {
   useLanguageContext,
 } from "./context/languageContext";
 import About from "./pages/About";
-import Cart from "./pages/Cart";
 import Contact from "./pages/Contact";
 import Error from "./pages/Error";
 import Index from "./pages/Index";
 import Offers from "./pages/Offers";
-import OrderConfirmation from "./pages/OrderConfirmation";
-import ProductDetail from "./pages/ProductDetail";
-import Products from "./pages/Products";
 import Projects from "./pages/Projects";
 import RootLayout from "./pages/RootLayout";
 import messages_en from "./translations/en.json";
@@ -35,13 +31,6 @@ const Navigation = () => {
           <Route path="about" element={<About />}></Route>
           <Route path="projects" element={<Projects />}></Route>
           <Route path="offers" element={<Offers />}></Route>
-          <Route path="products" element={<Products />}></Route>
-          <Route path="product-detail" element={<ProductDetail />}></Route>
-          <Route path="cart" element={<Cart />}></Route>
-          <Route
-            path="orderconfirmation"
-            element={<OrderConfirmation />}
-          ></Route>
           <Route path="*" element={<Error />}></Route>
         </Route>
       </Routes>
