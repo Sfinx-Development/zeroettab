@@ -1,7 +1,7 @@
-const SvgMobile = () => (
+const SvgSmallImage = () => (
   <svg
-    width="57.69165mm"
-    height="37.838028mm"
+    width="25.69165mm"
+    height="14.838028mm"
     viewBox="0 0 157.69165 47.838028"
     version="1.1"
     id="svg1"
@@ -18,4 +18,4 @@ const SvgMobile = () => (
   </svg>
 );
 
-export default SvgMobile;
+export default SvgSmallImage;
