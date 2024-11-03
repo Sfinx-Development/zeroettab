@@ -19,6 +19,7 @@ export default function ParallaxIndex() {
           minHeight: "100vh",
           backgroundColor: "rgba(34,32,37,255)",
           zIndex: 2,
+          width: "100%",
         }}
       >
         <Box

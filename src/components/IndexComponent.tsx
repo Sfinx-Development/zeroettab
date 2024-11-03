@@ -1,5 +1,7 @@
+import EastIcon from "@mui/icons-material/East";
 import { Box, Link, Typography } from "@mui/material";
 import { Rubrik } from "./Footer";
+import SvgIndexZeroett from "./SvgIndex";
 
 export default function IndexComponent() {
   return (
@@ -14,12 +16,10 @@ export default function IndexComponent() {
       <Box
         sx={{
           display: "flex",
-          // width: "100%",
           padding: 0,
           height: "100%",
           backgroundColor: "rgba(238,233,230,255)",
-          // alignItems: "flex-start", // Align items to the start (left)
-          justifyContent: "flex-start", // Optional, adjust based on your layout needs
+          justifyContent: "flex-start",
           width: "100%",
         }}
       >
@@ -70,51 +70,103 @@ export default function IndexComponent() {
             Kontakta oss direkt
           </Link>
 
-          <Box sx={{ paddingTop: 10, display: "flex", gap: 4 }}>
+          <Box sx={{ paddingTop: 10, display: "flex", gap: 6 }}>
             <Box>
               <Rubrik sx={{ fontSize: 20, letterSpacing: 1.5 }}>
                 Vilka är vi?
               </Rubrik>
-              <Typography
+              <Box
                 sx={{
-                  fontSize: 20,
+                  display: "flex",
+                  gap: 0.5,
+                  alignItems: "center",
                   marginBottom: 1,
-                  fontFamily: "Roboto",
-                  fontWeight: "lighter",
                 }}
               >
-                Om oss
-              </Typography>
+                <EastIcon sx={{ color: "rgb(216,163,153)" }} />
+                <Link
+                  href="/aboutus"
+                  style={{ textDecoration: "none", color: "rgb(37,31,37)" }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: 20,
+                      fontFamily: "Roboto",
+                      fontWeight: "lighter",
+                      textAlign: "center",
+                    }}
+                  >
+                    Om oss
+                  </Typography>
+                </Link>
+              </Box>
             </Box>
             <Box>
               <Rubrik sx={{ fontSize: 20, letterSpacing: 1.5 }}>
                 Vad kan vi göra för dig?
               </Rubrik>
-              <Typography
+              <Box
                 sx={{
-                  fontSize: 20,
-                  marginBottom: 1,
-                  fontFamily: "Roboto",
-                  fontWeight: "lighter",
+                  display: "flex",
+                  gap: 1,
+                  alignItems: "center",
                 }}
               >
-                Tjänster
-              </Typography>
+                <EastIcon sx={{ color: "rgb(216,163,153)" }} />
+                <Link
+                  href="/offers"
+                  style={{ textDecoration: "none", color: "rgb(37,31,37)" }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: 20,
+                      fontFamily: "Roboto",
+                      fontWeight: "lighter",
+                    }}
+                  >
+                    Tjänster
+                  </Typography>
+                </Link>
+              </Box>
             </Box>
             <Box>
               <Rubrik sx={{ fontSize: 20, letterSpacing: 1.5 }}>
                 Vad har vi gjort tidigare?
               </Rubrik>
-              <Typography
+              <Box
                 sx={{
-                  fontSize: 20,
-                  marginBottom: 1,
-                  fontFamily: "Roboto",
-                  fontWeight: "lighter",
+                  display: "flex",
+                  gap: 1,
+                  alignItems: "center",
                 }}
               >
-                Projekt
-              </Typography>
+                <EastIcon sx={{ color: "rgb(216,163,153)" }} />
+                <Link
+                  href="/projects"
+                  style={{ textDecoration: "none", color: "rgb(37,31,37)" }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: 20,
+                      fontFamily: "Roboto",
+                      fontWeight: "lighter",
+                    }}
+                  >
+                    Projekt
+                  </Typography>
+                </Link>
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                marginLeft: 10,
+                alignItems: "start",
+                justifyContent: "start",
+                marginTop: -4,
+              }}
+            >
+              <SvgIndexZeroett />
             </Box>
           </Box>
         </Box>
