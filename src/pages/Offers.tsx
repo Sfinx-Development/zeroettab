@@ -1,5 +1,6 @@
-import { Box, Typography, keyframes } from "@mui/material";
-import { FormattedMessage, useIntl } from "react-intl";
+import { Box, keyframes } from "@mui/material";
+import { useIntl } from "react-intl";
+import ServicesComponent from "../components/ServicesComponent";
 
 const fadeIn = keyframes`
   from {
@@ -68,7 +69,7 @@ const Offers = () => {
         animation: `${fadeIn} 1s ease-out`,
       }}
     >
-      {services.map((service, index) => (
+      {/* {services.map((service, index) => (
         <Box
           key={index}
           sx={{
@@ -165,7 +166,8 @@ const Offers = () => {
             </Box>
           </Box>
         </Box>
-      ))}
+      ))} */}
+      <ServicesComponent />
     </Box>
   );
 };
