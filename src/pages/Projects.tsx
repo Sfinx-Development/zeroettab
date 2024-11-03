@@ -1,14 +1,5 @@
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Grid,
-  Link,
-  Typography,
-  keyframes,
-} from "@mui/material";
-import { FormattedMessage } from "react-intl";
+import { Box, keyframes } from "@mui/material";
+import ProjectComponent from "../components/ProjectComponent";
 
 const fadeIn = keyframes`
     from {
@@ -73,7 +64,7 @@ export default function Projects() {
       sx={{
         display: "flex",
         flexDirection: "column",
-        paddingY: 4,
+        // paddingY: 4,
         margin: 0,
         width: "100%",
         alignItems: "center",
@@ -84,7 +75,7 @@ export default function Projects() {
         animation: `${fadeIn} 1s ease-out`,
       }}
     >
-      <Box
+      {/* <Box
         sx={{
           width: "100%",
           marginBottom: 2,
@@ -216,7 +207,8 @@ export default function Projects() {
             </Card>
           </Grid>
         ))}
-      </Grid>
+      </Grid> */}
+      <ProjectComponent />
     </Box>
   );
 }
