@@ -1,4 +1,5 @@
 import { Box, Link, Typography } from "@mui/material";
+import BubblaComponent from "./BubblaComponent";
 import { Rubrik } from "./Footer";
 
 export default function ParallaxIndex() {
@@ -41,47 +42,9 @@ export default function ParallaxIndex() {
           </Typography>
         </Box>
 
-        <Box
-          sx={{
-            width: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-            marginBottom: 4,
-          }}
-        >
-          <Rubrik
-            sx={{
-              backgroundColor: "#F7F7F7",
-              padding: 3,
-              color: "rgba(218,154,145,255)",
-            }}
-          >
-            Frontend
-          </Rubrik>
-          <Rubrik
-            sx={{
-              backgroundColor: "rgba(254,232,209,255)",
-              padding: 3,
-              color: "rgba(225,161,99,255)",
-            }}
-          >
-            Backend
-          </Rubrik>
-          <Rubrik
-            sx={{
-              background:
-                "linear-gradient(to bottom, rgba(229,186,179,255),rgba(240,231,226,255))",
-              padding: 3,
-              color: "rgba(34,32,37,255)",
-            }}
-          >
-            Fullstack
-          </Rubrik>
-        </Box>
+        <BubblaComponent />
 
-        <Box sx={{ width: "50%", marginBottom: 4, marginLeft: 10 }}>
+        <Box sx={{ width: "50%", marginBottom: 10, marginLeft: 10 }}>
           <Rubrik sx={{ color: "#F7F7F7", fontSize: 30, fontWeight: 400 }}>
             Kort sagt..
           </Rubrik>
