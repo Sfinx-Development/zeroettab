@@ -1,24 +1,22 @@
 import { Box, Link, Typography, useMediaQuery, useTheme } from "@mui/material";
-import { useState } from "react";
 import { FormattedMessage } from "react-intl";
-import { useLanguageContext } from "../context/languageContext";
 import MySvgImage from "./SvgImage";
 
 export default function Header(): JSX.Element {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const { language, setLanguage } = useLanguageContext();
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  // const { language, setLanguage } = useLanguageContext();
+  // const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+  // const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
 
-  const handleClose = (lang: string) => {
-    setLanguage(lang);
-    setAnchorEl(null);
-  };
+  // const handleClose = (lang: string) => {
+  //   setLanguage(lang);
+  //   setAnchorEl(null);
+  // };
 
   return (
     <Box
@@ -60,7 +58,8 @@ export default function Header(): JSX.Element {
             sx={{
               color: "rgb(37,31,37)",
               letterSpacing: 2,
-              fontWeight: "300",
+              fontFamily: "Roboto",
+              fontWeight: "lighter",
               fontSize: isMobile ? 18 : 22,
               lineHeight: 1.5,
               transition: "color 0.3s",
@@ -84,7 +83,8 @@ export default function Header(): JSX.Element {
             sx={{
               color: "rgb(37,31,37)",
               letterSpacing: 2,
-              fontWeight: "300",
+              fontFamily: "Roboto",
+              fontWeight: "lighter",
               fontSize: isMobile ? 18 : 22,
               lineHeight: 1.5,
               transition: "color 0.3s",
@@ -114,7 +114,8 @@ export default function Header(): JSX.Element {
             sx={{
               color: "rgb(37,31,37)",
               letterSpacing: 2,
-              fontWeight: "300",
+              fontFamily: "Roboto",
+              fontWeight: "lighter",
               fontSize: isMobile ? 18 : 22,
               lineHeight: 1.5,
               transition: "color 0.3s",
@@ -143,7 +144,8 @@ export default function Header(): JSX.Element {
             sx={{
               color: "rgb(37,31,37)",
               letterSpacing: 2,
-              fontWeight: "300",
+              fontFamily: "Roboto",
+              fontWeight: "lighter",
               fontSize: isMobile ? 18 : 22,
               lineHeight: 1.5,
               transition: "color 0.3s",
