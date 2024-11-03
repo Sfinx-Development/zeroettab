@@ -132,7 +132,7 @@ export default function Header(): JSX.Element {
             textDecoration: "none",
             transition: "color 0.3s",
             background:
-              "linear-gradient(to bottom,rgba(250,220,197,255), rgba(233, 189, 179, 1))",
+              "linear-gradient(to bottom,rgba(250,220,197,255), rgba(235,190,180,255))",
             paddingY: 1,
             paddingX: 2,
             borderRadius: 2,
