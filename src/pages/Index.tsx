@@ -1,27 +1,13 @@
-import { Box, keyframes } from "@mui/material";
+import { Box } from "@mui/material";
 import { useAnimation } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import IndexComponent from "../components/IndexComponent";
-import { useScreenSize } from "../contexts/screenSizeContext";
-
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
+import ParallaxIndex from "../components/ParallaxIndex";
 
 export default function Index() {
-  const navigate = useNavigate();
   const iconsRef = useRef<HTMLDivElement>(null);
   const controls = useAnimation();
   const [isVisible, setIsVisible] = useState(false);
-  const { isMobile } = useScreenSize();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,10 +48,10 @@ export default function Index() {
         alignItems: "start",
         flexGrow: 1,
         minHeight: "100vh",
-        zIndex: 1,
       }}
     >
       <IndexComponent />
+      <ParallaxIndex />
     </Box>
   );
 }

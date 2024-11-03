@@ -19,8 +19,6 @@ const RootLayout = () => {
         padding: 0,
         flexGrow: 1,
         position: "relative",
-        backgroundImage: "url('https://i.imgur.com/kFmeAx8.png')",
-        backgroundSize: "cover",
       }}
     >
       <div
@@ -30,11 +28,9 @@ const RootLayout = () => {
           left: 0,
           width: "100%",
           height: "100%",
-          backgroundColor: "rgba(0, 0, 0, 0.6)",
         }}
       ></div>
       {isMobile ? <MobileHeader /> : <Header />}
-
       <main
         style={{
           display: "flex",
