@@ -1,42 +1,43 @@
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import {
+  Alert,
   AlertColor,
   Box,
   IconButton,
-  styled,
+  Snackbar,
   TextField,
   Typography,
 } from "@mui/material";
 import emailjs from "emailjs-com";
-import React from "react";
-import { Customer, useCustomerContext } from "../../context/customerContext";
+import React, { useState } from "react";
 import { Rubrik } from "../Footer";
 
 emailjs.init("C8CxNnxZg6mg-d2tq");
 
 export default function ParallaxContact() {
-  const { customer, setCustomer } = useCustomerContext();
-
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
   const [snackbarMessage, setSnackbarMessage] = React.useState("");
   const [snackbarSeverity, setSnackbarSeverity] =
     React.useState<AlertColor>("success");
-
+  const [localName, setLocalName] = useState("");
+  const [localMail, setLocalMail] = useState("");
+  const [localPhone, setLocalPhone] = useState("");
+  const [localDesc, setLocalDesc] = useState("");
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
   };
 
-  const sendEmailWithLink = (customer: Customer) => {
-    const customerName = `Kundens namn : ${customer.name}`;
-    const customerEmail = `Kundens email : ${customer.email}`;
-    const customerPhone = `Kundens email : ${customer.phone}`;
-    const customerExtra = `Beskrivning: ${customer.extraDescription}`;
+  const sendEmailWithLink = () => {
+    const customerName = `Kundens namn : ${localName}`;
+    const customerEmail = `Kundens email : ${localMail}`;
+    const customerPhone = `Kundens telefon : ${localPhone}`;
+    const customerExtra = `Beskrivning: ${localDesc}`;
 
     const body = `${customerName}\n${customerEmail}\n${customerPhone}\n${customerExtra}`;
 
     const templateParams = {
       to_name: "Zeroett",
-      from_name: customer.name,
+      from_name: localName,
       message: `Meddelande: ${body}`,
     };
 
@@ -57,20 +58,6 @@ export default function ParallaxContact() {
         setOpenSnackbar(true);
       });
   };
-
-  const StyledTextField = styled(TextField)({
-    "& .MuiInputBase-root": {
-      background: "linear-gradient(to right,#E6A08E, #F1B8A9)",
-      borderRadius: "50px",
-      paddingLeft: "15px",
-    },
-    "& .MuiOutlinedInput-notchedOutline": {
-      border: "none",
-    },
-    "& .MuiInputBase-input": {
-      color: "rgb(37,31,37)",
-    },
-  });
 
   return (
     <Box
@@ -94,13 +81,26 @@ export default function ParallaxContact() {
           flexDirection: "column",
         }}
       >
-        <Box sx={{ position: "absolute", right: 0 }}>
+        <Box
+          sx={{
+            position: "absolute",
+            right: 0,
+            height: { xs: 150, md: 250 },
+            width: "auto", // Säkerställer att bredden anpassas efter innehållet
+            overflow: "hidden", // Förhindrar att bilden överskrider boxen
+          }}
+        >
           <img
             src="https://i.imgur.com/H2Nhixw.png"
             alt="Pink decoration"
-            height={"200px"}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "contain", // Ser till att hela bilden syns inom ramen utan att sträckas
+            }}
           />
         </Box>
+
         <Box
           sx={{
             width: "100%",
@@ -153,55 +153,153 @@ export default function ParallaxContact() {
                 paddingTop: { xs: 4, md: 6 },
               }}
             >
-              <StyledTextField
+              <TextField
                 variant="outlined"
                 placeholder="Namn"
                 fullWidth
+                value={localName}
                 onChange={(e) => {
-                  setCustomer({ ...customer, name: e.target.value });
+                  setLocalName(e.target.value);
+                }}
+                InputProps={{
+                  style: {
+                    background:
+                      "linear-gradient(to right, #D08B7C, #E6A08E, #F1B8A9)",
+                    borderRadius: "50px",
+                    paddingLeft: "15px",
+                    color: "rgb(37,31,37)",
+                  },
+                }}
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "transparent",
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "transparent",
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "transparent",
+                    },
+                    "&.Mui-focused": {
+                      boxShadow: "none",
+                    },
+                  },
                 }}
               />
-              <StyledTextField
+              <TextField
                 variant="outlined"
                 placeholder="Mejladress"
                 fullWidth
+                value={localMail}
                 onChange={(e) => {
-                  setCustomer({ ...customer, email: e.target.value });
+                  setLocalMail(e.target.value);
+                }}
+                InputProps={{
+                  style: {
+                    background:
+                      "linear-gradient(to right, #D08B7C, #E6A08E, #F1B8A9)",
+                    borderRadius: "50px",
+                    paddingLeft: "15px",
+                    color: "rgb(37,31,37)",
+                  },
+                }}
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "transparent",
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "transparent",
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "transparent",
+                    },
+                    "&.Mui-focused": {
+                      boxShadow: "none",
+                    },
+                  },
                 }}
               />
-              <StyledTextField
+              <TextField
                 variant="outlined"
                 placeholder="Telefonnummer"
                 fullWidth
+                value={localPhone}
                 onChange={(e) => {
-                  setCustomer({ ...customer, phone: e.target.value });
+                  setLocalPhone(e.target.value);
+                }}
+                InputProps={{
+                  style: {
+                    background:
+                      "linear-gradient(to right, #D08B7C, #E6A08E, #F1B8A9)",
+                    borderRadius: "50px",
+                    paddingLeft: "15px",
+                    color: "rgb(37,31,37)",
+                  },
+                }}
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "transparent",
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "transparent",
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "transparent",
+                    },
+                    "&.Mui-focused": {
+                      boxShadow: "none",
+                    },
+                  },
                 }}
               />
-              <StyledTextField
+              <TextField
                 variant="outlined"
                 placeholder="Berätta vad vi kan göra för dig"
                 fullWidth
+                value={localDesc}
                 multiline
                 rows={5}
+                InputProps={{
+                  style: {
+                    background:
+                      "linear-gradient(to right, #D08B7C, #E6A08E, #F1B8A9)",
+                    borderRadius: "50px",
+                    paddingLeft: "15px",
+                    color: "rgb(37,31,37)",
+                  },
+                }}
                 sx={{
                   "& .MuiInputBase-root": {
-                    background: "linear-gradient(to right,#E6A08E, #F1B8A9)",
                     borderRadius: "30px",
                     paddingLeft: "15px",
                   },
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "transparent", // Inaktiverar standardgränsen
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "transparent", // Inaktiverar gränsen vid hover
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "transparent", // Tar bort blåa ramen vid fokus
+                    },
+                    "&.Mui-focused": {
+                      boxShadow: "none", // Tar bort den blå skuggan vid fokus
+                    },
+                  },
                 }}
                 onChange={(e) => {
-                  setCustomer({
-                    ...customer,
-                    extraDescription: e.target.value,
-                  });
+                  setLocalDesc(e.target.value);
                 }}
               />
               <Box sx={{ display: "flex", justifyContent: "end" }}>
                 <IconButton
                   sx={{ display: "flex" }}
                   onClick={() => {
-                    sendEmailWithLink(customer);
+                    sendEmailWithLink();
                   }}
                 >
                   <Rubrik sx={{ color: "#F7F7F7", fontSize: 25 }}>
@@ -209,6 +307,19 @@ export default function ParallaxContact() {
                   </Rubrik>
                   <ArrowForwardIcon sx={{ color: "#F7F7F7", fontSize: 25 }} />
                 </IconButton>
+                <Snackbar
+                  open={openSnackbar}
+                  autoHideDuration={6000}
+                  onClose={handleCloseSnackbar}
+                >
+                  <Alert
+                    onClose={handleCloseSnackbar}
+                    severity={snackbarSeverity}
+                    sx={{ width: "100%" }}
+                  >
+                    {snackbarMessage}
+                  </Alert>
+                </Snackbar>
               </Box>
             </Box>
           </Box>
