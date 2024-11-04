@@ -8,3 +8,14 @@ body {
 ::-webkit-scrollbar {
   display: none;
 }
+
+@font-face {
+  font-family: 'Rubrik';
+  src: url('/fonts/quador-semi-bold.otf') format('opentype');
+  font-weight: 600; /* Ange tyngd om det behövs */
+  font-style: normal; /* Ange stil om det behövs */
+}
+
+h1, h2, h3 { 
+  font-family: 'Quador', serif;
+}
