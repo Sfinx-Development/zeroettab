@@ -3,7 +3,6 @@ import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import MenuIcon from "@mui/icons-material/Menu";
-import StorefrontIcon from "@mui/icons-material/Storefront";
 import WorkIcon from "@mui/icons-material/Work";
 import {
   Box,
@@ -17,12 +16,8 @@ import {
   useTheme,
 } from "@mui/material";
 import { useState } from "react";
-// import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
-import { useNavigate } from "react-router-dom";
-import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import { useScreenSize } from "../contexts/screenSizeContext";
-// import LetsTalkPhone from "./LetsTalkPhone";
 
 export default function CustomHeader2(): JSX.Element {
   const theme = useTheme();
@@ -47,9 +42,7 @@ export default function CustomHeader2(): JSX.Element {
     },
     { label: "projects", href: "/projects", icon: <WorkIcon /> },
     { label: "offers", href: "/offers", icon: <LocalOfferIcon /> },
-    { label: "products", href: "/products", icon: <StorefrontIcon /> },
   ];
-  const navigate = useNavigate();
 
   return (
     <Box
@@ -103,20 +96,6 @@ export default function CustomHeader2(): JSX.Element {
           </Link>
         </Box>
 
-        <Box sx={{ display: "flex" }}>
-          <IconButton
-            onClick={() => navigate("/cart")}
-            sx={{
-              color: "white",
-              backgroundColor: "#662c9c",
-              "&:hover": { backgroundColor: "#422a75" },
-              borderRadius: "50%",
-              // marginX: 1,
-            }}
-          >
-            <ShoppingBagIcon sx={{ fontSize: 25 }} />
-          </IconButton>
-        </Box>
         <IconButton
           onClick={handleToggleMenu}
           sx={{

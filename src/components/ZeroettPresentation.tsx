@@ -5,6 +5,9 @@ import { FormattedMessage } from "react-intl";
 // import LetsTalk from "./LetsTalk";
 import LetsTalkPhone from "./LetsTalkPhone";
 import { useScreenSize } from "../contexts/screenSizeContext";
+import SvgBigImage from "./SvgBigzeroett";
+import MySvgImage from "./SvgImage";
+
 
 export default function ZeroettPresentation() {
   const { isMobile } = useScreenSize();
@@ -83,7 +86,14 @@ export default function ZeroettPresentation() {
               marginLeft: isMobile ? 0 : 0,
             }}
           >
-            <Link href="/" sx={{ textDecoration: "none" }}>
+             <Link href="/" sx={{ textDecoration: "none" }}>
+              {isMobile ? (
+                <MySvgImage  />  // Use MySvgImage for mobile
+              ) : (
+                <SvgBigImage  />  // Keep SvgBigImage for larger screens
+              )}
+            </Link>
+            {/* <Link href="/" sx={{ textDecoration: "none" }}>
               <img
                 src={
                   isMobile
@@ -94,7 +104,7 @@ export default function ZeroettPresentation() {
                 width={isMobile ? 100 : 600}
                 style={{ marginBottom: isMobile ? 16 : 0 }}
               />
-            </Link>
+            </Link> */}
           </Box>
           <Typography
             variant="h6"
