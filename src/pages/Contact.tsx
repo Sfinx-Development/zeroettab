@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import ContactComponent from "../components/ContactComponent";
+import ParallaxContact from "../components/parallax/ParallaxContact";
 
 export default function Contact() {
   return (
@@ -17,6 +18,7 @@ export default function Contact() {
       }}
     >
       <ContactComponent />
+      <ParallaxContact />
     </Box>
   );
 }
