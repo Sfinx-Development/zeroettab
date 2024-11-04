@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import AboutUsComponent from "../components/AboutUsComponent";
+import ParallaxAboutUs from "../components/parallax/ParallaxAboutUs";
 
 export default function AboutUs() {
   return (
@@ -17,6 +18,7 @@ export default function AboutUs() {
       }}
     >
       <AboutUsComponent />
+      <ParallaxAboutUs />
     </Box>
   );
 }
