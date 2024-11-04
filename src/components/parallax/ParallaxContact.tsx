@@ -1,5 +1,6 @@
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Box, IconButton, styled, TextField, Typography } from "@mui/material";
+import emailjs from "emailjs-com";
 import { Customer, useCustomerContext } from "../../context/customerContext";
 import { Rubrik } from "../Footer";
 
