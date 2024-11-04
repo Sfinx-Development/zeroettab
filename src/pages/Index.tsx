@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import { useAnimation } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import IndexComponent from "../components/IndexComponent";
-import ParallaxIndex from "../components/ParallaxIndex";
+import ParallaxIndex from "../components/parallax/ParallaxIndex";
 
 export default function Index() {
   const iconsRef = useRef<HTMLDivElement>(null);

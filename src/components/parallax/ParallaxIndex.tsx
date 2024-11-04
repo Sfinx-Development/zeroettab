@@ -1,6 +1,6 @@
 import { Box, Link, Typography } from "@mui/material";
-import BubblaComponent from "./BubblaComponent";
-import { Rubrik } from "./Footer";
+import BubblaComponent from "../BubblaComponent";
+import { Rubrik } from "../Footer";
 
 export default function ParallaxIndex() {
   return (
@@ -23,7 +23,12 @@ export default function ParallaxIndex() {
         }}
       >
         <Box
-          sx={{ width: {xs: "90%", md: "50%" } , marginBottom: 4, paddingTop: 20, marginLeft: {xs: 3, md: 10, sm: 3, lg: 10, xlg: 20} }}
+          sx={{
+            width: { xs: "90%", md: "50%" },
+            marginBottom: 4,
+            paddingTop: 20,
+            marginLeft: { xs: 3, md: 10, sm: 3, lg: 10, xlg: 20 },
+          }}
         >
           <Rubrik sx={{ color: "#F7F7F7", fontSize: 30, fontWeight: 400 }}>
             Frontend, backend eller fullstack?
@@ -45,7 +50,13 @@ export default function ParallaxIndex() {
 
         <BubblaComponent />
 
-        <Box sx={{ width: {xs: "90%", md: "50%" }, marginBottom: 10, marginLeft: {xs: 2, md: 10, sm: 3, lg: 10, xlg: 20}}}>
+        <Box
+          sx={{
+            width: { xs: "90%", md: "50%" },
+            marginBottom: 10,
+            marginLeft: { xs: 2, md: 10, sm: 3, lg: 10, xlg: 20 },
+          }}
+        >
           <Rubrik sx={{ color: "#F7F7F7", fontSize: 30, fontWeight: 400 }}>
             Kort sagt..
           </Rubrik>
