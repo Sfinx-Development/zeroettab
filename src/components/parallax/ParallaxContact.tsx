@@ -81,13 +81,26 @@ export default function ParallaxContact() {
           flexDirection: "column",
         }}
       >
-        <Box sx={{ position: "absolute", right: 0 }}>
+        <Box
+          sx={{
+            position: "absolute",
+            right: 0,
+            height: { xs: 150, md: 250 },
+            width: "auto", // Säkerställer att bredden anpassas efter innehållet
+            overflow: "hidden", // Förhindrar att bilden överskrider boxen
+          }}
+        >
           <img
             src="https://i.imgur.com/H2Nhixw.png"
             alt="Pink decoration"
-            height={"200px"}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "contain", // Ser till att hela bilden syns inom ramen utan att sträckas
+            }}
           />
         </Box>
+
         <Box
           sx={{
             width: "100%",
