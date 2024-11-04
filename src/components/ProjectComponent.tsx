@@ -26,7 +26,7 @@ export default function ProjectComponent() {
       <Box
         sx={{
           marginBottom: { xs: 30, md: 20 },
-          marginLeft: { xs: 0, md: 10, xlg: 20 },
+          marginLeft: { xs: 0, md: 5, xlg: 20 },
           marginTop: { md: 10, xl: 20 },
         }}
       >
@@ -70,7 +70,11 @@ export default function ProjectComponent() {
           Kontakta oss direkt
         </Link>
 
-        <Box sx={{ paddingTop: 10, display: "flex", gap: 4 }}>
+        <Box sx={{  paddingTop: { xs: 6, md: 10 },
+              display: "flex",
+             
+              gap: { xs: 2, sm: 2, md: 6, lg: 6, xl: 6 },
+              flexDirection: { xs: "column", md: "row", sm: "row", },}}>
           <Box>
             <Rubrik sx={{ fontSize: 20, letterSpacing: 1.5 }}>
               Vilka är vi?

@@ -13,6 +13,7 @@ export default function AboutUsComponent() {
     >
       <Box
         sx={{
+          flexDirection: { xs: "column", md: "row" },
           display: "flex",
           // width: "100%",
           padding: { xs: 1.5, sm: 3, md: 0, lg: 3, xl: 4 },
@@ -26,7 +27,7 @@ export default function AboutUsComponent() {
         <Box
           sx={{
             marginBottom: { xs: 30, md: 20 },
-            marginLeft: { xs: 0, md: 10, xlg: 20 },
+            marginLeft: { xs: 0, md: 5, xlg: 20 },
             marginTop: { md: 10, xl: 20 },
           }}
         >
@@ -70,7 +71,15 @@ export default function AboutUsComponent() {
             Kontakta oss direkt
           </Link>
 
-          <Box sx={{ paddingTop: 10, display: "flex", gap: 4 }}>
+          <Box
+            sx={{
+              paddingTop: { xs: 6, md: 10 },
+              display: "flex",
+
+              gap: { xs: 2, sm: 2, md: 6, lg: 6, xl: 6 },
+              flexDirection: { xs: "column", md: "row", sm: "row" },
+            }}
+          >
             <Box>
               <Rubrik sx={{ fontSize: 20, letterSpacing: 1.5 }}>
                 Vilka är vi?
