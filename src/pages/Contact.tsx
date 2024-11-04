@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+import ContactComponent from "../components/ContactComponent";
 
 export default function Contact() {
   return (
@@ -15,7 +16,7 @@ export default function Contact() {
         minHeight: "100vh",
       }}
     >
-      <Contact />
+      <ContactComponent />
     </Box>
   );
 }

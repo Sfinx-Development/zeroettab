@@ -76,13 +76,14 @@ export default function IndexComponent() {
             sx={{
               paddingTop: { xs: 6, md: 10 },
               display: "flex",
-             
-              gap: { xs: 2, sm: 2, md: 6, lg: 6, xl: 6 },
-              flexDirection: { xs: "column", md: "row", sm: "row", },
+              gap: { xs: 2, sm: 2, md: 6, lg: 8, xl: 8 },
+              flexDirection: { xs: "column", md: "row", sm: "row" },
             }}
           >
             <Box>
-              <Rubrik sx={{ fontSize: 20, letterSpacing: 1.5 }}>
+              <Rubrik
+                sx={{ fontSize: 20, letterSpacing: 1.5, textWrap: "nowrap" }}
+              >
                 Vilka är vi?
               </Rubrik>
               <Box
@@ -112,7 +113,9 @@ export default function IndexComponent() {
               </Box>
             </Box>
             <Box>
-              <Rubrik sx={{ fontSize: 20, letterSpacing: 1.5 }}>
+              <Rubrik
+                sx={{ fontSize: 20, letterSpacing: 1.5, textWrap: "nowrap" }}
+              >
                 Vad kan vi göra för dig?
               </Rubrik>
               <Box
@@ -140,7 +143,9 @@ export default function IndexComponent() {
               </Box>
             </Box>
             <Box>
-              <Rubrik sx={{ fontSize: 20, letterSpacing: 1.5 }}>
+              <Rubrik
+                sx={{ fontSize: 20, letterSpacing: 1.5, textWrap: "nowrap" }}
+              >
                 Vad har vi gjort tidigare?
               </Rubrik>
               <Box
@@ -172,17 +177,21 @@ export default function IndexComponent() {
                 display: "flex",
                 justifyContent: { xs: "center", md: "flex-start" },
                 alignItems: "center",
-                width: { xs: "80%", sm: "40%", md: "30%", lg: "25%", xl: "20%" },
+                width: {
+                  xs: "80%",
+                  sm: "40%",
+                  md: "30%",
+                  lg: "25%",
+                  xl: "20%",
+                },
                 maxWidth: "100%", // Förhindra att den blir större än förälderns maxbredd
                 flexShrink: 1, // Gör att den krymper om det behövs på mindre skärmar
                 flexGrow: 0, // Hindrar den från att växa för mycket
                 objectFit: "contain", // Bevarar proportionerna och förhindrar att den klipps
-                marginTop: { xs: 4, md: -6 },
+                marginTop: { xs: 4, md: -4 },
               }}
             >
-              <SvgIndexZeroett
-             
-              />
+              <SvgIndexZeroett />
             </Box>
           </Box>
         </Box>
