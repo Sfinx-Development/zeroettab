@@ -8,6 +8,7 @@ emailjs.init("C8CxNnxZg6mg-d2tq");
 
 export default function ParallaxContact() {
   const { customer } = useCustomerContext();
+  const { customer, setCustomer } = useCustomerContext();
   const sendEmailWithLink = (customer: Customer) => {
     const customerName = `Kundens namn : ${customer.name}`;
     const customerEmail = `Kundens email : ${customer.email}`;
@@ -151,16 +152,25 @@ export default function ParallaxContact() {
                 variant="outlined"
                 placeholder="Namn"
                 fullWidth
+                onChange={(e) => {
+                  setCustomer({ ...customer, name: e.target.value });
+                }}
               />
               <StyledTextField
                 variant="outlined"
                 placeholder="Mejladress"
                 fullWidth
+                onChange={(e) => {
+                  setCustomer({ ...customer, email: e.target.value });
+                }}
               />
               <StyledTextField
                 variant="outlined"
                 placeholder="Telefonnummer"
                 fullWidth
+                onChange={(e) => {
+                  setCustomer({ ...customer, phone: e.target.value });
+                }}
               />
               <StyledTextField
                 variant="outlined"
@@ -174,6 +184,12 @@ export default function ParallaxContact() {
                     borderRadius: "30px",
                     paddingLeft: "15px",
                   },
+                }}
+                onChange={(e) => {
+                  setCustomer({
+                    ...customer,
+                    extraDescription: e.target.value,
+                  });
                 }}
               />
               <Box sx={{ display: "flex", justifyContent: "end" }}>
