@@ -1,7 +1,20 @@
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { Box, IconButton, styled, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  AlertColor,
+  Box,
+  IconButton,
+  Snackbar,
+  styled,
+  TextField,
+  Typography,
+} from "@mui/material";
+import emailjs from "emailjs-com";
+import React from "react";
 import { Customer, useCustomerContext } from "../../context/customerContext";
 import { Rubrik } from "../Footer";
+
+emailjs.init("C8CxNnxZg6mg-d2tq");
 
 export default function ParallaxContact() {
   const { customer, setCustomer } = useCustomerContext();
@@ -171,12 +184,30 @@ export default function ParallaxContact() {
                 }}
               />
               <Box sx={{ display: "flex", justifyContent: "end" }}>
-                <IconButton sx={{ display: "flex" }}>
+                <IconButton
+                  sx={{ display: "flex" }}
+                  onClick={() => {
+                    sendEmailWithLink(customer);
+                  }}
+                >
                   <Rubrik sx={{ color: "#F7F7F7", fontSize: 25 }}>
                     Skicka
                   </Rubrik>
                   <ArrowForwardIcon sx={{ color: "#F7F7F7", fontSize: 25 }} />
                 </IconButton>
+                <Snackbar
+                  open={openSnackbar}
+                  autoHideDuration={6000}
+                  onClose={handleCloseSnackbar}
+                >
+                  <Alert
+                    onClose={handleCloseSnackbar}
+                    severity={snackbarSeverity}
+                    sx={{ width: "100%" }}
+                  >
+                    {snackbarMessage}
+                  </Alert>
+                </Snackbar>
               </Box>
             </Box>
           </Box>
