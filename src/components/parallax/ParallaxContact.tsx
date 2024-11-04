@@ -158,16 +158,25 @@ export default function ParallaxContact() {
                 variant="outlined"
                 placeholder="Namn"
                 fullWidth
+                onChange={(e) => {
+                  setCustomer({ ...customer, name: e.target.value });
+                }}
               />
               <StyledTextField
                 variant="outlined"
                 placeholder="Mejladress"
                 fullWidth
+                onChange={(e) => {
+                  setCustomer({ ...customer, email: e.target.value });
+                }}
               />
               <StyledTextField
                 variant="outlined"
                 placeholder="Telefonnummer"
                 fullWidth
+                onChange={(e) => {
+                  setCustomer({ ...customer, phone: e.target.value });
+                }}
               />
               <StyledTextField
                 variant="outlined"
@@ -181,6 +190,12 @@ export default function ParallaxContact() {
                     borderRadius: "30px",
                     paddingLeft: "15px",
                   },
+                }}
+                onChange={(e) => {
+                  setCustomer({
+                    ...customer,
+                    extraDescription: e.target.value,
+                  });
                 }}
               />
               <Box sx={{ display: "flex", justifyContent: "end" }}>
