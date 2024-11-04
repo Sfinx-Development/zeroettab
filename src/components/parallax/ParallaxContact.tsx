@@ -1,8 +1,54 @@
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Box, IconButton, styled, TextField, Typography } from "@mui/material";
+import { Customer, useCustomerContext } from "../../context/customerContext";
 import { Rubrik } from "../Footer";
 
 export default function ParallaxContact() {
+  const { customer } = useCustomerContext();
+  const sendEmailWithLink = (customer: Customer) => {
+    const customerName = `Kundens namn : ${customer.name}`;
+    const customerEmail = `Kundens email : ${customer.email}`;
+    const customerPhone = `Kundens email : ${customer.phone}`;
+    const customerAddress = `Kundens adress: ${customer.address} ${customer.zipcode} ${customer.city}`;
+    const customerPurpose = `Syfte med applikationen: ${customer.purposeApp}`;
+    const customerApp = `Typ av appplikation: ${customer.typeOfApp}`;
+    const customerTargetGroup = `Målgrupp som vi riktar in oss på: ${customer.targetGroup}`;
+    const customerBudget = `Budget: ${customer.budgetDescription}`;
+    const customerExtra = `Övrigt: ${customer.extraDescription}`;
+
+    const isCompany = `Är företag: ${customer.isCompany ? "ja" : "nej"}`;
+    let companyName = "";
+    let companyDescription = "";
+    if (isCompany) {
+      companyName = `Företagets namn: ${customer.companyName}`;
+      companyDescription = `Företagets beskrivning: ${customer.companyDescription}`;
+    }
+    const body = `${customerName}\n${customerEmail}\n${customerPhone}\n${customerAddress}\n${customerPurpose}\n${customerTargetGroup}\n${customerApp}\n${customerBudget}\n${customerExtra}\n${isCompany}\n${companyName}\n${companyDescription}`;
+
+    const templateParams = {
+      to_name: "Zeroett",
+      from_name: customer.name,
+      message: `Meddelande: ${body}`,
+    };
+
+    emailjs
+      .send("service_f1l2auv", "template_2f6lq5o", templateParams)
+      .then((response) => {
+        console.log("Email sent successfully:", response.status, response.text);
+        setSnackbarSeverity("success");
+        setSnackbarMessage("Förfrågan skickad!");
+        setOpenSnackbar(true);
+      })
+      .catch((err) => {
+        console.error("Error sending email:", err);
+        setSnackbarSeverity("error");
+        setSnackbarMessage(
+          "Något gick fel när förfrågan skickades. Försök igen."
+        );
+        setOpenSnackbar(true);
+      });
+  };
+
   const StyledTextField = styled(TextField)({
     "& .MuiInputBase-root": {
       background: "linear-gradient(to right,#E6A08E, #F1B8A9)",
