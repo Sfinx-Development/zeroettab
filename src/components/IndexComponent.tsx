@@ -15,8 +15,10 @@ export default function IndexComponent() {
     >
       <Box
         sx={{
+         
+          flexDirection: { xs: "column", md: "row" },
           display: "flex",
-          padding: 0,
+          padding: { xs: 1.5, sm: 3, md: 0, lg: 3, xl: 4 },
           height: "100%",
           backgroundColor: "rgba(238,233,230,255)",
           justifyContent: "flex-start",

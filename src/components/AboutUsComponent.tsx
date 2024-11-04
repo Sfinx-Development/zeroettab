@@ -15,7 +15,7 @@ export default function AboutUsComponent() {
         sx={{
           display: "flex",
           // width: "100%",
-          padding: 0,
+          padding: { xs: 1.5, sm: 3, md: 0, lg: 3, xl: 4 },
           height: "100%",
           backgroundColor: "rgba(238,233,230,255)",
           // alignItems: "flex-start", // Align items to the start (left)
