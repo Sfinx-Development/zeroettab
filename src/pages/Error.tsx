@@ -20,6 +20,13 @@ export default function Error() {
         // paddingTop: { xs: 10, md: 20 }, 
       }}
     >
+         <Box sx={{ position: "absolute", left: 0, top: 2 }}>
+          <img
+            src="https://i.imgur.com/n6vt6Q8.png"
+            alt="Pink decoration"
+            height={"200px"}
+          />
+        </Box>
       <Typography
         variant={isMobile ? "h4" : "h2"}
         sx={{
