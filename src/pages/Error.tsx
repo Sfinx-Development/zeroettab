@@ -1,76 +1,78 @@
-import {
-  Box,
-  Button,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, Button, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 export default function Error() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
+
   return (
     <Box
       sx={{
+        position: "relative",
+        width: "100%",
+        minHeight: "100vh",
+        backgroundColor: "rgba(34,32,37,255)", 
         display: "flex",
         flexDirection: "column",
-        padding: 0,
-        margin: 0,
-        width: "100%",
         alignItems: "center",
         justifyContent: "center",
-        flexGrow: 1,
+        // paddingTop: { xs: 10, md: 20 }, 
       }}
     >
-      <div
-        style={{
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-          width: "100%",
-          overflowX: "hidden",
-          justifyContent: "flex-start",
-          alignItems: "center",
+         <Box sx={{ position: "absolute", left: 0, top: 2 }}>
+          <img
+            src="https://i.imgur.com/n6vt6Q8.png"
+            alt="Pink decoration"
+            height={"200px"}
+          />
+        </Box>
+      <Typography
+        variant={isMobile ? "h4" : "h2"}
+        sx={{
+          color: "rgba(254,232,209,255)", // Färg för texten
+          fontWeight: 800,
+          marginBottom: 2,
+          textAlign: "center",
         }}
       >
-        <Typography
-          variant={isMobile ? "h4" : "h2"}
-          gutterBottom
-          sx={{
-            textAlign: "center",
-            color: "white",
-            position: "relative",
-            marginTop: isMobile ? "40px" : "20px",
-            marginBottom: "20px",
-          }}
-        >
-          Wrong URL?
-        </Typography>
-        <Button
-          variant="outlined"
-          sx={{
-            color: "white",
-            borderColor: "rgba(255,255,255,0.5)",
-            margin: isMobile ? "10px" : "10px 20px",
-            paddingX: 3,
-            paddingY: 1,
-            backgroundColor: "rgba(255,255,255,0.5)",
-            "&:hover": {
-              borderColor: "rgba(255,255,255,0.5)",
-              backgroundColor: "rgba(255,255,255,0.3)",
-              transition: "background-color 0.3s ease, color 0.3s ease",
-            },
-            width: "50%",
-          }}
-          onClick={() => {
-            navigate("/");
-          }}
-        >
-          Go back
-        </Button>
-      </div>
+        Oops! Wrong URL?
+      </Typography>
+
+      <Typography
+        sx={{
+          color: "rgba(247, 247, 247, 0.9)",
+          fontSize: 18,
+          fontFamily: "Roboto",
+          fontWeight: 200,
+          maxWidth: "80%",
+          textAlign: "center",
+          marginBottom: 4,
+        }}
+      >
+        Det verkar som att du har navigerat till en ogiltig sida. Kontrollera
+        URL:en och försök igen.
+      </Typography>
+
+      <Button
+        variant="outlined"
+        sx={{
+          color: "white",
+          borderColor: "rgba(255,255,255,0.5)",
+          backgroundColor: "rgba(229,186,179,1)", 
+          "&:hover": {
+            backgroundColor: "rgba(254,232,209,0.5)", 
+          },
+          paddingX: 3,
+          paddingY: 1,
+        }}
+        onClick={() => {
+          navigate("/"); 
+        }}
+      >
+        Gå tillbaka
+      </Button>
     </Box>
   );
 }
+

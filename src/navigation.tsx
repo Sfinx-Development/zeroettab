@@ -31,7 +31,8 @@ const Navigation = () => {
           <Route path="about" element={<About />}></Route>
           <Route path="projects" element={<Projects />}></Route>
           <Route path="offers" element={<Offers />}></Route>
-          <Route path="*" element={<Error />}></Route>
+         <Route path="*" element={<Error />} />
+
         </Route>
       </Routes>
     </IntlProvider>
