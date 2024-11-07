@@ -13,6 +13,7 @@ const RootLayout = () => {
         flexDirection: "column",
         flex: 1,
         minHeight: "100vh",
+        backgroundColor: "rgba(238,233,230,255)",
         alignItems: "center",
         width: "100%",
         margin: 0,

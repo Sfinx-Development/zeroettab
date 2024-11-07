@@ -71,7 +71,7 @@ export default function ParallaxProject() {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            paddingTop: 15,
+            paddingTop: { xs: 10, md: 16 },
           }}
         >
           <Box
@@ -89,7 +89,7 @@ export default function ParallaxProject() {
                 fontWeight: 500,
                 textAlign: "left",
                 width: "100%",
-                paddingLeft: 8,
+                paddingLeft: { xs: 4, md: 8 },
               }}
             >
               Stolta ögonblick
@@ -102,7 +102,7 @@ export default function ParallaxProject() {
                 fontWeight: 200,
                 width: "100%",
                 textAlign: "left",
-                paddingLeft: 8,
+                paddingLeft: { xs: 4, md: 8 },
               }}
             >
               Projekt
@@ -112,13 +112,13 @@ export default function ParallaxProject() {
                 width: "100%",
                 margin: "auto",
                 flexDirection: "row",
-                overflowX: "scroll", // För säker scrollning på alla enheter
+                overflowX: "scroll",
                 gap: 4,
                 paddingTop: { xs: 4, md: 6 },
-                paddingLeft: 4,
+                paddingLeft: { xs: 2, md: 4 },
                 scrollSnapType: "x mandatory",
                 display: "inline-flex",
-                paddingRight: 8, // öka denna siffra om det behövs
+                paddingRight: { xs: 4, md: 8 },
                 scrollPaddingRight: 20,
               }}
             >
@@ -130,8 +130,8 @@ export default function ParallaxProject() {
                     flexShrink: 0,
 
                     borderRadius: 2,
-                    minWidth: 350,
-                    height: 350,
+                    minWidth: { xs: 300, md: 350 },
+                    height: { xs: 300, md: 350 },
                     backgroundColor:
                       project.backgroundColor ?? "rgba(250,220,197,255)",
                     display: "flex",
