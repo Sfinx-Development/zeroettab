@@ -96,7 +96,7 @@ export default function IndexComponent() {
               >
                 <EastIcon sx={{ color: "rgb(216,163,153)" }} />
                 <Link
-                  href="/aboutus"
+                  href="/about"
                   style={{ textDecoration: "none", color: "rgb(37,31,37)" }}
                 >
                   <Typography
