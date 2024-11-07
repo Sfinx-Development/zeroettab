@@ -34,7 +34,7 @@ export default function IndexComponent() {
           <Rubrik
             sx={{ fontSize: { xs: 40, md: 60, xl: 70 }, letterSpacing: 1.5 }}
           >
-            TJÄNSTER SIDAN
+            Vad behöver du?
           </Rubrik>
           <Typography
             sx={{
@@ -45,7 +45,7 @@ export default function IndexComponent() {
               fontWeight: "lighter",
             }}
           >
-            Berätta om din idé, vi bygger den.
+            Hemsida, e-tjänst eller kanske ett API.
           </Typography>
           <Link
             sx={{
