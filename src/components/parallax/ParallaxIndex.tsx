@@ -24,21 +24,28 @@ export default function ParallaxIndex() {
       >
         <Box
           sx={{
-            width: { xs: "90%", md: "50%" },
+            width: { xs: "75%", md: "50%" },
             marginBottom: 4,
-            paddingTop: 20,
+            paddingTop: { xs: 10, md: 20 },
             marginLeft: { xs: 3, md: 10, sm: 3, lg: 10, xlg: 20 },
           }}
         >
-          <Rubrik sx={{ color: "#F7F7F7", fontSize: 30, fontWeight: 400 }}>
+          <Rubrik
+            sx={{
+              color: "#F7F7F7",
+              fontSize: { xs: 25, md: 30 },
+              fontWeight: 400,
+            }}
+          >
             Frontend, backend eller fullstack?
           </Rubrik>
           <Typography
             sx={{
               color: "rgba(247, 247, 247, 0.9)",
-              fontSize: 25,
+              fontSize: { xs: 18, md: 20 },
               fontFamily: "Roboto",
               fontWeight: 200,
+              paddingBottom: { xs: 2 },
             }}
           >
             Hos oss behöver du inte välja. Men vad är det vi gör, egentligen?
@@ -52,18 +59,24 @@ export default function ParallaxIndex() {
 
         <Box
           sx={{
-            width: { xs: "90%", md: "50%" },
+            width: { xs: "75%", md: "50%" },
             marginBottom: 10,
             marginLeft: { xs: 2, md: 10, sm: 3, lg: 10, xlg: 20 },
           }}
         >
-          <Rubrik sx={{ color: "#F7F7F7", fontSize: 30, fontWeight: 400 }}>
+          <Rubrik
+            sx={{
+              color: "#F7F7F7",
+              fontSize: { xs: 25, md: 30 },
+              fontWeight: 400,
+            }}
+          >
             Kort sagt..
           </Rubrik>
           <Typography
             sx={{
               color: "rgba(247, 247, 247, 0.9)",
-              fontSize: 25,
+              fontSize: { xs: 18, md: 20 },
               fontFamily: "Roboto",
               fontWeight: 200,
               marginBottom: 2,
