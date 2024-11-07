@@ -1,5 +1,4 @@
 import ContactMailIcon from "@mui/icons-material/ContactMail";
-import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -18,6 +17,7 @@ import {
 import { useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useScreenSize } from "../contexts/screenSizeContext";
+import SvgSmallImage from "./SvgSmallZeroett";
 
 export default function CustomHeader2(): JSX.Element {
   const theme = useTheme();
@@ -33,15 +33,14 @@ export default function CustomHeader2(): JSX.Element {
   };
 
   const links = [
-    { label: "home", href: "/", icon: <HomeIcon /> },
     { label: "about", href: "/about", icon: <InfoIcon /> },
+    { label: "offers", href: "/offers", icon: <LocalOfferIcon /> },
+    { label: "projects", href: "/projects", icon: <WorkIcon /> },
     {
       label: "contact",
       href: "/contact",
       icon: <ContactMailIcon sx={{ fontSize: 20 }} />,
     },
-    { label: "projects", href: "/projects", icon: <WorkIcon /> },
-    { label: "offers", href: "/offers", icon: <LocalOfferIcon /> },
   ];
 
   return (
@@ -54,12 +53,9 @@ export default function CustomHeader2(): JSX.Element {
         // boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
         flexDirection: "column",
         zindex: 1000,
-        position: "relative",
+        position: "sticky",
         paddingTop: 2,
-        // backgroundColor: "red",
-        // position: "sticky",
-        // top: 0,
-        // backgroundColor: "black"
+        backgroundColor: "#F7F7F7",
       }}
       component={"header"}
     >
@@ -87,21 +83,15 @@ export default function CustomHeader2(): JSX.Element {
             marginLeft: isMobile ? 0 : 10,
           }}
         >
-          <Link href="/" sx={{ textDecoration: "none" }}>
-            <img
-              src="https://i.imgur.com/5Fk6tu4.png"
-              alt="Zeroett"
-              width={150}
-            />
+          <Link href="/" sx={{ textDecoration: "none", marginX: 2 }}>
+            <SvgSmallImage />
           </Link>
         </Box>
 
         <IconButton
           onClick={handleToggleMenu}
           sx={{
-            color: "white",
-            backgroundColor: "#662c9c",
-            "&:hover": { backgroundColor: "#422a75" },
+            color: "black",
             borderRadius: "50%",
             marginX: 1,
           }}
@@ -128,7 +118,7 @@ export default function CustomHeader2(): JSX.Element {
               paddingLeft: 1,
               display: "flex",
               flexDirection: "column",
-              backgroundColor: "black",
+              backgroundColor: "#F7F7F7",
               height: "100%",
             }}
           >
@@ -159,16 +149,12 @@ export default function CustomHeader2(): JSX.Element {
                       display: "flex",
                       paddingTop: 3,
                       alignItems: "center",
-
-                      // paddingBottom: 6,
                     }}
                     onClick={handleCloseMenu}
                   >
                     <IconButton
                       sx={{
-                        color: "white",
-                        backgroundColor: "#662c9c",
-                        "&:hover": { backgroundColor: "#422a75" },
+                        color: "rgb(37,31,37)",
                         borderRadius: "50%",
                       }}
                     >
@@ -177,7 +163,7 @@ export default function CustomHeader2(): JSX.Element {
 
                     <Typography
                       sx={{
-                        color: "white",
+                        color: "rgb(37,31,37)",
                         fontSize: 20,
                         letterSpacing: 2,
                         fontWeight: "300",

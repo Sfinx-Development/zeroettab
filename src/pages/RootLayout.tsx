@@ -2,10 +2,12 @@ import { Outlet } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import MobileHeader from "../components/MobileHeader";
+import ScrollToTop from "../components/ScrollToTop";
 import { useScreenSize } from "../contexts/screenSizeContext";
 
 const RootLayout = () => {
   const { isMobile } = useScreenSize();
+
   return (
     <div
       style={{
@@ -13,14 +15,13 @@ const RootLayout = () => {
         flexDirection: "column",
         flex: 1,
         minHeight: "100vh",
+        backgroundColor: "rgba(238,233,230,255)",
         alignItems: "center",
         width: "100%",
         margin: 0,
         padding: 0,
         flexGrow: 1,
         position: "relative",
-        backgroundImage: "url('https://i.imgur.com/kFmeAx8.png')",
-        backgroundSize: "cover",
       }}
     >
       <div
@@ -30,11 +31,9 @@ const RootLayout = () => {
           left: 0,
           width: "100%",
           height: "100%",
-          backgroundColor: "rgba(0, 0, 0, 0.6)",
         }}
       ></div>
       {isMobile ? <MobileHeader /> : <Header />}
-
       <main
         style={{
           display: "flex",
@@ -45,6 +44,7 @@ const RootLayout = () => {
           alignItems: "center",
         }}
       >
+        <ScrollToTop />
         <Outlet />
       </main>
 

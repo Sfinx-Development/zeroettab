@@ -1,21 +1,222 @@
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import { Box, Divider, IconButton, Link, Typography } from "@mui/material";
+import { Box, IconButton, styled, Typography } from "@mui/material";
+
+export const Rubrik = styled(Typography)`
+  font-family: "Rubrik", sans-serif;
+  font-variation-settings: "wght" 500;
+`;
 
 export default function Footer() {
   return (
     <Box
       sx={{
         paddingY: 6,
-        textAlign: "center",
-        backgroundColor: "rgba(0,0,0,0.8)",
+        display: "flex",
+        backgroundColor: "rgba(238,233,230,255)",
         zIndex: 2,
         width: "100%",
+        justifyContent: { xs: "start", md: "center" },
         boxShadow: "0 -4px 10px rgba(0, 0, 0, 0.5)",
       }}
     >
       <Box
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" },
+          width: { xs: "100%", md: "80%" },
+          marginX: { xs: 3, md: 0 },
+          gap: { xs: 2, md: 0 },
+          alignItems: "space-between",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            flex: 1,
+            textAlign: "left",
+          }}
+        >
+          <Box
+            sx={{
+              width: { xs: "100%", md: "65%" },
+              height: "100%",
+              color: "rgba(34,32,37,255)",
+            }}
+          >
+            <Rubrik
+              sx={{
+                fontSize: { xs: 25, md: 30 },
+                marginBottom: { xs: 1, md: 3 },
+              }}
+            >
+              Våra tjänster
+            </Rubrik>
+            <Typography
+              sx={{
+                fontSize: 20,
+                marginY: 0.5,
+                fontFamily: "Roboto",
+                fontWeight: "lighter",
+              }}
+            >
+              Hemsida
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: 20,
+                marginY: 0.5,
+                fontFamily: "Roboto",
+                fontWeight: "lighter",
+              }}
+            >
+              Webbshop
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: 20,
+                marginY: 0.5,
+                fontFamily: "Roboto",
+                fontWeight: "lighter",
+              }}
+            >
+              Mobilapplikation
+            </Typography>
+
+            <Typography
+              sx={{
+                fontSize: 20,
+                marginY: 0.5,
+                fontFamily: "Roboto",
+                fontWeight: "lighter",
+              }}
+            >
+              API och databas
+            </Typography>
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            flex: 1,
+            color: "rgba(34,32,37,255)",
+          }}
+        >
+          <Box sx={{ width: { xs: "100%", md: "65%" }, height: "100%" }}>
+            <Rubrik
+              sx={{
+                fontSize: { xs: 25, md: 30 },
+                marginBottom: { xs: 1, md: 3 },
+              }}
+            >
+              Besök oss
+            </Rubrik>
+            <Typography
+              sx={{
+                fontSize: 20,
+                marginY: 0.5,
+                fontFamily: "Roboto",
+                fontWeight: "lighter",
+              }}
+            >
+              Vävlargatan 6p
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: 20,
+                marginY: 0.5,
+                fontFamily: "Roboto",
+                fontWeight: "lighter",
+              }}
+            >
+              507 30 Brämhult
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: 20,
+                marginTop: { xs: 2, md: 4 },
+                fontFamily: "Roboto",
+                fontWeight: "lighter",
+              }}
+            >
+              Eller virtuellt:
+            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "start",
+              }}
+            >
+              <IconButton
+                sx={{
+                  color: "rgba(34,32,37,255)",
+                  padding: 0,
+                  marginRight: 0.5,
+                  "&:hover": {
+                    color: "#dbbed1",
+                    transition: "color 0.3s ease",
+                  },
+                }}
+                href="https://www.instagram.com/zeroettab"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <InstagramIcon sx={{ fontSize: 30 }} />
+              </IconButton>
+              <IconButton
+                sx={{
+                  color: "rgba(34,32,37,255)",
+                  padding: 0,
+                  "&:hover": {
+                    color: "#dbbed1",
+                    transition: "color 0.3s ease",
+                  },
+                }}
+                href="https://www.facebook.com/zeroettab"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FacebookIcon sx={{ fontSize: 30 }} />
+              </IconButton>
+            </Box>
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            flex: 1,
+            color: "rgba(34,32,37,255)",
+          }}
+        >
+          <Box sx={{ width: { xs: "100%", md: "65%" }, height: "100%" }}>
+            <Rubrik
+              sx={{
+                fontSize: { xs: 25, md: 30 },
+                marginBottom: { xs: 1, md: 3 },
+              }}
+            >
+              Kontakt
+            </Rubrik>
+            <Typography
+              sx={{
+                fontSize: 20,
+                marginY: 0.5,
+                fontFamily: "Roboto",
+                fontWeight: "lighter",
+              }}
+            >
+              zeroettab@gmail.com
+            </Typography>
+          </Box>
+        </Box>
+      </Box>
+      {/* <Box
         sx={{
           display: "flex",
           justifyContent: "center",
@@ -130,7 +331,7 @@ export default function Footer() {
         >
           <Typography> HITTA</Typography>
         </Link>
-      </Box>
+      </Box> */}
     </Box>
   );
 }
