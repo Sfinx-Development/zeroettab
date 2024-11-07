@@ -2,10 +2,12 @@ import { Outlet } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import MobileHeader from "../components/MobileHeader";
+import ScrollToTop from "../components/ScrollToTop";
 import { useScreenSize } from "../contexts/screenSizeContext";
 
 const RootLayout = () => {
   const { isMobile } = useScreenSize();
+
   return (
     <div
       style={{
@@ -42,6 +44,7 @@ const RootLayout = () => {
           alignItems: "center",
         }}
       >
+        <ScrollToTop />
         <Outlet />
       </main>
 

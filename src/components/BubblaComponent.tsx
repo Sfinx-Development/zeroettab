@@ -88,7 +88,7 @@ export default function BubblaComponent() {
             <IconButton
               sx={{ display: "flex", width: "100%", justifyContent: "end" }}
               onClick={() => {
-                navigation("/contact");
+                navigation("/offers#frontend");
               }}
             >
               <Rubrik sx={{ color: "rgb(37,31,37)", fontSize: 12 }}>
@@ -162,7 +162,7 @@ export default function BubblaComponent() {
             <IconButton
               sx={{ display: "flex", width: "100%", justifyContent: "end" }}
               onClick={() => {
-                navigation("/contact");
+                navigation("/offers#backend");
               }}
             >
               <Rubrik sx={{ color: "rgb(37,31,37)", fontSize: 12 }}>
@@ -235,7 +235,7 @@ export default function BubblaComponent() {
             <IconButton
               sx={{ display: "flex", width: "100%", justifyContent: "end" }}
               onClick={() => {
-                navigation("/contact");
+                navigation("/offers#fullstack");
               }}
             >
               <Rubrik sx={{ color: "rgb(37,31,37)", fontSize: 12 }}>
