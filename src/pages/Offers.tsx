@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import ServicesComponent from "../components/ServicesComponent";
+import ParallaxServices from "../components/parallax/ParallaxServices";
 
 // interface Service {
 //   title: string;
@@ -56,6 +57,7 @@ const Offers = () => {
       }}
     >
       <ServicesComponent />
+      <ParallaxServices />
     </Box>
   );
 };
