@@ -53,7 +53,7 @@ export default function CustomHeader2(): JSX.Element {
         // boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
         flexDirection: "column",
         zindex: 1000,
-        position: "relative",
+        position: "sticky",
         paddingTop: 2,
         backgroundColor: "#F7F7F7",
       }}
