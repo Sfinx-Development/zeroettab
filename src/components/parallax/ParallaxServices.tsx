@@ -1,11 +1,24 @@
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import { Box, IconButton, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Rubrik } from "../Footer";
 
 export default function ParallaxServices() {
   const navigation = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    // Skrolla till rätt sektion när hash ändras
+    if (location.hash) {
+      const elementId = location.hash.replace("#", "");
+      const targetElement = document.getElementById(elementId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  }, [location.hash]);
   return (
     <Box
       sx={{
@@ -36,7 +49,7 @@ export default function ParallaxServices() {
             flexDirection: "column",
             alignItems: "center",
             paddingTop: 4,
-            marginTop: { xs: 5, md: 10 },
+            marginTop: { xs: 5, md: 12 },
             width: "70%",
             backgroundColor: "#F7F7F7",
             borderRadius: 6,
@@ -147,6 +160,7 @@ export default function ParallaxServices() {
             width: "70%",
             backgroundColor: "rgba(229,186,179,1)",
             borderRadius: 6,
+            marginTop: 6,
           }}
         >
           <Rubrik
@@ -258,7 +272,9 @@ export default function ParallaxServices() {
             width: "70%",
             backgroundColor: "rgba(240,231,226,1)",
             borderRadius: 6,
+            marginTop: 6,
           }}
+          id="fullstack"
         >
           <Rubrik
             sx={{
@@ -360,8 +376,8 @@ export default function ParallaxServices() {
             paddingTop: 4,
             backgroundColor: "#F7F7F7",
             borderRadius: 6,
+            marginTop: 6,
           }}
-          id="fullstack"
         >
           <Rubrik
             sx={{
@@ -463,6 +479,7 @@ export default function ParallaxServices() {
             paddingTop: 4,
             backgroundColor: "rgba(229,186,179,1)",
             borderRadius: 6,
+            marginTop: 6,
           }}
           id="backend"
         >
