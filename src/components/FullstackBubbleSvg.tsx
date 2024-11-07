@@ -1,16 +1,15 @@
 const FullstackBubbleSvg = () => (
   <svg
-    width="300"
-    height="200"
-    viewBox="0 0 300 200"
+    viewBox="0 0 300 200" // Behåll proportionerna för skalan
     xmlns="http://www.w3.org/2000/svg"
     style={{
       position: "absolute",
       top: 0,
       left: 0,
       width: "100%",
-      height: "100%",
+      height: "auto", // Automatisk höjd för att bevara proportionerna
       zIndex: -1,
+      maxWidth: "600px", // Större maxbredd för större skärmar
     }}
   >
     <defs>
