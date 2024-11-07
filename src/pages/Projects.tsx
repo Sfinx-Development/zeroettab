@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import ProjectComponent from "../components/ProjectComponent";
+import ParallaxProject from "../components/parallax/ParallaxProject";
 
 // const projects = [
 //   {
@@ -63,6 +64,7 @@ export default function Projects() {
       }}
     >
       <ProjectComponent />
+      <ParallaxProject />
     </Box>
   );
 }
