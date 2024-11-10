@@ -32,17 +32,18 @@ export default function IndexComponent() {
           }}
         >
           <Rubrik
-            sx={{ fontSize: { xs: 40, md: 60, xl: 75 }, letterSpacing: 1.5 }}
+            sx={{ fontSize: { xs: 35, md: 60, xl: 75 }, letterSpacing: 1.5 }}
           >
             Vad behöver du?
           </Rubrik>
           <Typography
             sx={{
-              fontSize: { xs: 30, md: 35, xl: 50 },
+              fontSize: { xs: 25, md: 35, xl: 50 },
               marginY: 0.5,
-              marginBottom: 1,
+              marginBottom: { xs: 2, md: 1 },
               fontFamily: "Roboto",
               fontWeight: "lighter",
+              width: { xs: "70%" },
             }}
           >
             Hemsida, e-tjänst eller kanske ett API.

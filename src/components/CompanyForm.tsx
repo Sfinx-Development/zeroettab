@@ -7,10 +7,10 @@ import {
 } from "@mui/material";
 import { FormattedMessage } from "react-intl";
 import { useCustomerContext } from "../context/customerContext";
-
+export const isMobile = window.innerWidth <= 820;
 export default function CompanyForm() {
   const { customer, setCustomer } = useCustomerContext();
-  const isMobile = window.innerWidth <= 820;
+
   return (
     <Box
       display={"flex"}
