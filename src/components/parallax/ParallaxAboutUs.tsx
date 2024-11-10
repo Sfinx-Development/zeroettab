@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import { isMobile } from "../CompanyForm";
 import { Rubrik } from "../Footer";
 
 export default function ParallaxAboutUs() {
@@ -27,7 +28,7 @@ export default function ParallaxAboutUs() {
           <img
             src="https://i.imgur.com/n6vt6Q8.png"
             alt="Pink decoration"
-            height={"200px"}
+            height={isMobile ? 100 : "200px"}
           />
         </Box>
         <Box
@@ -123,7 +124,7 @@ export default function ParallaxAboutUs() {
             alignItems: "center",
             justifyContent: "center",
             paddingBottom: { xs: 5, md: 10 },
-            paddingTop: { xs: 10, xl: 20 },
+            paddingTop: { xs: 5, xl: 20 },
           }}
         >
           <Box
@@ -223,11 +224,18 @@ export default function ParallaxAboutUs() {
             </Box>
           </Box>
 
-          <Box sx={{ flex: 1, paddingTop: { xs: 4 }, paddingX: { xs: 3 } }}>
+          <Box
+            sx={{
+              flex: 1,
+              paddingTop: { xs: 4 },
+              paddingX: { xs: 3 },
+              marginLeft: { xs: 2 },
+            }}
+          >
             <Rubrik
               sx={{
                 color: "rgba(254,232,209,255)",
-                fontSize: { xs: 30, xl: 40 },
+                fontSize: { xs: 25, xl: 40 },
                 fontWeight: 800,
               }}
             >
@@ -239,7 +247,7 @@ export default function ParallaxAboutUs() {
                 fontSize: { xs: 18, xl: 25 },
                 fontFamily: "Roboto",
                 fontWeight: 200,
-                width: { xs: "80%", md: "60%", xl: "50%" },
+                maxWidth: { xs: "80%", md: "60%", xl: "50%" },
               }}
             >
               Angelina och Elina heter vi som driver Zeroett tillsammans. En

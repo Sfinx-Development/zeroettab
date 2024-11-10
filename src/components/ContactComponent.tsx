@@ -40,9 +40,10 @@ export default function ContactComponent() {
             sx={{
               fontSize: { xs: 30, md: 35, xl: 50 },
               marginY: 0.5,
-              marginBottom: 1,
+              marginBottom: { xs: 2, md: 1 },
               fontFamily: "Roboto",
               fontWeight: "lighter",
+              width: { xs: "70%" },
             }}
           >
             Berätta om din idé, vi bygger den.
