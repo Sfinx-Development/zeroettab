@@ -85,7 +85,7 @@ export default function ParallaxServices() {
             }}
           >
             Behöver du en ny hemsida för ditt företag? Eller varför inte en sida
-            för en bröllopsinbjudan?
+            för eventet, Save the date eller 50-årsfesten?
           </Typography>
           <Typography
             component="ul"
@@ -127,10 +127,64 @@ export default function ParallaxServices() {
             </li>
             <li>
               {" "}
-              <FiberManualRecordIcon sx={{ fontSize: 10 }} /> Support - via vår
-              mail i första hand
+              <FiberManualRecordIcon sx={{ fontSize: 10 }} /> Support
             </li>
           </Typography>
+          <Box
+            sx={{
+              width: "80%",
+              alignItems: "start",
+              display: "flex",
+              marginTop: 2,
+            }}
+          >
+            <Box sx={{ display: "flex", flex: 1, flexDirection: "column" }}>
+              <Rubrik>Engångskonstnad från 8000 kr</Rubrik>
+              <Rubrik sx={{ fontSize: 14 }}>
+                Månadskostnad från 350 kr/mån
+              </Rubrik>
+              <Typography
+                sx={{
+                  color: "rgb(37,31,37)",
+                  fontSize: 14,
+                  fontFamily: "Roboto",
+                  fontWeight: 200,
+                }}
+              >
+                Hemsida med undersidor
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flex: 1,
+                flexDirection: "column",
+              }}
+            >
+              <Rubrik>Från 500 kr</Rubrik>
+              <Typography
+                sx={{
+                  color: "rgb(37,31,37)",
+                  fontSize: 14,
+                  fontFamily: "Roboto",
+                  fontWeight: 200,
+                }}
+              >
+                Informationssida utan vald domän.
+              </Typography>
+              <Typography
+                sx={{
+                  color: "rgb(37,31,37)",
+                  fontSize: 14,
+                  fontFamily: "Roboto",
+                  fontWeight: 200,
+                }}
+              >
+                Idag är det fleratalet som väljer att skicka sina inbjudningar
+                via digitala tjänster. Vi bygger din inbjuadn/informationssida.
+              </Typography>
+            </Box>
+          </Box>
           <Box
             sx={{
               width: "100%",
@@ -214,6 +268,16 @@ export default function ParallaxServices() {
             </li>
             <li>
               {" "}
+              <FiberManualRecordIcon sx={{ fontSize: 10 }} /> Admin-login/vy för
+              att hantera produkter så dom du vill ha det
+            </li>
+            <li>
+              {" "}
+              <FiberManualRecordIcon sx={{ fontSize: 10 }} />{" "}
+              Betalningsintegration
+            </li>
+            <li>
+              {" "}
               <FiberManualRecordIcon sx={{ fontSize: 10 }} /> SEO för
               tillgänglighet på webben
             </li>
@@ -224,25 +288,27 @@ export default function ParallaxServices() {
             </li>
             <li>
               {" "}
-              <FiberManualRecordIcon sx={{ fontSize: 10 }} /> Gratis uppdatering
-              för information och bilder
-            </li>
-            <li>
-              {" "}
-              <FiberManualRecordIcon sx={{ fontSize: 10 }} /> Möjlighet till
-              vidareutveckling av tjänst
-            </li>
-            <li>
-              {" "}
               <FiberManualRecordIcon sx={{ fontSize: 10 }} /> Möjlighet till
               statistik månadsvis
             </li>
             <li>
               {" "}
-              <FiberManualRecordIcon sx={{ fontSize: 10 }} /> Support - via vår
-              mail i första hand
+              <FiberManualRecordIcon sx={{ fontSize: 10 }} /> Support
             </li>
           </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flex: 1,
+              flexDirection: "column",
+              alignItems: "start",
+              width: "80%",
+              marginTop: 2,
+            }}
+          >
+            <Rubrik>Från 30.000 kr</Rubrik>
+            <Rubrik sx={{ fontSize: 14 }}>Månadskostnad från 800 kr/mån</Rubrik>
+          </Box>
           <Box
             sx={{
               width: "100%",
@@ -333,6 +399,11 @@ export default function ParallaxServices() {
             </li>
             <li>
               {" "}
+              <FiberManualRecordIcon sx={{ fontSize: 10 }} /> Design och
+              funktioner efter dina önskemål och behov
+            </li>
+            <li>
+              {" "}
               <FiberManualRecordIcon sx={{ fontSize: 10 }} /> Integration med
               tredjepartstjänster
             </li>
@@ -343,10 +414,22 @@ export default function ParallaxServices() {
             </li>
             <li>
               {" "}
-              <FiberManualRecordIcon sx={{ fontSize: 10 }} /> Support - via vår
-              mail i första hand
+              <FiberManualRecordIcon sx={{ fontSize: 10 }} /> Support
             </li>
           </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flex: 1,
+              flexDirection: "column",
+              alignItems: "start",
+              width: "80%",
+              marginTop: 2,
+            }}
+          >
+            <Rubrik>Från 50.000 kr</Rubrik>
+            <Rubrik sx={{ fontSize: 14 }}>Månadskostnad från 500 kr/mån</Rubrik>
+          </Box>
           <Box
             sx={{
               width: "100%",
@@ -431,6 +514,11 @@ export default function ParallaxServices() {
             </li>
             <li>
               {" "}
+              <FiberManualRecordIcon sx={{ fontSize: 10 }} /> Design och
+              funktioner efter dina önskemål och behov
+            </li>
+            <li>
+              {" "}
               <FiberManualRecordIcon sx={{ fontSize: 10 }} /> Integration med
               frontend och tredjepartstjänster
             </li>
@@ -446,10 +534,22 @@ export default function ParallaxServices() {
             </li>
             <li>
               {" "}
-              <FiberManualRecordIcon sx={{ fontSize: 10 }} /> Support - via vår
-              mail i första hand
+              <FiberManualRecordIcon sx={{ fontSize: 10 }} /> Support
             </li>
           </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flex: 1,
+              flexDirection: "column",
+              alignItems: "start",
+              width: "80%",
+              marginTop: 2,
+            }}
+          >
+            <Rubrik>Från 50.000 kr</Rubrik>
+            <Rubrik sx={{ fontSize: 14 }}>Månadskostnad från 800 kr/mån</Rubrik>
+          </Box>
           <Box
             sx={{
               width: "100%",
@@ -536,11 +636,6 @@ export default function ParallaxServices() {
             </li>
             <li>
               {" "}
-              <FiberManualRecordIcon sx={{ fontSize: 10 }} /> Integration med
-              frontend och tredjepartstjänster
-            </li>
-            <li>
-              {" "}
               <FiberManualRecordIcon sx={{ fontSize: 10 }} /> Regelbunden
               övervakning och underhåll
             </li>
@@ -551,10 +646,21 @@ export default function ParallaxServices() {
             </li>
             <li>
               {" "}
-              <FiberManualRecordIcon sx={{ fontSize: 10 }} /> Support - via vår
-              mail i första hand
+              <FiberManualRecordIcon sx={{ fontSize: 10 }} /> Support
             </li>
           </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flex: 1,
+              flexDirection: "column",
+              alignItems: "start",
+              width: "80%",
+              marginTop: 2,
+            }}
+          >
+            <Rubrik sx={{ fontSize: 14 }}>Pris efter offertförfrågan</Rubrik>
+          </Box>
           <Box
             sx={{
               width: "100%",
