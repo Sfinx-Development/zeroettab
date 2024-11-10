@@ -42,8 +42,9 @@ export default function ParallaxAboutUs() {
           <Rubrik
             sx={{
               color: "rgba(254,232,209,255)",
-              fontSize: 35,
+              fontSize: { xs: 35, xl: 40 },
               fontWeight: 800,
+              letterSpacing: 2,
             }}
           >
             Jämlikhet
@@ -51,8 +52,9 @@ export default function ParallaxAboutUs() {
           <Rubrik
             sx={{
               color: "rgba(229,186,179,1)",
-              fontSize: 35,
+              fontSize: { xs: 35, xl: 40 },
               fontWeight: 800,
+              letterSpacing: 2,
             }}
           >
             Transparans
@@ -60,7 +62,8 @@ export default function ParallaxAboutUs() {
           <Rubrik
             sx={{
               color: "rgba(254,232,209,255)",
-              fontSize: 35,
+              fontSize: { xs: 35, xl: 40 },
+              letterSpacing: 2,
               fontWeight: 800,
             }}
           >
@@ -79,7 +82,7 @@ export default function ParallaxAboutUs() {
           <Rubrik
             sx={{
               color: "rgba(229,186,179,1)",
-              fontSize: 25,
+              fontSize: { xs: 25, xl: 30 },
               fontWeight: 800,
               width: { xs: "80%", md: "100%" },
               display: "flex",
@@ -92,10 +95,10 @@ export default function ParallaxAboutUs() {
           <Typography
             sx={{
               color: "rgba(247, 247, 247, 0.9)",
-              fontSize: 18,
+              fontSize: { xs: 18, xl: 25 },
               fontFamily: "Roboto",
               fontWeight: 200,
-              maxWidth: { xs: "80%", md: "60%" },
+              maxWidth: { xs: "80%", md: "60%", xl: "50%" },
               textAlign: { xs: "left", md: "center" },
               marginTop: 1,
             }}
@@ -120,7 +123,7 @@ export default function ParallaxAboutUs() {
             alignItems: "center",
             justifyContent: "center",
             paddingBottom: { xs: 5, md: 10 },
-            paddingTop: 10,
+            paddingTop: { xs: 10, xl: 20 },
           }}
         >
           <Box
@@ -136,8 +139,8 @@ export default function ParallaxAboutUs() {
             <Box
               sx={{
                 position: "relative",
-                width: { xs: 150, md: 180 },
-                height: { xs: 250, md: 280 },
+                width: { xs: 150, md: 180, xl: 300 },
+                height: { xs: 250, md: 280, xl: 400 },
                 borderRadius: "10%",
                 overflow: "hidden",
               }}
@@ -164,7 +167,12 @@ export default function ParallaxAboutUs() {
                 }}
               >
                 <Rubrik
-                  sx={{ color: "rgba(34,32,37,255)", paddingY: 1, paddingX: 2 }}
+                  sx={{
+                    color: "rgba(34,32,37,255)",
+                    paddingY: { xs: 1, xl: 2 },
+                    paddingX: { xs: 2, xl: 4 },
+                    fontSize: { xs: 20, xl: 25 },
+                  }}
                 >
                   Angelina
                 </Rubrik>
@@ -174,8 +182,8 @@ export default function ParallaxAboutUs() {
             <Box
               sx={{
                 position: "relative",
-                width: { xs: 150, md: 180 },
-                height: { xs: 250, md: 280 },
+                width: { xs: 150, md: 180, xl: 300 },
+                height: { xs: 250, md: 280, xl: 400 },
                 borderRadius: "10%",
                 overflow: "hidden",
               }}
@@ -202,7 +210,12 @@ export default function ParallaxAboutUs() {
                 }}
               >
                 <Rubrik
-                  sx={{ color: "rgba(34,32,37,255)", paddingY: 1, paddingX: 2 }}
+                  sx={{
+                    color: "rgba(34,32,37,255)",
+                    paddingY: { xs: 1, xl: 2 },
+                    paddingX: { xs: 2, xl: 4 },
+                    fontSize: { xs: 20, xl: 25 },
+                  }}
                 >
                   Elina
                 </Rubrik>
@@ -214,7 +227,7 @@ export default function ParallaxAboutUs() {
             <Rubrik
               sx={{
                 color: "rgba(254,232,209,255)",
-                fontSize: 30,
+                fontSize: { xs: 30, xl: 40 },
                 fontWeight: 800,
               }}
             >
@@ -223,10 +236,10 @@ export default function ParallaxAboutUs() {
             <Typography
               sx={{
                 color: "rgba(247, 247, 247, 0.9)",
-                fontSize: 18,
+                fontSize: { xs: 18, xl: 25 },
                 fontFamily: "Roboto",
                 fontWeight: 200,
-                width: { xs: "80%", md: "60%" },
+                width: { xs: "80%", md: "60%", xl: "50%" },
               }}
             >
               Angelina och Elina heter vi som driver Zeroett tillsammans. En

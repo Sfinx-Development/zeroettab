@@ -23,7 +23,8 @@ export default function BubblaComponent() {
         justifyContent: "center",
         flexDirection: "column",
         marginTop: -10,
-        marginLeft: { xs: 0, md: 10 },
+        height: "100%",
+        marginLeft: { xs: 0, md: 10, xl: -100 },
       }}
     >
       {/* Frontend Bubbla */}
@@ -37,19 +38,19 @@ export default function BubblaComponent() {
         <Box
           sx={{
             position: "relative",
-            width: { xs: "90%", sm: "80%", md: "55%" }, // Responsiv bredd
+            width: { xs: "90%", sm: "70%", md: "55%", xl: "60%" }, // Responsiv bredd
             height: {
               xs: "200px",
               md: "200px",
-              sm: "280",
-              lg: "200",
-              xl: "300",
+              sm: "280px",
+              lg: "200px",
+              xl: "250px",
             }, // Responsiv höjd
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             padding: { xs: 1, md: 2 }, // Anpassad padding
-            marginBottom: { xs: -2, md: -10 }, // Negativ margin för överlapp
+            marginBottom: { xs: -2, md: -10, xl: -15 }, // Negativ margin för överlapp
             textAlign: "center",
             marginTop: { xs: 2 },
             flexDirection: "column",
@@ -61,8 +62,8 @@ export default function BubblaComponent() {
             sx={{
               color: "rgb(216,163,153)",
               marginBottom: 1,
-              marginTop: { xs: 5, md: 10 },
-              fontSize: { xs: 18, md: 18, sm: 22, lg: 22 },
+              marginTop: { xs: 5, md: 10, xl: 4 },
+              fontSize: { xs: 18, md: 18, sm: 22, lg: 22, xl: 25 },
               fontWeight: 600,
             }}
           >
@@ -72,7 +73,7 @@ export default function BubblaComponent() {
             sx={{
               color: "#5B5B5B",
               maxWidth: "60%",
-              fontSize: { xs: 12, md: 14 },
+              fontSize: { xs: 12, md: 14, xl: 15 },
             }}
           >
             Vi designar och bygger gränssnitt utifrån dina personliga önskemål
@@ -111,20 +112,20 @@ export default function BubblaComponent() {
         <Box
           sx={{
             position: "relative",
-            width: { xs: "90%", sm: "80%", md: "40%" },
+            width: { xs: "90%", sm: "60%", md: "40%", xl: "45%" },
             height: {
               xs: "250px",
               md: "250px",
-              sm: "280",
-              lg: "200",
-              xl: "300",
+              sm: "280px",
+              lg: "200px",
+              xl: "300px",
             }, // Responsiv höjd
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
             padding: { xs: 1, md: 2 },
-            marginBottom: { xs: -2, md: -10 }, // Negativ margin för överlapp
+            marginBottom: { xs: -2, md: -10, xl: -20 }, // Negativ margin för överlapp
             textAlign: "center",
           }}
         >
@@ -133,9 +134,9 @@ export default function BubblaComponent() {
             variant="h4"
             sx={{
               color: "#DBA569",
-              marginTop: { xs: 3, md: 6 },
+              marginTop: { xs: 3, md: 10, xl: 2 },
               marginBottom: 1,
-              fontSize: { xs: 18, md: 22 },
+              fontSize: { xs: 18, md: 22, xl: 25 },
               fontWeight: 600,
             }}
           >
@@ -145,7 +146,7 @@ export default function BubblaComponent() {
             sx={{
               color: "#5B5B5B",
               maxWidth: "60%",
-              fontSize: { xs: 12, md: 14 },
+              fontSize: { xs: 12, md: 14, xl: 15 },
             }}
           >
             Vi utvecklar kraftfulla backend-lösningar, inklusive system och
@@ -185,13 +186,13 @@ export default function BubblaComponent() {
         <Box
           sx={{
             position: "relative",
-            width: { xs: "90%", sm: "80%", md: "55%" },
+            width: { xs: "90%", sm: "70%", md: "55%" },
             height: {
               xs: "200px",
               md: "200px",
-              sm: "280",
-              lg: "200",
-              xl: "300",
+              sm: "280px",
+              lg: "200px",
+              xl: "300px",
             }, // Responsiv höjd
             display: "flex",
             alignItems: "center",
@@ -210,7 +211,7 @@ export default function BubblaComponent() {
               marginBottom: 1,
               fontSize: { xs: 18, md: 22 },
               fontWeight: 600,
-              marginTop: { xs: 5, md: 10 },
+              marginTop: { xs: 6, md: 10, xl: 1 },
             }}
           >
             Fullstack

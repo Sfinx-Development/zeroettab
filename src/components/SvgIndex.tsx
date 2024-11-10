@@ -1,7 +1,7 @@
 const SvgIndexZeroett = () => (
   <svg
-    width="40.69165mm"
-    height="30.838028mm"
+    width="44.69165mm"
+    height="34.838028mm"
     viewBox="0 0 157.69165 47.838028"
     version="1.1"
     id="svg1"

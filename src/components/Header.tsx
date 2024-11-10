@@ -60,7 +60,7 @@ export default function Header(): JSX.Element {
               letterSpacing: 2,
               fontFamily: "Roboto",
               fontWeight: "lighter",
-              fontSize: isMobile ? 18 : 22,
+              fontSize: { xs: 18, md: 22, xl: 30 },
               lineHeight: 1.5,
               transition: "color 0.3s",
               "&:hover": {
@@ -85,7 +85,7 @@ export default function Header(): JSX.Element {
               letterSpacing: 2,
               fontFamily: "Roboto",
               fontWeight: "lighter",
-              fontSize: isMobile ? 18 : 22,
+              fontSize: { xs: 18, md: 22, xl: 30 },
               lineHeight: 1.5,
               transition: "color 0.3s",
               "&:hover": {
@@ -116,7 +116,7 @@ export default function Header(): JSX.Element {
               letterSpacing: 2,
               fontFamily: "Roboto",
               fontWeight: "lighter",
-              fontSize: isMobile ? 18 : 22,
+              fontSize: { xs: 18, md: 22, xl: 30 },
               lineHeight: 1.5,
               transition: "color 0.3s",
               "&:hover": {
@@ -146,7 +146,7 @@ export default function Header(): JSX.Element {
               letterSpacing: 2,
               fontFamily: "Roboto",
               fontWeight: "lighter",
-              fontSize: isMobile ? 18 : 22,
+              fontSize: { xs: 18, md: 22, xl: 30 },
               lineHeight: 1.5,
               transition: "color 0.3s",
               "&:hover": {
