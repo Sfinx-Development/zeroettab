@@ -50,7 +50,7 @@ export default function ParallaxServices() {
             alignItems: "center",
             paddingTop: 4,
             marginTop: { xs: 5, md: 12 },
-            width: "70%",
+            width: { xs: "70%", xl: "60%" },
             backgroundColor: "#F7F7F7",
             borderRadius: 6,
           }}
@@ -139,7 +139,7 @@ export default function ParallaxServices() {
             }}
           >
             <Box sx={{ display: "flex", flex: 1, flexDirection: "column" }}>
-              <Rubrik>Engångskonstnad från 8000 kr</Rubrik>
+              <Rubrik>Från 8000 kr</Rubrik>
               <Rubrik sx={{ fontSize: 14 }}>
                 Månadskostnad från 350 kr/mån
               </Rubrik>
@@ -211,7 +211,7 @@ export default function ParallaxServices() {
             flexDirection: "column",
             alignItems: "center",
             paddingTop: 4,
-            width: "70%",
+            width: { xs: "70%", xl: "60%" },
             backgroundColor: "rgba(229,186,179,1)",
             borderRadius: 6,
             marginTop: 6,
@@ -335,7 +335,7 @@ export default function ParallaxServices() {
             flexDirection: "column",
             alignItems: "center",
             paddingTop: 4,
-            width: "70%",
+            width: { xs: "70%", xl: "60%" },
             backgroundColor: "rgba(240,231,226,1)",
             borderRadius: 6,
             marginTop: 6,
@@ -455,7 +455,7 @@ export default function ParallaxServices() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            width: "70%",
+            width: { xs: "70%", xl: "60%" },
             paddingTop: 4,
             backgroundColor: "#F7F7F7",
             borderRadius: 6,
@@ -575,7 +575,7 @@ export default function ParallaxServices() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            width: "70%",
+            width: { xs: "70%", xl: "60%" },
             paddingTop: 4,
             backgroundColor: "rgba(229,186,179,1)",
             borderRadius: 6,

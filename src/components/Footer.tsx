@@ -48,7 +48,7 @@ export default function Footer() {
           >
             <Rubrik
               sx={{
-                fontSize: { xs: 25, md: 30 },
+                fontSize: { xs: 25, md: 30, xl: 35 },
                 marginBottom: { xs: 1, md: 3 },
               }}
             >
@@ -56,7 +56,7 @@ export default function Footer() {
             </Rubrik>
             <Typography
               sx={{
-                fontSize: 20,
+                fontSize: { xs: 20, xl: 30 },
                 marginY: 0.5,
                 fontFamily: "Roboto",
                 fontWeight: "lighter",
@@ -66,7 +66,7 @@ export default function Footer() {
             </Typography>
             <Typography
               sx={{
-                fontSize: 20,
+                fontSize: { xs: 20, xl: 30 },
                 marginY: 0.5,
                 fontFamily: "Roboto",
                 fontWeight: "lighter",
@@ -76,7 +76,7 @@ export default function Footer() {
             </Typography>
             <Typography
               sx={{
-                fontSize: 20,
+                fontSize: { xs: 20, xl: 30 },
                 marginY: 0.5,
                 fontFamily: "Roboto",
                 fontWeight: "lighter",
@@ -87,7 +87,7 @@ export default function Footer() {
 
             <Typography
               sx={{
-                fontSize: 20,
+                fontSize: { xs: 20, xl: 30 },
                 marginY: 0.5,
                 fontFamily: "Roboto",
                 fontWeight: "lighter",
@@ -109,7 +109,7 @@ export default function Footer() {
           <Box sx={{ width: { xs: "100%", md: "65%" }, height: "100%" }}>
             <Rubrik
               sx={{
-                fontSize: { xs: 25, md: 30 },
+                fontSize: { xs: 25, md: 30, xl: 35 },
                 marginBottom: { xs: 1, md: 3 },
               }}
             >
@@ -117,7 +117,7 @@ export default function Footer() {
             </Rubrik>
             <Typography
               sx={{
-                fontSize: 20,
+                fontSize: { xs: 20, xl: 30 },
                 marginY: 0.5,
                 fontFamily: "Roboto",
                 fontWeight: "lighter",
@@ -127,7 +127,7 @@ export default function Footer() {
             </Typography>
             <Typography
               sx={{
-                fontSize: 20,
+                fontSize: { xs: 20, xl: 30 },
                 marginY: 0.5,
                 fontFamily: "Roboto",
                 fontWeight: "lighter",
@@ -137,7 +137,7 @@ export default function Footer() {
             </Typography>
             <Typography
               sx={{
-                fontSize: 20,
+                fontSize: { xs: 20, xl: 30 },
                 marginTop: { xs: 2, md: 4 },
                 fontFamily: "Roboto",
                 fontWeight: "lighter",
@@ -165,7 +165,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <InstagramIcon sx={{ fontSize: 30 }} />
+                <InstagramIcon sx={{ fontSize: { xs: 30, xl: 40 } }} />
               </IconButton>
               <IconButton
                 sx={{
@@ -180,7 +180,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FacebookIcon sx={{ fontSize: 30 }} />
+                <FacebookIcon sx={{ fontSize: { xs: 30, xl: 40 } }} />
               </IconButton>
             </Box>
           </Box>
@@ -197,7 +197,7 @@ export default function Footer() {
           <Box sx={{ width: { xs: "100%", md: "65%" }, height: "100%" }}>
             <Rubrik
               sx={{
-                fontSize: { xs: 25, md: 30 },
+                fontSize: { xs: 25, md: 30, xl: 35 },
                 marginBottom: { xs: 1, md: 3 },
               }}
             >
@@ -205,7 +205,7 @@ export default function Footer() {
             </Rubrik>
             <Typography
               sx={{
-                fontSize: 20,
+                fontSize: { xs: 20, xl: 30 },
                 marginY: 0.5,
                 fontFamily: "Roboto",
                 fontWeight: "lighter",

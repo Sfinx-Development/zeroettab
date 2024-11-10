@@ -12,33 +12,52 @@ export default function ParallaxIndex() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        overflow: "hidden",
+        background: "linear-gradient(to bottom, #1a1a1d, #4e4e50)",
       }}
     >
       <Box
         sx={{
           minHeight: "100vh",
-          backgroundColor: "rgba(34,32,37,255)",
+          backgroundColor: "rgba(34,32,37,0.95)",
           zIndex: 2,
           width: "100%",
+          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
         }}
       >
         <Box
           sx={{
-            width: { xs: "90%", md: "50%" },
+            width: { xs: "90%", md: "60%", lg: "45%", xl: "35%" },
             marginBottom: 4,
-            paddingTop: 20,
-            marginLeft: { xs: 3, md: 10, sm: 3, lg: 10, xlg: 20 },
+            paddingTop: { xs: 10, xl: 15 },
+            paddingBottom: { xs: 2, xl: 4 },
+            marginX: "auto",
+            backgroundColor: "rgba(255, 255, 255, 0.08)",
+            backdropFilter: "blur(8px)",
+            borderRadius: 4,
+            boxShadow: "0px 4px 20px rgba(0,0,0,0.2)",
+            padding: { xs: 3, lg: 6 },
           }}
         >
-          <Rubrik sx={{ color: "#F7F7F7", fontSize: 30, fontWeight: 400 }}>
-            Frontend, backend eller fullstack?
+          <Rubrik
+            sx={{
+              color: "#FFD700",
+              fontSize: { xs: 26, md: 34, xl: 42 },
+              fontWeight: 700,
+              letterSpacing: "0.5px",
+              mb: 2,
+              textAlign: "center",
+            }}
+          >
+            Frontend, Backend eller Fullstack?
           </Rubrik>
           <Typography
             sx={{
               color: "rgba(247, 247, 247, 0.9)",
-              fontSize: 25,
-              fontFamily: "Roboto",
-              fontWeight: 200,
+              fontSize: { xs: 18, md: 22, xl: 26 },
+              fontWeight: 300,
+              lineHeight: 1.6,
+              textAlign: "center",
             }}
           >
             Hos oss behöver du inte välja. Men vad är det vi gör, egentligen?
@@ -52,21 +71,38 @@ export default function ParallaxIndex() {
 
         <Box
           sx={{
-            width: { xs: "90%", md: "50%" },
+            width: { xs: "90%", md: "60%", lg: "45%", xl: "35%" },
             marginBottom: 10,
-            marginLeft: { xs: 2, md: 10, sm: 3, lg: 10, xlg: 20 },
+            marginX: "auto",
+            paddingTop: { xs: 2, xl: 4 },
+            paddingBottom: { xs: 2, xl: 4 },
+            backgroundColor: "rgba(255, 255, 255, 0.08)",
+            backdropFilter: "blur(8px)",
+            borderRadius: 4,
+            boxShadow: "0px 4px 20px rgba(0,0,0,0.2)",
+            padding: { xs: 3, lg: 6 },
           }}
         >
-          <Rubrik sx={{ color: "#F7F7F7", fontSize: 30, fontWeight: 400 }}>
+          <Rubrik
+            sx={{
+              color: "#FFD700",
+              fontSize: { xs: 26, md: 34, xl: 42 },
+              fontWeight: 700,
+              letterSpacing: "0.5px",
+              mb: 2,
+              textAlign: "center",
+            }}
+          >
             Kort sagt..
           </Rubrik>
           <Typography
             sx={{
               color: "rgba(247, 247, 247, 0.9)",
-              fontSize: 25,
-              fontFamily: "Roboto",
-              fontWeight: 200,
-              marginBottom: 2,
+              fontSize: { xs: 18, md: 22, xl: 26 },
+              fontWeight: 300,
+              lineHeight: 1.6,
+              textAlign: "center",
+              marginBottom: 3,
             }}
           >
             Oavsett vad du behöver hjälp med har vi lösningen. Våra tekniska
@@ -77,20 +113,22 @@ export default function ParallaxIndex() {
           <Link
             sx={{
               textDecoration: "none",
-              transition: "color 0.3s",
+              transition: "all 0.3s",
               background:
-                "linear-gradient(to bottom, rgba(250,220,197,255), rgba(235,190,180,255))",
-              paddingY: 1,
-              paddingX: 2,
-              marginTop: 1,
-              borderRadius: 2,
-              color: "rgb(37,31,37)",
-              fontFamily: "Rubrik",
-              fontWeight: "lighter",
-              fontSize: { xs: 18, md: 22, xl: 30 },
+                "linear-gradient(135deg, rgba(250,220,197,1), rgba(235,190,180,1))",
+              paddingY: 1.5,
+              paddingX: 3,
+              borderRadius: "30px",
+              color: "#1a1a1d",
+              fontWeight: "600",
+              fontSize: { xs: 18, md: 20, xl: 24 },
               lineHeight: 1.5,
+              display: "inline-block",
               "&:hover": {
-                color: "rgb(67, 61, 67)",
+                color: "#333",
+                background:
+                  "linear-gradient(135deg, rgba(235,190,180,1), rgba(250,220,197,1))",
+                boxShadow: "0px 4px 15px rgba(250,220,197,0.6)",
               },
             }}
             href="/contact"

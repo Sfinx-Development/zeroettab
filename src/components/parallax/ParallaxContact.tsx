@@ -85,7 +85,7 @@ export default function ParallaxContact() {
           sx={{
             position: "absolute",
             right: 0,
-            height: { xs: 150, md: 250 },
+            height: { xs: 150, md: 250, xl: 300 },
             width: "auto", // Säkerställer att bredden anpassas efter innehållet
             overflow: "hidden", // Förhindrar att bilden överskrider boxen
           }}
@@ -108,7 +108,7 @@ export default function ParallaxContact() {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            paddingTop: 15,
+            paddingTop: { xs: 15, xl: 35 },
           }}
         >
           <Box
@@ -121,7 +121,7 @@ export default function ParallaxContact() {
             <Rubrik
               sx={{
                 color: "#F7F7F7",
-                fontSize: 30,
+                fontSize: { xs: 30, xl: 40 },
                 fontWeight: 500,
                 textAlign: "left",
                 width: { xs: "80%", md: "58%" },
@@ -132,7 +132,7 @@ export default function ParallaxContact() {
             <Typography
               sx={{
                 color: "rgba(247, 247, 247, 0.9)",
-                fontSize: 18,
+                fontSize: { xs: 18, xl: 25 },
                 fontFamily: "Roboto",
                 fontWeight: 200,
                 maxWidth: { xs: "80%", md: "58%" },
@@ -149,7 +149,7 @@ export default function ParallaxContact() {
                 margin: "auto",
                 display: "flex",
                 flexDirection: "column",
-                gap: 2,
+                gap: { xs: 2, xl: 4 },
                 paddingTop: { xs: 4, md: 6 },
               }}
             >
@@ -302,10 +302,14 @@ export default function ParallaxContact() {
                     sendEmailWithLink();
                   }}
                 >
-                  <Rubrik sx={{ color: "#F7F7F7", fontSize: 25 }}>
+                  <Rubrik
+                    sx={{ color: "#F7F7F7", fontSize: { xs: 25, xl: 35 } }}
+                  >
                     Skicka
                   </Rubrik>
-                  <ArrowForwardIcon sx={{ color: "#F7F7F7", fontSize: 25 }} />
+                  <ArrowForwardIcon
+                    sx={{ color: "#F7F7F7", fontSize: { xs: 25, xl: 35 } }}
+                  />
                 </IconButton>
                 <Snackbar
                   open={openSnackbar}

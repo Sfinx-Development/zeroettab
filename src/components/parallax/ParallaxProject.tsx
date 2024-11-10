@@ -85,11 +85,11 @@ export default function ParallaxProject() {
             <Rubrik
               sx={{
                 color: "#F7F7F7",
-                fontSize: 30,
+                fontSize: { xs: 30, xl: 40 },
                 fontWeight: 500,
                 textAlign: "left",
                 width: "100%",
-                paddingLeft: { xs: 4, md: 8 },
+                paddingLeft: { xs: 4, md: 8, xl: 10 },
               }}
             >
               Stolta ögonblick
@@ -97,12 +97,12 @@ export default function ParallaxProject() {
             <Typography
               sx={{
                 color: "rgba(247, 247, 247, 0.9)",
-                fontSize: 18,
+                fontSize: { xs: 18, xl: 25 },
                 fontFamily: "Roboto",
                 fontWeight: 200,
                 width: "100%",
                 textAlign: "left",
-                paddingLeft: { xs: 4, md: 8 },
+                paddingLeft: { xs: 4, md: 8, xl: 10 },
               }}
             >
               Projekt
@@ -113,9 +113,9 @@ export default function ParallaxProject() {
                 margin: "auto",
                 flexDirection: "row",
                 overflowX: "scroll",
-                gap: 4,
+                gap: { xs: 4, xl: 10 },
                 paddingTop: { xs: 4, md: 6 },
-                paddingLeft: { xs: 2, md: 4 },
+                paddingLeft: { xs: 2, md: 4, xl: 6 },
                 scrollSnapType: "x mandatory",
                 display: "inline-flex",
                 paddingRight: { xs: 4, md: 8 },
@@ -130,8 +130,8 @@ export default function ParallaxProject() {
                     flexShrink: 0,
 
                     borderRadius: 2,
-                    minWidth: { xs: 300, md: 350 },
-                    height: { xs: 300, md: 350 },
+                    minWidth: { xs: 300, md: 350, xl: 500 },
+                    height: { xs: 300, md: 350, xl: 500 },
                     backgroundColor:
                       project.backgroundColor ?? "rgba(250,220,197,255)",
                     display: "flex",
@@ -155,7 +155,7 @@ export default function ParallaxProject() {
                       alt={project.title}
                       sx={{
                         width: "100%",
-                        height: "150px",
+                        height: { xs: "150px", xl: 250 },
                         borderRadius: "8px",
                         objectFit: "cover",
                         boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.2)",
@@ -166,7 +166,7 @@ export default function ParallaxProject() {
                     <Typography
                       variant="h6"
                       sx={{
-                        fontSize: 22,
+                        fontSize: { xs: 22, xl: 29 },
                         fontWeight: "bold",
                         color: "#222025",
                         textTransform: "uppercase",
@@ -178,7 +178,7 @@ export default function ParallaxProject() {
                     <Typography
                       sx={{
                         color: "#222025",
-                        fontSize: 18,
+                        fontSize: { xs: 18, xl: 25 },
                         fontFamily: "Roboto",
                         fontWeight: 200,
                         width: "100%",
@@ -189,7 +189,7 @@ export default function ParallaxProject() {
                     </Typography>
                     <Typography
                       sx={{
-                        fontSize: 16,
+                        fontSize: { xs: 16, xl: 23 },
                         paddingTop: 1,
                         color: "rgba(34,32,37,0.7)",
                         fontWeight: "light",
@@ -217,7 +217,7 @@ export default function ParallaxProject() {
                         borderRadius: "20px",
                         backgroundColor: "#222025",
                         color: "#F7F7F7",
-                        fontSize: 16,
+                        fontSize: { xs: 18, xl: 25 },
                         fontWeight: "bold",
                         textTransform: "none",
                         alignSelf: "flex-start",
