@@ -134,7 +134,7 @@ export default function BubblaComponent() {
             variant="h4"
             sx={{
               color: "#DBA569",
-              marginTop: { xs: 3, md: 10, xl: 2 },
+              marginTop: { xs: -1, md: 10, xl: 2 },
               marginBottom: 1,
               fontSize: { xs: 18, md: 22, xl: 25 },
               fontWeight: 600,
@@ -149,9 +149,9 @@ export default function BubblaComponent() {
               fontSize: { xs: 12, md: 14, xl: 15 },
             }}
           >
-            Vi utvecklar kraftfulla backend-lösningar, inklusive system och
-            API:er som säkerställer att vår mjukvara fungerar smidigt och kan
-            kommunicera med andra system.
+            Vi utvecklar backend-lösningar, system och API:er. Från att skapa
+            funktioner i ett befintligt projekt till att utveckla ett nytt
+            system.
           </Typography>
           <Box
             sx={{
