@@ -50,7 +50,7 @@ export default function BubblaComponent() {
             alignItems: "center",
             justifyContent: "center",
             padding: { xs: 1, md: 2 }, // Anpassad padding
-            marginBottom: { xs: -2, md: -10, xl: -15 }, // Negativ margin för överlapp
+            marginBottom: { xs: -2, md: -5, xl: -10 }, // Negativ margin för överlapp
             textAlign: "center",
             marginTop: { xs: 2 },
             flexDirection: "column",
@@ -62,7 +62,7 @@ export default function BubblaComponent() {
             sx={{
               color: "rgb(216,163,153)",
               marginBottom: 1,
-              marginTop: { xs: 5, md: 10, xl: 4 },
+              marginTop: { xs: 5, md: 10, xl: 10 },
               fontSize: { xs: 18, md: 18, sm: 22, lg: 22, xl: 25 },
               fontWeight: 600,
             }}
@@ -112,7 +112,7 @@ export default function BubblaComponent() {
         <Box
           sx={{
             position: "relative",
-            width: { xs: "90%", sm: "60%", md: "40%", xl: "45%" },
+            width: { xs: "90%", sm: "60%", md: "50%", xl: "55%" },
             height: {
               xs: "250px",
               md: "250px",
@@ -125,8 +125,9 @@ export default function BubblaComponent() {
             alignItems: "center",
             justifyContent: "center",
             padding: { xs: 1, md: 2 },
-            marginBottom: { xs: -2, md: -10, xl: -20 }, // Negativ margin för överlapp
+            marginBottom: { xs: -2, md: 6, xl: -2 }, // Negativ margin för överlapp
             textAlign: "center",
+            marginRight: { xl: -5 },
           }}
         >
           <BackendBubbleSvg />
@@ -134,7 +135,7 @@ export default function BubblaComponent() {
             variant="h4"
             sx={{
               color: "#DBA569",
-              marginTop: { xs: -1, md: 10, xl: 2 },
+              marginTop: { xs: -1, md: 8, xl: 2 },
               marginBottom: 1,
               fontSize: { xs: 18, md: 22, xl: 25 },
               fontWeight: 600,
@@ -186,7 +187,7 @@ export default function BubblaComponent() {
         <Box
           sx={{
             position: "relative",
-            width: { xs: "90%", sm: "70%", md: "55%" },
+            width: { xs: "90%", sm: "70%", md: "55%", xl: "60%" },
             height: {
               xs: "200px",
               md: "200px",
