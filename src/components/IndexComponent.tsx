@@ -27,7 +27,7 @@ export default function IndexComponent() {
           sx={{
             marginBottom: { xs: 30, md: 20 },
             marginLeft: { xs: 0, md: 5, xl: 20 },
-            marginTop: { md: 10, xl: 25 },
+            marginTop: { md: 10, xl: 20 },
             width: "100%",
           }}
         >

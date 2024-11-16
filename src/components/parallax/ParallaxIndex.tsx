@@ -12,6 +12,7 @@ export default function ParallaxIndex() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        justifyContent: "space-between",
       }}
     >
       <Box
@@ -20,14 +21,21 @@ export default function ParallaxIndex() {
           backgroundColor: "rgba(34,32,37,255)",
           zIndex: 2,
           width: "100%",
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" }, // Lägg till radlayout för större skärmar
+          justifyContent: "space-between", // Separera vänster och höger sektion
+          alignItems: "center",
         }}
       >
+        {/* Vänster sektion */}
         <Box
           sx={{
-            width: { xs: "75%", md: "50%", xl: "40%" },
-            marginBottom: 4,
-            paddingTop: { xs: 10, md: 20 },
-            marginLeft: { xs: 3, md: 10, sm: 3, lg: 10, xlg: 20 },
+            width: { xs: "90%", md: "45%", xl: "55%" }, // Dynamisk bredd för vänster sektion
+            marginBottom: { xs: 4, md: 0 },
+            padding: { xs: 3, md: 5 },
+            alignSelf: "flex-start",
+            marginTop: { xs: 10, md: 20, xl: 25 },
+            marginLeft: { xs: 0, md: 4, xl: 6 },
           }}
         >
           <Rubrik
@@ -55,14 +63,21 @@ export default function ParallaxIndex() {
           </Typography>
         </Box>
 
+        {/* Din bubbla-komponent */}
         <BubblaComponent />
 
+        {/* Höger sektion */}
         <Box
           sx={{
-            width: { xs: "75%", md: "50%", xl: "40%" },
-            marginBottom: 10,
-            marginLeft: { xs: 2, md: 10, sm: 3, lg: 10, xlg: 20 },
-            marginTop: 4,
+            width: { xs: "90%", md: "50%", xl: "55%" }, // Dynamisk bredd för höger sektion
+            padding: { xs: 3, md: 5 },
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-end", // Justera innehållet till höger
+            alignSelf: "flex-end",
+            textAlign: { xs: "left", md: "right" },
+            marginBottom: { xs: 10, md: 20, xl: 25 },
+            marginRight: { xs: 0, md: 4, xl: 6 },
           }}
         >
           <Rubrik
@@ -70,6 +85,8 @@ export default function ParallaxIndex() {
               color: "#F7F7F7",
               fontSize: { xs: 25, md: 30, xl: 40 },
               fontWeight: 400,
+              textAlign: { xs: "left", md: "right" },
+              width: "100%",
             }}
           >
             Kort sagt..

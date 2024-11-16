@@ -27,7 +27,7 @@ export default function ParallaxIndex() {
       >
         <Box
           sx={{
-            width: { xs: "90%", md: "60%", lg: "45%", xl: "35%" },
+            width: { xs: "90%", md: "60%", lg: "45%", xl: "50%" },
             marginBottom: 4,
             paddingTop: { xs: 10, xl: 15 },
             paddingBottom: { xs: 2, xl: 4 },
@@ -71,7 +71,7 @@ export default function ParallaxIndex() {
 
         <Box
           sx={{
-            width: { xs: "90%", md: "60%", lg: "45%", xl: "35%" },
+            width: { xs: "90%", md: "60%", lg: "45%", xl: "50%" },
             marginBottom: 10,
             marginX: "auto",
             paddingTop: { xs: 2, xl: 4 },

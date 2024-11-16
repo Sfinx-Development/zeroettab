@@ -24,7 +24,7 @@ export default function BubblaComponent() {
         flexDirection: "column",
         marginTop: -10,
         height: "100%",
-        marginLeft: { xs: 0, md: 10, xl: -100 },
+        marginLeft: { xs: 0, md: 10, lg: 20, xl: 20 },
       }}
     >
       {/* Frontend Bubbla */}
@@ -38,7 +38,7 @@ export default function BubblaComponent() {
         <Box
           sx={{
             position: "relative",
-            width: { xs: "90%", sm: "70%", md: "55%", xl: "60%" }, // Responsiv bredd
+            width: { xs: "90%", sm: "70%", md: "55%", lg: "80%", xl: "60%" }, // Responsiv bredd
             height: {
               xs: "200px",
               md: "200px",
@@ -50,7 +50,7 @@ export default function BubblaComponent() {
             alignItems: "center",
             justifyContent: "center",
             padding: { xs: 1, md: 2 }, // Anpassad padding
-            marginBottom: { xs: -2, md: -5, xl: -10 }, // Negativ margin för överlapp
+            marginBottom: { xs: -2, md: -5, lg: -2, xl: -10 }, // Negativ margin för överlapp
             textAlign: "center",
             marginTop: { xs: 2 },
             flexDirection: "column",
@@ -112,7 +112,7 @@ export default function BubblaComponent() {
         <Box
           sx={{
             position: "relative",
-            width: { xs: "90%", sm: "60%", md: "50%", xl: "55%" },
+            width: { xs: "90%", sm: "60%", md: "50%", lg: "80%", xl: "55%" },
             height: {
               xs: "250px",
               md: "250px",
@@ -187,7 +187,7 @@ export default function BubblaComponent() {
         <Box
           sx={{
             position: "relative",
-            width: { xs: "90%", sm: "70%", md: "55%", xl: "60%" },
+            width: { xs: "90%", sm: "70%", md: "55%", lg: "80%", xl: "60%" },
             height: {
               xs: "200px",
               md: "200px",
