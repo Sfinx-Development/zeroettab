@@ -111,15 +111,16 @@ export default function ParallaxProject() {
               sx={{
                 width: "100%",
                 margin: "auto",
-                flexDirection: "row",
+                flexDirection: { xs: "column", md: "row" },
                 overflowX: "scroll",
                 gap: { xs: 4, xl: 10 },
                 paddingTop: { xs: 4, md: 6 },
-                paddingLeft: { xs: 2, md: 4, xl: 6 },
-                scrollSnapType: "x mandatory",
+                paddingLeft: { xs: 0, md: 4, xl: 6 },
+                alignItems: { xs: "center" },
+                scrollSnapType: { xs: "none", md: "x mandatory" },
                 display: "inline-flex",
-                paddingRight: { xs: 4, md: 8 },
-                scrollPaddingRight: 20,
+                paddingRight: { xs: 0, md: 8 },
+                scrollPaddingRight: { xs: 0, md: 20 },
               }}
             >
               {projects.map((project, index) => (
@@ -128,9 +129,8 @@ export default function ParallaxProject() {
                   sx={{
                     padding: 3,
                     flexShrink: 0,
-
                     borderRadius: 2,
-                    minWidth: { xs: 300, md: 350, xl: 500 },
+                    width: { xs: 280, md: 350, xl: 500 },
                     height: { xs: 300, md: 350, xl: 500 },
                     backgroundColor:
                       project.backgroundColor ?? "rgba(250,220,197,255)",
@@ -154,7 +154,7 @@ export default function ParallaxProject() {
                       src={project.image}
                       alt={project.title}
                       sx={{
-                        width: "100%",
+                        width: "auto",
                         height: { xs: "150px", xl: 250 },
                         borderRadius: "8px",
                         objectFit: "cover",

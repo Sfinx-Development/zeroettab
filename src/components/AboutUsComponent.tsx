@@ -66,7 +66,7 @@ export default function IndexComponent() {
               borderRadius: 2,
               color: "rgb(37,31,37)",
               fontFamily: "Roboto",
-              fontWeight: "lighter",
+              fontWeight: "semibold",
               fontSize: { xs: 20, md: 22, xl: 40 },
               lineHeight: 1.5,
               "&:hover": {

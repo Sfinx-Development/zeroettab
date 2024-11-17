@@ -30,12 +30,12 @@ export default function ContactComponent() {
             marginBottom: { xs: 30, md: 20 },
             marginLeft: { xs: 0, md: 5, xl: 20 },
             marginTop: { xs: 5, md: 10, xl: 20 },
-            width: "100%",
+            width: { xs: "98%", md: "100%" },
             height: "100%",
           }}
         >
           <Rubrik
-            sx={{ fontSize: { xs: 35, md: 60, xl: 75 }, letterSpacing: 1.5 }}
+            sx={{ fontSize: { xs: 30, md: 60, xl: 75 }, letterSpacing: 1.5 }}
           >
             Hur kan vi hjälpa dig?
           </Rubrik>
@@ -49,7 +49,7 @@ export default function ContactComponent() {
               width: { xs: "70%" },
             }}
           >
-            Berätta om din idé, vi bygger den.
+            Berätta om din idé!
           </Typography>
           <Link
             sx={{
@@ -63,7 +63,7 @@ export default function ContactComponent() {
               borderRadius: 2,
               color: "rgb(37,31,37)",
               fontFamily: "Roboto",
-              fontWeight: "lighter",
+              fontWeight: "semibold",
               fontSize: { xs: 20, md: 22, xl: 40 },
               lineHeight: 1.5,
               "&:hover": {

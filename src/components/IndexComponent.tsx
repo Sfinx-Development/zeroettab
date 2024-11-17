@@ -25,6 +25,8 @@ export default function IndexComponent() {
           // backgroundPosition: "center left", // Flytta fokus mot botten
           // backgroundRepeat: "no-repeat", // Förhindra att bilden upprepas
           // justifyContent: "flex-start",
+          // background:
+          //   "linear-gradient(to bottom,rgba(240,231,226,1), rgba(229,186,179,1)))",
           backgroundColor: "rgba(238,233,230,255)",
           width: "100%",
         }}
@@ -64,15 +66,17 @@ export default function IndexComponent() {
             sx={{
               textDecoration: "none",
               transition: "color 0.3s",
+              // background: "rgba(44, 40, 38, 255)",
               background:
                 "linear-gradient(to bottom, rgba(250,220,197,255), rgba(235,190,180,255))",
               paddingY: 1,
               paddingX: 2,
               marginTop: 1,
               borderRadius: 2,
+              // color: "#F7F7F7",
               color: "rgb(37,31,37)",
               fontFamily: "Roboto",
-              fontWeight: "lighter",
+              fontWeight: "semibold",
               fontSize: { xs: 20, md: 22, xl: 40 },
               lineHeight: 1.5,
               "&:hover": {
