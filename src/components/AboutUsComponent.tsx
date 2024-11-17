@@ -1,6 +1,8 @@
 import { Box, Link, Typography } from "@mui/material";
+import { isMobile } from "./CompanyForm";
 import { Rubrik } from "./Footer";
 import WhoAreWe from "./WhoAreWe";
+import WhoAreWePhone from "./WhoAreWePhone";
 
 export default function IndexComponent() {
   return (
@@ -14,12 +16,16 @@ export default function IndexComponent() {
     >
       <Box
         sx={{
-          flexDirection: { xs: "column", md: "row" },
+          flexDirection: "column",
           display: "flex",
           padding: { xs: 1.5, sm: 2, md: 0, lg: 2, xl: 4 },
           height: "100%",
+          // backgroundImage: `url(https://i.imgur.com/9sO10K9.png)`, // Lägg till en ljus övertoning
+          // backgroundSize: "cover", // Gör att bilden täcker hela området
+          // backgroundPosition: "center left", // Flytta fokus mot botten
+          // backgroundRepeat: "no-repeat", // Förhindra att bilden upprepas
+          // justifyContent: "flex-start",
           backgroundColor: "rgba(238,233,230,255)",
-          justifyContent: "flex-start",
           width: "100%",
         }}
       >
@@ -27,8 +33,9 @@ export default function IndexComponent() {
           sx={{
             marginBottom: { xs: 30, md: 20 },
             marginLeft: { xs: 0, md: 5, xl: 20 },
-            marginTop: { md: 10, xl: 25 },
+            marginTop: { xs: 5, md: 10, xl: 20 },
             width: "100%",
+            height: "100%",
           }}
         >
           <Rubrik
@@ -45,7 +52,7 @@ export default function IndexComponent() {
               fontWeight: "lighter",
             }}
           >
-            Vi är två fullstackutvecklare
+            Vi är två utvecklare som kompletterar varandra
           </Typography>
           <Link
             sx={{
@@ -60,7 +67,7 @@ export default function IndexComponent() {
               color: "rgb(37,31,37)",
               fontFamily: "Roboto",
               fontWeight: "lighter",
-              fontSize: { xs: 18, md: 22, xl: 40 },
+              fontSize: { xs: 20, md: 22, xl: 40 },
               lineHeight: 1.5,
               "&:hover": {
                 color: "rgb(67, 61, 67)",
@@ -68,10 +75,10 @@ export default function IndexComponent() {
             }}
             href="/contact"
           >
-            Kontakta oss direkt
+            Kontakta oss
           </Link>
 
-          <WhoAreWe />
+          {!isMobile ? <WhoAreWe /> : <WhoAreWePhone />}
         </Box>
       </Box>
     </Box>
