@@ -12,7 +12,6 @@ import {
   ListItem,
   Slide,
   Typography,
-  useTheme,
 } from "@mui/material";
 import { useState } from "react";
 import { FormattedMessage } from "react-intl";
@@ -20,7 +19,7 @@ import { useScreenSize } from "../contexts/screenSizeContext";
 import SvgSmallImage from "./SvgSmallZeroett";
 
 export default function CustomHeader2(): JSX.Element {
-  const theme = useTheme();
+  // const theme = useTheme();
   const { isMobile } = useScreenSize();
   const [openDrawer, setOpenDrawer] = useState(false);
 
@@ -109,7 +108,7 @@ export default function CustomHeader2(): JSX.Element {
           sx={{
             "& .MuiDrawer-paper": {
               width: 220,
-              backgroundColor: theme.palette.background.paper,
+              backgroundColor: "rgba(34,32,37,255)",
             },
           }}
         >
@@ -118,8 +117,9 @@ export default function CustomHeader2(): JSX.Element {
               paddingLeft: 1,
               display: "flex",
               flexDirection: "column",
-              backgroundColor: "#F7F7F7",
+              backgroundColor: "rgba(34,32,37,255)",
               height: "100%",
+              paddingTop: 2,
             }}
           >
             {links.map((link, index) => (
@@ -136,9 +136,7 @@ export default function CustomHeader2(): JSX.Element {
                     flexDirection: "column",
                     alignItems: "flex-start",
                     transition: "background-color 0.3s ease",
-                    "&:hover": {
-                      backgroundColor: "#f3f3f3",
-                    },
+
                     marginBottom: 2,
                   }}
                 >
@@ -148,23 +146,24 @@ export default function CustomHeader2(): JSX.Element {
                       textDecoration: "none",
                       display: "flex",
                       paddingTop: 3,
+                      color: "#F7F7F7",
                       alignItems: "center",
                     }}
                     onClick={handleCloseMenu}
                   >
-                    <IconButton
+                    {/* <IconButton
                       sx={{
-                        color: "rgb(37,31,37)",
+                        color: "#F7F7F7",
                         borderRadius: "50%",
                       }}
                     >
                       {link.icon}
-                    </IconButton>
+                    </IconButton> */}
 
                     <Typography
                       sx={{
-                        color: "rgb(37,31,37)",
-                        fontSize: 20,
+                        color: "#F7F7F7",
+                        fontSize: 22,
                         letterSpacing: 2,
                         fontWeight: "300",
                         marginLeft: 2,
@@ -177,6 +176,21 @@ export default function CustomHeader2(): JSX.Element {
               </Slide>
             ))}
           </List>
+          <Box
+            sx={{
+              position: "absolute",
+              left: 10,
+              bottom: -50,
+              transform: "rotate(20deg)", // Vrider elementet 45 grader medsols
+              transformOrigin: "center", // Justerar varifrån rotationen sker (kan ändras till "left", "top", etc.)
+            }}
+          >
+            <img
+              src="https://i.imgur.com/n6vt6Q8.png"
+              alt="Pink decoration"
+              height={isMobile ? 250 : "200px"}
+            />
+          </Box>
         </Drawer>
       </Box>
       {/* <LetsTalkPhone /> */}

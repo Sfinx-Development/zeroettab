@@ -266,7 +266,7 @@ export default function ParallaxContact() {
                   style: {
                     background:
                       "linear-gradient(to right, #D08B7C, #E6A08E, #F1B8A9)",
-                    borderRadius: "50px",
+                    borderRadius: "30px",
                     paddingLeft: "15px",
                     color: "rgb(37,31,37)",
                   },

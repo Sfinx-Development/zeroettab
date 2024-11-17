@@ -38,7 +38,7 @@ export default function WhoAreWe() {
             sx={{ color: "rgb(216,163,153)", fontSize: { xs: 20, xl: 40 } }}
           />
           <Link
-            href="/aboutus"
+            href="/about"
             style={{ textDecoration: "none", color: "rgb(37,31,37)" }}
           >
             <Typography
