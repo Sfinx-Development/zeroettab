@@ -23,7 +23,7 @@ export default function WhoAreWePhone() {
         width: "100%",
         minHeight: "100%",
         flexDirection: "column",
-        marginBottom: -12,
+        marginBottom: -13,
       }}
     >
       <Box
@@ -35,6 +35,7 @@ export default function WhoAreWePhone() {
           width: "auto", // Behåll proportionerna
           display: "block", // Gör att bilden centreras enklare
           margin: "0 auto",
+          // marginLeft: 6,
         }}
       />
       <ExpandMoreIcon
