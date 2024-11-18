@@ -2,10 +2,10 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Box, IconButton, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import BackendBubbleSvg from "./BackendBubbleSvg";
+// import BackendBubbleSvg from "./BackendBubbleSvg";
 import { Rubrik } from "./Footer";
-import FrontendBubbleSvg from "./FrontendBubbleSvg";
-import FullstackBubbleSvg from "./FullstackBubbleSvg";
+// import FrontendBubbleSvg from "./FrontendBubbleSvg";
+// import FullstackBubbleSvg from "./FullstackBubbleSvg";
 
 const animationVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -27,7 +27,7 @@ export default function BubblaComponent() {
         marginLeft: { xs: 0, md: 10, lg: 20, xl: 20 },
       }}
     >
-      {/* Frontend Bubbla */}
+      {/* Web App TextInfo */}
       <motion.div
         variants={animationVariants}
         initial="hidden"
@@ -56,7 +56,6 @@ export default function BubblaComponent() {
             flexDirection: "column",
           }}
         >
-          <FrontendBubbleSvg />
           <Rubrik
             variant="h4"
             sx={{
@@ -67,7 +66,7 @@ export default function BubblaComponent() {
               fontWeight: 600,
             }}
           >
-            Frontend
+            Web Applications
           </Rubrik>
           <Typography
             sx={{
@@ -101,7 +100,7 @@ export default function BubblaComponent() {
         </Box>
       </motion.div>
 
-      {/* Backend Bubbla */}
+      {/* Mobile App TextInfo */}
       <motion.div
         variants={animationVariants}
         initial="hidden"
@@ -130,7 +129,6 @@ export default function BubblaComponent() {
             marginRight: { xl: -5 },
           }}
         >
-          <BackendBubbleSvg />
           <Rubrik
             variant="h4"
             sx={{
@@ -141,7 +139,7 @@ export default function BubblaComponent() {
               fontWeight: 600,
             }}
           >
-            Backend
+            Mobile Applications
           </Rubrik>
           <Typography
             sx={{
@@ -150,9 +148,8 @@ export default function BubblaComponent() {
               fontSize: { xs: 12, md: 14, xl: 15 },
             }}
           >
-            Vi utvecklar backend-lösningar, system och API:er. Från att skapa
-            funktioner i ett befintligt projekt till att utveckla ett nytt
-            system.
+            Vi designar och utvecklar användarvänliga och funktionella
+            mobilapplikationer som passar dina behov.
           </Typography>
           <Box
             sx={{
@@ -164,7 +161,7 @@ export default function BubblaComponent() {
             <IconButton
               sx={{ display: "flex", width: "100%", justifyContent: "end" }}
               onClick={() => {
-                navigation("/offers#backend");
+                navigation("/offers#mobile");
               }}
             >
               <Rubrik sx={{ color: "rgb(37,31,37)", fontSize: 12 }}>
@@ -176,7 +173,7 @@ export default function BubblaComponent() {
         </Box>
       </motion.div>
 
-      {/* Fullstack Bubbla */}
+      {/* Backend Solutions TextInfo */}
       <motion.div
         variants={animationVariants}
         initial="hidden"
@@ -205,17 +202,16 @@ export default function BubblaComponent() {
             textAlign: "center",
           }}
         >
-          <FullstackBubbleSvg />
           <Rubrik
             sx={{
-              color: "rgba(34,32,37,255)",
+              color: "rgb(216,163,153)",
               marginBottom: 1,
               fontSize: { xs: 18, md: 22 },
               fontWeight: 600,
               marginTop: { xs: 6, md: 10, xl: 1 },
             }}
           >
-            Fullstack
+            Backend Solutions
           </Rubrik>
           <Typography
             sx={{
@@ -224,8 +220,8 @@ export default function BubblaComponent() {
               fontSize: { xs: 12, md: 14 },
             }}
           >
-            Vi bygger användargränssnitt utifrån dina personliga önskemål,
-            samtidigt som vi säkerställer användarvänligheten.
+            Vi utvecklar robusta backend-lösningar och API:er för att optimera
+            din webbplats eller applikations prestanda.
           </Typography>
           <Box
             sx={{
@@ -237,7 +233,7 @@ export default function BubblaComponent() {
             <IconButton
               sx={{ display: "flex", width: "100%", justifyContent: "end" }}
               onClick={() => {
-                navigation("/offers#fullstack");
+                navigation("/offers#backend");
               }}
             >
               <Rubrik sx={{ color: "rgb(37,31,37)", fontSize: 12 }}>
