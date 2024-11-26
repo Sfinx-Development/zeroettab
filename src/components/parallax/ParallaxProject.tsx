@@ -18,8 +18,9 @@ export default function ParallaxProject() {
     },
     {
       title: "Yaya Media",
+      url: "https://yayamedia.se",
       image: "https://i.imgur.com/y0i4it9.png",
-      status: "Pågående",
+      status: "Klar",
       backgroundColor: "rgba(254,232,209,255)",
       type: "Hemsida",
     },
