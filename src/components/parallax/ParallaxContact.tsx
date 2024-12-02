@@ -3,6 +3,8 @@ import {
   Alert,
   AlertColor,
   Box,
+  Checkbox,
+  FormControlLabel,
   IconButton,
   Snackbar,
   TextField,
@@ -23,8 +25,13 @@ export default function ParallaxContact() {
   const [localMail, setLocalMail] = useState("");
   const [localPhone, setLocalPhone] = useState("");
   const [localDesc, setLocalDesc] = useState("");
+  const [privacyPolicyChecked, setPrivacyPolicyChecked] = useState(false);
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
+  };
+
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPrivacyPolicyChecked(event.target.checked);
   };
 
   const sendEmailWithLink = () => {
@@ -295,20 +302,68 @@ export default function ParallaxContact() {
                   setLocalDesc(e.target.value);
                 }}
               />
+              <FormControlLabel
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  width: "110%",
+                  gap: 1,
+                }}
+                control={
+                  <Checkbox
+                    required
+                    sx={{
+                      color: "#F7F7F7",
+                      "&.Mui-checked": {
+                        color: "#F7F7F7",
+                      },
+                    }}
+                    checked={privacyPolicyChecked}
+                    onChange={handleCheckboxChange}
+                  />
+                }
+                label={
+                  <Typography sx={{ color: "#F7F7F7" }}>
+                    Jag samtycker till att Zeroett AB behandlar mina
+                    personuppgifter i enlighet med vår{" "}
+                    <a
+                      href="/privacy-policy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: "#E6A08E" }}
+                    >
+                      integritetspolicy
+                    </a>
+                    .
+                  </Typography>
+                }
+              />
               <Box sx={{ display: "flex", justifyContent: "end" }}>
                 <IconButton
                   sx={{ display: "flex" }}
+                  disabled={!privacyPolicyChecked}
                   onClick={() => {
                     sendEmailWithLink();
                   }}
                 >
                   <Rubrik
-                    sx={{ color: "#F7F7F7", fontSize: { xs: 25, xl: 35 } }}
+                    sx={{
+                      color: !privacyPolicyChecked
+                        ? "rgba(255,255,255,0.5)"
+                        : "#F7F7F7",
+                      fontSize: { xs: 25, xl: 35 },
+                    }}
                   >
                     Skicka
                   </Rubrik>
                   <ArrowForwardIcon
-                    sx={{ color: "#F7F7F7", fontSize: { xs: 25, xl: 35 } }}
+                    sx={{
+                      color: !privacyPolicyChecked
+                        ? "rgba(255,255,255,0.5)"
+                        : "#F7F7F7",
+                      fontSize: { xs: 25, xl: 35 },
+                    }}
                   />
                 </IconButton>
                 <Snackbar
