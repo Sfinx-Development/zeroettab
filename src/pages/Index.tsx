@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import { useAnimation } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import CookieBanner from "../components/CookieBanner";
 import IndexComponent from "../components/IndexComponent";
 import ParallaxIndex from "../components/parallax/ParallaxIndex";
 
@@ -50,6 +51,7 @@ export default function Index() {
         minHeight: "100vh",
       }}
     >
+      <CookieBanner/>
       <IndexComponent />
       <ParallaxIndex />
     </Box>
