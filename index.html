@@ -33,5 +33,26 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Kontrollera om användaren har accepterat cookies
+      const hasConsent = localStorage.getItem("cookieConsent");
+
+      if (hasConsent === "true") {
+        // Dynamiskt ladda Google Analytics script
+        const script = document.createElement("script");
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-BZZJ5P2TDK";
+        script.async = true;
+        document.head.appendChild(script);
+
+        script.onload = () => {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag("js", new Date());
+          gtag("config", "G-BZZJ5P2TDK");
+        };
+      }
+    </script>
   </body>
 </html>
