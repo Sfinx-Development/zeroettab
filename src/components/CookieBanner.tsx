@@ -14,7 +14,12 @@ const CookieBanner = () => {
   const handleAccept = () => {
     localStorage.setItem("cookieConsent", "true");
     setShowBanner(false);
-    window.location.reload(); // Ladda om sidan för att aktivera Google Analytics
+    window.location.reload();
+  };
+
+  const handleDecline = () => {
+    localStorage.setItem("cookieConsent", "false");
+    setShowBanner(false);
   };
 
   if (!showBanner) return null;
@@ -36,17 +41,44 @@ const CookieBanner = () => {
         alignItems: "center",
       }}
     >
-      <Typography
-        variant="body1"
+       <Typography
+        variant="body2"
         sx={{
-          marginBottom: { xs: "8px", md: 0 },
-          marginX: 2,
-
-          color: "white",
+          fontSize: { xs: "0.85rem", md: "1rem" },
+          lineHeight: "1.6",
+          maxWidth: { xs: "95%", md: "70%" },
+          marginBottom: { xs: "0.5rem", md: "0" },
         }}
       >
-        Genom att acceptera godkänner du att vi använder Cookies för att
-        analysera trafik via Google Analytics.
+        Vi använder cookies för att förbättra din upplevelse på vår hemsida.
+        Detta inkluderar analys av trafik via Google Analytics. Genom att klicka
+        på
+        <Typography
+          component="span"
+          sx={{
+            fontWeight: "bold",
+            color: "#F3D9DF",
+            marginLeft: "4px",
+          }}
+        >
+          "Acceptera"
+        </Typography>
+        , ger du oss tillåtelse att använda cookies.{" "}
+        <Link
+          href="https://cookieinformation.com/sv/vad-ar-en-cookie/"
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={{
+            color: "rgba(250,220,197,255)",
+            textDecoration: "underline",
+            "&:hover": {
+              textDecoration: "none",
+            },
+          }}
+        >
+          Läs mer här
+        </Link>
+        .
       </Typography>
       <Box sx={{ display: "flex", marginX: 2 }}>
         <Button
@@ -74,9 +106,8 @@ const CookieBanner = () => {
           Acceptera
         </Button>
         <Button
+          onClick={handleDecline}
           variant="outlined"
-          component={Link}
-          href="https://cookieinformation.com/sv/vad-ar-en-cookie/"
           sx={{
             marginLeft: "8px",
             color: "rgba(250,220,197,255)", // Rosa färg som matchar gradienten
@@ -97,8 +128,9 @@ const CookieBanner = () => {
             },
           }}
         >
-          Läs mer
+          Avvisa
         </Button>
+      
       </Box>
     </Box>
   );
