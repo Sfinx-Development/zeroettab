@@ -57,7 +57,7 @@ const CookieBanner = () => {
           component="span"
           sx={{
             fontWeight: "bold",
-            color: "#F3D9DF",
+            color: "rgba(250,220,197,255)",
             marginLeft: "4px",
           }}
         >
