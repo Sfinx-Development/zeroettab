@@ -47,7 +47,7 @@ export default function IndexComponent() {
               // color: "#",
             }}
           >
-            
+            Vi gillar kod.
           </Rubrik>
           <Typography
             sx={{
