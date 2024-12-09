@@ -25,6 +25,7 @@ export default function ParallaxContact() {
   const [localMail, setLocalMail] = useState("");
   const [localPhone, setLocalPhone] = useState("");
   const [localDesc, setLocalDesc] = useState("");
+  const [emailUnvalid, setEmailUnvalid] = useState(false);
   const [privacyPolicyChecked, setPrivacyPolicyChecked] = useState(false);
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
@@ -35,35 +36,44 @@ export default function ParallaxContact() {
   };
 
   const sendEmailWithLink = () => {
-    const customerName = `Kundens namn : ${localName}`;
-    const customerEmail = `Kundens email : ${localMail}`;
-    const customerPhone = `Kundens telefon : ${localPhone}`;
-    const customerExtra = `Beskrivning: ${localDesc}`;
+    const emailIsValid = localMail.includes("@") && localMail.includes(".");
+    if (emailIsValid) {
+      const customerName = `Kundens namn : ${localName}`;
+      const customerEmail = `Kundens email : ${localMail}`;
+      const customerPhone = `Kundens telefon : ${localPhone}`;
+      const customerExtra = `Beskrivning: ${localDesc}`;
 
-    const body = `${customerName}\n${customerEmail}\n${customerPhone}\n${customerExtra}`;
+      const body = `${customerName}\n${customerEmail}\n${customerPhone}\n${customerExtra}`;
 
-    const templateParams = {
-      to_name: "Zeroett",
-      from_name: localName,
-      message: `Meddelande: ${body}`,
-    };
+      const templateParams = {
+        to_name: "Zeroett",
+        from_name: localName,
+        message: `Meddelande: ${body}`,
+      };
 
-    emailjs
-      .send("service_f1l2auv", "template_2f6lq5o", templateParams)
-      .then((response) => {
-        console.log("Email sent successfully:", response.status, response.text);
-        setSnackbarSeverity("success");
-        setSnackbarMessage("Förfrågan skickad!");
-        setOpenSnackbar(true);
-      })
-      .catch((err) => {
-        console.error("Error sending email:", err);
-        setSnackbarSeverity("error");
-        setSnackbarMessage(
-          "Något gick fel när förfrågan skickades. Försök igen."
-        );
-        setOpenSnackbar(true);
-      });
+      emailjs
+        .send("service_f1l2auv", "template_2f6lq5o", templateParams)
+        .then((response) => {
+          console.log(
+            "Email sent successfully:",
+            response.status,
+            response.text
+          );
+          setSnackbarSeverity("success");
+          setSnackbarMessage("Förfrågan skickad!");
+          setOpenSnackbar(true);
+        })
+        .catch((err) => {
+          console.error("Error sending email:", err);
+          setSnackbarSeverity("error");
+          setSnackbarMessage(
+            "Något gick fel när förfrågan skickades. Försök igen."
+          );
+          setOpenSnackbar(true);
+        });
+    } else {
+      setEmailUnvalid(true);
+    }
   };
 
   return (
@@ -198,6 +208,8 @@ export default function ParallaxContact() {
                 variant="outlined"
                 placeholder="Mejladress"
                 fullWidth
+                error={emailUnvalid}
+                helperText={emailUnvalid ? "Ange en giltig e-postadress" : ""}
                 value={localMail}
                 onChange={(e) => {
                   setLocalMail(e.target.value);
