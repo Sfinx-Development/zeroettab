@@ -24,7 +24,7 @@ export default function BubblaComponent() {
         flexDirection: "column",
         marginTop: -10,
         height: "100%",
-        marginLeft: { xs: 0, md: 10, lg: 20, xl: 20 },
+        // marginLeft: { xs: 0, md: 10, lg: 20, xl: 20 },
       }}
     >
       {/* Web App TextInfo */}

@@ -13,13 +13,14 @@ export default function ParallaxIndex() {
         flexDirection: "column",
         alignItems: "center",
         overflow: "hidden",
-        background: "linear-gradient(to bottom, #1a1a1d, #4e4e50)",
+        // background: "linear-gradient(to bottom, #1a1a1d, #4e4e50)",
       }}
     >
       <Box
         sx={{
           minHeight: "100vh",
-          backgroundColor: "rgba(34,32,37,0.95)",
+          backgroundColor: "pink",
+          // backgroundColor: "rgba(34,32,37,0.95)",
           zIndex: 2,
           width: "100%",
           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
@@ -32,7 +33,8 @@ export default function ParallaxIndex() {
             paddingTop: { xs: 10, xl: 15 },
             paddingBottom: { xs: 2, xl: 4 },
             marginX: "auto",
-            backgroundColor: "rgba(255, 255, 255, 0.08)",
+            backgroundColor: "red",
+            // backgroundColor: "rgba(255, 255, 255, 0.08)",
             backdropFilter: "blur(8px)",
             borderRadius: 4,
             boxShadow: "0px 4px 20px rgba(0,0,0,0.2)",
@@ -45,6 +47,7 @@ export default function ParallaxIndex() {
               fontSize: { xs: 26, md: 34, xl: 42 },
               fontWeight: 700,
               letterSpacing: "0.5px",
+              backgroundColor: "lightblue",
               mb: 2,
               textAlign: "center",
             }}
@@ -76,7 +79,8 @@ export default function ParallaxIndex() {
             marginX: "auto",
             paddingTop: { xs: 2, xl: 4 },
             paddingBottom: { xs: 2, xl: 4 },
-            backgroundColor: "rgba(255, 255, 255, 0.08)",
+            backgroundColor: "green",
+            // backgroundColor: "rgba(255, 255, 255, 0.08)",
             backdropFilter: "blur(8px)",
             borderRadius: 4,
             boxShadow: "0px 4px 20px rgba(0,0,0,0.2)",

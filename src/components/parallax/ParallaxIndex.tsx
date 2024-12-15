@@ -30,12 +30,12 @@ export default function ParallaxIndex() {
         {/* Vänster sektion */}
         <Box
           sx={{
-            width: { xs: "90%", md: "45%", xl: "55%" }, // Dynamisk bredd för vänster sektion
+            width: { xs: "90%", md: "70%", xl: "55%" }, // Dynamisk bredd för vänster sektion
             marginBottom: { xs: 4, md: 0 },
             padding: { xs: 3, md: 5 },
             alignSelf: "flex-start",
-            marginTop: { xs: 10, md: 20, xl: 25 },
-            marginLeft: { xs: 0, md: 4, xl: 6 },
+            // marginTop: { xs: 10, md: 20, xl: 25 },
+            // marginLeft: { xs: 0, md: 4, xl: 6 },
           }}
         >
           <Rubrik
@@ -69,7 +69,7 @@ export default function ParallaxIndex() {
         {/* Höger sektion */}
         <Box
           sx={{
-            width: { xs: "90%", md: "50%", xl: "55%" }, // Dynamisk bredd för höger sektion
+            width: { xs: "90%", md: "70%", xl: "55%" }, // Dynamisk bredd för höger sektion
             padding: { xs: 3, md: 5 },
             display: "flex",
             flexDirection: "column",
@@ -77,7 +77,7 @@ export default function ParallaxIndex() {
             alignSelf: "flex-end",
             textAlign: { xs: "left", md: "right" },
             marginBottom: { xs: 10, md: 20, xl: 25 },
-            marginRight: { xs: 0, md: 4, xl: 6 },
+            // marginRight: { xs: 0, md: 4, xl: 6 },
           }}
         >
           <Rubrik
