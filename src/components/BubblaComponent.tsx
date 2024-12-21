@@ -2,10 +2,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Box, IconButton, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-// import BackendBubbleSvg from "./BackendBubbleSvg";
 import { Rubrik } from "./Footer";
-// import FrontendBubbleSvg from "./FrontendBubbleSvg";
-// import FullstackBubbleSvg from "./FullstackBubbleSvg";
 
 const animationVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -14,236 +11,108 @@ const animationVariants = {
 
 export default function BubblaComponent() {
   const navigation = useNavigate();
+
+  const sections = [
+    {
+      title: "Webbapplikationer",
+      description:
+        "Vi designar och bygger gränssnitt utifrån dina personliga önskemål samtidigt som vi säkerställer användarvänligheten.",
+      color: "rgb(216,163,153)",
+      link: "/offers#frontend",
+      delay: 0.1,
+    },
+    {
+      title: "Mobilapplikationer",
+      description:
+        "Vi designar och utvecklar användarvänliga och funktionella mobilapplikationer som passar dina behov.",
+      color: "#DBA569",
+      link: "/offers#mobile",
+      delay: 0.2,
+    },
+    {
+      title: "Backendlösningar",
+      description:
+        "Vi utvecklar robusta backend-lösningar och API:er för att optimera din webbplats eller applikations prestanda.",
+      color: "rgb(216,163,153)",
+      link: "/offers#backend",
+      delay: 0.3,
+    },
+  ];
+
   return (
     <Box
       sx={{
         width: "100%",
+        minHeight: "100%",
         display: "flex",
-        alignItems: "end",
+        alignItems: "center",
         justifyContent: "center",
-        flexDirection: "column",
-        marginTop: -10,
-        height: "100%",
-        // marginLeft: { xs: 0, md: 10, lg: 20, xl: 20 },
+        flexDirection: { xs: "column", md: "row" },
+        gap: 3,
+        // background: "linear-gradient(120deg, #f3e8e2, #f9f4ef)",
+        paddingY: 5,
       }}
     >
-      {/* Web App TextInfo */}
-      <motion.div
-        variants={animationVariants}
-        initial="hidden"
-        whileInView="visible"
-        transition={{ duration: 0.5, delay: 0.1 }}
-        viewport={{ once: true, amount: 0.3 }}
-      >
-        <Box
-          sx={{
-            position: "relative",
-            width: { xs: "90%", sm: "70%", md: "55%", lg: "80%", xl: "60%" }, // Responsiv bredd
-            height: {
-              xs: "200px",
-              md: "200px",
-              sm: "280px",
-              lg: "200px",
-              xl: "250px",
-            }, // Responsiv höjd
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: { xs: 1, md: 2 }, // Anpassad padding
-            marginBottom: { xs: -2, md: -5, lg: -2, xl: -10 }, // Negativ margin för överlapp
-            textAlign: "center",
-            marginTop: { xs: 2 },
-            flexDirection: "column",
-          }}
+      {sections.map((section, index) => (
+        <motion.div
+          key={index}
+          variants={animationVariants}
+          initial="hidden"
+          whileInView="visible"
+          transition={{ duration: 0.7, delay: section.delay }}
+          viewport={{ once: true, amount: 0.3 }}
         >
-          <Rubrik
-            variant="h4"
-            sx={{
-              color: "rgb(216,163,153)",
-              marginBottom: 1,
-              marginTop: { xs: 5, md: 10, xl: 10 },
-              fontSize: { xs: 18, md: 18, sm: 22, lg: 22, xl: 25 },
-              fontWeight: 600,
-            }}
-          >
-            Web Applications
-          </Rubrik>
-          <Typography
-            sx={{
-              color: "#5B5B5B",
-              maxWidth: "60%",
-              fontSize: { xs: 12, md: 14, xl: 15 },
-            }}
-          >
-            Vi designar och bygger gränssnitt utifrån dina personliga önskemål
-            samtidigt som vi säkerställer användarvänligheten.
-          </Typography>
           <Box
             sx={{
-              width: "60%",
-              justifyContent: "end",
-              paddingRight: 4,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: 3,
+              borderRadius: "50%",
+              width: { xs: 220, md: 220 },
+              height: { xs: 220, md: 220 },
+              backgroundColor: section.color,
+              boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.2)",
+              textAlign: "center",
             }}
           >
-            <IconButton
-              sx={{ display: "flex", width: "100%", justifyContent: "end" }}
-              onClick={() => {
-                navigation("/offers#frontend");
+            <Rubrik
+              variant="h5"
+              sx={{
+                color: "#fff",
+                fontWeight: 700,
+                fontSize: { xs: 18, md: 18 },
+                marginBottom: 1,
               }}
             >
-              <Rubrik sx={{ color: "rgb(37,31,37)", fontSize: 12 }}>
-                Läs mer
-              </Rubrik>
-              <ArrowForwardIcon sx={{ color: "rgb(37,31,37)", fontSize: 20 }} />
-            </IconButton>
-          </Box>
-        </Box>
-      </motion.div>
-
-      {/* Mobile App TextInfo */}
-      <motion.div
-        variants={animationVariants}
-        initial="hidden"
-        whileInView="visible"
-        transition={{ duration: 0.5, delay: 0.2 }}
-        viewport={{ once: true, amount: 0.3 }}
-      >
-        <Box
-          sx={{
-            position: "relative",
-            width: { xs: "90%", sm: "60%", md: "50%", lg: "80%", xl: "55%" },
-            height: {
-              xs: "250px",
-              md: "250px",
-              sm: "280px",
-              lg: "200px",
-              xl: "300px",
-            }, // Responsiv höjd
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: { xs: 1, md: 2 },
-            marginBottom: { xs: -2, md: 6, xl: -2 }, // Negativ margin för överlapp
-            textAlign: "center",
-            marginRight: { xl: -5 },
-          }}
-        >
-          <Rubrik
-            variant="h4"
-            sx={{
-              color: "#DBA569",
-              marginTop: { xs: -1, md: 8, xl: 2 },
-              marginBottom: 1,
-              fontSize: { xs: 18, md: 22, xl: 25 },
-              fontWeight: 600,
-            }}
-          >
-            Mobile Applications
-          </Rubrik>
-          <Typography
-            sx={{
-              color: "#5B5B5B",
-              maxWidth: "60%",
-              fontSize: { xs: 12, md: 14, xl: 15 },
-            }}
-          >
-            Vi designar och utvecklar användarvänliga och funktionella
-            mobilapplikationer som passar dina behov.
-          </Typography>
-          <Box
-            sx={{
-              width: "60%",
-              justifyContent: "end",
-              paddingRight: 4,
-            }}
-          >
-            <IconButton
-              sx={{ display: "flex", width: "100%", justifyContent: "end" }}
-              onClick={() => {
-                navigation("/offers#mobile");
+              {section.title}
+            </Rubrik>
+            <Typography
+              sx={{
+                color: "#fff",
+                fontSize: { xs: 14, md: 14 },
+                textAlign: "center",
               }}
             >
-              <Rubrik sx={{ color: "rgb(37,31,37)", fontSize: 12 }}>
-                Läs mer
-              </Rubrik>
-              <ArrowForwardIcon sx={{ color: "rgb(37,31,37)", fontSize: 20 }} />
-            </IconButton>
-          </Box>
-        </Box>
-      </motion.div>
-
-      {/* Backend Solutions TextInfo */}
-      <motion.div
-        variants={animationVariants}
-        initial="hidden"
-        whileInView="visible"
-        transition={{ duration: 0.5, delay: 0.3 }}
-        viewport={{ once: true, amount: 0.3 }}
-      >
-        <Box
-          sx={{
-            position: "relative",
-            width: { xs: "90%", sm: "70%", md: "55%", lg: "80%", xl: "60%" },
-            height: {
-              xs: "200px",
-              md: "200px",
-              sm: "280px",
-              lg: "200px",
-              xl: "300px",
-            }, // Responsiv höjd
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-            padding: { xs: 1, md: 2 },
-            marginTop: { xs: -6, md: -10 },
-            marginBottom: { xs: 2, md: 0 }, // Negativ margin för överlapp
-            textAlign: "center",
-          }}
-        >
-          <Rubrik
-            sx={{
-              color: "rgb(216,163,153)",
-              marginBottom: 1,
-              fontSize: { xs: 18, md: 22 },
-              fontWeight: 600,
-              marginTop: { xs: 6, md: 10, xl: 1 },
-            }}
-          >
-            Backend Solutions
-          </Rubrik>
-          <Typography
-            sx={{
-              color: "#5B5B5B",
-              maxWidth: "60%",
-              fontSize: { xs: 12, md: 14 },
-            }}
-          >
-            Vi utvecklar robusta backend-lösningar och API:er för att optimera
-            din webbplats eller applikations prestanda.
-          </Typography>
-          <Box
-            sx={{
-              width: "60%",
-              justifyContent: "end",
-              paddingRight: 4,
-            }}
-          >
+              {section.description}
+            </Typography>
             <IconButton
-              sx={{ display: "flex", width: "100%", justifyContent: "end" }}
-              onClick={() => {
-                navigation("/offers#backend");
+              sx={{
+                marginTop: 2,
+                backgroundColor: "#fff",
+                color: section.color,
+                boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.2)",
+                display: "flex",
+                alignItems: "center",
               }}
+              onClick={() => navigation(section.link)}
             >
-              <Rubrik sx={{ color: "rgb(37,31,37)", fontSize: 12 }}>
-                Läs mer
-              </Rubrik>
-              <ArrowForwardIcon sx={{ color: "rgb(37,31,37)", fontSize: 20 }} />
+              <ArrowForwardIcon />
             </IconButton>
           </Box>
-        </Box>
-      </motion.div>
+        </motion.div>
+      ))}
     </Box>
   );
 }
