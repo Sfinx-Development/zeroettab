@@ -26,7 +26,7 @@ export default function BubblaComponent() {
       description:
         "Vi designar och utvecklar användarvänliga och funktionella mobilapplikationer som passar dina behov.",
       color: "#DBA569",
-      link: "/offers#mobile",
+      link: "/offers#mobileapp",
       delay: 0.2,
     },
     {
