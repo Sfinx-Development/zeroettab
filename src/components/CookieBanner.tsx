@@ -39,15 +39,17 @@ const CookieBanner = () => {
 
         flexDirection: { xs: "column", md: "row" },
         alignItems: "center",
+        justifyContent: "center",
       }}
     >
-       <Typography
+      <Typography
         variant="body2"
         sx={{
-          fontSize: { xs: "0.85rem", md: "1rem" },
+          fontSize: { xs: "0.85rem", md: "1rem", xl: "1.2rem" },
           lineHeight: "1.6",
           maxWidth: { xs: "95%", md: "70%" },
           marginBottom: { xs: "0.5rem", md: "0" },
+          // paddingLeft: 2,
         }}
       >
         Vi använder cookies för att förbättra din upplevelse på vår hemsida.
@@ -95,7 +97,8 @@ const CookieBanner = () => {
             color: "rgb(37,31,37)",
             fontFamily: "Roboto",
             fontWeight: "semibold",
-            fontSize: { xs: 16, md: 18, xl: 40 },
+            textTransform: "none",
+            fontSize: { xs: 16, md: 18, xl: 22 },
             lineHeight: 1.5,
             "&:hover": {
               color: "rgb(67, 61, 67)",
@@ -118,7 +121,7 @@ const CookieBanner = () => {
             borderRadius: 2,
             fontFamily: "Roboto",
             fontWeight: "semibold",
-            fontSize: { xs: 16, md: 18, xl: 40 }, // Samma textstorlek
+            fontSize: { xs: 16, md: 18, xl: 22 },
             lineHeight: 1.5,
             textTransform: "none",
             "&:hover": {
@@ -130,7 +133,6 @@ const CookieBanner = () => {
         >
           Avvisa
         </Button>
-      
       </Box>
     </Box>
   );
