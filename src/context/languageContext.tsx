@@ -29,7 +29,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const browserLanguage = navigator.language.split("-")[0];
     if (!localStorage.getItem("language")) {
-      setLanguage(browserLanguage === "sv" ? "sv" : "en");
+      setLanguage(browserLanguage === "en" ? "en" : "sv");
     }
   }, []);
 
