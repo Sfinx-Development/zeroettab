@@ -16,12 +16,18 @@ export default function IndexComponent() {
     >
       <Box
         sx={{
-          flexDirection: { xs: "column", md: "row" },
+          flexDirection: "column",
           display: "flex",
           padding: { xs: 1.5, sm: 2, md: 0, lg: 2, xl: 4 },
           height: "100%",
+          // backgroundImage: `url(https://i.imgur.com/9sO10K9.png)`, // Lägg till en ljus övertoning
+          // backgroundSize: "cover", // Gör att bilden täcker hela området
+          // backgroundPosition: "center left", // Flytta fokus mot botten
+          // backgroundRepeat: "no-repeat", // Förhindra att bilden upprepas
+          // justifyContent: "flex-start",
+          // background:
+          //   "linear-gradient(to bottom,rgba(240,231,226,1), rgba(229,186,179,1)))",
           backgroundColor: "rgba(238,233,230,255)",
-          justifyContent: "flex-start",
           width: "100%",
         }}
       >

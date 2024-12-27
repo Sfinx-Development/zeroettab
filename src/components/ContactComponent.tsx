@@ -16,12 +16,18 @@ export default function ContactComponent() {
     >
       <Box
         sx={{
-          flexDirection: { xs: "column", md: "row" },
+          flexDirection: "column",
           display: "flex",
           padding: { xs: 1.5, sm: 2, md: 0, lg: 2, xl: 4 },
           height: "100%",
+          // backgroundImage: `url(https://i.imgur.com/9sO10K9.png)`, // Lägg till en ljus övertoning
+          // backgroundSize: "cover", // Gör att bilden täcker hela området
+          // backgroundPosition: "center left", // Flytta fokus mot botten
+          // backgroundRepeat: "no-repeat", // Förhindra att bilden upprepas
+          // justifyContent: "flex-start",
+          // background:
+          //   "linear-gradient(to bottom,rgba(240,231,226,1), rgba(229,186,179,1)))",
           backgroundColor: "rgba(238,233,230,255)",
-          justifyContent: "flex-start",
           width: "100%",
         }}
       >
@@ -30,12 +36,12 @@ export default function ContactComponent() {
             marginBottom: { xs: 30, md: 20 },
             marginLeft: { xs: 0, md: 5, xl: 20 },
             marginTop: { xs: 5, md: 10, xl: 20 },
-            width: { xs: "98%", md: "100%" },
+            width: "100%",
             height: "100%",
           }}
         >
           <Rubrik
-            sx={{ fontSize: { xs: 30, md: 60, xl: 75 }, letterSpacing: 1.5 }}
+            sx={{ fontSize: { xs: 28, md: 60, xl: 75 }, letterSpacing: 1.5 }}
           >
             Hur kan vi hjälpa dig?
           </Rubrik>

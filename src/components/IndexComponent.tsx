@@ -1,10 +1,23 @@
 import { Box, Link, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 import { isMobile } from "./CompanyForm";
 import { Rubrik } from "./Footer";
 import WhoAreWe from "./WhoAreWe";
 import WhoAreWePhone from "./WhoAreWePhone";
 
+const titles = ["hemsida?", "e-tjänst?", "webbshop?", "mobilapp?"];
+
 export default function IndexComponent() {
+  const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTitleIndex((prevIndex) =>
+        prevIndex === titles.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 3000); // Ändra var 3:e sekund
+    return () => clearInterval(interval); // Rensa när komponenten demonteras
+  }, []);
   return (
     <Box
       sx={{
@@ -33,22 +46,45 @@ export default function IndexComponent() {
       >
         <Box
           sx={{
-            marginBottom: { xs: 30, md: 20 },
+            marginBottom: { xs: 50, md: 20 },
             marginLeft: { xs: 0, md: 5, xl: 20 },
-            marginTop: { xs: 5, md: 10, xl: 20 },
+            marginTop: { xs: 2, md: 10, xl: 20 },
             width: "100%",
             height: "100%",
           }}
         >
-          <Rubrik
-            sx={{
-              fontSize: { xs: 35, md: 60, xl: 75 },
-              letterSpacing: 1.5,
-              // color: "#",
-            }}
+          <Box
+            sx={{ display: "flex", flexDirection: { xs: "column", md: "row" } }}
           >
-            Behöver du en hemsida?
-          </Rubrik>
+            <Rubrik
+              sx={{
+                fontSize: { xs: 35, md: 60, xl: 75 },
+                letterSpacing: 1.5,
+                marginRight: 1.5,
+                // color: "#",
+              }}
+            >
+              Behöver du en
+            </Rubrik>
+            <Rubrik
+              sx={{
+                fontSize: { xs: 35, md: 60, xl: 75 },
+                letterSpacing: 1.5,
+                // color: "#",
+                opacity: 0,
+                animation: `fade-in-out 3s ease-in-out infinite`,
+                animationDelay: `0s`,
+                "@keyframes fade-in-out": {
+                  "0%": { opacity: 0, transform: "translateY(-10px)" },
+                  "25%": { opacity: 1, transform: "translateY(0)" },
+                  "75%": { opacity: 1, transform: "translateY(0)" },
+                  "100%": { opacity: 0, transform: "translateY(10px)" },
+                },
+              }}
+            >
+              {titles[currentTitleIndex]}
+            </Rubrik>
+          </Box>
           <Typography
             sx={{
               fontSize: { xs: 25, md: 35, xl: 50 },

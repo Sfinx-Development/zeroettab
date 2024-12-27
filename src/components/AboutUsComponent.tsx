@@ -25,6 +25,8 @@ export default function IndexComponent() {
           // backgroundPosition: "center left", // Flytta fokus mot botten
           // backgroundRepeat: "no-repeat", // Förhindra att bilden upprepas
           // justifyContent: "flex-start",
+          // background:
+          //   "linear-gradient(to bottom,rgba(240,231,226,1), rgba(229,186,179,1)))",
           backgroundColor: "rgba(238,233,230,255)",
           width: "100%",
         }}
