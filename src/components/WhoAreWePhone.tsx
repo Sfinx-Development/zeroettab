@@ -13,6 +13,8 @@ const bounce = keyframes`
 `;
 
 export default function WhoAreWePhone() {
+  const isPhoneUnder800px = window.innerHeight < 800;
+  const isPhoneUnder700px = window.innerHeight < 700;
   return (
     <Box
       sx={{
@@ -23,7 +25,7 @@ export default function WhoAreWePhone() {
         width: "100%",
         minHeight: "100%",
         flexDirection: "column",
-        marginBottom: -13,
+        marginBottom: isPhoneUnder800px ? -18 : -13,
       }}
     >
       <Box
@@ -31,10 +33,11 @@ export default function WhoAreWePhone() {
         src="https://i.imgur.com/OqvOzUd.png"
         alt="Two girls coding"
         sx={{
-          maxHeight: 250, // Justera höjden på bilden
-          width: "auto", // Behåll proportionerna
-          display: "block", // Gör att bilden centreras enklare
-          margin: "0 auto",
+          maxHeight: isPhoneUnder700px ? 200 : 250, // Justera höjden på bilden
+          width: "auto",
+          marginLeft: -0.5,
+          display: "block",
+          // marginLeft: 0.1,
           // marginLeft: 6,
         }}
       />

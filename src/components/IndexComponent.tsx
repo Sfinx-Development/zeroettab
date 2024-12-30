@@ -18,6 +18,7 @@ export default function IndexComponent() {
     }, 3000); // Ändra var 3:e sekund
     return () => clearInterval(interval); // Rensa när komponenten demonteras
   }, []);
+
   return (
     <Box
       sx={{
