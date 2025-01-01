@@ -186,6 +186,7 @@ export default function CustomHeader2(): JSX.Element {
             }}
           >
             <img
+              rel="preload"
               src="https://i.imgur.com/n6vt6Q8.png"
               alt="Pink decoration"
               height={isMobile ? 250 : "200px"}

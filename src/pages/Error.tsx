@@ -1,4 +1,10 @@
-import { Box, Button, Typography, useMediaQuery, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 export default function Error() {
@@ -12,21 +18,22 @@ export default function Error() {
         position: "relative",
         width: "100%",
         minHeight: "100vh",
-        backgroundColor: "rgba(34,32,37,255)", 
+        backgroundColor: "rgba(34,32,37,255)",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        // paddingTop: { xs: 10, md: 20 }, 
+        // paddingTop: { xs: 10, md: 20 },
       }}
     >
-         <Box sx={{ position: "absolute", left: 0, top: 2 }}>
-          <img
-            src="https://i.imgur.com/n6vt6Q8.png"
-            alt="Pink decoration"
-            height={"200px"}
-          />
-        </Box>
+      <Box sx={{ position: "absolute", left: 0, top: 2 }}>
+        <img
+          src="https://i.imgur.com/n6vt6Q8.png"
+          alt="Pink decoration"
+          rel="preload"
+          height={"200px"}
+        />
+      </Box>
       <Typography
         variant={isMobile ? "h4" : "h2"}
         sx={{
@@ -59,15 +66,15 @@ export default function Error() {
         sx={{
           color: "white",
           borderColor: "rgba(255,255,255,0.5)",
-          backgroundColor: "rgba(229,186,179,1)", 
+          backgroundColor: "rgba(229,186,179,1)",
           "&:hover": {
-            backgroundColor: "rgba(254,232,209,0.5)", 
+            backgroundColor: "rgba(254,232,209,0.5)",
           },
           paddingX: 3,
           paddingY: 1,
         }}
         onClick={() => {
-          navigate("/"); 
+          navigate("/");
         }}
       >
         Gå tillbaka
@@ -75,4 +82,3 @@ export default function Error() {
     </Box>
   );
 }
-

@@ -11,7 +11,8 @@ import {
   Typography,
 } from "@mui/material";
 import emailjs from "emailjs-com";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Rubrik } from "../Footer";
 
 emailjs.init("C8CxNnxZg6mg-d2tq");
@@ -27,6 +28,20 @@ export default function ParallaxContact() {
   const [localDesc, setLocalDesc] = useState("");
   const [emailUnvalid, setEmailUnvalid] = useState(false);
   const [privacyPolicyChecked, setPrivacyPolicyChecked] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const hash = location.hash;
+    if (hash) {
+      const element = document.getElementById(hash.slice(1)); // Ta bort '#' och hitta elementet
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        console.warn(`Elementet med id "${hash.slice(1)}" hittades inte.`);
+      }
+    }
+  }, [location]);
+
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
   };
@@ -110,6 +125,7 @@ export default function ParallaxContact() {
           <img
             src="https://i.imgur.com/H2Nhixw.png"
             alt="Pink decoration"
+            rel="preload"
             style={{
               width: "100%",
               height: "100%",
@@ -119,6 +135,7 @@ export default function ParallaxContact() {
         </Box>
 
         <Box
+          id="form"
           sx={{
             width: "100%",
             display: "flex",
