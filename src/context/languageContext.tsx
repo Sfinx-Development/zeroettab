@@ -2,8 +2,8 @@ import {
   ReactNode,
   createContext,
   useContext,
-  useState,
   useEffect,
+  useState,
 } from "react";
 
 export type TranslationMessages = {
@@ -22,14 +22,12 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
 );
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState(
-    localStorage.getItem("language") || "sv"
-  );
+  const [language, setLanguageState] = useState("sv");
 
   useEffect(() => {
     const browserLanguage = navigator.language.split("-")[0];
     if (!localStorage.getItem("language")) {
-      setLanguage(browserLanguage === "en" ? "en" : "sv");
+      setLanguage(browserLanguage === "en" ? "sv" : "sv");
     }
   }, []);
 
