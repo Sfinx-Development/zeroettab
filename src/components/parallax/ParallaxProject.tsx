@@ -224,6 +224,7 @@ export default function ParallaxProject() {
                   </Typography>
                   {project.status !== "Pågående" && (
                     <Button
+                    aria-label={`Navigera till hemsidan för ${project.title || 'sidan'}`}
                       onClick={() => {
                         if (project.url) {
                           window.open(project.url, "_blank");

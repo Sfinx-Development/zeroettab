@@ -82,12 +82,17 @@ export default function CustomHeader2(): JSX.Element {
             marginLeft: isMobile ? 0 : 10,
           }}
         >
-          <Link href="/" sx={{ textDecoration: "none", marginX: 2 }}>
+          <Link
+            aria-label="Startsidan"
+            href="/"
+            sx={{ textDecoration: "none", marginX: 2 }}
+          >
             <SvgSmallImage />
           </Link>
         </Box>
 
         <IconButton
+          aria-label="Toggla hamburgermeny"
           onClick={handleToggleMenu}
           sx={{
             color: "black",
@@ -141,6 +146,7 @@ export default function CustomHeader2(): JSX.Element {
                   }}
                 >
                   <Link
+                    aria-label="Stäng meny"
                     href={link.href}
                     sx={{
                       textDecoration: "none",

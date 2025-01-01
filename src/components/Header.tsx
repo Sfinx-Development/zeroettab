@@ -45,6 +45,7 @@ export default function Header(): JSX.Element {
         }}
       >
         <Link
+          aria-label="Om oss - sidan"
           sx={{
             textDecoration: "none",
             transition: "color 0.3s",
@@ -73,6 +74,7 @@ export default function Header(): JSX.Element {
           </Typography>
         </Link>
         <Link
+          aria-label="Tjänstersidan"
           sx={{
             textDecoration: "none",
             transition: "color 0.3s",
@@ -97,13 +99,14 @@ export default function Header(): JSX.Element {
             <FormattedMessage id="offers" />
           </Typography>
         </Link>
-        <Link href="/">
+        <Link href="/" aria-label="Startsidan">
           <MySvgImage />
           {/* <svg
          
           ></svg> */}
         </Link>
         <Link
+          aria-label="Projektsidan"
           sx={{
             textDecoration: "none",
             transition: "color 0.3s",
@@ -129,6 +132,7 @@ export default function Header(): JSX.Element {
           </Typography>
         </Link>
         <Link
+          aria-label="Kontaktsidan"
           sx={{
             textDecoration: "none",
             transition: "color 0.3s",

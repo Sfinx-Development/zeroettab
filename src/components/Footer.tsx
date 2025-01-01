@@ -152,6 +152,7 @@ export default function Footer() {
               }}
             >
               <IconButton
+                aria-label="Navigera till Instagram"
                 sx={{
                   color: "rgba(34,32,37,255)",
                   padding: 0,
@@ -168,6 +169,7 @@ export default function Footer() {
                 <InstagramIcon sx={{ fontSize: { xs: 30, xl: 40 } }} />
               </IconButton>
               <IconButton
+                aria-label="Navigera till Facebook"
                 sx={{
                   color: "rgba(34,32,37,255)",
                   padding: 0,

@@ -41,6 +41,7 @@ const MobileSections = () => (
         Vi bygger hemsidor
       </Rubrik>
       <Link
+        aria-label="Hemsidor-sektion"
         href="/offers#frontend"
         sx={{
           fontSize: 16,
@@ -75,6 +76,7 @@ const MobileSections = () => (
         Vi bygger webbshoppar
       </Rubrik>
       <Link
+        aria-label="Webbshoppar-sektion"
         href="/offers#fullstack"
         sx={{
           fontSize: 16,
@@ -109,6 +111,7 @@ const MobileSections = () => (
         Vi är experter på systemutveckling
       </Rubrik>
       <Link
+        aria-label="Tjänster"
         href="/offers"
         sx={{
           fontSize: 16,

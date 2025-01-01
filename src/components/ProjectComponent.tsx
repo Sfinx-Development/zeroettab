@@ -58,6 +58,7 @@ export default function IndexComponent() {
             En blandning av vad vi gjort tidigare
           </Typography>
           <Link
+            aria-label="Kontaktformulär"
             sx={{
               textDecoration: "none",
               transition: "color 0.3s",
