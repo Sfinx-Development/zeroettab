@@ -370,6 +370,7 @@ export default function ParallaxContact() {
               />
               <Box sx={{ display: "flex", justifyContent: "end" }}>
                 <IconButton
+                  aria-label="Skicka email"
                   sx={{ display: "flex" }}
                   disabled={!privacyPolicyChecked}
                   onClick={() => {

@@ -98,6 +98,7 @@ export default function BubblaComponent() {
               {section.description}
             </Typography>
             <IconButton
+             aria-label={`Navigera till ${section.title || 'sidan'}`} 
               sx={{
                 marginTop: 2,
                 backgroundColor: "#fff",

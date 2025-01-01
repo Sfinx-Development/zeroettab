@@ -58,6 +58,7 @@ export default function ContactComponent() {
             Berätta om din idé!
           </Typography>
           <Link
+            aria-label="Kontaktformulär"
             sx={{
               textDecoration: "none",
               transition: "color 0.3s",

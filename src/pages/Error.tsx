@@ -63,6 +63,7 @@ export default function Error() {
 
       <Button
         variant="outlined"
+        aria-label="Navigera till föregående sida"
         sx={{
           color: "white",
           borderColor: "rgba(255,255,255,0.5)",

@@ -67,6 +67,7 @@ const CookieBanner = () => {
         </Typography>
         , ger du oss tillåtelse att använda cookies.{" "}
         <Link
+          aria-label="Cookies-information"
           href="https://cookieinformation.com/sv/vad-ar-en-cookie/"
           target="_blank"
           rel="noopener noreferrer"
@@ -84,6 +85,7 @@ const CookieBanner = () => {
       </Typography>
       <Box sx={{ display: "flex", marginX: 2 }}>
         <Button
+          aria-label="Acceptera Cookies"
           variant="contained"
           sx={{
             textDecoration: "none",

@@ -66,6 +66,7 @@ export default function WhoAreWe() {
               sx={{ color: "rgb(216,163,153)", fontSize: { xs: 20, xl: 40 } }}
             />
             <Link
+              aria-label="Om oss - sidan"
               href="/about"
               style={{ textDecoration: "none", color: "rgb(37,31,37)" }}
             >
@@ -103,6 +104,7 @@ export default function WhoAreWe() {
               sx={{ color: "rgb(216,163,153)", fontSize: { xs: 20, xl: 40 } }}
             />
             <Link
+              aria-label="Tjänstersidan"
               href="/offers"
               style={{ textDecoration: "none", color: "rgb(37,31,37)" }}
             >
@@ -139,6 +141,7 @@ export default function WhoAreWe() {
               sx={{ color: "rgb(216,163,153)", fontSize: { xs: 20, xl: 40 } }}
             />
             <Link
+              aria-label="Projektsidan"
               href="/projects"
               style={{ textDecoration: "none", color: "rgb(37,31,37)" }}
             >
