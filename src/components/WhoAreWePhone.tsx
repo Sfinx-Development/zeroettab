@@ -30,6 +30,7 @@ export default function WhoAreWePhone() {
     >
       <Box
         component="img"
+        rel="preload"
         src="https://i.imgur.com/OqvOzUd.png"
         alt="Two girls coding"
         sx={{
