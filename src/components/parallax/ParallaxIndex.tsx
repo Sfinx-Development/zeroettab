@@ -87,6 +87,7 @@ export default function ParallaxIndex() {
             <img
               src="https://i.imgur.com/0qP3TIO.png"
               alt="Pink decoration"
+              rel="preload"
               style={{
                 width: "100%",
                 height: "100%",
@@ -156,7 +157,7 @@ export default function ParallaxIndex() {
                 color: "rgb(67, 61, 67)",
               },
             }}
-            href="/contact"
+            href="/contact#form"
           >
             Kontakt
           </Link>

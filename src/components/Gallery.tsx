@@ -84,6 +84,7 @@ const Gallery = () => {
           <img
             src={images[imageInFocus - 1].url}
             alt={images[imageInFocus - 1].alt}
+            rel="preload"
             style={{
               width: "100%",
               height: "100%",

@@ -76,7 +76,7 @@ export default function ContactComponent() {
                 color: "rgb(67, 61, 67)",
               },
             }}
-            href="/contact"
+            href="/contact#form"
           >
             Kontakta oss
           </Link>

@@ -135,7 +135,7 @@ export default function ParallaxIndex() {
                 boxShadow: "0px 4px 15px rgba(250,220,197,0.6)",
               },
             }}
-            href="/contact"
+            href="/contact#form"
           >
             Kontakt
           </Link>

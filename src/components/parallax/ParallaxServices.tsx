@@ -243,7 +243,7 @@ export default function ParallaxServices() {
                 mt: 2,
               }}
             >
-              <IconButton onClick={() => navigation("/contact")}>
+              <IconButton onClick={() => navigation("/contact#form")}>
                 <Rubrik sx={{ color: "rgb(37,31,37)", fontSize: 18 }}>
                   Kontakt
                 </Rubrik>

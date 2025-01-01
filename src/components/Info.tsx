@@ -73,6 +73,7 @@ export default function Info() {
           <img
             src={"https://i.imgur.com/ma2U0SC.png"}
             alt="Message icon"
+            rel="preload"
             style={{
               width: "100%",
               maxWidth: "230px",
@@ -92,6 +93,7 @@ export default function Info() {
           <img
             src={"https://i.imgur.com/aSAxIrM.png"}
             alt="Computer icon"
+            rel="preload"
             style={{
               width: "100%",
               maxWidth: "300px",

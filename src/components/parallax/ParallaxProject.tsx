@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Rubrik } from "../Footer";
@@ -183,6 +183,8 @@ export default function ParallaxProject() {
                       width: "100%",
                       height: "auto",
                       borderRadius: "8px",
+                      filter:
+                        project.status == "Pågående" ? "blur(4px)" : "none",
                       objectFit: "cover",
                     }}
                   />
@@ -208,6 +210,44 @@ export default function ParallaxProject() {
                   >
                     {project.type}
                   </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: { xs: 16, xl: 23 },
+                      paddingTop: 1,
+                      color: "rgba(34,32,37,0.7)",
+                      fontWeight: "light",
+                      fontStyle:
+                        project.status === "Pågående" ? "italic" : "normal",
+                    }}
+                  >
+                    {project.status === "Pågående" ? "Pågående" : ""}
+                  </Typography>
+                  {project.status !== "Pågående" && (
+                    <Button
+                      onClick={() => {
+                        if (project.url) {
+                          window.open(project.url, "_blank");
+                        } else {
+                          navigate("/projects");
+                        }
+                      }}
+                      sx={{
+                        mt: 2,
+                        paddingX: 3,
+                        paddingY: 1,
+                        borderRadius: "20px",
+                        backgroundColor: "#222025",
+                        color: "#F7F7F7",
+                        fontSize: { xs: 18, xl: 25 },
+                        fontWeight: "bold",
+                        textTransform: "none",
+                        alignSelf: "flex-start",
+                        "&:hover": { backgroundColor: "#333333" },
+                      }}
+                    >
+                      Besök
+                    </Button>
+                  )}
                 </Box>
               ))}
               <Box sx={{ minWidth: "50px", flexShrink: 0 }} />
