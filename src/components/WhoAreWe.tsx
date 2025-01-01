@@ -40,7 +40,7 @@ export default function WhoAreWe() {
           width: "100%",
           paddingBottom: 0,
           marginBottom: 0,
-          // backgroundColor: "red",
+          // backgroundColor: "green",
         }}
       >
         <Box>
@@ -184,6 +184,8 @@ export default function WhoAreWe() {
           height: 50,
           marginBottom: 0,
           width: 50,
+          // backgroundColor: "red",
+          marginRight: { xs: 0, md: 10, lg: 30, xl: 40 },
           display: "flex",
           flex: 1,
           animation: `${bounce} 2s infinite ease-in-out`,
