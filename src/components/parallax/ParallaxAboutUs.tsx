@@ -26,7 +26,6 @@ export default function ParallaxAboutUs() {
       >
         <Box sx={{ position: "absolute", left: 0 }}>
           <img
-            rel="preload"
             src="https://i.imgur.com/n6vt6Q8.png"
             alt="Pink decoration"
             height={isMobile ? 100 : "200px"}
@@ -150,7 +149,6 @@ export default function ParallaxAboutUs() {
               <img
                 src="https://i.imgur.com/icqhCYg.jpeg"
                 alt="Angelina"
-                rel="preload"
                 style={{
                   width: "100%",
                   height: "100%",
@@ -194,7 +192,6 @@ export default function ParallaxAboutUs() {
               <img
                 src="https://i.imgur.com/dDhnWeN.jpeg"
                 alt="Elina"
-                rel="preload"
                 style={{
                   width: "100%",
                   height: "100%",

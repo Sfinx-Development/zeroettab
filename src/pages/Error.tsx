@@ -30,7 +30,6 @@ export default function Error() {
         <img
           src="https://i.imgur.com/n6vt6Q8.png"
           alt="Pink decoration"
-          rel="preload"
           height={"200px"}
         />
       </Box>
