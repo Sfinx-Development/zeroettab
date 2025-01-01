@@ -1,12 +1,39 @@
-import { Box, Button, Typography } from "@mui/material";
-import emailjs from "emailjs-com";
+import { Box, Typography } from "@mui/material";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Rubrik } from "../Footer";
 
-emailjs.init("C8CxNnxZg6mg-d2tq");
-
 export default function ParallaxProject() {
   const navigate = useNavigate();
+  const scrollRef = useRef<HTMLDivElement | null>(null); // Ref för skrollbehållaren
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  const handleMouseDown = (e: React.MouseEvent | React.TouchEvent) => {
+    setIsDragging(true);
+
+    const position =
+      "touches" in e ? e.touches[0].clientX : (e as React.MouseEvent).clientX;
+
+    setStartX(position);
+    setScrollLeft(scrollRef.current?.scrollLeft || 0);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent | React.TouchEvent) => {
+    if (!isDragging || !scrollRef.current) return;
+
+    const position =
+      "touches" in e ? e.touches[0].clientX : (e as React.MouseEvent).clientX;
+
+    const delta = startX - position;
+    scrollRef.current.scrollLeft = scrollLeft + delta;
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
   const projects = [
     {
       title: "Städtjejerna",
@@ -28,16 +55,13 @@ export default function ParallaxProject() {
       title: "DenThu Webshop",
       image: "https://i.imgur.com/enI1UZB.png",
       status: "Pågående",
-
       backgroundColor: "rgb(208,124,116)",
       type: "Webbshop",
     },
     {
       title: "UF E-tjänst",
       image: "https://i.imgur.com/upAsxi9.png",
-
       status: "Pågående",
-
       backgroundColor: "rgba(235,190,180,255)",
       type: "E-tjänst",
     },
@@ -109,6 +133,14 @@ export default function ParallaxProject() {
               Projekt
             </Typography>
             <Box
+              ref={scrollRef}
+              onMouseDown={handleMouseDown}
+              onTouchStart={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onTouchMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onTouchEnd={handleMouseUp}
+              onMouseLeave={handleMouseUp}
               sx={{
                 width: "100%",
                 margin: "auto",
@@ -122,6 +154,7 @@ export default function ParallaxProject() {
                 display: "inline-flex",
                 paddingRight: { xs: 0, md: 8 },
                 scrollPaddingRight: { xs: 0, md: 20 },
+                cursor: isDragging ? "grabbing" : "grab",
               }}
             >
               {projects.map((project, index) => (
@@ -140,94 +173,41 @@ export default function ParallaxProject() {
                     alignItems: "flex-start",
                     justifyContent: "space-between",
                     boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-                    // scrollSnapAlign: "start",
                   }}
                 >
                   <Box
+                    component="img"
+                    src={project.image}
+                    alt={project.title}
                     sx={{
                       width: "100%",
-                      display: "flex",
-                      flexDirection: "column",
+                      height: "auto",
+                      borderRadius: "8px",
+                      objectFit: "cover",
+                    }}
+                  />
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      fontSize: { xs: 22, xl: 29 },
+                      fontWeight: "bold",
+                      color: "#222025",
+                      textTransform: "uppercase",
+                      letterSpacing: 1.2,
                     }}
                   >
-                    <Box
-                      component="img"
-                      src={project.image}
-                      alt={project.title}
-                      sx={{
-                        width: "auto",
-                        height: { xs: "150px", xl: 250 },
-                        borderRadius: "8px",
-                        objectFit: "cover",
-                        boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.2)",
-                        filter:
-                          project.status == "Pågående" ? "blur(4px)" : "none",
-                      }}
-                    />
-                    <Typography
-                      variant="h6"
-                      sx={{
-                        fontSize: { xs: 22, xl: 29 },
-                        fontWeight: "bold",
-                        color: "#222025",
-                        textTransform: "uppercase",
-                        letterSpacing: 1.2,
-                      }}
-                    >
-                      {project.title}
-                    </Typography>
-                    <Typography
-                      sx={{
-                        color: "#222025",
-                        fontSize: { xs: 18, xl: 25 },
-                        fontFamily: "Roboto",
-                        fontWeight: 200,
-                        width: "100%",
-                        textAlign: "left",
-                      }}
-                    >
-                      {project.type}
-                    </Typography>
-                    <Typography
-                      sx={{
-                        fontSize: { xs: 16, xl: 23 },
-                        paddingTop: 1,
-                        color: "rgba(34,32,37,0.7)",
-                        fontWeight: "light",
-                        fontStyle:
-                          project.status === "Pågående" ? "italic" : "normal",
-                      }}
-                    >
-                      {project.status === "Pågående" ? "Pågående" : ""}
-                    </Typography>
-                  </Box>
-
-                  {project.status !== "Pågående" && (
-                    <Button
-                      onClick={() => {
-                        if (project.url) {
-                          window.open(project.url, "_blank");
-                        } else {
-                          navigate("/projects");
-                        }
-                      }}
-                      sx={{
-                        mt: 2,
-                        paddingX: 3,
-                        paddingY: 1,
-                        borderRadius: "20px",
-                        backgroundColor: "#222025",
-                        color: "#F7F7F7",
-                        fontSize: { xs: 18, xl: 25 },
-                        fontWeight: "bold",
-                        textTransform: "none",
-                        alignSelf: "flex-start",
-                        "&:hover": { backgroundColor: "#333333" },
-                      }}
-                    >
-                      Besök
-                    </Button>
-                  )}
+                    {project.title}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      color: "#222025",
+                      fontSize: { xs: 18, xl: 25 },
+                      fontFamily: "Roboto",
+                      fontWeight: 200,
+                    }}
+                  >
+                    {project.type}
+                  </Typography>
                 </Box>
               ))}
               <Box sx={{ minWidth: "50px", flexShrink: 0 }} />
