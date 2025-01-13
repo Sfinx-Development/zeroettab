@@ -125,7 +125,6 @@ export default function ParallaxContact() {
           <img
             src="https://i.imgur.com/H2Nhixw.png"
             alt="Pink decoration"
-            rel="preload"
             style={{
               width: "100%",
               height: "100%",

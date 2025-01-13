@@ -15,7 +15,11 @@ export default function PrivacyPolicy() {
     >
       <Rubrik
         variant="h2"
-        sx={{ marginBottom: "2rem", color: "rgb(37,31,37)" }}
+        sx={{
+          marginBottom: { xs: 1, md: "2rem" },
+          color: "rgb(37,31,37)",
+          fontSize: { xs: 21, md: 30 },
+        }}
       >
         Integritetspolicy för Zeroett AB
       </Rubrik>
@@ -30,7 +34,11 @@ export default function PrivacyPolicy() {
       >
         <Rubrik
           variant="h4"
-          sx={{ marginBottom: "1rem", color: "rgb(37,31,37)" }}
+          sx={{
+            marginBottom: "1rem",
+            color: "rgb(37,31,37)",
+            fontSize: { xs: 18 },
+          }}
         >
           1. Vilka uppgifter samlar vi in?
         </Rubrik>
@@ -55,7 +63,11 @@ export default function PrivacyPolicy() {
         </Typography>
         <Rubrik
           variant="h4"
-          sx={{ marginBottom: "1rem", color: "rgb(37,31,37)" }}
+          sx={{
+            marginBottom: "1rem",
+            color: "rgb(37,31,37)",
+            fontSize: { xs: 18 },
+          }}
         >
           2. Varför samlar vi in dessa uppgifter?
         </Rubrik>
@@ -74,7 +86,11 @@ export default function PrivacyPolicy() {
         </ul>
         <Rubrik
           variant="h4"
-          sx={{ marginBottom: "1rem", color: "rgb(37,31,37)" }}
+          sx={{
+            marginBottom: "1rem",
+            color: "rgb(37,31,37)",
+            fontSize: { xs: 18 },
+          }}
         >
           3. Hur hanterar vi dina uppgifter?
         </Rubrik>
@@ -85,7 +101,11 @@ export default function PrivacyPolicy() {
         </Typography>
         <Rubrik
           variant="h4"
-          sx={{ marginBottom: "1rem", color: "rgb(37,31,37)" }}
+          sx={{
+            marginBottom: "1rem",
+            color: "rgb(37,31,37)",
+            fontSize: { xs: 18 },
+          }}
         >
           4. Dina rättigheter
         </Rubrik>
@@ -116,7 +136,11 @@ export default function PrivacyPolicy() {
         </Typography>
         <Rubrik
           variant="h4"
-          sx={{ marginBottom: "1rem", color: "rgb(37,31,37)" }}
+          sx={{
+            marginBottom: "1rem",
+            color: "rgb(37,31,37)",
+            fontSize: { xs: 18 },
+          }}
         >
           5. Kontakt
         </Rubrik>
@@ -131,7 +155,11 @@ export default function PrivacyPolicy() {
         </a>
         <Rubrik
           variant="h4"
-          sx={{ marginBottom: "1rem", color: "rgb(37,31,37)" }}
+          sx={{
+            marginBottom: "1rem",
+            color: "rgb(37,31,37)",
+            fontSize: { xs: 18 },
+          }}
         >
           6. Säkerhet
         </Rubrik>
