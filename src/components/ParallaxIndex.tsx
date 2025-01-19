@@ -115,7 +115,7 @@ export default function ParallaxIndex() {
             ihop?
           </Typography>
           <Link
-                aria-label="Kontaktformulär"
+            aria-label="Kontaktformulär"
             sx={{
               textDecoration: "none",
               transition: "all 0.3s",

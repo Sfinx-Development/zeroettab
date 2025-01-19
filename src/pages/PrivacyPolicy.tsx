@@ -129,8 +129,8 @@ export default function PrivacyPolicy() {
         </ul>
         <Typography sx={{ marginBottom: "1.5rem", lineHeight: "1.8" }}>
           För att utöva dina rättigheter, vänligen kontakta oss via e-post:{" "}
-          <a href="zeroettab@gmail.com" style={{ color: "rgb(37,31,37)" }}>
-            zeroettab@gmail.com
+          <a href="kontakt@zeroett.se" style={{ color: "rgb(37,31,37)" }}>
+            kontakt@zeroett.se
           </a>
           .
         </Typography>
@@ -150,8 +150,8 @@ export default function PrivacyPolicy() {
         <strong>
           <Typography>E-post:</Typography>
         </strong>{" "}
-        <a href="mailto:zeroettab@gmail.com" style={{ color: "rgb(37,31,37)" }}>
-          <Typography sx={{ marginBottom: 2 }}>zeroettab@gmail.com</Typography>
+        <a href="mailto:kontakt@zeroett.se" style={{ color: "rgb(37,31,37)" }}>
+          <Typography sx={{ marginBottom: 2 }}>kontakt@zeroett.se</Typography>
         </a>
         <Rubrik
           variant="h4"

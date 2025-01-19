@@ -94,7 +94,7 @@ export default function ParallaxServices() {
       priceColor: "rgb(37,31,37)",
     },
     {
-      id: "etjanst",
+      id: "backend",
       title: "E-tjänster",
       description:
         "Vill du erbjuda dina kunder en digital tjänst, som bokning av möten, registrering av intresseanmälningar, eller ansökningar online?",

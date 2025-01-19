@@ -213,7 +213,7 @@ export default function Footer() {
                 fontWeight: "lighter",
               }}
             >
-              zeroettab@gmail.com
+             kontakt@zeroett.se
             </Typography>
           </Box>
         </Box>

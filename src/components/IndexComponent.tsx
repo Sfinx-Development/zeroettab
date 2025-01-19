@@ -128,6 +128,7 @@ export default function IndexComponent() {
           {/* <Box sx={{ paddingTop: 10, display: "flex", gap: 6 }}> */}
 
           {!isMobile ? <WhoAreWe /> : <WhoAreWePhone />}
+  
 
           {/* <Box
             sx={{

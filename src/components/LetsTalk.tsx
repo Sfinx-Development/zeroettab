@@ -49,7 +49,7 @@ export default function LetsTalk() {
 
         <Link
           aria-label="Öppna mail"
-          href="mailto:zeroettab@gmail.com"
+          href="mailto:kontakt@zeroett.se"
           sx={{ textDecoration: "none", color: "#662c9c" }}
         >
           <EmailIcon sx={{ fontSize: 30, color: "white" }} />
