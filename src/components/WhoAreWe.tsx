@@ -1,7 +1,7 @@
 import { keyframes } from "@emotion/react";
 import EastIcon from "@mui/icons-material/East";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Box, Link, Typography } from "@mui/material";
+import { Box, Link, Typography, useMediaQuery } from "@mui/material";
 import { Rubrik } from "./Footer";
 import SvgIndexZeroett from "./SvgIndex";
 
@@ -16,6 +16,8 @@ const bounce = keyframes`
 `;
 
 export default function WhoAreWe() {
+  const isBigScreen = useMediaQuery("(min-width:2560px)");
+  const isBiggerScreen = useMediaQuery("(min-width:3000px)");
   return (
     <Box
       sx={{
@@ -46,7 +48,7 @@ export default function WhoAreWe() {
         <Box>
           <Rubrik
             sx={{
-              fontSize: { xs: 20, xl: 40 },
+              fontSize: isBigScreen ? 50 : { xs: 20, xl: 40 },
               letterSpacing: 1.5,
               textWrap: "nowrap",
             }}
@@ -63,7 +65,10 @@ export default function WhoAreWe() {
             }}
           >
             <EastIcon
-              sx={{ color: "rgb(216,163,153)", fontSize: { xs: 20, xl: 40 } }}
+              sx={{
+                color: "rgb(216,163,153)",
+                fontSize: isBigScreen ? 45 : { xs: 20, xl: 40 },
+              }}
             />
             <Link
               aria-label="Om oss - sidan"
@@ -72,7 +77,7 @@ export default function WhoAreWe() {
             >
               <Typography
                 sx={{
-                  fontSize: { xs: 20, xl: 40 },
+                  fontSize: isBigScreen ? 45 : { xs: 20, xl: 40 },
                   fontFamily: "Roboto",
                   fontWeight: "lighter",
                   textAlign: "center",
@@ -86,7 +91,7 @@ export default function WhoAreWe() {
         <Box>
           <Rubrik
             sx={{
-              fontSize: { xs: 20, xl: 40 },
+              fontSize: isBigScreen ? 50 : { xs: 20, xl: 40 },
               letterSpacing: 1.5,
               textWrap: "nowrap",
             }}
@@ -101,7 +106,10 @@ export default function WhoAreWe() {
             }}
           >
             <EastIcon
-              sx={{ color: "rgb(216,163,153)", fontSize: { xs: 20, xl: 40 } }}
+              sx={{
+                color: "rgb(216,163,153)",
+                fontSize: isBigScreen ? 45 : { xs: 20, xl: 40 },
+              }}
             />
             <Link
               aria-label="Tjänstersidan"
@@ -110,7 +118,7 @@ export default function WhoAreWe() {
             >
               <Typography
                 sx={{
-                  fontSize: { xs: 20, xl: 40 },
+                  fontSize: isBigScreen ? 45 : { xs: 20, xl: 40 },
                   fontFamily: "Roboto",
                   fontWeight: "lighter",
                 }}
@@ -123,7 +131,7 @@ export default function WhoAreWe() {
         <Box>
           <Rubrik
             sx={{
-              fontSize: { xs: 20, xl: 40 },
+              fontSize: isBigScreen ? 50 : { xs: 20, xl: 40 },
               letterSpacing: 1.5,
               textWrap: "nowrap",
             }}
@@ -138,7 +146,10 @@ export default function WhoAreWe() {
             }}
           >
             <EastIcon
-              sx={{ color: "rgb(216,163,153)", fontSize: { xs: 20, xl: 40 } }}
+              sx={{
+                color: "rgb(216,163,153)",
+                fontSize: isBigScreen ? 45 : { xs: 20, xl: 40 },
+              }}
             />
             <Link
               aria-label="Projektsidan"
@@ -147,7 +158,7 @@ export default function WhoAreWe() {
             >
               <Typography
                 sx={{
-                  fontSize: { xs: 20, xl: 40 },
+                  fontSize: isBigScreen ? 45 : { xs: 20, xl: 40 },
                   fontFamily: "Roboto",
                   fontWeight: "lighter",
                 }}
@@ -160,7 +171,9 @@ export default function WhoAreWe() {
         <Box
           sx={{
             display: "flex",
-            justifyContent: { xs: "center", md: "flex-start" },
+            justifyContent: isBigScreen
+              ? "center"
+              : { xs: "center", md: "flex-start" },
             alignItems: "center",
             width: {
               xs: "80%",
@@ -179,22 +192,48 @@ export default function WhoAreWe() {
           <SvgIndexZeroett />
         </Box>
       </Box>
-      <ExpandMoreIcon
-        // component="img"
-        // src="https://i.imgur.com/uu3B9aY.png"
-        // alt="An arrow pointing down"
+      <Box
         sx={{
-          height: 50,
-          marginBottom: 0,
-          width: 50,
           // backgroundColor: "red",
-          marginRight: { xs: 2, md: 10, lg: 15, xl: 40 },
+          width: "100%",
           display: "flex",
-          flex: 1,
-          animation: `${bounce} 2s infinite ease-in-out`,
-          transformOrigin: "center", // Säkerställer att rotation sker från mitten
+          flexDirection: "column",
+          marginRight: isBigScreen ? 50 : 0,
+          alignItems: "center",
+          justifyContent: "center",
         }}
-      />
+      >
+        {(isBigScreen || isBiggerScreen) && (
+          <Box
+            component="img"
+            src="https://i.imgur.com/OqvOzUd.png"
+            alt="Two girls coding"
+            sx={{
+              width: isBiggerScreen ? "30%" : "20%",
+              display: "block",
+            }}
+          />
+        )}
+
+        <ExpandMoreIcon
+          // component="img"
+          // src="https://i.imgur.com/uu3B9aY.png"
+          // alt="An arrow pointing down"
+          sx={{
+            height: 50,
+            marginBottom: 0,
+            width: 50,
+
+            // backgroundColor: "red",
+            marginRight: isBigScreen ? 0 : { md: 20, xl: 40 },
+            marginTop: isBigScreen ? 0 : { md: -2, xl: 0 },
+            display: "flex",
+            flex: 1,
+            animation: `${bounce} 2s infinite ease-in-out`,
+            transformOrigin: "center", // Säkerställer att rotation sker från mitten
+          }}
+        />
+      </Box>
     </Box>
   );
 }

@@ -1,6 +1,7 @@
 import { Box, Link, Typography } from "@mui/material";
 import { isMobile } from "./CompanyForm";
 import { Rubrik } from "./Footer";
+import { isPhoneHeigher800px, isPhoneHeigher900px } from "./IndexComponent";
 import WhoAreWe from "./WhoAreWe";
 import WhoAreWePhone from "./WhoAreWePhone";
 
@@ -80,8 +81,19 @@ export default function IndexComponent() {
           >
             Kontakta oss
           </Link>
-
-          {!isMobile ? <WhoAreWe /> : <WhoAreWePhone />}
+          <Box
+            sx={{
+              paddingTop: isMobile
+                ? isPhoneHeigher900px
+                  ? 27
+                  : isPhoneHeigher800px
+                  ? 20
+                  : 8
+                : undefined,
+            }}
+          >
+            {!isMobile ? <WhoAreWe /> : <WhoAreWePhone />}
+          </Box>
         </Box>
       </Box>
     </Box>

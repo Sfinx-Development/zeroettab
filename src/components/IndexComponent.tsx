@@ -6,10 +6,10 @@ import WhoAreWe from "./WhoAreWe";
 import WhoAreWePhone from "./WhoAreWePhone";
 
 const titles = ["hemsida?", "e-tjänst?", "webbshop?", "mobilapp?"];
-
+export const isPhoneHeigher800px = window.innerHeight > 800;
+export const isPhoneHeigher900px = window.innerHeight > 900;
 export default function IndexComponent() {
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
-
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTitleIndex((prevIndex) =>
@@ -47,9 +47,9 @@ export default function IndexComponent() {
       >
         <Box
           sx={{
-            marginBottom: { xs: 50, md: 20 },
+            marginBottom: { xs: 30, md: 20 },
             marginLeft: { xs: 0, md: 5, xl: 20 },
-            marginTop: { xs: 2, md: 10, xl: 20 },
+            marginTop: { xs: 5, md: 10, xl: 20 },
             width: "100%",
             height: "100%",
           }}
@@ -62,7 +62,6 @@ export default function IndexComponent() {
                 fontSize: { xs: 35, md: 60, xl: 75 },
                 letterSpacing: 1.5,
                 marginRight: 1.5,
-                // color: "#",
               }}
             >
               Behöver du en
@@ -126,10 +125,19 @@ export default function IndexComponent() {
           </Link>
 
           {/* <Box sx={{ paddingTop: 10, display: "flex", gap: 6 }}> */}
-
-          {!isMobile ? <WhoAreWe /> : <WhoAreWePhone />}
-  
-
+          <Box
+            sx={{
+              paddingTop: isMobile
+                ? isPhoneHeigher900px
+                  ? 20
+                  : isPhoneHeigher800px
+                  ? 12
+                  : 0
+                : undefined,
+            }}
+          >
+            {!isMobile ? <WhoAreWe /> : <WhoAreWePhone />}
+          </Box>
           {/* <Box
             sx={{
               display: "flex",
