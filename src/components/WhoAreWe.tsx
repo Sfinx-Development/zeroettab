@@ -113,7 +113,7 @@ export default function WhoAreWe() {
             />
             <Link
               aria-label="Tjänstersidan"
-              href="/offers"
+              href="/services"
               style={{ textDecoration: "none", color: "rgb(37,31,37)" }}
             >
               <Typography

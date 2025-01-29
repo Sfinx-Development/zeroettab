@@ -12,7 +12,7 @@ export default function ParallaxIndex() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "space-between",
+        // justifyContent: "space-between",
       }}
     >
       <Box
@@ -22,8 +22,8 @@ export default function ParallaxIndex() {
           zIndex: 2,
           width: "100%",
           display: "flex",
-          flexDirection: { xs: "column", md: "column" }, // Lägg till radlayout för större skärmar
-          justifyContent: "space-between", // Separera vänster och höger sektion
+          flexDirection: { xs: "column", md: "column" },
+          justifyContent: "space-around",
           alignItems: "center",
         }}
       >
@@ -50,8 +50,10 @@ export default function ParallaxIndex() {
             <Rubrik
               sx={{
                 color: "#F7F7F7",
-                fontSize: { xs: 25, md: 30, xl: 40 },
+                fontSize: { xs: 25, md: 30, xl: 45 },
                 fontWeight: 400,
+                marginLeft: { xl: 20 },
+                marginTop: { xl: 10 },
               }}
             >
               Frontend, backend eller fullstack?
@@ -59,10 +61,11 @@ export default function ParallaxIndex() {
             <Typography
               sx={{
                 color: "rgba(247, 247, 247, 0.9)",
-                fontSize: { xs: 18, md: 20, xl: 22 },
+                fontSize: { xs: 18, md: 20, xl: 25 },
                 fontFamily: "Roboto",
                 fontWeight: 200,
                 paddingBottom: { xs: 2 },
+                marginLeft: { xl: 20 },
                 width: { xs: "90%", md: "70%", xl: "55%" },
               }}
             >
@@ -114,10 +117,11 @@ export default function ParallaxIndex() {
           <Rubrik
             sx={{
               color: "#F7F7F7",
-              fontSize: { xs: 25, md: 30, xl: 40 },
+              fontSize: { xs: 25, md: 30, xl: 45 },
               fontWeight: 400,
               // textAlign: { xs: "left", md: "right" },
               width: "100%",
+              marginLeft: { xl: 20 },
             }}
           >
             Kort sagt..
@@ -125,11 +129,12 @@ export default function ParallaxIndex() {
           <Typography
             sx={{
               color: "rgba(247, 247, 247, 0.9)",
-              fontSize: { xs: 18, md: 20, xl: 22 },
+              fontSize: { xs: 18, md: 20, xl: 25 },
               fontFamily: "Roboto",
               fontWeight: 200,
               paddingBottom: { xs: 2 },
               width: { xs: "90%", md: "70%", xl: "55%" },
+              marginLeft: { xl: 20 },
             }}
           >
             Oavsett vad du behöver hjälp med har vi lösningen. Våra tekniska
@@ -150,6 +155,8 @@ export default function ParallaxIndex() {
               borderRadius: 2,
               color: "rgb(37,31,37)",
               fontFamily: "Rubrik",
+              marginLeft: { xl: 20 },
+              marginBottom: { xl: 20 },
               fontWeight: "lighter",
               fontSize: { xs: 18, md: 22, xl: 30 },
               lineHeight: 1.5,

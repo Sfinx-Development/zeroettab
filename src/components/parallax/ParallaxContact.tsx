@@ -154,7 +154,7 @@ export default function ParallaxContact() {
             <Rubrik
               sx={{
                 color: "#F7F7F7",
-                fontSize: { xs: 30, xl: 40 },
+                fontSize: { xs: 30, md: 40, xl: 50 },
                 fontWeight: 500,
                 textAlign: "left",
                 width: { xs: "80%", md: "58%" },
@@ -165,7 +165,7 @@ export default function ParallaxContact() {
             <Typography
               sx={{
                 color: "rgba(247, 247, 247, 0.9)",
-                fontSize: { xs: 18, xl: 25 },
+                fontSize: { xs: 18, md: 25, xl: 30 },
                 fontFamily: "Roboto",
                 fontWeight: 200,
                 maxWidth: { xs: "80%", md: "58%" },

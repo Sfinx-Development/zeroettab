@@ -18,7 +18,7 @@ export default function BubblaComponent() {
       description:
         "Vi designar och bygger gränssnitt utifrån dina personliga önskemål samtidigt som vi säkerställer användarvänligheten.",
       color: "rgb(216,163,153)",
-      link: "/offers#frontend",
+      link: "/services#frontend",
       delay: 0.1,
     },
     {
@@ -26,7 +26,7 @@ export default function BubblaComponent() {
       description:
         "Vi designar och utvecklar användarvänliga och funktionella mobilapplikationer som passar dina behov.",
       color: "#DBA569",
-      link: "/offers#mobileapp",
+      link: "/services#mobileapp",
       delay: 0.2,
     },
     {
@@ -34,7 +34,7 @@ export default function BubblaComponent() {
       description:
         "Vi utvecklar robusta backend-lösningar och API:er för att optimera din webbplats eller applikations prestanda.",
       color: "rgb(216,163,153)",
-      link: "/offers#backend",
+      link: "/services#backend",
       delay: 0.3,
     },
   ];
@@ -70,8 +70,8 @@ export default function BubblaComponent() {
               justifyContent: "center",
               padding: 3,
               borderRadius: "50%",
-              width: { xs: 220, md: 220 },
-              height: { xs: 220, md: 220 },
+              width: { xs: 220, md: 220, xl: 520 },
+              height: { xs: 220, md: 220, xl: 520 },
               backgroundColor: section.color,
               boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.2)",
               textAlign: "center",
@@ -82,7 +82,7 @@ export default function BubblaComponent() {
               sx={{
                 color: "#fff",
                 fontWeight: 700,
-                fontSize: { xs: 18, md: 18 },
+                fontSize: { xs: 18, md: 18, xl: 35 },
                 marginBottom: 1,
               }}
             >
@@ -91,14 +91,14 @@ export default function BubblaComponent() {
             <Typography
               sx={{
                 color: "#fff",
-                fontSize: { xs: 14, md: 14 },
+                fontSize: { xs: 14, md: 14, xl: 25 },
                 textAlign: "center",
               }}
             >
               {section.description}
             </Typography>
             <IconButton
-             aria-label={`Navigera till ${section.title || 'sidan'}`} 
+              aria-label={`Navigera till ${section.title || "sidan"}`}
               sx={{
                 marginTop: 2,
                 backgroundColor: "#fff",
@@ -109,7 +109,7 @@ export default function BubblaComponent() {
               }}
               onClick={() => navigation(section.link)}
             >
-              <ArrowForwardIcon />
+              <ArrowForwardIcon sx={{ fontSize: { xl: 30 } }} />
             </IconButton>
           </Box>
         </motion.div>

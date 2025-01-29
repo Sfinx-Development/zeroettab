@@ -32,12 +32,12 @@ export default function CustomHeader2(): JSX.Element {
   };
 
   const links = [
-    { label: "about", href: "/about", icon: <InfoIcon /> },
-    { label: "offers", href: "/offers", icon: <LocalOfferIcon /> },
-    { label: "projects", href: "/projects", icon: <WorkIcon /> },
+    { label: "about", href: "/about#us", icon: <InfoIcon /> },
+    { label: "offers", href: "/services#list", icon: <LocalOfferIcon /> },
+    { label: "projects", href: "/projects#slide", icon: <WorkIcon /> },
     {
       label: "contact",
-      href: "/contact",
+      href: "/contact#form",
       icon: <ContactMailIcon sx={{ fontSize: 20 }} />,
     },
   ];

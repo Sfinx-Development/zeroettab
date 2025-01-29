@@ -3,6 +3,7 @@ import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import { Box, IconButton, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { isMobile } from "../CompanyForm";
 import { Rubrik } from "../Footer";
 
 type PricingOption = {
@@ -20,7 +21,10 @@ export default function ParallaxServices() {
       const elementId = location.hash.replace("#", "");
       const targetElement = document.getElementById(elementId);
       if (targetElement) {
-        targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+        const height = isMobile ? 0 : 100;
+        const yOffset =
+          targetElement.getBoundingClientRect().top + window.scrollY - height;
+        window.scrollTo({ top: yOffset, behavior: "smooth" });
       }
     }
   }, [location.hash]);
@@ -140,6 +144,7 @@ export default function ParallaxServices() {
       }}
     >
       <Box
+        id="list"
         sx={{
           minHeight: "100vh",
           backgroundColor: "rgba(34,32,37,255)",

@@ -53,7 +53,7 @@ export default function Header(): JSX.Element {
               color: "rgb(67, 61, 67)",
             },
           }}
-          href="/about"
+          href="/about#us"
         >
           <Typography
             sx={{
@@ -79,7 +79,7 @@ export default function Header(): JSX.Element {
             textDecoration: "none",
             transition: "color 0.3s",
           }}
-          href="/offers"
+          href="/services#list"
         >
           <Typography
             sx={{
@@ -111,7 +111,7 @@ export default function Header(): JSX.Element {
             textDecoration: "none",
             transition: "color 0.3s",
           }}
-          href="/projects"
+          href="/projects#slide"
         >
           <Typography
             sx={{
@@ -142,7 +142,7 @@ export default function Header(): JSX.Element {
             paddingX: 2,
             borderRadius: 2,
           }}
-          href="/contact"
+          href="/contact#form"
         >
           <Typography
             sx={{

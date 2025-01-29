@@ -1,6 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
-import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { isMobile } from "../CompanyForm";
 import { Rubrik } from "../Footer";
 
 export default function ParallaxProject() {
@@ -9,6 +10,24 @@ export default function ParallaxProject() {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
+
+  const location = useLocation();
+  useEffect(() => {
+    const hash = location.hash;
+    if (hash) {
+      setTimeout(() => {
+        const element = document.getElementById(hash.slice(1));
+        if (element) {
+          const height = isMobile ? 0 : 50;
+          const yOffset =
+            element.getBoundingClientRect().top + window.scrollY - height;
+          window.scrollTo({ top: yOffset, behavior: "smooth" });
+        } else {
+          console.warn(`Elementet med id "${hash.slice(1)}" hittades inte.`);
+        }
+      }, 100);
+    }
+  }, [location]);
 
   const handleMouseDown = (e: React.MouseEvent | React.TouchEvent) => {
     setIsDragging(true);
@@ -79,6 +98,7 @@ export default function ParallaxProject() {
       }}
     >
       <Box
+        id="slide"
         sx={{
           minHeight: "100vh",
           backgroundColor: "rgba(34,32,37,255)",
@@ -164,8 +184,8 @@ export default function ParallaxProject() {
                     padding: 3,
                     flexShrink: 0,
                     borderRadius: 2,
-                    width: { xs: 280, md: 350, xl: 500 },
-                    height: { xs: 300, md: 350, xl: 500 },
+                    width: { xs: 280, md: 350, xl: 550 },
+                    height: { xs: 300, md: 350, xl: 550 },
                     backgroundColor:
                       project.backgroundColor ?? "rgba(250,220,197,255)",
                     display: "flex",
@@ -224,7 +244,9 @@ export default function ParallaxProject() {
                   </Typography>
                   {project.status !== "Pågående" && (
                     <Button
-                    aria-label={`Navigera till hemsidan för ${project.title || 'sidan'}`}
+                      aria-label={`Navigera till hemsidan för ${
+                        project.title || "sidan"
+                      }`}
                       onClick={() => {
                         if (project.url) {
                           window.open(project.url, "_blank");

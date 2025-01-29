@@ -31,7 +31,7 @@ const Navigation = () => {
           <Route path="contact" element={<Contact />}></Route>
           <Route path="about" element={<About />}></Route>
           <Route path="projects" element={<Projects />}></Route>
-          <Route path="offers" element={<Offers />}></Route>
+          <Route path="services" element={<Offers />}></Route>
           <Route path="privacy-policy" element={<PrivacyPolicy />}></Route>
           <Route path="*" element={<Error />} />
         </Route>

@@ -42,7 +42,7 @@ const MobileSections = () => (
       </Rubrik>
       <Link
         aria-label="Hemsidor-sektion"
-        href="/offers#frontend"
+        href="/services#frontend"
         sx={{
           fontSize: 16,
           textDecoration: "none",
@@ -77,7 +77,7 @@ const MobileSections = () => (
       </Rubrik>
       <Link
         aria-label="Webbshoppar-sektion"
-        href="/offers#fullstack"
+        href="/services#fullstack"
         sx={{
           fontSize: 16,
           textDecoration: "none",
@@ -112,7 +112,7 @@ const MobileSections = () => (
       </Rubrik>
       <Link
         aria-label="Tjänster"
-        href="/offers"
+        href="/services"
         sx={{
           fontSize: 16,
           textDecoration: "none",

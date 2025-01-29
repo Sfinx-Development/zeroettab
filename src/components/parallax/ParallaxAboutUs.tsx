@@ -1,8 +1,28 @@
 import { Box, Typography } from "@mui/material";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { isMobile } from "../CompanyForm";
 import { Rubrik } from "../Footer";
 
 export default function ParallaxAboutUs() {
+  const location = useLocation();
+  useEffect(() => {
+    const hash = location.hash;
+    if (hash) {
+      setTimeout(() => {
+        const element = document.getElementById(hash.slice(1));
+        if (element) {
+          const height = isMobile ? 0 : 100;
+          const yOffset =
+            element.getBoundingClientRect().top + window.scrollY - height;
+          window.scrollTo({ top: yOffset, behavior: "smooth" });
+        } else {
+          console.warn(`Elementet med id "${hash.slice(1)}" hittades inte.`);
+        }
+      }, 100);
+    }
+  }, [location]);
+
   return (
     <Box
       sx={{
@@ -15,6 +35,7 @@ export default function ParallaxAboutUs() {
       }}
     >
       <Box
+        id="us"
         sx={{
           minHeight: "100vh",
           backgroundColor: "rgba(34,32,37,255)",
@@ -43,7 +64,7 @@ export default function ParallaxAboutUs() {
           <Rubrik
             sx={{
               color: "rgba(254,232,209,255)",
-              fontSize: { xs: 35, xl: 40 },
+              fontSize: { xs: 35, md: 40, xl: 50 },
               fontWeight: 800,
               letterSpacing: 2,
             }}
@@ -53,7 +74,7 @@ export default function ParallaxAboutUs() {
           <Rubrik
             sx={{
               color: "rgba(229,186,179,1)",
-              fontSize: { xs: 35, xl: 40 },
+              fontSize: { xs: 35, md: 40, xl: 50 },
               fontWeight: 800,
               letterSpacing: 2,
             }}
@@ -63,7 +84,7 @@ export default function ParallaxAboutUs() {
           <Rubrik
             sx={{
               color: "rgba(254,232,209,255)",
-              fontSize: { xs: 35, xl: 40 },
+              fontSize: { xs: 35, md: 40, xl: 50 },
               letterSpacing: 2,
               fontWeight: 800,
             }}
@@ -83,7 +104,7 @@ export default function ParallaxAboutUs() {
           <Rubrik
             sx={{
               color: "rgba(229,186,179,1)",
-              fontSize: { xs: 25, xl: 30 },
+              fontSize: { xs: 25, md: 30, xl: 40 },
               fontWeight: 800,
               width: { xs: "80%", md: "100%" },
               display: "flex",
@@ -96,7 +117,7 @@ export default function ParallaxAboutUs() {
           <Typography
             sx={{
               color: "rgba(247, 247, 247, 0.9)",
-              fontSize: { xs: 18, xl: 25 },
+              fontSize: { xs: 18, md: 25, xl: 35 },
               fontFamily: "Roboto",
               fontWeight: 200,
               maxWidth: { xs: "80%", md: "60%", xl: "50%" },
@@ -140,8 +161,8 @@ export default function ParallaxAboutUs() {
             <Box
               sx={{
                 position: "relative",
-                width: { xs: 150, md: 180, xl: 300 },
-                height: { xs: 250, md: 280, xl: 400 },
+                width: { xs: 150, md: 180, xl: 400 },
+                height: { xs: 250, md: 280, xl: 500 },
                 borderRadius: "10%",
                 overflow: "hidden",
               }}
@@ -183,8 +204,8 @@ export default function ParallaxAboutUs() {
             <Box
               sx={{
                 position: "relative",
-                width: { xs: 150, md: 180, xl: 300 },
-                height: { xs: 250, md: 280, xl: 400 },
+                width: { xs: 150, md: 180, xl: 400 },
+                height: { xs: 250, md: 280, xl: 500 },
                 borderRadius: "10%",
                 overflow: "hidden",
               }}
@@ -235,7 +256,7 @@ export default function ParallaxAboutUs() {
             <Rubrik
               sx={{
                 color: "rgba(254,232,209,255)",
-                fontSize: { xs: 25, xl: 40 },
+                fontSize: { xs: 25, md: 40, xl: 50 },
                 fontWeight: 800,
               }}
             >
@@ -244,15 +265,15 @@ export default function ParallaxAboutUs() {
             <Typography
               sx={{
                 color: "rgba(247, 247, 247, 0.9)",
-                fontSize: { xs: 18, xl: 25 },
+                fontSize: { xs: 18, md: 25, xl: 30 },
                 fontFamily: "Roboto",
                 fontWeight: 200,
                 maxWidth: { xs: "80%", md: "60%", xl: "50%" },
               }}
             >
               Angelina och Elina heter vi som driver Zeroett tillsammans. En
-              utvecklarduo med säte i Borås. Angelina är duons härliga
-              energiknippe. Ingen idé är för konstig. Elina, å andra sidan,
+              utvecklarduo med säte i Borås. Elina är duons härliga
+              energiknippe. Ingen idé är för konstig. Angelina, å andra sidan,
               duons lugn och vår stabila klippa. Att vi kompletterar varandra
               råder det inget tvivel om.
             </Typography>
