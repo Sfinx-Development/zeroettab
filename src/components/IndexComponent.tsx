@@ -123,6 +123,7 @@ export default function IndexComponent() {
           >
             Kontakta oss
           </Link>
+          {/* <NewsPreview /> */}
 
           {/* <Box sx={{ paddingTop: 10, display: "flex", gap: 6 }}> */}
           <Box
@@ -138,35 +139,6 @@ export default function IndexComponent() {
           >
             {!isMobile ? <WhoAreWe /> : <WhoAreWePhone />}
           </Box>
-          {/* <Box
-            sx={{
-              display: "flex",
-              paddingTop: 0,
-              alignItems: "start",
-              justifyContent: "center",
-              height: "100%",
-              marginRight: { xs: 0, md: 5, xl: 40 },
-              paddingBottom: 2,
-              marginTop: -2,
-            }}
-          >
-            <KeyboardArrowDownIcon
-              sx={{
-                color: "rgba(235,190,180,255)",
-                fontSize: { xs: 20, md: 40, xl: 50 },
-                padding: 0,
-                animation: `bounce 1.5s ease-in-out infinite`, // Lägg till animation
-                "@keyframes bounce": {
-                  "0%, 100%": {
-                    transform: "translateY(0)",
-                  },
-                  "50%": {
-                    transform: "translateY(10px)", // Justera höjden på studsen
-                  },
-                },
-              }}
-            />
-          </Box> */}
         </Box>
       </Box>
     </Box>

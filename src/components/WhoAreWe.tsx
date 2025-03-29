@@ -136,7 +136,7 @@ export default function WhoAreWe() {
               textWrap: "nowrap",
             }}
           >
-            Vad har vi gjort tidigare?
+            Senaste nytt hos oss
           </Rubrik>
           <Box
             sx={{
@@ -152,8 +152,8 @@ export default function WhoAreWe() {
               }}
             />
             <Link
-              aria-label="Projektsidan"
-              href="/projects"
+              aria-label="Nyhetssidan"
+              href="/news#list"
               style={{ textDecoration: "none", color: "rgb(37,31,37)" }}
             >
               <Typography
@@ -163,7 +163,7 @@ export default function WhoAreWe() {
                   fontWeight: "lighter",
                 }}
               >
-                Projekt
+                Nyheter
               </Typography>
             </Link>
           </Box>
