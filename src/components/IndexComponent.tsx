@@ -1,9 +1,10 @@
-import { Box, Link, Typography } from "@mui/material";
+import { Box, Button, Link, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { isMobile } from "./CompanyForm";
 import { Rubrik } from "./Footer";
 import WhoAreWe from "./WhoAreWe";
 import WhoAreWePhone from "./WhoAreWePhone";
+import { news } from "./parallax/ParallaxNews";
 
 const titles = ["hemsida?", "e-tjänst?", "webbshop?", "mobilapp?"];
 export const isPhoneHeigher800px = window.innerHeight > 800;
@@ -19,6 +20,7 @@ export default function IndexComponent() {
     return () => clearInterval(interval); // Rensa när komponenten demonteras
   }, []);
 
+  const latestNews = news[0];
   return (
     <Box
       sx={{
@@ -45,11 +47,64 @@ export default function IndexComponent() {
           width: "100%",
         }}
       >
+        {isMobile && latestNews && (
+          <Box
+            sx={{
+              width: "95%",
+
+              background: "linear-gradient(90deg, #000000, #333333)",
+              color: "#fff",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              borderRadius: "12px",
+              // marginY: 2,
+              boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+            }}
+          >
+            <Box sx={{ flex: 1, padding: 1 }}>
+              <Typography
+                variant="body2"
+                sx={{
+                  fontSize: "0.9rem",
+                  fontWeight: 500,
+                  lineHeight: 1.4,
+                }}
+              >
+                📰 Nyhet: {latestNews.title}
+              </Typography>
+            </Box>
+
+            <Button
+              aria-label="Se alla nyheter"
+              href="/news#list"
+              variant="contained"
+              size="small"
+              sx={{
+                backgroundColor: "#fff",
+                color: "#000",
+                textTransform: "none",
+                fontSize: "0.75rem",
+                fontWeight: 600,
+                marginRight: 1,
+                borderRadius: "20px",
+                paddingX: 1,
+                paddingY: 0.5,
+                "&:hover": {
+                  backgroundColor: "#f0f0f0",
+                },
+              }}
+            >
+              Läs mer
+            </Button>
+          </Box>
+        )}
+
         <Box
           sx={{
             marginBottom: { xs: 30, md: 20 },
             marginLeft: { xs: 0, md: 5, xl: 20 },
-            marginTop: { xs: 5, md: 10, xl: 20 },
+            marginTop: { xs: 2, md: 10, xl: 20 },
             width: "100%",
             height: "100%",
           }}
@@ -59,7 +114,7 @@ export default function IndexComponent() {
           >
             <Rubrik
               sx={{
-                fontSize: { xs: 35, md: 60, xl: 75 },
+                fontSize: { xs: 32, md: 60, xl: 75 },
                 letterSpacing: 1.5,
                 marginRight: 1.5,
               }}
@@ -68,7 +123,7 @@ export default function IndexComponent() {
             </Rubrik>
             <Rubrik
               sx={{
-                fontSize: { xs: 35, md: 60, xl: 75 },
+                fontSize: { xs: 32, md: 60, xl: 75 },
                 letterSpacing: 1.5,
                 // color: "#",
                 opacity: 0,

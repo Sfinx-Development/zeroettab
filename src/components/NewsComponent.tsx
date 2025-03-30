@@ -35,7 +35,7 @@ export default function NewsComponent() {
           }}
         >
           <Rubrik
-            sx={{ fontSize: { xs: 35, md: 60, xl: 75 }, letterSpacing: 1.5 }}
+            sx={{ fontSize: { xs: 30, md: 60, xl: 75 }, letterSpacing: 1.5 }}
           >
             Vad har vi på gång?
           </Rubrik>

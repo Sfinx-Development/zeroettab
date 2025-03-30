@@ -35,6 +35,7 @@ export default function CustomHeader2(): JSX.Element {
     { label: "about", href: "/about#us", icon: <InfoIcon /> },
     { label: "offers", href: "/services#list", icon: <LocalOfferIcon /> },
     { label: "projects", href: "/projects#slide", icon: <WorkIcon /> },
+    { label: "På gång", href: "/news#list", icon: <WorkIcon /> },
     {
       label: "contact",
       href: "/contact#form",
