@@ -52,6 +52,7 @@ export default function IndexComponent() {
             sx={{
               width: "102%",
               marginLeft: -2,
+              marginTop: -1.5,
               background: "linear-gradient(90deg, #000000, #333333)",
               color: "#fff",
               display: "flex",
