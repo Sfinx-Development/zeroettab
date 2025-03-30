@@ -50,14 +50,15 @@ export default function IndexComponent() {
         {isMobile && latestNews && (
           <Box
             sx={{
-              width: "95%",
-
+              width: "102%",
+              marginLeft: -2,
               background: "linear-gradient(90deg, #000000, #333333)",
               color: "#fff",
               display: "flex",
               alignItems: "center",
+              paddingY: 0.5,
               justifyContent: "space-between",
-              borderRadius: "12px",
+              // borderRadius: "12px",
               // marginY: 2,
               boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
             }}
@@ -67,6 +68,7 @@ export default function IndexComponent() {
                 variant="body2"
                 sx={{
                   fontSize: "0.9rem",
+                  marginLeft: 1,
                   fontWeight: 500,
                   lineHeight: 1.4,
                 }}
@@ -86,7 +88,7 @@ export default function IndexComponent() {
                 textTransform: "none",
                 fontSize: "0.75rem",
                 fontWeight: 600,
-                marginRight: 1,
+                marginRight: 2,
                 borderRadius: "20px",
                 paddingX: 1,
                 paddingY: 0.5,
