@@ -4,6 +4,12 @@ import { useLocation } from "react-router-dom";
 import { Rubrik } from "../Footer";
 
 export const news = [
+    {
+    title: "Nytt samarbete med assistans-bolag",
+    date: "2025-06-01",
+    text: "Vi bygger en ny hemsida åt ett företag som erbjuder personlig assistans och daglig verksamhet. Detta är extra roligt, inte bara för att vi bygger ett specialdesignat CMS men också för att det är till en så viktig del i samhället. Håll utkik!",
+    image: "https://i.imgur.com/dM5n5Ch.png",
+  },
   {
     title: "DenThu Webbshop är nu lanserad",
     date: "2025-03-23",
