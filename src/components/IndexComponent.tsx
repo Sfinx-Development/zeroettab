@@ -1,10 +1,9 @@
-import { Box, Button, Link, Typography } from "@mui/material";
+import { Box, Link, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { isMobile } from "./CompanyForm";
 import { Rubrik } from "./Footer";
 import WhoAreWe from "./WhoAreWe";
 import WhoAreWePhone from "./WhoAreWePhone";
-import { news } from "./parallax/ParallaxNews";
 
 const titles = ["hemsida?", "e-tjänst?", "webbshop?", "mobilapp?"];
 export const isPhoneHeigher800px = window.innerHeight > 800;
@@ -16,11 +15,11 @@ export default function IndexComponent() {
       setCurrentTitleIndex((prevIndex) =>
         prevIndex === titles.length - 1 ? 0 : prevIndex + 1
       );
-    }, 3000); // Ändra var 3:e sekund
-    return () => clearInterval(interval); // Rensa när komponenten demonteras
+    }, 3000);
+    return () => clearInterval(interval);
   }, []);
 
-  const latestNews = news[0];
+  // const latestNews = news[0];
   return (
     <Box
       sx={{
@@ -30,6 +29,28 @@ export default function IndexComponent() {
         height: "100%",
       }}
     >
+      <Box
+        sx={{
+          width: "100%",
+          background: "linear-gradient(90deg, #DBA569, #C97A40)",
+          color: "white",
+          textAlign: "center",
+          fontWeight: 600,
+          fontSize: { xs: "0.9rem", md: "1rem" },
+          py: 1,
+        }}
+      >
+        <Rubrik
+          sx={{
+            fontSize: { xs: 16, md: 18, xl: 22 },
+            letterSpacing: 1,
+            marginRight: 1.5,
+          }}
+        >
+          🍂 Höstkampanj! 50% på mindre företagssidor under oktober 🍂
+        </Rubrik>
+      </Box>
+
       <Box
         sx={{
           flexDirection: "column",
@@ -47,7 +68,7 @@ export default function IndexComponent() {
           width: "100%",
         }}
       >
-        {isMobile && latestNews && (
+        {/* {isMobile && latestNews && (
           <Box
             sx={{
               width: "102%",
@@ -101,7 +122,7 @@ export default function IndexComponent() {
               Läs mer
             </Button>
           </Box>
-        )}
+        )} */}
 
         <Box
           sx={{
