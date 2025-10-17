@@ -168,16 +168,17 @@ export default function ParallaxAboutUs() {
               }}
             >
               <img
-                src="https://i.imgur.com/icqhCYg.jpeg"
+                src="../../../Angelina1.png"
                 alt="Angelina"
                 style={{
                   width: "100%",
                   height: "100%",
                   objectFit: "cover",
-                  transition: "transform 0.3s ease-in-out",
-                  transform: "scale(2.0) translateY(15%) translateX(5%)",
+                  objectPosition: "center 20%",
+                  transform: "scale(1.2)",
                 }}
               />
+
               <Box
                 sx={{
                   position: "absolute",

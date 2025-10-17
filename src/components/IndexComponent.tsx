@@ -15,10 +15,11 @@ export default function IndexComponent() {
       setCurrentTitleIndex((prevIndex) =>
         prevIndex === titles.length - 1 ? 0 : prevIndex + 1
       );
-    }, 3000); // Ändra var 3:e sekund
-    return () => clearInterval(interval); // Rensa när komponenten demonteras
+    }, 3000);
+    return () => clearInterval(interval);
   }, []);
 
+  // const latestNews = news[0];
   return (
     <Box
       sx={{
@@ -28,6 +29,28 @@ export default function IndexComponent() {
         height: "100%",
       }}
     >
+      <Box
+        sx={{
+          width: "100%",
+          background: "linear-gradient(90deg, #DBA569, #C97A40)",
+          color: "white",
+          textAlign: "center",
+          fontWeight: 600,
+          fontSize: { xs: "0.9rem", md: "1rem" },
+          py: 1,
+        }}
+      >
+        <Rubrik
+          sx={{
+            fontSize: { xs: 16, md: 18, xl: 22 },
+            letterSpacing: 1,
+            marginRight: 1.5,
+          }}
+        >
+          🍂 Höstkampanj! 50% på mindre företagssidor under oktober 🍂
+        </Rubrik>
+      </Box>
+
       <Box
         sx={{
           flexDirection: "column",
@@ -45,11 +68,67 @@ export default function IndexComponent() {
           width: "100%",
         }}
       >
+        {/* {isMobile && latestNews && (
+          <Box
+            sx={{
+              width: "102%",
+              marginLeft: -2,
+              marginTop: -1.5,
+              background: "linear-gradient(90deg, #000000, #333333)",
+              color: "#fff",
+              display: "flex",
+              alignItems: "center",
+              paddingY: 0.5,
+              justifyContent: "space-between",
+              // borderRadius: "12px",
+              // marginY: 2,
+              boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+            }}
+          >
+            <Box sx={{ flex: 1, padding: 1 }}>
+              <Typography
+                variant="body2"
+                sx={{
+                  fontSize: "0.9rem",
+                  marginLeft: 1,
+                  fontWeight: 500,
+                  lineHeight: 1.4,
+                }}
+              >
+                📰 Nyhet: {latestNews.title}
+              </Typography>
+            </Box>
+
+            <Button
+              aria-label="Se alla nyheter"
+              href="/news#list"
+              variant="contained"
+              size="small"
+              sx={{
+                backgroundColor: "#fff",
+                color: "#000",
+                textTransform: "none",
+                fontSize: "0.75rem",
+                fontWeight: 600,
+                marginRight: 2,
+                borderRadius: "20px",
+                paddingX: 1,
+                paddingY: 0.5,
+                "&:hover": {
+                  backgroundColor: "#f0f0f0",
+                },
+              }}
+            >
+              Läs mer
+            </Button>
+          </Box>
+        )} */}
+
         <Box
           sx={{
             marginBottom: { xs: 30, md: 20 },
             marginLeft: { xs: 0, md: 5, xl: 20 },
-            marginTop: { xs: 5, md: 10, xl: 20 },
+            marginTop: { xs: 2, md: 10, xl: 20 },
             width: "100%",
             height: "100%",
           }}
@@ -59,7 +138,7 @@ export default function IndexComponent() {
           >
             <Rubrik
               sx={{
-                fontSize: { xs: 35, md: 60, xl: 75 },
+                fontSize: { xs: 32, md: 60, xl: 75 },
                 letterSpacing: 1.5,
                 marginRight: 1.5,
               }}
@@ -68,7 +147,7 @@ export default function IndexComponent() {
             </Rubrik>
             <Rubrik
               sx={{
-                fontSize: { xs: 35, md: 60, xl: 75 },
+                fontSize: { xs: 32, md: 60, xl: 75 },
                 letterSpacing: 1.5,
                 // color: "#",
                 opacity: 0,
@@ -123,6 +202,7 @@ export default function IndexComponent() {
           >
             Kontakta oss
           </Link>
+          {/* <NewsPreview /> */}
 
           {/* <Box sx={{ paddingTop: 10, display: "flex", gap: 6 }}> */}
           <Box
@@ -138,35 +218,6 @@ export default function IndexComponent() {
           >
             {!isMobile ? <WhoAreWe /> : <WhoAreWePhone />}
           </Box>
-          {/* <Box
-            sx={{
-              display: "flex",
-              paddingTop: 0,
-              alignItems: "start",
-              justifyContent: "center",
-              height: "100%",
-              marginRight: { xs: 0, md: 5, xl: 40 },
-              paddingBottom: 2,
-              marginTop: -2,
-            }}
-          >
-            <KeyboardArrowDownIcon
-              sx={{
-                color: "rgba(235,190,180,255)",
-                fontSize: { xs: 20, md: 40, xl: 50 },
-                padding: 0,
-                animation: `bounce 1.5s ease-in-out infinite`, // Lägg till animation
-                "@keyframes bounce": {
-                  "0%, 100%": {
-                    transform: "translateY(0)",
-                  },
-                  "50%": {
-                    transform: "translateY(10px)", // Justera höjden på studsen
-                  },
-                },
-              }}
-            />
-          </Box> */}
         </Box>
       </Box>
     </Box>

@@ -14,6 +14,7 @@ import RootLayout from "./pages/RootLayout";
 import messages_en from "./translations/en.json";
 import messages_sv from "./translations/sv.json";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import News from "./pages/News";
 
 const Navigation = () => {
   const { language } = useLanguageContext();
@@ -32,6 +33,7 @@ const Navigation = () => {
           <Route path="about" element={<About />}></Route>
           <Route path="projects" element={<Projects />}></Route>
           <Route path="services" element={<Offers />}></Route>
+          <Route path="news" element={<News />}></Route>
           <Route path="privacy-policy" element={<PrivacyPolicy />}></Route>
           <Route path="*" element={<Error />} />
         </Route>
