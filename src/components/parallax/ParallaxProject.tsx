@@ -59,7 +59,7 @@ export default function ParallaxProject() {
       url: "https://stadtjejerna.se",
       image: "https://i.imgur.com/TofNZWm.png",
       status: "Klar",
-      backgroundColor: "rgba(235,190,180,255)",
+      // backgroundColor: "rgba(235,190,180,255)",
       type: "Hemsida",
     },
     {
@@ -67,7 +67,7 @@ export default function ParallaxProject() {
       url: "https://yayamedia.se",
       image: "https://i.imgur.com/y0i4it9.png",
       status: "Klar",
-      backgroundColor: "rgba(254,232,209,255)",
+      // backgroundColor: "rgba(254,232,209,255)",
       type: "Hemsida",
     },
     {
@@ -75,7 +75,7 @@ export default function ParallaxProject() {
       url: "https://denthuwebbshop.se",
       image: "https://i.imgur.com/enI1UZB.png",
       status: "Klar",
-      backgroundColor: "rgb(208,124,116)",
+      // backgroundColor: "rgb(208,124,116)",
       type: "Webbshop",
     },
     {
@@ -83,7 +83,7 @@ export default function ParallaxProject() {
       url: "https://beezmartuf.se",
       image: "https://i.imgur.com/upAsxi9.png",
       status: "Klar",
-      backgroundColor: "rgba(235,190,180,255)",
+      // backgroundColor: "rgba(235,190,180,255)",
       type: "E-tjänst",
     },
   ];
@@ -167,34 +167,63 @@ export default function ParallaxProject() {
                 width: "100%",
                 margin: "auto",
                 flexDirection: { xs: "column", md: "row" },
-                overflowX: "scroll",
+                overflowX: "auto", // ← CHANGED
                 gap: { xs: 4, xl: 10 },
                 paddingTop: { xs: 4, md: 6 },
                 paddingLeft: { xs: 0, md: 4, xl: 6 },
                 alignItems: { xs: "center" },
                 scrollSnapType: { xs: "none", md: "x mandatory" },
                 display: "inline-flex",
-                paddingRight: { xs: 0, md: 8 },
-                scrollPaddingRight: { xs: 0, md: 20 },
+                // paddingRight: { xs: 0, md: 8 },        // ← REMOVE
+                // scrollPaddingRight: { xs: 0, md: 20 }, // ← REMOVE
                 cursor: isDragging ? "grabbing" : "grab",
+                // Göm scrollbar
+                scrollbarWidth: "none", // Firefox
+                msOverflowStyle: "none", // IE/Edge
+                "&::-webkit-scrollbar": {
+                  // Chrome/Safari
+                  display: "none",
+                },
+                // width: "100%",
+                // margin: "auto",
+                // flexDirection: { xs: "column", md: "row" },
+                // overflowX: "scroll",
+                // gap: { xs: 4, xl: 10 },
+                // paddingTop: { xs: 4, md: 6 },
+                // paddingLeft: { xs: 0, md: 4, xl: 6 },
+                // alignItems: { xs: "center" },
+                // scrollSnapType: { xs: "none", md: "x mandatory" },
+                // display: "inline-flex",
+                // paddingRight: { xs: 0, md: 8 },
+                // scrollPaddingRight: { xs: 0, md: 20 },
+                // cursor: isDragging ? "grabbing" : "grab",
               }}
             >
               {projects.map((project, index) => (
                 <Box
                   key={index}
                   sx={{
-                    padding: 3,
+                    p: 3,
                     flexShrink: 0,
                     borderRadius: 2,
                     width: { xs: 280, md: 350, xl: 550 },
                     height: { xs: 300, md: 350, xl: 550 },
-                    backgroundColor:
-                      project.backgroundColor ?? "rgba(250,220,197,255)",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "flex-start",
-                    justifyContent: "space-between",
+                    position: "relative", // ← NEW
+                    overflow: "hidden", // ← NEW
                     boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+                    // backgroundColor: project.backgroundColor ?? "rgba(250,220,197,255)", // optional fallback (kan lämnas bort)
+                    // padding: 3,
+                    // flexShrink: 0,
+                    // borderRadius: 2,
+                    // width: { xs: 280, md: 350, xl: 550 },
+                    // height: { xs: 300, md: 350, xl: 550 },
+                    // backgroundColor:
+                    //   project.backgroundColor ?? "rgba(250,220,197,255)",
+                    // display: "flex",
+                    // flexDirection: "column",
+                    // alignItems: "flex-start",
+                    // justifyContent: "space-between",
+                    // boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
                   }}
                 >
                   <Box
@@ -202,12 +231,20 @@ export default function ParallaxProject() {
                     src={project.image}
                     alt={project.title}
                     sx={{
+                      position: "absolute",
+                      inset: 0,
                       width: "100%",
-                      height: "auto",
-                      borderRadius: "8px",
+                      height: "100%",
+                      objectFit: "cover", // ← FIXED
                       filter:
-                        project.status == "Pågående" ? "blur(4px)" : "none",
-                      objectFit: "cover",
+                        project.status === "Pågående" ? "blur(4px)" : "none",
+                      transform: "scale(1.02)", // liten zoom för att undvika kanter vid blur
+                      // width: "100%",
+                      // height: "auto",
+                      // borderRadius: "8px",
+                      // filter:
+                      //   project.status == "Pågående" ? "blur(4px)" : "none",
+                      // objectFit: "100%",
                     }}
                   />
                   <Typography
@@ -257,7 +294,7 @@ export default function ParallaxProject() {
                         }
                       }}
                       sx={{
-                        mt: 2,
+                        mt: 30,
                         paddingX: 3,
                         paddingY: 1,
                         borderRadius: "20px",
