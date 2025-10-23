@@ -187,22 +187,23 @@ export default function ParallaxProject() {
                   xs: "1fr",
                   sm: "1fr 1fr",
                   lg: "1fr 1fr 1fr",
+                  xl: "1fr 1fr 1fr 1fr "
                 },
-                gap: { xs: 4, md: 4, xl: 10 },
-                // px: { xs: 4, md: 8, xl: 10 },
+                gap: { xs: 4, md: 4, xl: 5 },
+                 
                 width: "100%",
 
                 justifyItems: "center",
                 // width: "100%",
-                // margin: "auto",
+                //  margin: "2px",
                 // flexDirection: { xs: "column", md: "row" },
                 // overflowX: "auto", // ← CHANGED
                 // gap: { xs: 4, xl: 10 },
                 paddingTop: { xs: 4, md: 6 },
-                //  paddingLeft: { xs: 0, md: 0, xl: 6 },
+                 
                 alignItems: { xs: "center" },
                 // scrollSnapType: { xs: "none", md: "x mandatory" },
-                // display: "inline-flex",
+                
                 // // paddingRight: { xs: 0, md: 8 },        // ← REMOVE
                 // // scrollPaddingRight: { xs: 0, md: 20 }, // ← REMOVE
                 // cursor: isDragging ? "grabbing" : "grab",
@@ -243,7 +244,7 @@ export default function ParallaxProject() {
 
                     transition: "transform 0.3s ease-in-out",
                     // backgroundColor: project.backgroundColor ?? "rgba(250,220,197,255)", // optional fallback (kan lämnas bort)
-                    padding: 3,
+                    // padding: 3,
                     "&:hover img": {
                       transform: "scale(1)", // 👈 zoomar ut bilden vid hover
                     },
@@ -275,7 +276,7 @@ export default function ParallaxProject() {
                       objectFit: "cover", // ← FIXED
                       filter:
                         project.status === "Pågående" ? "blur(4px)" : "none",
-                      transform: "scale(1.1)", // liten zoom för att undvika kanter vid blur
+                      transform: "scale(1)", // liten zoom för att undvika kanter vid blur
                       "&:hover": {
                         transform: "scale(1)", // 👈 zoomar ut så man ser hela bilden
                       },
@@ -361,7 +362,8 @@ export default function ParallaxProject() {
                         }
                       }}
                       sx={{
-                        mt: 34,
+                       
+                         mt: { xs: 29, md: 34, lg: 50, xl: 55 },
                         paddingX: 3,
                         paddingY: 1,
                         borderRadius: "10px",
