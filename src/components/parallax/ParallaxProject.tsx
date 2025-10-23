@@ -6,10 +6,10 @@ import { Rubrik } from "../Footer";
 
 export default function ParallaxProject() {
   const navigate = useNavigate();
-  const scrollRef = useRef<HTMLDivElement | null>(null); // Ref för skrollbehållaren
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
+  // const scrollRef = useRef<HTMLDivElement | null>(null); // Ref för skrollbehållaren
+  // const [isDragging, setIsDragging] = useState(false);
+  // const [startX, setStartX] = useState(0);
+  // const [scrollLeft, setScrollLeft] = useState(0);
 
   const location = useLocation();
   useEffect(() => {
@@ -29,29 +29,29 @@ export default function ParallaxProject() {
     }
   }, [location]);
 
-  const handleMouseDown = (e: React.MouseEvent | React.TouchEvent) => {
-    setIsDragging(true);
+  // const handleMouseDown = (e: React.MouseEvent | React.TouchEvent) => {
+  //   setIsDragging(true);
 
-    const position =
-      "touches" in e ? e.touches[0].clientX : (e as React.MouseEvent).clientX;
+  //   const position =
+  //     "touches" in e ? e.touches[0].clientX : (e as React.MouseEvent).clientX;
 
-    setStartX(position);
-    setScrollLeft(scrollRef.current?.scrollLeft || 0);
-  };
+  //   setStartX(position);
+  //   setScrollLeft(scrollRef.current?.scrollLeft || 0);
+  // };
 
-  const handleMouseMove = (e: React.MouseEvent | React.TouchEvent) => {
-    if (!isDragging || !scrollRef.current) return;
+  // const handleMouseMove = (e: React.MouseEvent | React.TouchEvent) => {
+  //   if (!isDragging || !scrollRef.current) return;
 
-    const position =
-      "touches" in e ? e.touches[0].clientX : (e as React.MouseEvent).clientX;
+  //   const position =
+  //     "touches" in e ? e.touches[0].clientX : (e as React.MouseEvent).clientX;
 
-    const delta = startX - position;
-    scrollRef.current.scrollLeft = scrollLeft + delta;
-  };
+  //   const delta = startX - position;
+  //   scrollRef.current.scrollLeft = scrollLeft + delta;
+  // };
 
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
+  // const handleMouseUp = () => {
+  //   setIsDragging(false);
+  // };
 
   const projects = [
     {
@@ -155,35 +155,49 @@ export default function ParallaxProject() {
               Projekt
             </Typography>
             <Box
-              ref={scrollRef}
-              onMouseDown={handleMouseDown}
-              onTouchStart={handleMouseDown}
-              onMouseMove={handleMouseMove}
-              onTouchMove={handleMouseMove}
-              onMouseUp={handleMouseUp}
-              onTouchEnd={handleMouseUp}
-              onMouseLeave={handleMouseUp}
+              // ref={scrollRef}
+              // onMouseDown={handleMouseDown}
+              // onTouchStart={handleMouseDown}
+              // onMouseMove={handleMouseMove}
+              // onTouchMove={handleMouseMove}
+              // onMouseUp={handleMouseUp}
+              // onTouchEnd={handleMouseUp}
+              // onMouseLeave={handleMouseUp}
               sx={{
-                width: "100%",
-                margin: "auto",
-                flexDirection: { xs: "column", md: "row" },
-                overflowX: "auto", // ← CHANGED
-                gap: { xs: 4, xl: 10 },
-                paddingTop: { xs: 4, md: 6 },
-                paddingLeft: { xs: 0, md: 4, xl: 6 },
-                alignItems: { xs: "center" },
-                scrollSnapType: { xs: "none", md: "x mandatory" },
-                display: "inline-flex",
-                // paddingRight: { xs: 0, md: 8 },        // ← REMOVE
-                // scrollPaddingRight: { xs: 0, md: 20 }, // ← REMOVE
-                cursor: isDragging ? "grabbing" : "grab",
-                // Göm scrollbar
-                scrollbarWidth: "none", // Firefox
-                msOverflowStyle: "none", // IE/Edge
-                "&::-webkit-scrollbar": {
-                  // Chrome/Safari
-                  display: "none",
-                },
+                       display: "grid",
+              gridTemplateColumns: {
+                xs: "1fr",
+                sm: "1fr 1fr",
+                lg: "1fr 1fr 1fr",
+              },
+              gap: { xs: 4, md: 0, xl: 10 },
+              // px: { xs: 4, md: 8, xl: 10 },
+              width: "100%",
+   
+   
+
+
+              justifyItems: "center",
+                // width: "100%",
+                // margin: "auto",
+                // flexDirection: { xs: "column", md: "row" },
+                // overflowX: "auto", // ← CHANGED
+                // gap: { xs: 4, xl: 10 },
+                 paddingTop: { xs: 4, md: 6 },
+                //  paddingLeft: { xs: 0, md: 0, xl: 6 },
+                 alignItems: { xs: "center" },
+                // scrollSnapType: { xs: "none", md: "x mandatory" },
+                // display: "inline-flex",
+                // // paddingRight: { xs: 0, md: 8 },        // ← REMOVE
+                // // scrollPaddingRight: { xs: 0, md: 20 }, // ← REMOVE
+                // cursor: isDragging ? "grabbing" : "grab",
+                // // Göm scrollbar
+                // scrollbarWidth: "none", // Firefox
+                // msOverflowStyle: "none", // IE/Edge
+                // "&::-webkit-scrollbar": {
+                //   // Chrome/Safari
+                //   display: "none",
+                // },
                 // width: "100%",
                 // margin: "auto",
                 // flexDirection: { xs: "column", md: "row" },
