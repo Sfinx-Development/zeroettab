@@ -363,7 +363,7 @@ export default function ParallaxProject() {
                       }}
                       sx={{
                        
-                         mt: { xs: 29, md: 34, lg: 50, xl: 55 },
+                         mt: { xs: 29, md: 34, lg: 34, xl: 55 },
                         paddingX: 3,
                         paddingY: 1,
                         borderRadius: "10px",
