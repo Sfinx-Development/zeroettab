@@ -29,7 +29,7 @@ export default function IndexComponent() {
         height: "100%",
       }}
     >
-      <Box
+      {/* <Box
         sx={{
           width: "100%",
           background: "linear-gradient(90deg, #DBA569, #C97A40)",
@@ -49,7 +49,7 @@ export default function IndexComponent() {
         >
           🍂 Höstkampanj! 50% på mindre företagssidor under oktober 🍂
         </Rubrik>
-      </Box>
+      </Box> */}
 
       <Box
         sx={{
