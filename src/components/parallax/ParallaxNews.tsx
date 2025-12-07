@@ -8,7 +8,7 @@ export const news = [
     title: "En ny partner inom en ny (för oss) bransch!",
     date: "2025-11-12",
     text: "Vi har fått ett ärofyllt uppdrag att skapa en webbshop åt ABC Collection. Det blir vår första kund inom textil-branschen.",
-    image: "https://i.imgur.com/pjeyQ3b.png",
+    image: "https://i.imgur.com/LfnRbPj.png",
   },
   {
     title: "Hemsida lanserad",
