@@ -73,7 +73,7 @@ export default function ParallaxServices() {
         "Support",
       ],
       pricing: [
-        { title: "Från 30.000 kr", subtitle: "Månadskostnad från 800 kr/mån" },
+        { title: "Från 40.000 kr", subtitle: "Månadskostnad från 800 kr/mån" },
       ] as PricingOption[],
       backgroundColor: "rgba(229,186,179,1)",
       priceColor: "rgb(37,31,37)",

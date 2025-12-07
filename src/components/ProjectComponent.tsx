@@ -28,7 +28,8 @@ export default function IndexComponent() {
           // justifyContent: "flex-start",
           // background:
           //   "linear-gradient(to bottom,rgba(240,231,226,1), rgba(229,186,179,1)))",
-          backgroundColor: "rgba(238,233,230,255)",
+          // backgroundColor: "rgba(238,233,230,255)",
+          backgroundColor: "transparent",
           width: "100%",
         }}
       >

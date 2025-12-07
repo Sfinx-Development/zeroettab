@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
-import ProjectComponent from "../components/ProjectComponent";
-import ParallaxProject from "../components/parallax/ParallaxProject";
+ import ProjectComponent from "../components/ProjectComponent";
+ import ParallaxProject from "../components/parallax/ParallaxProject";
+// import Error from "./Error";
 
 // const projects = [
 //   {
@@ -63,6 +64,7 @@ export default function Projects() {
         minHeight: "100vh",
       }}
     >
+      {/* <Error /> */}
       <ProjectComponent />
       <ParallaxProject />
     </Box>
