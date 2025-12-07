@@ -4,7 +4,19 @@ import { useLocation } from "react-router-dom";
 import { Rubrik } from "../Footer";
 
 export const news = [
-    {
+  {
+    title: "En ny partner inom en ny (för oss) bransch!",
+    date: "2025-11-12",
+    text: "Vi har fått ett ärofyllt uppdrag att skapa en webbshop åt ABC Collection. Det blir vår första kund inom textil-branschen.",
+    image: "https://i.imgur.com/pjeyQ3b.png",
+  },
+  {
+    title: "Hemsida lanserad",
+    date: "2025-10-20",
+    text: "Med mycket värme och omtanke har vi skapat en ny sida åt assistansbolaget Primacura. Det har varit ett extra roligt projekt då vi jobbade nära kunden med mycket kommunikation. Skapad i react med typescript!",
+    image: "https://i.imgur.com/pQYgvrg.png",
+  },
+  {
     title: "Nytt samarbete med assistans-bolag",
     date: "2025-06-01",
     text: "Vi bygger en ny hemsida åt ett företag som erbjuder personlig assistans och daglig verksamhet. Detta är extra roligt, inte bara för att vi bygger ett specialdesignat CMS men också för att det är till en så viktig del i samhället. Håll utkik!",
