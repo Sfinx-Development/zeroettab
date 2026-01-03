@@ -1,224 +1,160 @@
-import { Box, Link, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
-import { isMobile } from "./CompanyForm";
+import { keyframes } from "@emotion/react";
+import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
+import { Box, Link, Typography, useMediaQuery } from "@mui/material";
 import { Rubrik } from "./Footer";
-import WhoAreWe from "./WhoAreWe";
-import WhoAreWePhone from "./WhoAreWePhone";
 
-const titles = ["hemsida?", "e-tjänst?", "webbshop?", "mobilapp?"];
 export const isPhoneHeigher800px = window.innerHeight > 800;
 export const isPhoneHeigher900px = window.innerHeight > 900;
-export default function IndexComponent() {
-  const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTitleIndex((prevIndex) =>
-        prevIndex === titles.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
 
-  // const latestNews = news[0];
+export default function IndexComponent() {
+  const isMobile = useMediaQuery("(max-width:900px)");
+  const isShortPhone = useMediaQuery(
+    "(max-width:900px) and (max-height:700px)"
+  );
+  const isLongPhone = useMediaQuery("(max-width:900px) and (min-height:800px)");
+
+  const bounce = keyframes`
+    0%, 100% { transform: translateY(0); opacity: 0.6; }
+    50% { transform: translateY(10px); opacity: 1; }
+  `;
+
   return (
     <Box
       sx={{
         position: "fixed",
         width: "100%",
+        minHeight: "100svh",
         zIndex: 1,
-        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        backgroundImage: "url(/indeximg.png)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
-      {/* <Box
-        sx={{
-          width: "100%",
-          background: "linear-gradient(90deg, #DBA569, #C97A40)",
-          color: "white",
-          textAlign: "center",
-          fontWeight: 600,
-          fontSize: { xs: "0.9rem", md: "1rem" },
-          py: 1,
-        }}
-      >
-        <Rubrik
-          sx={{
-            fontSize: { xs: 16, md: 18, xl: 22 },
-            letterSpacing: 1,
-            marginRight: 1.5,
-          }}
-        >
-          🍂 Höstkampanj! 50% på mindre företagssidor under oktober 🍂
-        </Rubrik>
-      </Box> */}
-
+      {/* Overlay */}
       <Box
         sx={{
-          flexDirection: "column",
+          position: "absolute",
+          inset: 0,
+          background:
+            "linear-gradient(to bottom, rgba(238,233,230,0.6), rgba(238,233,230,0.55))",
+          zIndex: 0,
+        }}
+      />
+
+      {/* HERO CONTENT */}
+      <Box
+        sx={{
+          position: "relative",
+          zIndex: 1,
+
+          // 🔑 ENDA VIKTIGA ÄNDRINGEN:
+          minHeight: {
+            xs: isLongPhone ? "75svh" : "auto",
+            md: "auto",
+          },
+
           display: "flex",
-          padding: { xs: 1.5, sm: 2, md: 0, lg: 2, xl: 4 },
-          height: "100%",
-          // backgroundImage: `url(https://i.imgur.com/9sO10K9.png)`, // Lägg till en ljus övertoning
-          // backgroundSize: "cover", // Gör att bilden täcker hela området
-          // backgroundPosition: "center left", // Flytta fokus mot botten
-          // backgroundRepeat: "no-repeat", // Förhindra att bilden upprepas
-          // justifyContent: "flex-start",
-          // background:
-          //   "linear-gradient(to bottom,rgba(240,231,226,1), rgba(229,186,179,1)))",
-          backgroundColor: "rgba(238,233,230,255)",
-          width: "100%",
+          flexDirection: { xs: "column", md: "row" },
+          alignItems: "center",
+          justifyContent: "space-between",
+          px: { xs: 2, sm: 4, md: 6, xl: 20 },
+          pt: { xs: 4, md: 5 },
+          gap: { xs: 4, md: 6 },
+          maxWidth: "1600px",
+          margin: "0 auto",
         }}
       >
-        {/* {isMobile && latestNews && (
-          <Box
-            sx={{
-              width: "102%",
-              marginLeft: -2,
-              marginTop: -1.5,
-              background: "linear-gradient(90deg, #000000, #333333)",
-              color: "#fff",
-              display: "flex",
-              alignItems: "center",
-              paddingY: 0.5,
-              justifyContent: "space-between",
-              // borderRadius: "12px",
-              // marginY: 2,
-              boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
-            }}
-          >
-            <Box sx={{ flex: 1, padding: 1 }}>
-              <Typography
-                variant="body2"
-                sx={{
-                  fontSize: "0.9rem",
-                  marginLeft: 1,
-                  fontWeight: 500,
-                  lineHeight: 1.4,
-                }}
-              >
-                📰 Nyhet: {latestNews.title}
-              </Typography>
-            </Box>
-
-            <Button
-              aria-label="Se alla nyheter"
-              href="/news#list"
-              variant="contained"
-              size="small"
-              sx={{
-                backgroundColor: "#fff",
-                color: "#000",
-                textTransform: "none",
-                fontSize: "0.75rem",
-                fontWeight: 600,
-                marginRight: 2,
-                borderRadius: "20px",
-                paddingX: 1,
-                paddingY: 0.5,
-                "&:hover": {
-                  backgroundColor: "#f0f0f0",
-                },
-              }}
-            >
-              Läs mer
-            </Button>
-          </Box>
-        )} */}
-
-        <Box
-          sx={{
-            marginBottom: { xs: 30, md: 20 },
-            marginLeft: { xs: 0, md: 5, xl: 20 },
-            marginTop: { xs: 2, md: 10, xl: 20 },
-            width: "100%",
-            height: "100%",
-          }}
-        >
-          <Box
-            sx={{ display: "flex", flexDirection: { xs: "column", md: "row" } }}
-          >
-            <Rubrik
-              sx={{
-                fontSize: { xs: 32, md: 60, xl: 75 },
-                letterSpacing: 1.5,
-                marginRight: 1.5,
-              }}
-            >
-              Behöver du en
-            </Rubrik>
-            <Rubrik
-              sx={{
-                fontSize: { xs: 32, md: 60, xl: 75 },
-                letterSpacing: 1.5,
-                // color: "#",
-                opacity: 0,
-                animation: `fade-in-out 3s ease-in-out infinite`,
-                animationDelay: `0s`,
-                "@keyframes fade-in-out": {
-                  "0%": { opacity: 0, transform: "translateY(-10px)" },
-                  "25%": { opacity: 1, transform: "translateY(0)" },
-                  "75%": { opacity: 1, transform: "translateY(0)" },
-                  "100%": { opacity: 0, transform: "translateY(10px)" },
-                },
-              }}
-            >
-              {titles[currentTitleIndex]}
-            </Rubrik>
-          </Box>
+        {/* TEXT */}
+        <Box sx={{ maxWidth: 720 }}>
           <Typography
             sx={{
-              fontSize: { xs: 25, md: 35, xl: 50 },
-              marginY: 0.5,
-              marginBottom: { xs: 2, md: 1 },
-              fontFamily: "Roboto",
-              fontWeight: "lighter",
-              width: { xs: "70%" },
-              // color: "#F7F7F7",
+              fontSize: { xs: 15, md: 16 },
+              opacity: 0.8,
+              mb: 1,
             }}
           >
-            Berätta om din idé, vi bygger den.
+            <strong>Zeroett</strong> · utvecklingsteam i Borås & Sjuhärad
           </Typography>
-          <Link
-            sx={{
-              textDecoration: "none",
-              transition: "color 0.3s",
-              // background: "rgba(44, 40, 38, 255)",
-              background:
-                "linear-gradient(to bottom, rgba(250,220,197,255), rgba(235,190,180,255))",
-              paddingY: 1,
-              paddingX: 2,
-              marginTop: 1,
-              borderRadius: 2,
-              // color: "#F7F7F7",
-              color: "rgb(37,31,37)",
-              fontFamily: "Roboto",
-              fontWeight: "semibold",
-              fontSize: { xs: 20, md: 22, xl: 40 },
-              lineHeight: 1.5,
-              "&:hover": {
-                color: "rgb(67, 61, 67)",
-              },
-            }}
-            href="/contact#form"
-          >
-            Kontakta oss
-          </Link>
-          {/* <NewsPreview /> */}
 
-          {/* <Box sx={{ paddingTop: 10, display: "flex", gap: 6 }}> */}
-          <Box
+          <Rubrik
             sx={{
-              paddingTop: isMobile
-                ? isPhoneHeigher900px
-                  ? 20
-                  : isPhoneHeigher800px
-                  ? 12
-                  : 0
-                : undefined,
+              fontSize: isShortPhone ? 24 : { xs: 26, sm: 36, md: 44, xl: 56 },
+              lineHeight: 1.15,
+              mb: 2,
             }}
           >
-            {!isMobile ? <WhoAreWe /> : <WhoAreWePhone />}
-          </Box>
+            Vi hjälper företag att skapa
+            <br />
+            digitala lösningar som speglar vilka de är.
+          </Rubrik>
+
+          <Typography
+            sx={{
+              fontSize: isShortPhone
+                ? 16
+                : isLongPhone
+                ? 18
+                : { xs: 16, md: 19 },
+              maxWidth: 640,
+              mb: 3,
+            }}
+          >
+            Hemsidor, e-tjänster och system – byggt nära, begripligt och
+            anpassat efter verkligheten.
+          </Typography>
+
+          <Link
+            href="/contact#form"
+            sx={{
+              background: "rgba(52,48,56,1)",
+              px: 2.5,
+              py: 1,
+              borderRadius: 2,
+              color: "rgba(250,220,197,255)",
+              textDecoration: "none",
+              fontFamily: "Roboto",
+              fontSize: isLongPhone ? 18 : { xs: 16, md: 18 },
+              display: "inline-block",
+            }}
+          >
+            Prata med oss
+          </Link>
         </Box>
+
+        {/* BILD */}
+        <Box
+          component="img"
+          src="https://i.imgur.com/OqvOzUd.png"
+          alt="Two girls coding"
+          sx={{
+            mt: { xs: 0 },
+            maxHeight: isShortPhone
+              ? 220
+              : isLongPhone
+              ? 320
+              : { xs: 280, md: 340, xl: 460 },
+            width: "auto",
+          }}
+        />
+      </Box>
+
+      {/* SCROLL PIL */}
+      <Box
+        sx={{
+          zIndex: 2,
+          pb: isShortPhone ? 2 : 3,
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <KeyboardArrowDownRoundedIcon
+          sx={{
+            fontSize: 42,
+            animation: `${bounce} 1.8s infinite`,
+          }}
+        />
       </Box>
     </Box>
   );
