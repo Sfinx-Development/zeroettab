@@ -7,7 +7,7 @@ export const isPhoneHeigher800px = window.innerHeight > 800;
 export const isPhoneHeigher900px = window.innerHeight > 900;
 
 export default function IndexComponent() {
-  const isMobile = useMediaQuery("(max-width:900px)");
+  // const isMobile = useMediaQuery("(max-width:900px)");
   const isShortPhone = useMediaQuery(
     "(max-width:900px) and (max-height:700px)"
   );
