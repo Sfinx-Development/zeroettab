@@ -12,6 +12,7 @@ export default function IndexComponent() {
     "(max-width:900px) and (max-height:700px)"
   );
   const isLongPhone = useMediaQuery("(max-width:900px) and (min-height:800px)");
+  // const isLargeScreen = useMediaQuery("(min-width:1600px)");
 
   const bounce = keyframes`
     0%, 100% { transform: translateY(0); opacity: 0.6; }
@@ -29,6 +30,7 @@ export default function IndexComponent() {
         flexDirection: "column",
         backgroundImage: "url(/indeximg.png)",
         backgroundSize: "cover",
+
         backgroundPosition: "center",
       }}
     >
@@ -48,29 +50,40 @@ export default function IndexComponent() {
         sx={{
           position: "relative",
           zIndex: 1,
-
-          // 🔑 ENDA VIKTIGA ÄNDRINGEN:
           minHeight: {
             xs: isLongPhone ? "75svh" : "auto",
-            md: "auto",
+            md: "65vh",
+            xl: "75vh",
           },
-
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
           alignItems: "center",
           justifyContent: "space-between",
-          px: { xs: 2, sm: 4, md: 6, xl: 20 },
-          pt: { xs: 4, md: 5 },
-          gap: { xs: 4, md: 6 },
-          maxWidth: "1600px",
-          margin: "0 auto",
+          px: {
+            xs: 2,
+            sm: 4,
+            md: 6,
+            xl: 20,
+          },
+
+          pt: { xs: 4, md: 5, xl: 6 },
+          gap: {
+            xs: 4,
+            md: 6,
+            xl: 12,
+          },
+          maxWidth: { xs: "1600px", xl: "100%" },
+          margin: {
+            xs: "0 auto",
+            xl: "0",
+          },
         }}
       >
         {/* TEXT */}
-        <Box sx={{ maxWidth: 720 }}>
+        <Box sx={{ maxWidth: { xs: 720, xl: 1200 } }}>
           <Typography
             sx={{
-              fontSize: { xs: 15, md: 16 },
+              fontSize: { xs: 15, md: 16, xl: 24 },
               opacity: 0.8,
               mb: 1,
             }}
@@ -80,7 +93,7 @@ export default function IndexComponent() {
 
           <Rubrik
             sx={{
-              fontSize: isShortPhone ? 24 : { xs: 26, sm: 36, md: 44, xl: 56 },
+              fontSize: isShortPhone ? 24 : { xs: 24, sm: 36, md: 44, xl: 65 },
               lineHeight: 1.15,
               mb: 2,
             }}
@@ -96,8 +109,8 @@ export default function IndexComponent() {
                 ? 16
                 : isLongPhone
                 ? 18
-                : { xs: 16, md: 19 },
-              maxWidth: 640,
+                : { xs: 16, md: 19, xl: 28 },
+              maxWidth: { xs: 640, xl: 900 },
               mb: 3,
             }}
           >
@@ -115,7 +128,7 @@ export default function IndexComponent() {
               color: "rgba(250,220,197,255)",
               textDecoration: "none",
               fontFamily: "Roboto",
-              fontSize: isLongPhone ? 18 : { xs: 16, md: 18 },
+              fontSize: isLongPhone ? 18 : { xs: 16, md: 18, xl: 28 },
               display: "inline-block",
             }}
           >
@@ -134,8 +147,11 @@ export default function IndexComponent() {
               ? 220
               : isLongPhone
               ? 320
-              : { xs: 280, md: 340, xl: 460 },
-            width: "auto",
+              : { xs: 280, md: 340, xl: 580 },
+            width: {
+              xs: "auto",
+              xl: 650, // ← nyckeln
+            },
           }}
         />
       </Box>
@@ -144,6 +160,7 @@ export default function IndexComponent() {
       <Box
         sx={{
           zIndex: 2,
+          mt: { md: 2 },
           pb: isShortPhone ? 2 : 3,
           display: "flex",
           justifyContent: "center",
