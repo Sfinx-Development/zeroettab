@@ -144,7 +144,7 @@ export default function IndexComponent() {
           sx={{
             mt: { xs: 0 },
             maxHeight: isShortPhone
-              ? 220
+              ? 200
               : isLongPhone
               ? 320
               : { xs: 280, md: 340, xl: 580 },
