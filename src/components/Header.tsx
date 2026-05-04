@@ -131,6 +131,34 @@ export default function Header(): JSX.Element {
             <FormattedMessage id="projects" />
           </Typography>
         </Link>
+
+        <Link
+          aria-label="Prissidan"
+          sx={{
+            textDecoration: "none",
+            transition: "color 0.3s",
+          }}
+          href="/priser"
+        >
+          <Typography
+            sx={{
+              color: "rgb(37,31,37)",
+              letterSpacing: 2,
+              fontFamily: "Roboto",
+              fontWeight: "lighter",
+              fontSize: { xs: 18, md: 22, xl: 30 },
+              lineHeight: 1.5,
+              transition: "color 0.3s",
+              "&:hover": {
+                color: "rgb(67, 61, 67)",
+              },
+              whiteSpace: "nowrap",
+            }}
+          >
+            Priser
+          </Typography>
+        </Link>
+        
         <Link
           aria-label="Kontaktsidan"
           sx={{
