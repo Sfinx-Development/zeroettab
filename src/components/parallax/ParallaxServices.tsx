@@ -32,6 +32,7 @@ export default function ParallaxServices() {
   const services = [
     {
       id: "frontend",
+      slug: "hemsidor",
       title: "Hemsidor",
       description:
         "Behöver du en ny hemsida för ditt företag? Eller varför inte en sida för eventet, Save the date eller 50-årsfesten?",
@@ -60,6 +61,7 @@ export default function ParallaxServices() {
     },
     {
       id: "webshop",
+      slug: "webbshoppar",
       title: "Webbshoppar",
       description:
         "Behöver du en webbshop med betalningsintegration och en admin-vy för att hantera varor och produktinformation?",
@@ -80,6 +82,7 @@ export default function ParallaxServices() {
     },
     {
       id: "mobileapp",
+      slug: "mobilapplikationer",
       title: "Mobilapplikationer",
       description:
         "Har du en ny idé för en mobilapp som du tänkt länge på? Eller kanske vill du ha din webbshop eller e-tjänst på mobilen?",
@@ -99,6 +102,8 @@ export default function ParallaxServices() {
     },
     {
       id: "backend",
+      slug: "e-tjanster",
+
       title: "E-tjänster",
       description:
         "Vill du erbjuda dina kunder en digital tjänst, som bokning av möten, registrering av intresseanmälningar, eller ansökningar online?",
@@ -118,6 +123,7 @@ export default function ParallaxServices() {
     },
     {
       id: "api",
+      slug: "api-databaslosningar",
       title: "API och databaslösningar",
       description:
         "Behöver du en lösning för att integrera din webbshop med ett externt lager- eller betalsystem? Eller hantera stora mängder kunddata på ett effektivt sätt?",
@@ -248,12 +254,23 @@ export default function ParallaxServices() {
                 mt: 2,
               }}
             >
-              <IconButton
+              {/*<IconButton
                 aria-label="Navigera till Kontaktformuläret"
                 onClick={() => navigation("/contact#form")}
               >
                 <Rubrik sx={{ color: "rgb(37,31,37)", fontSize: 18 }}>
                   Kontakt
+                </Rubrik>
+                <ArrowForwardIcon
+                  sx={{ color: "rgb(37,31,37)", fontSize: 20, ml: 1 }}
+                />
+              </IconButton>*/}
+              <IconButton
+                aria-label={`Läs mer om ${service.title}`}
+                onClick={() => navigation(`/tjanster/${service.slug}`)}
+              >
+                <Rubrik sx={{ color: "rgb(37,31,37)", fontSize: 18 }}>
+                  Läs mer
                 </Rubrik>
                 <ArrowForwardIcon
                   sx={{ color: "rgb(37,31,37)", fontSize: 20, ml: 1 }}

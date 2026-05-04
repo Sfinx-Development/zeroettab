@@ -5,8 +5,10 @@ import { CustomerProvider } from "./context/customerContext";
 import { LanguageProvider } from "./context/languageContext";
 import { ScreenSizeProvider } from "./contexts/screenSizeContext";
 import Navigation from "./navigation";
+import { HelmetProvider } from "react-helmet-async";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
+    <HelmetProvider>
     <LanguageProvider>
       <BrowserRouter>
         <CustomerProvider>
@@ -16,5 +18,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         </CustomerProvider>
       </BrowserRouter>
     </LanguageProvider>
+    </HelmetProvider>
   </React.StrictMode>
 );
