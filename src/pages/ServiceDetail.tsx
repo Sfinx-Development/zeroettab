@@ -1,5 +1,7 @@
 import { Box, Typography, Link } from "@mui/material";
-import { useParams } from "react-router-dom";
+
+import { Helmet } from "react-helmet-async";
+import { useNavigate, useParams } from "react-router-dom";
 // import { Rubrik } from "../components/Footer";
 
 type ContentBlock = {
@@ -8,18 +10,25 @@ type ContentBlock = {
 };
 
 type ServicePage = {
+  metaTitle: string;
+  metaDescription: string;
   title: string;
   description: string;
   price: string;
   content?: ContentBlock[];
 };
 
+
 const servicePages: Record<string, ServicePage> = {
   hemsidor: {
+    metaTitle: "Hemsidor i Borås | Moderna hemsidor för företag",
+    metaDescription:
+      "Vi bygger moderna, mobilanpassade och SEO-vänliga hemsidor för företag i Borås, Göteborg och Västra Götaland.",
     title: "Hemsidor för företag",
     description:
       "Vi bygger moderna, mobilanpassade och SEO-vänliga hemsidor för företag i Borås, Göteborg och Västra Götaland.",
     price: "Från 8000 kr",
+
     content: [
       {
         type: "text",
@@ -77,24 +86,40 @@ const servicePages: Record<string, ServicePage> = {
     // ],
   },
   webbshoppar: {
+    metaTitle: "Webbshoppar | Webbshop för företag",
+    metaDescription:
+      "Vi bygger moderna webbshoppar med betalningslösningar, produktadministration och en smidig köpupplevelse.",
+
     title: "Webbshoppar",
     description:
       "Vi skapar webbshoppar med betalningslösningar, produktadministration och en smidig köpupplevelse.",
     price: "Från 40.000 kr",
   },
   mobilapplikationer: {
+    metaTitle: "Mobilappar i Borås | Utveckling av appar för företag",
+    metaDescription:
+      "Vi utvecklar mobilapplikationer för företag i Borås, Göteborg och hela Sverige. Skräddarsydda appar med modern design och funktionalitet.",
+
     title: "Mobilapplikationer",
     description:
       "Vi utvecklar mobilappar anpassade efter dina idéer, funktioner och användarnas behov.",
     price: "Från 50.000 kr",
   },
   "e-tjanster": {
+    metaTitle: "E-tjänster i Borås | Digitala tjänster för företag",
+    metaDescription:
+      "Vi utvecklar e-tjänster för företag i Borås, Göteborg och hela Sverige. Bokningar, kundportaler, formulär och digitala lösningar.",
+
     title: "E-tjänster",
     description:
       "Vi bygger digitala tjänster som bokningar, ansökningar, kundportaler och formulärlösningar.",
     price: "Från 50.000 kr",
   },
   "api-databaslosningar": {
+    metaTitle: "API & databaslösningar | Integrationer för företag",
+    metaDescription:
+      "Vi hjälper företag med API-integrationer och databaslösningar. Koppla ihop system, hantera data och skapa skalbara lösningar.",
+
     title: "API och databaslösningar",
     description:
       "Vi hjälper företag med integrationer, databaser och API-lösningar som kopplar ihop olika system.",
@@ -104,6 +129,8 @@ const servicePages: Record<string, ServicePage> = {
 
 export default function ServiceDetail() {
   const { slug } = useParams();
+   
+  const navigate = useNavigate();
 
   const service = servicePages[slug as keyof typeof servicePages];
 
@@ -113,6 +140,10 @@ export default function ServiceDetail() {
 
   return (
     <Box sx={{ px: { xs: 3, md: 10 }, py: 10 }}>
+      <Helmet>
+        <title>{service.metaTitle}</title>
+        <meta name="description" content={service.metaDescription} />
+      </Helmet>
       <Typography
         component="h1"
         sx={{ fontSize: { xs: 32, md: 48 }, mb: 2, fontWeight: 800 }}
@@ -154,30 +185,33 @@ export default function ServiceDetail() {
         </Typography>
       ))} */}
 
-      <Link
-        aria-label="Kontaktformulär"
-        sx={{
-          textDecoration: "none",
-          transition: "color 0.3s",
-          background:
-            "linear-gradient(to bottom, rgba(250,220,197,255), rgba(235,190,180,255))",
-          paddingY: 1,
-          paddingX: 2,
-          marginTop: 1,
-          borderRadius: 2,
-          color: "rgb(37,31,37)",
-          fontFamily: "Roboto",
-          fontWeight: "semibold",
-          fontSize: { xs: 20, md: 22, xl: 40 },
-          lineHeight: 1.5,
-          "&:hover": {
-            color: "rgb(67, 61, 67)",
-          },
-        }}
-        href="/contact#form"
-      >
-        Kontakta oss
-      </Link>
+     <Link
+  component="button"
+  onClick={() => navigate("/contact#form")}
+  aria-label="Kontaktformulär"
+  sx={{
+    textDecoration: "none",
+    cursor: "pointer",
+    border: "none",
+    transition: "color 0.3s",
+    background:
+      "linear-gradient(to bottom, rgba(250,220,197,255), rgba(235,190,180,255))",
+    paddingY: 1,
+    paddingX: 2,
+    marginTop: 1,
+    borderRadius: 2,
+    color: "rgb(37,31,37)",
+    fontFamily: "Roboto",
+    fontWeight: "semibold",
+    fontSize: { xs: 20, md: 22, xl: 40 },
+    lineHeight: 1.5,
+    "&:hover": {
+      color: "rgb(67, 61, 67)",
+    },
+  }}
+>
+  Kontakta oss
+</Link>
 
       {/* <Button variant="contained" onClick={() => navigate("/contact#form")}>
         Kontakta oss
