@@ -132,7 +132,7 @@ export default function Header(): JSX.Element {
           </Typography>
         </Link>
 
-        <Link
+        {/* <Link
           aria-label="Prissidan"
           sx={{
             textDecoration: "none",
@@ -157,7 +157,7 @@ export default function Header(): JSX.Element {
           >
             Priser
           </Typography>
-        </Link>
+        </Link> */}
         
         <Link
           aria-label="Kontaktsidan"

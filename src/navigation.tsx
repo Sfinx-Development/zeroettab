@@ -17,7 +17,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import News from "./pages/News";
 import ParallaxServices from "./components/parallax/ParallaxServices";
 import ServiceDetail from "./pages/ServiceDetail";
-import PricePage from "./pages/PricePage";
+// import PricePage from "./pages/PricePage";
 
 const Navigation = () => {
   const { language } = useLanguageContext();
@@ -38,7 +38,7 @@ const Navigation = () => {
           <Route path="services" element={<Offers />}></Route>
           <Route path="/tjanster" element={<ParallaxServices />} />
           <Route path="/tjanster/:slug" element={<ServiceDetail />} />
-          <Route path="/priser" element={<PricePage />} />
+          {/* <Route path="/priser" element={<PricePage />} /> */}
           <Route path="news" element={<News />}></Route>
           <Route path="privacy-policy" element={<PrivacyPolicy />}></Route>
           <Route path="*" element={<Error />} />
