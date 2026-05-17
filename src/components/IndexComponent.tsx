@@ -9,7 +9,7 @@ export const isPhoneHeigher900px = window.innerHeight > 900;
 export default function IndexComponent() {
   // const isMobile = useMediaQuery("(max-width:900px)");
   const isShortPhone = useMediaQuery(
-    "(max-width:900px) and (max-height:700px)"
+    "(max-width:900px) and (max-height:700px)",
   );
   const isLongPhone = useMediaQuery("(max-width:900px) and (min-height:800px)");
   // const isLargeScreen = useMediaQuery("(min-width:1600px)");
@@ -28,7 +28,7 @@ export default function IndexComponent() {
         zIndex: 1,
         display: "flex",
         flexDirection: "column",
-        backgroundImage: "url(/indeximg.png)",
+        backgroundImage: "url(/bubbles.png)",
         backgroundSize: "cover",
 
         backgroundPosition: "center",
@@ -108,8 +108,8 @@ export default function IndexComponent() {
               fontSize: isShortPhone
                 ? 16
                 : isLongPhone
-                ? 18
-                : { xs: 16, md: 19, xl: 28 },
+                  ? 18
+                  : { xs: 16, md: 19, xl: 28 },
               maxWidth: { xs: 640, xl: 900 },
               mb: 3,
             }}
@@ -146,8 +146,8 @@ export default function IndexComponent() {
             maxHeight: isShortPhone
               ? 200
               : isLongPhone
-              ? 320
-              : { xs: 280, md: 340, xl: 580 },
+                ? 320
+                : { xs: 280, md: 340, xl: 580 },
             width: {
               xs: "auto",
               xl: 650, // ← nyckeln
