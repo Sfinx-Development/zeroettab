@@ -1,7 +1,10 @@
 import { keyframes } from "@emotion/react";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import { Box, Link, Typography, useMediaQuery } from "@mui/material";
+import { isMobile } from "./CompanyForm";
 import { Rubrik } from "./Footer";
+import NewsPreview from "./NewsPreviewComponent";
+import { news } from "./parallax/ParallaxNews";
 
 export const isPhoneHeigher800px = window.innerHeight > 800;
 export const isPhoneHeigher900px = window.innerHeight > 900;
@@ -18,6 +21,20 @@ export default function IndexComponent() {
     0%, 100% { transform: translateY(0); opacity: 0.6; }
     50% { transform: translateY(10px); opacity: 1; }
   `;
+
+  const first = news[0];
+
+  const isRecent = (() => {
+    const newsDate = new Date(first.date);
+    const today = new Date();
+
+    const diffDays =
+      (today.getTime() - newsDate.getTime()) / (1000 * 60 * 60 * 24);
+
+    return diffDays <= 7;
+  })();
+
+  if (!isRecent) return null;
 
   return (
     <Box
@@ -134,6 +151,7 @@ export default function IndexComponent() {
           >
             Prata med oss
           </Link>
+          {!isMobile && isRecent && <NewsPreview />}
         </Box>
 
         {/* BILD */}

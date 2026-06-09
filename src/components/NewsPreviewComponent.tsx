@@ -1,4 +1,5 @@
 import { Box, Link, Typography } from "@mui/material";
+import { Rubrik } from "./Footer";
 import { news } from "./parallax/ParallaxNews";
 
 export default function NewsPreview() {
@@ -7,15 +8,16 @@ export default function NewsPreview() {
   return (
     <Box
       sx={{
-        mt: { xs: 4, md: 6 },
-        mb: { xs: 2, md: 4 },
-        px: { xs: 2, md: 4 },
-        py: 1,
-        borderLeft: "3px solid rgba(235,190,180,0.6)",
-        maxWidth: 600,
+        mt: 4,
+        p: 2,
+        background: "rgba(255,255,255,0.55)",
+        backdropFilter: "blur(8px)",
+        border: "1px solid rgba(235,190,180,0.3)",
+        borderRadius: 2,
+        maxWidth: 450,
       }}
     >
-      <Typography
+      <Rubrik
         variant="body2"
         sx={{
           fontWeight: 500,
@@ -24,8 +26,8 @@ export default function NewsPreview() {
           mb: 0.5,
         }}
       >
-        Senaste nytt
-      </Typography>
+        Senaste från oss
+      </Rubrik>
 
       <Link
         href={`/news#${first.date}`}
@@ -38,7 +40,7 @@ export default function NewsPreview() {
           display: "inline-block",
         }}
       >
-        {first.title}
+        <Rubrik> {first.title}</Rubrik>
       </Link>
 
       <Typography
@@ -62,8 +64,13 @@ export default function NewsPreview() {
       >
         {first.text.slice(0, 100)}...
         <Link
-          href="/news"
-          sx={{ textDecoration: "underline", ml: 0.5, fontSize: "inherit" }}
+          href="/news#list"
+          sx={{
+            textDecoration: "underline",
+            ml: 0.5,
+            fontSize: "inherit",
+            color: "rgba(52,48,56,1)",
+          }}
         >
           Läs mer
         </Link>
