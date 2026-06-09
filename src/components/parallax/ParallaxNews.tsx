@@ -5,6 +5,12 @@ import { Rubrik } from "../Footer";
 
 export const news = [
   {
+    title: "Fokus på SEO",
+    date: "2026-06-09",
+    text: "Snart lanserar vi en hemsida åt fastighetsföretag med fokus på SEO. Främst för att dyka upp på Google och lätt kunna tas kontakt med! Väldigt roligt att bygga ur det perspektivet först.",
+    image: "https://i.imgur.com/5paiK87.png",
+  },
+  {
     title: "En ny partner inom en ny (för oss) bransch!",
     date: "2025-11-12",
     text: "Vi har fått ett ärofyllt uppdrag att skapa en webbshop åt ABC Collection. Det blir vår första kund inom textil-branschen.",
