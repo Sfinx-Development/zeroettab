@@ -34,7 +34,7 @@ export default function IndexComponent() {
     return diffDays <= 7;
   })();
 
-  if (!isRecent) return null;
+
 
   return (
     <Box
